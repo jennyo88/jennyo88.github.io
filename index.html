@@ -279,7 +279,7 @@
     }, {});
 
     function populateGuide() {
-      tvGuide.innerHTML = `<h2>Categories</h2>`;
+      tvGuide.innerHTML = `<h2>TV Guide</h2>`;
       Object.keys(groupedChannels).forEach(category => {
         const categoryItem = document.createElement("div");
         categoryItem.classList.add("category-item");
@@ -301,7 +301,7 @@
 
       const backButton = document.createElement("div");
       backButton.classList.add("back-button");
-      backButton.textContent = "Back to Categories";
+      backButton.textContent = "Back to Main";
       backButton.addEventListener("click", populateGuide);
       tvGuide.appendChild(backButton);
     }
