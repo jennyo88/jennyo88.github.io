@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Old-School CRT TV</title>
   <style>
+    /* Add styles here */
     body {
       margin: 0;
       background-color: black;
@@ -60,17 +61,6 @@
       opacity: 0.5;
     }
 
-    .tv-glow {
-      position: absolute;
-      top: -50px;
-      left: -50px;
-      width: calc(100% + 100px);
-      height: calc(100% + 100px);
-      background: radial-gradient(circle, rgba(0, 255, 0, 0.1), transparent 60%);
-      z-index: -1;
-      filter: blur(20px);
-    }
-
     .tv-overlay {
       position: absolute;
       bottom: 10px;
@@ -88,6 +78,15 @@
       top: 10px;
       display: flex;
       flex-direction: column;
+    }
+
+    .sound-controls {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .button {
@@ -109,17 +108,21 @@
 <body>
   <div class="tv-frame">
     <div class="tv-screen">
-      <video id="videoPlayer" autoplay muted loop>
+      <video id="videoPlayer" autoplay loop>
         <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
       <div class="scan-lines"></div>
-      <div class="tv-glow"></div>
       <div class="tv-overlay" id="channelInfo">Channel 1</div>
     </div>
     <div class="channel-buttons">
       <div class="button" id="channelUp"></div>
       <div class="button" id="channelDown"></div>
+    </div>
+    <div class="sound-controls">
+      <button class="button" id="toggleSound">🔊</button>
+      <button class="button" id="volumeUp">+</button>
+      <button class="button" id="volumeDown">-</button>
     </div>
   </div>
 
@@ -146,6 +149,18 @@
     document.getElementById("channelDown").addEventListener("click", () => {
       currentChannel = (currentChannel - 1 + channels.length) % channels.length;
       changeChannel();
+    });
+
+    document.getElementById("toggleSound").addEventListener("click", () => {
+      videoPlayer.muted = !videoPlayer.muted;
+    });
+
+    document.getElementById("volumeUp").addEventListener("click", () => {
+      videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+    });
+
+    document.getElementById("volumeDown").addEventListener("click", () => {
+      videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
     });
 
     function changeChannel() {
