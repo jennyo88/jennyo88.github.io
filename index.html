@@ -18,41 +18,27 @@
     }
 
     .tv-frame {
-      width: 100%;
-      height: 100%;
-      background: url('https://90s.myretrotvs.com/img/tvbackclean.webp') no-repeat center center;
+      width: 90%;
+      max-width: 800px;
+      height: 60%;
+      max-height: 450px;
+      background: url('https://90s.myretrotvs.com/img/tvbackclean.webp') no-repeat center;
       background-size: contain;
       position: relative;
     }
 
     .tv-screen {
-      width: 72%;
-      height: 54%; /* Maintains a 4:3 aspect ratio */
+      width: 70%;
+      height: 55%;
       position: absolute;
-      top: 22%;
-      left: 14%;
+      top: 18%;
+      left: 15%;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
-      z-index: 1;
-    }
-
-    .tv-stencil {
-      width: 72%;
-      height: 54%;
-      position: absolute;
-      top: 22%;
-      left: 14%;
-      background: url('https://90s.myretrotvs.com/img/tvstencil.webp') no-repeat center center;
-      background-size: contain;
-      pointer-events: none;
-      z-index: 2;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
     }
 
     video {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -81,18 +67,6 @@
       background: #888;
     }
 
-    .tv-static {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Static.gif/320px-Static.gif') repeat;
-      opacity: 0.2;
-      z-index: 1;
-      pointer-events: none;
-    }
-
     .tv-overlay {
       position: absolute;
       bottom: 10px;
@@ -101,7 +75,7 @@
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 14px;
-      z-index: 3;
+      z-index: 2;
     }
   </style>
 </head>
@@ -112,14 +86,12 @@
         <source src="https://archive.org/download/395AS/Walt%20Disney%20Cartoon%20Classics%20Vol.%201.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div class="tv-static"></div>
-      <div class="tv-overlay" id="channelInfo">Channel 1</div>
     </div>
-    <div class="tv-stencil"></div>
     <div class="channel-buttons">
       <div class="button" id="channelUp"></div>
       <div class="button" id="channelDown"></div>
     </div>
+    <div class="tv-overlay" id="channelInfo">Channel 1</div>
   </div>
 
   <script>
