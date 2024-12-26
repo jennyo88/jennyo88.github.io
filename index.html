@@ -24,10 +24,10 @@
 
     .tv-container {
       position: relative;
-      width: 690px; /* 15% increase */
-      height: 517.5px; /* 15% increase */
+      width: 690px; /* 15% increase from 600px */
+      height: 517.5px; /* 15% increase from 450px */
       background-color: black;
-      margin-right: 20px;
+      margin-right: 20px; /* Space between TV and guide */
     }
 
     .tv-screen {
@@ -69,8 +69,8 @@
 
     .button-panel {
       position: absolute;
-      bottom: 4.8%;
-      left: 37.2%;
+      bottom: 7%;
+      left: 37%;
       display: flex;
       gap: 9px;
     }
@@ -78,44 +78,20 @@
     .button-panel button {
       width: 10px;
       height: 10px;
-      background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
+      background-color: transparent;
       border: none;
       border-radius: 50%;
       cursor: pointer;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-              0 0 10px rgba(192, 192, 192, 0.6); /* Gradient halo */
-    }
-
-    .button-panel button:hover {
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-              0 0 30px rgba(192, 192, 192, 0.6); /* Stronger halo on hover */
+      transition: background-color 0.2s ease;
     }
 
     .button-panel button:active {
-      background: linear-gradient(145deg, #e0e0e0, #b0b0b0); /* Slightly darker metallic look */
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4),
-              0 0 5px rgba(255, 255, 255, 0.5);
-    }
-
-    #power {
-      width: 25px; /* Larger width */
-      height: 25px; /* Larger height */
-      background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background-color 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
-              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-              0 0 15px rgba(192, 192, 192, 0.8); /* Larger halo for power button */
-      margin-top: -2.8px; /* Adjust alignment */
+      background-color: transparent;
     }
 
     .spacer {
-      width: 41px;
-      height: 2px;
+      width: 10px;
+      height: 10px;
     }
 
     .channel-display {
@@ -125,6 +101,7 @@
       transform: translateX(-50%);
       font-size: 16px;
       font-weight: bold;
+      font-family: 'Roboto', sans-serif;
       text-align: center;
       background-color: transparent;
       padding: 5px 10px;
@@ -166,13 +143,13 @@
     }
 
     .tv-guide {
-      width: 300px; /* 15% larger */
-      height: 518px; /* 15% larger */
-      background-size: contain;
+      width: 250px;
+      height: 450px;
+      background-color: rgba(0, 0, 0, 0.8);
       color: white;
       padding: 15px;
       overflow-y: auto;
-      border: none;
+      border: 2px solid limegreen;
       border-radius: 5px;
     }
 
@@ -239,47 +216,145 @@
         <button id="channelDown"></button>
         <button id="channelUp"></button>
         <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
         <button id="power"></button>
       </div>
       <div class="glowing-button" id="glowingButton"></div>
     </div>
 
-    <div class="tv-guide" id="tvGuide">
-      <h2>TV Guide</h2>
-      <!-- Categories and channels will be dynamically added here -->
-    </div>
+    <div class="tv-guide" id="tvGuide" style="background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvguide.webp') no-repeat center center; background-size: contain;">
+  <h2>TV Guide</h2>
+  <!-- Categories and channels will be dynamically added here -->
+</div>
   </div>
 
   <script src="channels.js"></script>
-
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const powerButton = document.getElementById("power");
-      const tvScreen = document.getElementById("tvScreen");
-      const videoPlayer = document.getElementById("videoPlayer");
-      const glowingButton = document.getElementById("glowingButton");
-      const channelDisplay = document.getElementById("channelDisplay");
+    let currentChannel = 0;
+    let powerOn = false;
+    const playbackTimes = {};
+    const tvScreen = document.getElementById("tvScreen");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const channelDisplay = document.getElementById("channelDisplay");
+    const notification = document.getElementById("notification");
+    const glowingButton = document.getElementById("glowingButton");
+    const tvGuide = document.getElementById("tvGuide");
 
-      let isPowerOn = false;
+    const groupedChannels = channels.reduce((acc, channel) => {
+      if (!acc[channel.category]) acc[channel.category] = [];
+      acc[channel.category].push(channel);
+      return acc;
+    }, {});
 
-      const togglePower = () => {
-        isPowerOn = !isPowerOn;
+    function populateGuide() {
+      tvGuide.innerHTML = `<h2>Categories</h2>`;
+      Object.keys(groupedChannels).forEach(category => {
+        const categoryItem = document.createElement("div");
+        categoryItem.classList.add("category-item");
+        categoryItem.textContent = category;
+        categoryItem.addEventListener("click", () => displayChannels(category));
+        tvGuide.appendChild(categoryItem);
+      });
+    }
 
-        if (isPowerOn) {
-          tvScreen.classList.add("on");
-          videoPlayer.classList.add("on");
-          glowingButton.classList.add("on");
-          channelDisplay.style.display = "block";
-        } else {
-          tvScreen.classList.remove("on");
-          videoPlayer.classList.remove("on");
-          glowingButton.classList.remove("on");
-          channelDisplay.style.display = "none";
-        }
-      };
+    function displayChannels(category) {
+      tvGuide.innerHTML = `<h2>${category}</h2>`;
+      groupedChannels[category].forEach((channel, index) => {
+        const channelItem = document.createElement("div");
+        channelItem.classList.add("channel-item");
+        channelItem.textContent = channel.name;
+        channelItem.addEventListener("click", () => playChannel(channel, index));
+        tvGuide.appendChild(channelItem);
+      });
 
-      powerButton.addEventListener("click", togglePower);
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Categories";
+      backButton.addEventListener("click", populateGuide);
+      tvGuide.appendChild(backButton);
+    }
+
+    function playChannel(channel, index) {
+      videoPlayer.src = channel.video;
+      channelDisplay.textContent = `Now Playing: ${channel.name}`;
+      currentChannel = index;
+      if (powerOn) {
+        videoPlayer.play();
+        showNotification(`Now Playing: ${channel.name}`);
+      }
+    }
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 2000);
+    }
+
+    function togglePower() {
+      powerOn = !powerOn;
+      if (powerOn) {
+        tvScreen.classList.add("on");
+        videoPlayer.classList.add("on");
+        glowingButton.classList.add("on");
+        channelDisplay.style.display = "block";
+        videoPlayer.play();
+        showNotification(`Power On`);
+      } else {
+        tvScreen.classList.remove("on");
+        videoPlayer.classList.remove("on");
+        glowingButton.classList.remove("on");
+        channelDisplay.style.display = "none";
+        videoPlayer.pause();
+        showNotification(`Power Off`);
+      }
+    }
+
+    document.getElementById("channelUp").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel + 1) % channels.length;
+        playChannel(channels[currentChannel], currentChannel);
+      }
     });
+
+    document.getElementById("channelDown").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+        playChannel(channels[currentChannel], currentChannel);
+      }
+    });
+
+    document.getElementById("volumeUp").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+      }
+    });
+
+    document.getElementById("volumeDown").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        const volumeLevel = Math.round(videoPlayer.volume * 10);
+        showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+      }
+    });
+
+    document.getElementById("power").addEventListener("click", togglePower);
+
+    document.getElementById("menu").addEventListener("click", () => {
+      if (powerOn) {
+        const previousChannel = currentChannel;
+        while (currentChannel === previousChannel) {
+          currentChannel = Math.floor(Math.random() * channels.length);
+        }
+        playChannel(channels[currentChannel], currentChannel);
+        showNotification("Channel Shuffled");
+      }
+    });
+
+    populateGuide();
   </script>
 </body>
 </html>
