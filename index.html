@@ -178,6 +178,23 @@
     .channel-item.active {
       background-color: rgba(0, 255, 0, 0.4);
     }
+
+    .back-button {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid limegreen;
+      border-radius: 3px;
+      background-color: limegreen;
+      color: black;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: black;
+      color: limegreen;
+    }
   </style>
 </head>
 <body>
@@ -185,7 +202,7 @@
     <div class="tv-container">
       <div class="tv-screen" id="tvScreen">
         <video id="videoPlayer" autoplay loop>
-          <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
+          <source src="" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
@@ -250,6 +267,12 @@
         channelItem.addEventListener("click", () => playChannel(channel, index));
         tvGuide.appendChild(channelItem);
       });
+
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Categories";
+      backButton.addEventListener("click", populateGuide);
+      tvGuide.appendChild(backButton);
     }
 
     function playChannel(channel, index) {
@@ -258,7 +281,7 @@
       currentChannel = index;
       if (powerOn) {
         videoPlayer.play();
-        showNotification(`${channel.category}`);
+        showNotification(`Now Playing: ${channel.name}`);
       }
     }
 
@@ -320,16 +343,16 @@
 
     document.getElementById("power").addEventListener("click", togglePower);
 
-document.getElementById("menu").addEventListener("click", () => {
-  if (powerOn) {
-    const previousChannel = currentChannel;
-    while (currentChannel === previousChannel) {
-      currentChannel = Math.floor(Math.random() * channels.length);
-    }
-    playChannel(channels[currentChannel], currentChannel);
-    showNotification("Channel Shuffled");
-  }
-});
+    document.getElementById("menu").addEventListener("click", () => {
+      if (powerOn) {
+        const previousChannel = currentChannel;
+        while (currentChannel === previousChannel) {
+          currentChannel = Math.floor(Math.random() * channels.length);
+        }
+        playChannel(channels[currentChannel], currentChannel);
+        showNotification("Channel Shuffled");
+      }
+    });
 
     populateGuide();
   </script>
