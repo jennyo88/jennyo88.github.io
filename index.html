@@ -137,7 +137,7 @@
 
     .notification {
       position: absolute;
-      top: 70%;
+      top: 60%;
       left: 50%;
       transform: translateX(-50%);
       font-size: 14px;
@@ -147,6 +147,7 @@
       border-radius: 5px;
       display: none;
       z-index: 15;
+      text-align: center;
     }
 
     .glowing-button {
@@ -312,25 +313,58 @@
 
     function displayChannels(category, subcategory) {
       tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
+  
+      // Get unique channel numbers for the given subcategory
       const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
 
-      uniqueChannels.forEach(channelNumber => {
+      // Sort channels by release year (optional enhancement)
+      const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
+        const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
+        const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
+        return yearA - yearB; // Sort ascending by year
+      });
+
+      sortedUniqueChannels.forEach(channelNumber => {
+        // Group channels by the same channel number
         const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
         const channelName = channelGroup[0].name.split("Part")[0].trim();
-        
+        const description = channelGroup[0].description || "No description available.";
+        const duration = channelGroup[0].duration || "Unknown duration";
+        const releaseYear = channelGroup[0].releaseYear || "Unknown year";
+
+        // Create a channel item element
         const channelItem = document.createElement("div");
         channelItem.classList.add("channel-item");
-        channelItem.textContent = `${channelName} (Channel ${channelNumber})`;
+
+        // Add metadata to the display
+        channelItem.innerHTML = `
+          <strong>${channelName} (Channel ${channelNumber})</strong><br>
+          <small>${description}</small><br>
+          <small>Duration: ${duration}</small><br>
+          <small>Year: ${releaseYear}</small>
+    `    ;
+        
+        // Add hover functionality to show metadata as a notification
+        channelItem.addEventListener("mouseover", () => {
+          showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
+        });
+
+        channelItem.addEventListener("mouseout", () => {
+          hideNotification();
+        });
+
+        // Handle click to play the channel group
         channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
         tvGuide.appendChild(channelItem);
       });
 
+      // Add a back button to navigate back to subcategories
       const backButton = document.createElement("div");
       backButton.classList.add("back-button");
       backButton.textContent = "Back to Categories";
       backButton.addEventListener("click", () => displaySubcategories(category));
       tvGuide.appendChild(backButton);
-    }
+  }
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
@@ -356,21 +390,30 @@
 
     function playChannel(channel) {
       videoPlayer.src = channel.video;
-      channelDisplay.textContent = `Now Playing: ${channel.name}`;
+      channelDisplay.innerHTML = `
+        <strong>${channel.name}</strong><br>
+        <small>${channel.description}</small><br>
+        <small>Duration: ${channel.duration}</small><br>
+        <small>${channel.releaseYear}</small>
+  `  ;
       currentChannel = index;
       if (powerOn) {
         videoPlayer.play();
-        showNotification(`${channel.category}`);
+        showNotification(`Playing: ${channel.name}`);
       }
     }
 
     function showNotification(message) {
+      const notification = document.getElementById("notification");
       notification.textContent = message;
       notification.style.display = "block";
-      setTimeout(() => {
-        notification.style.display = "none";
-      }, 2000);
     }
+
+    function hideNotification() {
+      const notification = document.getElementById("notification");
+      notification.style.display = "none";
+    }
+
 
     function togglePower() {
       powerOn = !powerOn;
