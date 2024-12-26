@@ -10,4 +10,4 @@ This is a retro-themed TV guide interface hosted on GitHub Pages. It includes:
 2. Use the controls to navigate between channels or adjust volume.
 
 ### Hosted on GitHub Pages
-View the live site at [your-username.github.io/repository-name](https://your-username.github.io/repository-name).
+View the live site at [jennyo88.github.io](https://jennyo88.github.io).
