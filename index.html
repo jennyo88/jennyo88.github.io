@@ -87,6 +87,7 @@
               inset 0 -1px 2px rgba(0, 0, 0, 0.4),
               0 0 10px rgba(192, 192, 192, 0.6); /* Gradient halo */
     }
+
     .button-panel button:hover {
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
               0 0 30px rgba(192, 192, 192, 0.6); /* Stronger halo on hover */
@@ -249,10 +250,8 @@
     </div>
   </div>
 
-  <!-- Keep your channels.js file if you have additional logic there -->
   <script src="channels.js"></script>
 
-  <!-- Minimal JS to ensure power button toggles the TV -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const powerButton = document.getElementById("power");
@@ -261,41 +260,24 @@
       const glowingButton = document.getElementById("glowingButton");
       const channelDisplay = document.getElementById("channelDisplay");
 
-      let isPowerOn = false; // Track power state
+      let isPowerOn = false;
 
-      // Toggle power ON/OFF
       const togglePower = () => {
         isPowerOn = !isPowerOn;
 
         if (isPowerOn) {
-          // Turn on
           tvScreen.classList.add("on");
           videoPlayer.classList.add("on");
           glowingButton.classList.add("on");
-
-          // Set a default video and play
-          videoPlayer.src = "your-default-video.mp4"; 
-          videoPlayer.play();
-
-          // Show default channel display
           channelDisplay.style.display = "block";
-          channelDisplay.textContent = "Channel 1";
         } else {
-          // Turn off
           tvScreen.classList.remove("on");
           videoPlayer.classList.remove("on");
           glowingButton.classList.remove("on");
-
-          // Stop and clear video
-          videoPlayer.pause();
-          videoPlayer.src = "";
-
-          // Hide channel display
           channelDisplay.style.display = "none";
         }
       };
 
-      // Listen for power button clicks
       powerButton.addEventListener("click", togglePower);
     });
   </script>
