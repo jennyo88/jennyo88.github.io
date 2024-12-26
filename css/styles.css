@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Add the rest of your styles */
