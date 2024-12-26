@@ -20,7 +20,6 @@ RetroTV is an interactive web-based simulation of a retro TV set with a dynamic 
 
 ### Visual Enhancements
 - **Retro TV Overlay**: Authentic CRT TV overlay design.
-- **Custom TV Guide Background**: Uses the provided `tvguide.webp` as a stylish guide overlay.
 
 ## File Structure
 - **`index.html`**: The main HTML file that integrates the TV and TV guide functionality.
