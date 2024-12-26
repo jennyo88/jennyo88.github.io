@@ -85,6 +85,22 @@
       display: none; /* Initially hidden when TV is off */
     }
 
+    .glowing-button {
+      position: absolute;
+      bottom: 6%;
+      left: 54.2%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background-color: red;
+      border-radius: 20%;
+      box-shadow: 0 0 5px red, 0 0 10px red, 0 0 10px red;
+    }
+
+    .glowing-button.on {
+      background-color: limegreen;
+      box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
+    }
   </style>
 </head>
 <body>
@@ -98,9 +114,7 @@
     </div>
     <div class="tv-overlay"></div>
     <div class="button-panel">
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
+      <button id="menu"></button>
       <button id="volumeDown"></button>
       <button id="volumeUp"></button>
       <button id="channelDown"></button>
@@ -113,6 +127,7 @@
       <div class="spacer"></div>
       <button id="power"></button>
     </div>
+    <div class="glowing-button" id="glowingButton"></div>
   </div>
 
   <script>
@@ -136,16 +151,28 @@
     const tvScreen = document.getElementById("tvScreen");
     const videoPlayer = document.getElementById("videoPlayer");
     const channelDisplay = document.getElementById("channelDisplay");
+    const glowingButton = document.getElementById("glowingButton");
     const channelUpButton = document.getElementById("channelUp");
     const channelDownButton = document.getElementById("channelDown");
     const volumeUpButton = document.getElementById("volumeUp");
     const volumeDownButton = document.getElementById("volumeDown");
     const powerButton = document.getElementById("power");
+    const menuButton = document.getElementById("menu");
 
     function updateChannel() {
       const channel = channels[currentChannel];
       videoPlayer.src = channel.video;
       channelDisplay.textContent = `Playing: ${channel.name}`;
+    }
+
+    function shuffleChannel() {
+      if (powerOn) {
+        const previousChannel = currentChannel;
+        while (currentChannel === previousChannel) {
+          currentChannel = Math.floor(Math.random() * channels.length); // Random channel index
+        }
+        updateChannel();
+      }
     }
 
     channelUpButton.addEventListener("click", () => {
@@ -179,13 +206,17 @@
       if (powerOn) {
         tvScreen.style.display = "block";
         channelDisplay.style.display = "block";
+        glowingButton.classList.add("on");
         updateChannel();
       } else {
         tvScreen.style.display = "none";
         channelDisplay.style.display = "none";
+        glowingButton.classList.remove("on");
         videoPlayer.pause();
       }
     });
+
+    menuButton.addEventListener("click", shuffleChannel);
 
     // Initialize the first channel
     updateChannel();
