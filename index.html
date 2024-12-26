@@ -27,16 +27,32 @@
 
     .tv-screen {
       width: 72%;
-      height: 54%;
+      padding-top: 54%; /* Maintains a 4:3 aspect ratio */
       position: absolute;
       top: 22%;
       left: 14%;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+      z-index: 1;
+    }
+
+    .tv-stencil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://90s.myretrotvs.com/img/tvstencil.webp') no-repeat center center;
+      background-size: contain;
+      pointer-events: none;
+      z-index: 2;
     }
 
     video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -85,7 +101,7 @@
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 14px;
-      z-index: 2;
+      z-index: 3;
     }
   </style>
 </head>
@@ -99,6 +115,7 @@
       <div class="tv-static"></div>
       <div class="tv-overlay" id="channelInfo">Channel 1</div>
     </div>
+    <div class="tv-stencil"></div>
     <div class="channel-buttons">
       <div class="button" id="channelUp"></div>
       <div class="button" id="channelDown"></div>
