@@ -223,10 +223,10 @@
       <div class="glowing-button" id="glowingButton"></div>
     </div>
 
-    <div class="tv-guide" id="tvGuide" style="background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvguide.webp') no-repeat center center; background-size: contain;">
-  <h2>TV Guide</h2>
-  <!-- Categories and channels will be dynamically added here -->
-</div>
+    <div class="tv-guide" id="tvGuide">
+      <h2>TV Guide</h2>
+      <!-- Categories and channels will be dynamically added here -->
+    </div>
   </div>
 
   <script src="channels.js"></script>
@@ -281,7 +281,7 @@
       currentChannel = index;
       if (powerOn) {
         videoPlayer.play();
-        showNotification(`Now Playing: ${channel.name}`);
+        showNotification(`${channel.category}`);
       }
     }
 
