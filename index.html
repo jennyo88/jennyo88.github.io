@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRT TV with Video</title>
+  <title>CRT TV with Halo Effect</title>
   <style>
     body {
       margin: 0;
@@ -22,6 +22,7 @@
       height: 450px;
       background-color: black;
     }
+
     .tv-screen {
       position: absolute;
       top: 9%;
@@ -29,12 +30,26 @@
       width: 86%;
       height: 72%;
       overflow: hidden;
-      display: none;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%, black 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.5s ease-in-out;
     }
+
+    .tv-screen.on {
+      background: none;
+    }
+
     video {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: none; /* Initially hidden */
+    }
+
+    video.on {
+      display: block; /* Only visible when TV is on */
     }
 
     .tv-overlay {
@@ -199,13 +214,21 @@
       showNotification(`${channel.subname}`);
     }
 
-    function shuffleChannel() {
+    function togglePower() {
+      powerOn = !powerOn;
       if (powerOn) {
-        const previousChannel = currentChannel;
-        while (currentChannel === previousChannel) {
-          currentChannel = Math.floor(Math.random() * channels.length); // Random channel index
-        }
+        tvScreen.classList.add("on");
+        videoPlayer.classList.add("on");
+        glowingButton.classList.add("on");
+        channelDisplay.style.display = "block";
+        videoPlayer.play();
         updateChannel();
+      } else {
+        tvScreen.classList.remove("on");
+        videoPlayer.classList.remove("on");
+        glowingButton.classList.remove("on");
+        channelDisplay.style.display = "none";
+        videoPlayer.pause();
       }
     }
 
@@ -223,45 +246,13 @@
       }
     });
 
-    const MAX_VOLUME = 11;
-    const VOLUME_STEP = 1 / MAX_VOLUME;
-
-    volumeUpButton.addEventListener("click", () => {
+    powerButton.addEventListener("click", togglePower);
+    menuButton.addEventListener("click", () => {
       if (powerOn) {
-        videoPlayer.volume = Math.min(videoPlayer.volume + VOLUME_STEP, 1);
-        const volumeLevel = Math.round(videoPlayer.volume * MAX_VOLUME);
-        showNotification(`Volume: ${volumeLevel}`);
-      }
-    });
-
-    volumeDownButton.addEventListener("click", () => {
-      if (powerOn) {
-        videoPlayer.volume = Math.max(videoPlayer.volume - VOLUME_STEP, 0);
-        const volumeLevel = Math.round(videoPlayer.volume * MAX_VOLUME);
-        if (volumeLevel === 0) {
-          showNotification("MUTE");
-        } else {
-          showNotification(`Volume: ${volumeLevel}`);
-        }
-      }
-    });
-
-    powerButton.addEventListener("click", () => {
-      powerOn = !powerOn;
-      if (powerOn) {
-        tvScreen.style.display = "block";
-        channelDisplay.style.display = "block";
-        glowingButton.classList.add("on");
+        currentChannel = Math.floor(Math.random() * channels.length);
         updateChannel();
-      } else {
-        tvScreen.style.display = "none";
-        channelDisplay.style.display = "none";
-        glowingButton.classList.remove("on");
-        videoPlayer.pause();
       }
     });
-
-    menuButton.addEventListener("click", shuffleChannel);
 
     updateChannel();
   </script>
