@@ -3,13 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRT TV with Overlay</title>
+  <title>CRT TV with Video</title>
   <style>
     body {
       margin: 0;
       background-color: black;
-      color: white;
-      font-family: 'Courier New', Courier, monospace;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,106 +15,50 @@
       overflow: hidden;
     }
 
-    .tv-frame {
-      width: 600px;
-      height: 400px;
+    .tv-container {
       position: relative;
-      background: black;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      width: 600px; /* Match the size of your overlay */
+      height: 450px;
+      background: url('/mnt/data/tvbackclean.webp') no-repeat center center;
+      background-size: contain;
     }
 
     .tv-screen {
       position: absolute;
-      top: 11%;
-      left: 8%;
-      width: 84%;
-      height: 73%;
+      top: 12%; /* Adjust to fit the screen area */
+      left: 7%; /* Adjust to fit the screen area */
+      width: 86%; /* Adjust to fit the screen area */
+      height: 72%; /* Adjust to fit the screen area */
       overflow: hidden;
-      background: black;
     }
 
     video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-    }
-
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 120%;
-      height: 120%;
-      pointer-events: none;
-      z-index: 2;
+      object-fit: cover; /* Ensures the video scales properly */
     }
 
     .tv-overlay {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      z-index: 3;
-    }
-
-    .channel-buttons {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sound-controls {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .button {
-      width: 30px;
-      height: 30px;
-      background: #444;
-      border: 2px solid #222;
-      margin: 5px;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    }
-
-    .button:active {
-      background: #888;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/mnt/data/tvstencil.webp') no-repeat center center;
+      background-size: contain;
+      pointer-events: none; /* Allows interaction with the video */
     }
   </style>
 </head>
 <body>
-  <div class="tv-frame">
+  <div class="tv-container">
     <div class="tv-screen">
-      <video id="videoPlayer" autoplay loop>
+      <video id="videoPlayer" autoplay loop muted>
         <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
-      <div class="scan-lines"></div>
-      <img src="https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvscreen.webp" alt="CRT Overlay" class="overlay">
-      <div class="tv-overlay" id="channelInfo">Channel 1</div>
     </div>
-    <div class="channel-buttons">
-      <div class="button" id="channelUp"></div>
-      <div class="button" id="channelDown"></div>
-    </div>
-    <div class="sound-controls">
-      <button class="button" id="toggleSound">🔊</button>
-      <button class="button" id="volumeUp">+</button>
-      <button class="button" id="volumeDown">-</button>
-    </div>
+    <div class="tv-overlay"></div>
   </div>
 
   <script>
@@ -132,33 +74,14 @@
     let currentChannel = 0;
 
     const videoPlayer = document.getElementById("videoPlayer");
-    const channelInfo = document.getElementById("channelInfo");
 
-    document.getElementById("channelUp").addEventListener("click", () => {
+    document.body.addEventListener("click", () => {
       currentChannel = (currentChannel + 1) % channels.length;
       changeChannel();
     });
 
-    document.getElementById("channelDown").addEventListener("click", () => {
-      currentChannel = (currentChannel - 1 + channels.length) % channels.length;
-      changeChannel();
-    });
-
-    document.getElementById("toggleSound").addEventListener("click", () => {
-      videoPlayer.muted = !videoPlayer.muted;
-    });
-
-    document.getElementById("volumeUp").addEventListener("click", () => {
-      videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-    });
-
-    document.getElementById("volumeDown").addEventListener("click", () => {
-      videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-    });
-
     function changeChannel() {
       videoPlayer.src = channels[currentChannel];
-      channelInfo.textContent = `Channel ${currentChannel + 1}`;
     }
   </script>
 </body>
