@@ -31,17 +31,24 @@
     }
 
     .tv-screen {
-      width: 50%;
-      height: 50%;
+      width: 100%;
+      height: 100%;
       border-radius: 10px;
       overflow: hidden;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     video {
       width: 50%;
-      height: 50%;
-      object-fit: cover;
+      height: auto;
+      position: absolute;
+      top: 25%; /* Center vertically */
+      left: 25%; /* Center horizontally */
+      transform: translate(-50%, -50%);
+      filter: contrast(1.2) brightness(0.9) saturate(1.1);
     }
 
     .scan-lines {
