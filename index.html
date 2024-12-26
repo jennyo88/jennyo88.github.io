@@ -249,6 +249,55 @@
     </div>
   </div>
 
+  <!-- Keep your channels.js file if you have additional logic there -->
   <script src="channels.js"></script>
+
+  <!-- Minimal JS to ensure power button toggles the TV -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const powerButton = document.getElementById("power");
+      const tvScreen = document.getElementById("tvScreen");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const glowingButton = document.getElementById("glowingButton");
+      const channelDisplay = document.getElementById("channelDisplay");
+
+      let isPowerOn = false; // Track power state
+
+      // Toggle power ON/OFF
+      const togglePower = () => {
+        isPowerOn = !isPowerOn;
+
+        if (isPowerOn) {
+          // Turn on
+          tvScreen.classList.add("on");
+          videoPlayer.classList.add("on");
+          glowingButton.classList.add("on");
+
+          // Set a default video and play
+          videoPlayer.src = "your-default-video.mp4"; 
+          videoPlayer.play();
+
+          // Show default channel display
+          channelDisplay.style.display = "block";
+          channelDisplay.textContent = "Channel 1";
+        } else {
+          // Turn off
+          tvScreen.classList.remove("on");
+          videoPlayer.classList.remove("on");
+          glowingButton.classList.remove("on");
+
+          // Stop and clear video
+          videoPlayer.pause();
+          videoPlayer.src = "";
+
+          // Hide channel display
+          channelDisplay.style.display = "none";
+        }
+      };
+
+      // Listen for power button clicks
+      powerButton.addEventListener("click", togglePower);
+    });
+  </script>
 </body>
 </html>
