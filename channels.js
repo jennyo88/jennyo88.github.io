@@ -1,8 +1,10 @@
 const channels = [
   /* { name: " (xxxx)", category: "Movies", video: "" }, */
+  { name: "Beneath the Planet of the Apes (1970)", category: "Movies", video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4" },
   { name: "The Aristocats (1970)", category: "Movies", video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4" },
   { name: "Star Wars (1977)", category: "Movies", video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4" },
   { name: "Superman: The Movie (1978)", category: "Movies", video: "https://archive.org/download/superman-the-movie-1978-from-the-1979-wci-home-video-vhs/Superman%20The%20Movie%20%281978%29%20%5Bfrom%20the%201979%20WCI%20Home%20Video%20VHS%5D.mp4" },
+  { name: "The Time Machine (1978)", category: "Movies", video: "https://archive.org/download/the-time-machine-1978-time-travel-sci-fi/The%20Time%20Machine%20%281978%20Time%20Travel%20SciFi%29.mp4" },
   { name: "Monty Python's Life of Brian (1979)", category: "Movies", video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4" },
   { name: "Superman II (1980)", category: "Movies", video: "https://archive.org/download/full-vhs-superman-ii-1981-warner-home-video-rental-edition/FULL%20VHS%20Superman%20II%20%281981%29%20%5BWarner%20Home%20Video%5D%20%28Rental%20Edition%29.mp4" },
   name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
