@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RetroTV</title>
+  <title>RetroTV with TV Guide</title>
   <style>
     body {
       margin: 0;
@@ -14,6 +14,12 @@
       height: 100vh;
       overflow: hidden;
       color: white;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
     }
 
     .tv-container {
@@ -21,6 +27,7 @@
       width: 600px;
       height: 450px;
       background-color: black;
+      margin-right: 20px; /* Space between TV and guide */
     }
 
     .tv-screen {
@@ -45,11 +52,11 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: none; /* Initially hidden */
+      display: none;
     }
 
     video.on {
-      display: block; /* Only visible when TV is on */
+      display: block;
     }
 
     .tv-overlay {
@@ -103,6 +110,20 @@
       display: none;
     }
 
+    .notification {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: limegreen;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      z-index: 15;
+    }
+
     .glowing-button {
       position: absolute;
       bottom: 6%;
@@ -113,6 +134,7 @@
       background-color: red;
       border-radius: 20%;
       box-shadow: 0 0 5px red, 0 0 10px red, 0 0 10px red;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .glowing-button.on {
@@ -120,114 +142,137 @@
       box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
     }
 
-    .notification {
-      position: absolute;
-      top: 15%;
-      left: 65%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 4, 0.7);
-      color: limegreen;
-      font-family: 'Roboto', sans-serif;
-      font-size: 15px;
-      font-weight: bold;
-      padding: 5px 10px;
-      border-radius: 10px;
-      z-index: 15;
-      animation: fadeInOut 2s forwards;
+    .tv-guide {
+      width: 250px;
+      height: 450px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 15px;
+      overflow-y: auto;
+      border: 2px solid limegreen;
+      border-radius: 5px;
     }
 
-    @keyframes fadeInOut {
-      0% {
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      90% {
-        opacity: 1;
-      }
-      100% {
-        opacity: 0;
-      }
+    .tv-guide h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-decoration: underline;
+    }
+
+    .category-item,
+    .channel-item {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid limegreen;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .category-item:hover,
+    .channel-item:hover {
+      background-color: rgba(0, 255, 0, 0.2);
+    }
+
+    .channel-item.active {
+      background-color: rgba(0, 255, 0, 0.4);
     }
   </style>
 </head>
 <body>
-  <div class="tv-container">
-    <div class="tv-screen" id="tvScreen">
-      <video id="videoPlayer" autoplay loop>
-        <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+  <div class="container">
+    <div class="tv-container">
+      <div class="tv-screen" id="tvScreen">
+        <video id="videoPlayer" autoplay loop>
+          <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="channel-display" id="channelDisplay"></div>
+      <div class="notification" id="notification"></div>
+      <div class="tv-overlay"></div>
+      <div class="button-panel">
+        <button id="menu"></button>
+        <button id="volumeDown"></button>
+        <button id="volumeUp"></button>
+        <button id="channelDown"></button>
+        <button id="channelUp"></button>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
+        <button id="power"></button>
+      </div>
+      <div class="glowing-button" id="glowingButton"></div>
     </div>
-    <div class="channel-display" id="channelDisplay"></div>
-    <div class="tv-overlay"></div>
-    <div class="button-panel">
-      <button id="menu"></button>
-      <button id="volumeDown"></button>
-      <button id="volumeUp"></button>
-      <button id="channelDown"></button>
-      <button id="channelUp"></button>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <div class="spacer"></div>
-      <button id="power"></button>
+
+    <div class="tv-guide" id="tvGuide">
+      <h2>TV Guide</h2>
+      <!-- Categories and channels will be dynamically added here -->
     </div>
-    <div class="glowing-button" id="glowingButton"></div>
   </div>
 
   <script>
     const channels = [
-      { name: "The Thing (1982)", subname: "MOVIES", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
-      { name: "Hocus Pocus (1993)", subname: "MOVIES", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
-      { name: "Ghostbusters (1985)", subname: "MOVIES", video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4" },
+      { name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
+      { name: "Hocus Pocus (1993)", category: "Movies", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
+      { name: "Ghostbusters (1985)", category: "Movies", video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4" },
     ];
 
     let currentChannel = 0;
     let powerOn = false;
-
-    // Object to store playback times for each channel
     const playbackTimes = {};
-
     const tvScreen = document.getElementById("tvScreen");
     const videoPlayer = document.getElementById("videoPlayer");
     const channelDisplay = document.getElementById("channelDisplay");
+    const notification = document.getElementById("notification");
     const glowingButton = document.getElementById("glowingButton");
-    const channelUpButton = document.getElementById("channelUp");
-    const channelDownButton = document.getElementById("channelDown");
-    const volumeUpButton = document.getElementById("volumeUp");
-    const volumeDownButton = document.getElementById("volumeDown");
-    const powerButton = document.getElementById("power");
-    const menuButton = document.getElementById("menu");
+    const tvGuide = document.getElementById("tvGuide");
 
-    function showNotification(message) {
-      const notification = document.createElement("div");
-      notification.classList.add("notification");
-      notification.textContent = message;
+    const groupedChannels = channels.reduce((acc, channel) => {
+      if (!acc[channel.category]) acc[channel.category] = [];
+      acc[channel.category].push(channel);
+      return acc;
+    }, {});
 
-      document.body.appendChild(notification);
-
-      setTimeout(() => notification.remove(), 2000);
+    function populateGuide() {
+      tvGuide.innerHTML = `<h2>Categories</h2>`;
+      Object.keys(groupedChannels).forEach(category => {
+        const categoryItem = document.createElement("div");
+        categoryItem.classList.add("category-item");
+        categoryItem.textContent = category;
+        categoryItem.addEventListener("click", () => displayChannels(category));
+        tvGuide.appendChild(categoryItem);
+      });
     }
 
-    function updateChannel() {
-      // Store the current playback time of the current channel
-      playbackTimes[currentChannel] = videoPlayer.currentTime;
+    function displayChannels(category) {
+      tvGuide.innerHTML = `<h2>${category}</h2>`;
+      groupedChannels[category].forEach((channel, index) => {
+        const channelItem = document.createElement("div");
+        channelItem.classList.add("channel-item");
+        channelItem.textContent = channel.name;
+        channelItem.addEventListener("click", () => playChannel(channel, index));
+        tvGuide.appendChild(channelItem);
+      });
+    }
 
-      // Update the current channel and load the new video
-      const channel = channels[currentChannel];
+    function playChannel(channel, index) {
       videoPlayer.src = channel.video;
-
-      // Restore playback time for the new channel, if available
-      if (playbackTimes[currentChannel]) {
-        videoPlayer.currentTime = playbackTimes[currentChannel];
+      channelDisplay.textContent = `Now Playing: ${channel.name}`;
+      currentChannel = index;
+      if (powerOn) {
+        videoPlayer.play();
+        showNotification(`${channel.category}`);
       }
+    }
 
-      channelDisplay.textContent = `Playing: ${channel.name}`;
-      showNotification(`${channel.subname}`);
-
-      // Ensure the video continues playing
-      videoPlayer.play();
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 2000);
     }
 
     function togglePower() {
@@ -238,63 +283,49 @@
         glowingButton.classList.add("on");
         channelDisplay.style.display = "block";
         videoPlayer.play();
-        updateChannel();
+        showNotification(`Power On`);
       } else {
         tvScreen.classList.remove("on");
         videoPlayer.classList.remove("on");
         glowingButton.classList.remove("on");
         channelDisplay.style.display = "none";
         videoPlayer.pause();
+        showNotification(`Power Off`);
       }
     }
 
-    channelUpButton.addEventListener("click", () => {
+    document.getElementById("channelUp").addEventListener("click", () => {
       if (powerOn) {
         currentChannel = (currentChannel + 1) % channels.length;
-        updateChannel();
+        playChannel(channels[currentChannel], currentChannel);
       }
     });
 
-    channelDownButton.addEventListener("click", () => {
+    document.getElementById("channelDown").addEventListener("click", () => {
       if (powerOn) {
         currentChannel = (currentChannel - 1 + channels.length) % channels.length;
-        updateChannel();
+        playChannel(channels[currentChannel], currentChannel);
       }
     });
 
-    volumeUpButton.addEventListener("click", () => {
+    document.getElementById("volumeUp").addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-        const volumeLevel = Math.round(videoPlayer.volume * 10);
-        showNotification(`Volume: ${volumeLevel}`);
+        showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
       }
     });
 
-    volumeDownButton.addEventListener("click", () => {
+    document.getElementById("volumeDown").addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
         const volumeLevel = Math.round(videoPlayer.volume * 10);
-        if (volumeLevel === 0) {
-          showNotification("MUTE");
-        } else {
-          showNotification(`Volume: ${volumeLevel}`);
-        }
+        showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
       }
     });
 
-    powerButton.addEventListener("click", togglePower);
+    document.getElementById("power").addEventListener("click", togglePower);
 
-    menuButton.addEventListener("click", () => {
-      if (powerOn) {
-        const previousChannel = currentChannel;
-        while (currentChannel === previousChannel) {
-          currentChannel = Math.floor(Math.random() * channels.length);
-        }
-        updateChannel();
-      }
-    });
-
-    updateChannel();
+    populateGuide();
   </script>
 </body>
 </html>
