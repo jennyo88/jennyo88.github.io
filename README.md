@@ -25,7 +25,6 @@ RetroTV is an interactive web-based simulation of a retro TV set with a dynamic 
 ## File Structure
 - **`index.html`**: The main HTML file that integrates the TV and TV guide functionality.
 - **`channels.js`**: Contains the list of channels and categories in JavaScript format.
-- **`tvguide.webp`**: Background image for the TV guide.
 - **`tvclean.webp`**: Background overlay for the TV screen.
 
 ## How It Works
@@ -59,14 +58,11 @@ const channels = [
 ```
 
 ## Setup for GitHub Pages
-1. Add all files (`index.html`, `channels.js`, `tvguide.webp`, `tvclean.webp`) to your repository.
+1. Add all files (`index.html`, `channels.js`, `tvclean.webp`) to your repository.
 2. Enable GitHub Pages in the repository settings.
 3. Access your site using the provided GitHub Pages URL.
 
 ## Screenshots
-
-### TV and Guide Layout
-![TV and Guide](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvguide.webp)
 
 ### Channel Display
 ![Channel Display](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvclean.webp)
