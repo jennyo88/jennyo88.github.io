@@ -170,17 +170,25 @@
       height: 480px;
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
-      padding: 15px;
+      padding: none;
       overflow-y: auto;
-      border: 2px solid red;
-      border-radius: 5px;
+      border: 4px solid grey;
+      border-radius: 10px;
     }
 
     .tv-guide h2 {
       text-align: center;
-      margin-bottom: 15px;
-      font-size: 18px;
-      text-decoration: underline;
+      margin-bottom: 20px;
+      font-size: 20px; /* Slightly larger text */
+      font-weight: bold;
+      color: white; /* Text color to stand out on a grey background */
+      background: linear-gradient(180deg, #a9a9a9, #808080); /* Grey gradient for texture */
+      padding: 15px 30px; /* Padding for spacing */
+      border: 2px solid #606060; /* Darker border for TV frame-like look */
+      border-radius: 3px; /* Slight rounding for a soft edge */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
+              0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
     }
 
     .category-item,
@@ -194,7 +202,7 @@
     }
 
     .category-item:hover,
-    .channel-item:hover {
+    .channel-item:texthover {
       background-color: rgba(255, 0, 0, 0.2);
     }
 
