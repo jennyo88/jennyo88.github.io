@@ -17,47 +17,33 @@
 
     .tv-container {
       position: relative;
-      width: 600px; /* Match the size for proper fit */
-      height: 450px; /* Maintain aspect ratio */
-      background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvbackclean.webp') no-repeat center center;
-      background-size: contain; /* Scale proportionally */
+      width: 600px; /* Match the size of your overlay */
+      height: 450px;
+      background-size: contain;
     }
 
     .tv-screen {
-      position: relative;
-      width: 75%;
-      height: auto;
-      overflow: hidden;
-    }
-
-    .tv-back {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensure background scales proportionally */
-      z-index: 1; /* Layer behind the video */
+      top: 12%; /* Adjust to fit the screen area */
+      left: 7%; /* Adjust to fit the screen area */
+      width: 86%; /* Adjust to fit the screen area */
+      height: 72%; /* Adjust to fit the screen area */
+      overflow: hidden;
     }
     
     video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Ensures the video scales properly */
+    }
+
+    .tv-overlay {
       position: relative;
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Ensures the video scales properly */
-      z-index: 2; /* Video above the background */
-      
-    }
-    .tv-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%; /* Scale relative to .tv-container */
-      height: 100%; /* Scale relative to .tv-container */
       background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvstencil.webp') no-repeat center center;
-      background-size: contain; /* Ensure proper scaling */
-      pointer-events: none; /* Allow interaction with the video */
-      z-index: 3; /* Overlay above the video */
+      background-size: contain;
+      pointer-events: none; /* Allows interaction with the video */
     }
   </style>
 </head>
@@ -76,7 +62,6 @@
     const channels = [
       "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
       "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4",
-      "https://ia802802.us.archive.org/16/items/casper_201912/CASPER.mp4",
       "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4",
       "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
       "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
