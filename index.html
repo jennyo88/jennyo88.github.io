@@ -24,29 +24,40 @@
     }
 
     .tv-screen {
-      position: absolute;
-      top: 7%; /* Adjust to fit the screen area | 12% default */
-      left: 7%; /* Adjust to fit the screen area | 7% default */
-      width: 80%; /* Adjust to fit the screen area | 86% default */
-      height: 67%; /* Adjust to fit the screen area | 72% default */
+      position: relative;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
     }
 
+    .tv-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure background scales proportionally */
+      z-index: 1; /* Layer behind the video */
+    }
+    
     video {
+      position: relative;
       width: 100%;
       height: 100%;
       object-fit: cover; /* Ensures the video scales properly */
+      z-index: 2; /* Video above the background */
+      
     }
-
     .tv-overlay {
       position: absolute;
-      top: -30; /* 0 default */
-      left: 70; /* left 0 default */
-      width: 86%; /* 100% default */
-      height: 86%; /* 100% default */
+      top: 0;
+      left: 0;
+      width: 100%; /* Scale relative to .tv-container */
+      height: 100%; /* Scale relative to .tv-container */
       background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvstencil.webp') no-repeat center center;
-      background-size: contain;
-      pointer-events: none; /* Allows interaction with the video */
+      background-size: contain; /* Ensure proper scaling */
+      pointer-events: none; /* Allow interaction with the video */
+      z-index: 3; /* Overlay above the video */
     }
   </style>
 </head>
