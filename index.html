@@ -312,11 +312,16 @@
 
     function displayChannels(category, subcategory) {
       tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
-      groupedChannels[category][subcategory].forEach((channel, index) => {
+      const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
+
+      uniqueChannels.forEach(channelNumber => {
+        const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
+        const channelName = channelGroup[0].name.split("Part")[0].trim();
+        
         const channelItem = document.createElement("div");
         channelItem.classList.add("channel-item");
-        channelItem.textContent = channel.name;
-        channelItem.addEventListener("click", () => playChannel(channel));
+        channelItem.textContent = `${channelName} (Channel ${channelNumber})`;
+        channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
         tvGuide.appendChild(channelItem);
       });
 
@@ -326,6 +331,28 @@
       backButton.addEventListener("click", () => displaySubcategories(category));
       tvGuide.appendChild(backButton);
     }
+
+    function playChannelGroup(channelGroup) {
+      let partIndex = 0;
+
+    function playNextPart() {
+      if (partIndex < channelGroup.length) {
+        const channel = channelGroup[partIndex];
+        videoPlayer.src = channel.video;
+        channelDisplay.textContent = `Now Playing: ${channel.name}`;
+        if (powerOn) videoPlayer.play();
+
+        videoPlayer.onended = () => {
+          partIndex++;
+          playNextPart();
+        };
+      } else {
+        showNotification("End of Channel");
+      }
+    }
+
+    playNextPart();
+  }
 
     function playChannel(channel) {
       videoPlayer.src = channel.video;
