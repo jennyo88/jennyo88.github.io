@@ -22,7 +22,6 @@
       height: 450px;
       background-color: black;
     }
-
     .tv-screen {
       position: absolute;
       top: 9%;
@@ -32,7 +31,6 @@
       overflow: hidden;
       display: none;
     }
-
     video {
       width: 100%;
       height: 100%;
@@ -58,7 +56,7 @@
     .button-panel button {
       width: 10px;
       height: 10px;
-      background-color: black;
+      background-color: transparent;
       border: none;
       border-radius: 50%;
       cursor: pointer;
@@ -110,7 +108,7 @@
     .notification {
       position: absolute;
       top: 25%;
-      left: 76%;
+      left: 65%;
       transform: translateX(-50%);
       background-color: rgba(0, 0, 4, 0.7);
       color: limegreen;
@@ -141,13 +139,13 @@
 </head>
 <body>
   <div class="tv-container">
-    <div class="channel-display" id="channelDisplay">The Thing (1982)</div>
     <div class="tv-screen" id="tvScreen">
       <video id="videoPlayer" autoplay loop>
         <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
+    <div class="channel-display" id="channelDisplay"></div>
     <div class="tv-overlay"></div>
     <div class="button-panel">
       <button id="menu"></button>
@@ -191,9 +189,7 @@
 
       document.body.appendChild(notification);
 
-      setTimeout(() => {
-        notification.remove();
-      }, 2000);
+      setTimeout(() => notification.remove(), 2000);
     }
 
     function updateChannel() {
@@ -227,11 +223,9 @@
       }
     });
 
-    // Volume constants
-    const MAX_VOLUME = 11; // Max volume goes to 11
-    const VOLUME_STEP = 1 / MAX_VOLUME; // Increment by 1/11th per step
+    const MAX_VOLUME = 11;
+    const VOLUME_STEP = 1 / MAX_VOLUME;
 
-    // Adjust volume up
     volumeUpButton.addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.min(videoPlayer.volume + VOLUME_STEP, 1);
@@ -240,7 +234,6 @@
       }
     });
 
-    // Adjust volume down
     volumeDownButton.addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.max(videoPlayer.volume - VOLUME_STEP, 0);
@@ -252,7 +245,6 @@
         }
       }
     });
-
 
     powerButton.addEventListener("click", () => {
       powerOn = !powerOn;
@@ -271,7 +263,6 @@
 
     menuButton.addEventListener("click", shuffleChannel);
 
-    // Initialize the first channel
     updateChannel();
   </script>
 </body>
