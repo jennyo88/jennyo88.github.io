@@ -4,7 +4,181 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with TV Guide</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .tv-container {
+      position: relative;
+      width: 690px; /* 15% increase from 600px */
+      height: 517.5px; /* 15% increase from 450px */
+      background-color: black;
+      margin-right: 20px; /* Space between TV and guide */
+    }
+
+    .tv-screen {
+      position: absolute;
+      top: 9%;
+      left: 7%;
+      width: 86%;
+      height: 72%;
+      overflow: hidden;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%, black 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.5s ease-in-out;
+    }
+
+    .tv-screen.on {
+      background: none;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    video.on {
+      display: block;
+    }
+
+    .tv-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvclean.webp') no-repeat center center;
+      background-size: contain;
+    }
+
+    .button-panel {
+      position: absolute;
+      bottom: 7%;
+      left: 37%;
+      display: flex;
+      gap: 9px;
+    }
+
+    .button-panel button {
+      width: 10px;
+      height: 10px;
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .button-panel button:active {
+      background-color: transparent;
+    }
+
+    .spacer {
+      width: 10px;
+      height: 10px;
+    }
+
+    .channel-display {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background-color: transparent;
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 10;
+      display: none;
+    }
+
+    .notification {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: limegreen;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      z-index: 15;
+    }
+
+    .glowing-button {
+      position: absolute;
+      bottom: 6%;
+      left: 54.2%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background-color: red;
+      border-radius: 20%;
+      box-shadow: 0 0 5px red, 0 0 10px red, 0 0 10px red;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glowing-button.on {
+      background-color: limegreen;
+      box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
+    }
+
+    .tv-guide {
+      width: 250px;
+      height: 450px;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 15px;
+      overflow-y: auto;
+      border: 2px solid limegreen;
+      border-radius: 5px;
+    }
+
+    .tv-guide h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 18px;
+      text-decoration: underline;
+    }
+
+    .category-item,
+    .channel-item {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid limegreen;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .category-item:hover,
+    .channel-item:hover {
+      background-color: rgba(0, 255, 0, 0.2);
+    }
+
+    .channel-item.active {
+      background-color: rgba(0, 255, 0, 0.4);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -25,14 +199,165 @@
         <button id="channelDown"></button>
         <button id="channelUp"></button>
         <div class="spacer"></div>
+        <div class="spacer"></div>
+        <div class="spacer"></div>
         <button id="power"></button>
       </div>
       <div class="glowing-button" id="glowingButton"></div>
     </div>
+
     <div class="tv-guide" id="tvGuide">
       <h2>TV Guide</h2>
+      <!-- Categories and channels will be dynamically added here -->
     </div>
   </div>
-  <script src="js/scripts.js"></script>
+
+  <script>
+     const channels = [
+      { name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
+      { name: "Hocus Pocus (1993)", category: "Movies", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
+      { name: "Ghostbusters (1985)", category: "Movies", video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4" },
+      { name: "Kids WB (2001) Part 1", category: "Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4" },
+      { name: "Kids WB (2001) Part 2", category: "Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4" },
+      { name: "Kids WB (2001) Part 3", category: "Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4" },
+      { name: "ABC Saturday Morning (1981) Part 1", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_1.mp4" },
+      { name: "ABC Saturday Morning (1981) Part 2", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_2.mp4" },
+      { name: "ABC Saturday Morning (1981) Part 3", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_3.mp4" },
+      { name: "ABC Saturday Morning (1981) Part 4", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_4.mp4" },
+      { name: "ABC Saturday Morning (1981) Part 5", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_5.mp4" },
+      { name: "ABC Saturday Morning (1986) Part 1", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_1.mp4" },
+      { name: "ABC Saturday Morning (1986) Part 2", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_2.mp4" },
+      { name: "ABC Saturday Morning (1986) Part 3", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_3.mp4" },
+      { name: "ABC Saturday Morning (1989) Part 1", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_1.mp4" },
+      { name: "ABC Saturday Morning (1989) Part 2", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_2.mp4" },
+      { name: "ABC Saturday Morning (1989) Part 3", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_3.mp4" },
+      { name: "ABC Saturday Morning (1989) Part 4", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_4.mp4" },
+      { name: "ABC Saturday Morning (1989) Part 5", category: "Cartoons", video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_5.mp4" },
+      { name: "ABC Saturday Morning (1993) Part 1", category: "Cartoons", video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4" },
+      { name: "ABC Saturday Morning (1993) Part 2", category: "Cartoons", video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4" },
+      { name: "ABC Saturday Morning (1993) Part 3", category: "Cartoons", video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4" },
+      { name: "ABC Saturday Morning (1993) Part 4", category: "Cartoons", video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_4.mp4" },
+      { name: "ABC Saturday Morning (1993) Part 5", category: "Cartoons", video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_5.mp4" },
+    ];
+
+    let currentChannel = 0;
+    let powerOn = false;
+    const playbackTimes = {};
+    const tvScreen = document.getElementById("tvScreen");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const channelDisplay = document.getElementById("channelDisplay");
+    const notification = document.getElementById("notification");
+    const glowingButton = document.getElementById("glowingButton");
+    const tvGuide = document.getElementById("tvGuide");
+
+    const groupedChannels = channels.reduce((acc, channel) => {
+      if (!acc[channel.category]) acc[channel.category] = [];
+      acc[channel.category].push(channel);
+      return acc;
+    }, {});
+
+    function populateGuide() {
+      tvGuide.innerHTML = `<h2>Categories</h2>`;
+      Object.keys(groupedChannels).forEach(category => {
+        const categoryItem = document.createElement("div");
+        categoryItem.classList.add("category-item");
+        categoryItem.textContent = category;
+        categoryItem.addEventListener("click", () => displayChannels(category));
+        tvGuide.appendChild(categoryItem);
+      });
+    }
+
+    function displayChannels(category) {
+      tvGuide.innerHTML = `<h2>${category}</h2>`;
+      groupedChannels[category].forEach((channel, index) => {
+        const channelItem = document.createElement("div");
+        channelItem.classList.add("channel-item");
+        channelItem.textContent = channel.name;
+        channelItem.addEventListener("click", () => playChannel(channel, index));
+        tvGuide.appendChild(channelItem);
+      });
+    }
+
+    function playChannel(channel, index) {
+      videoPlayer.src = channel.video;
+      channelDisplay.textContent = `Now Playing: ${channel.name}`;
+      currentChannel = index;
+      if (powerOn) {
+        videoPlayer.play();
+        showNotification(`${channel.category}`);
+      }
+    }
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = "block";
+      setTimeout(() => {
+        notification.style.display = "none";
+      }, 2000);
+    }
+
+    function togglePower() {
+      powerOn = !powerOn;
+      if (powerOn) {
+        tvScreen.classList.add("on");
+        videoPlayer.classList.add("on");
+        glowingButton.classList.add("on");
+        channelDisplay.style.display = "block";
+        videoPlayer.play();
+        showNotification(`Power On`);
+      } else {
+        tvScreen.classList.remove("on");
+        videoPlayer.classList.remove("on");
+        glowingButton.classList.remove("on");
+        channelDisplay.style.display = "none";
+        videoPlayer.pause();
+        showNotification(`Power Off`);
+      }
+    }
+
+    document.getElementById("channelUp").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel + 1) % channels.length;
+        playChannel(channels[currentChannel], currentChannel);
+      }
+    });
+
+    document.getElementById("channelDown").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+        playChannel(channels[currentChannel], currentChannel);
+      }
+    });
+
+    document.getElementById("volumeUp").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+      }
+    });
+
+    document.getElementById("volumeDown").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        const volumeLevel = Math.round(videoPlayer.volume * 10);
+        showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+      }
+    });
+
+    document.getElementById("power").addEventListener("click", togglePower);
+
+document.getElementById("menu").addEventListener("click", () => {
+  if (powerOn) {
+    const previousChannel = currentChannel;
+    while (currentChannel === previousChannel) {
+      currentChannel = Math.floor(Math.random() * channels.length);
+    }
+    playChannel(channels[currentChannel], currentChannel);
+    showNotification("Channel Shuffled");
+  }
+});
+
+    populateGuide();
+  </script>
 </body>
 </html>
