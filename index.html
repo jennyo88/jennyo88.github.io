@@ -35,12 +35,17 @@
       border-radius: 10px;
       overflow: hidden;
       position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
     }
 
     video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
     }
 
     .channel-buttons {
@@ -93,7 +98,7 @@
 <body>
   <div class="tv-frame">
     <div class="tv-screen">
-      <video id="videoPlayer" autoplay muted loop>
+      <video id="videoPlayer" autoplay muted loop controls>
         <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -108,10 +113,32 @@
 
   <script>
     const channels = [
-      "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/holidays/christmas_channel.m3u8",
-      "https://samplelib.com/lib/preview/mp4/sample-10s.mp4",
-      "https://samplelib.com/lib/preview/mp4/sample-15s.mp4"
+      {
+        title: "Christmas Specials",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/holidays/christmas_channel.m3u8"
+      },
+      {
+        title: "VHS Movies",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/movies/movies_channel.m3u8"
+      },
+      {
+        title: "Walt Disney Cartoon Classics",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/movies/Walt_Disney_classics_channel.m3u8"
+      },
+      {
+        title: "Cartoon Network",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/cartoons/cartoon_network_channel.m3u8"
+      },
+      {
+        title: "Kids WB",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/cartoons/WB_channel.m3u8"
+      },
+      {
+        title: "ABC",
+        url: "https://raw.githubusercontent.com/jennyo88/retro_tv/refs/heads/main/m3u8/cartoons/abc_channel.m3u8"
+      }
     ];
+
     let currentChannel = 0;
 
     const videoPlayer = document.getElementById("videoPlayer");
@@ -128,9 +155,27 @@
     });
 
     function changeChannel() {
-      videoPlayer.src = channels[currentChannel];
-      channelInfo.textContent = `Channel ${currentChannel + 1}`;
+      const channel = channels[currentChannel];
+      if (channel.url.endsWith(".m3u8")) {
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(channel.url);
+          hls.attachMedia(videoPlayer);
+        } else if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+          videoPlayer.src = channel.url;
+        } else {
+          alert("Your browser does not support HLS playback.");
+          return;
+        }
+      } else {
+        videoPlayer.src = channel.url;
+      }
+      channelInfo.textContent = channel.title;
     }
+
+    // Initialize first channel
+    changeChannel();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </body>
 </html>
