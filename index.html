@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRT TV with Halo Effect</title>
+  <title>CRT TV with Continuous Playback</title>
   <style>
     body {
       margin: 0;
@@ -79,7 +79,7 @@
     }
 
     .button-panel button:active {
-      background-color: black;
+      background-color: transparent;
     }
 
     .spacer {
@@ -186,6 +186,9 @@
     let currentChannel = 0;
     let powerOn = false;
 
+    // Object to store playback times for each channel
+    const playbackTimes = {};
+
     const tvScreen = document.getElementById("tvScreen");
     const videoPlayer = document.getElementById("videoPlayer");
     const channelDisplay = document.getElementById("channelDisplay");
@@ -208,10 +211,23 @@
     }
 
     function updateChannel() {
+      // Store the current playback time of the current channel
+      playbackTimes[currentChannel] = videoPlayer.currentTime;
+
+      // Update the current channel and load the new video
       const channel = channels[currentChannel];
       videoPlayer.src = channel.video;
+
+      // Restore playback time for the new channel, if available
+      if (playbackTimes[currentChannel]) {
+        videoPlayer.currentTime = playbackTimes[currentChannel];
+      }
+
       channelDisplay.textContent = `Playing: ${channel.name}`;
       showNotification(`${channel.subname}`);
+
+      // Ensure the video continues playing
+      videoPlayer.play();
     }
 
     function togglePower() {
@@ -246,10 +262,34 @@
       }
     });
 
+    volumeUpButton.addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        const volumeLevel = Math.round(videoPlayer.volume * 10);
+        showNotification(`Volume: ${volumeLevel}`);
+      }
+    });
+
+    volumeDownButton.addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        const volumeLevel = Math.round(videoPlayer.volume * 10);
+        if (volumeLevel === 0) {
+          showNotification("MUTE");
+        } else {
+          showNotification(`Volume: ${volumeLevel}`);
+        }
+      }
+    });
+
     powerButton.addEventListener("click", togglePower);
+
     menuButton.addEventListener("click", () => {
       if (powerOn) {
-        currentChannel = Math.floor(Math.random() * channels.length);
+        const previousChannel = currentChannel;
+        while (currentChannel === previousChannel) {
+          currentChannel = Math.floor(Math.random() * channels.length);
+        }
         updateChannel();
       }
     });
