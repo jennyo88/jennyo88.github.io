@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Old-School CRT TV</title>
+  <title>CRT TV with Overlay</title>
   <style>
-    /* Add styles here */
     body {
       margin: 0;
       background-color: black;
@@ -37,15 +36,12 @@
       border-radius: 10px;
       overflow: hidden;
       position: relative;
-      perspective: 800px;
     }
 
     video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.05) translateZ(-20px);
-      filter: contrast(1.2) brightness(0.9) saturate(1.1);
     }
 
     .scan-lines {
@@ -61,6 +57,16 @@
       opacity: 0.5;
     }
 
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
     .tv-overlay {
       position: absolute;
       bottom: 10px;
@@ -69,7 +75,7 @@
       padding: 5px 10px;
       border-radius: 5px;
       font-size: 14px;
-      z-index: 2;
+      z-index: 3;
     }
 
     .channel-buttons {
@@ -113,6 +119,7 @@
         Your browser does not support the video tag.
       </video>
       <div class="scan-lines"></div>
+      <img src="https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvscreen.webp" alt="CRT Overlay" class="overlay">
       <div class="tv-overlay" id="channelInfo">Channel 1</div>
     </div>
     <div class="channel-buttons">
