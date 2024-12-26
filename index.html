@@ -9,76 +9,186 @@
       margin: 0;
       background-color: black;
       display: flex;
-      justify-content: center; /* Keep horizontally centered */
-      align-items: center; /* Align items centered */
+      justify-content: center;
+      align-items: center;
       height: 100vh;
       overflow: hidden;
+      color: white; /* For the channel name display */
     }
 
     .tv-container {
       position: relative;
-      width: 600px; /* Match the size of your overlay */
+      width: 600px; /* Match the overlay image dimensions */
       height: 450px;
-      background-size: contain;
+      background-color: black; /* Default background for black screen effect */
     }
 
     .tv-screen {
       position: absolute;
-      top: 12%; /* Adjust to fit the screen area */
-      left: 7%; /* Adjust to fit the screen area */
-      width: 86%; /* Adjust to fit the screen area */
-      height: 72%; /* Adjust to fit the screen area */
+      top: 9%;
+      left: 7%;
+      width: 86%;
+      height: 72%;
       overflow: hidden;
+      display: none; /* Initially hidden to simulate power off */
     }
-    
+
     video {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* Ensures the video scales properly */
+      object-fit: contain;
     }
 
     .tv-overlay {
-      position: relative;
+      position: absolute;
       width: 100%;
       height: 100%;
-      background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvstencil.webp') no-repeat center center;
+      background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tvclean.webp') no-repeat center center;
       background-size: contain;
-      pointer-events: none; /* Allows interaction with the video */
     }
+
+    .button-panel {
+      position: absolute;
+      bottom: 7%; /* Adjust to align with buttons in the overlay */
+      left: 37%; /* Adjust to position the buttons horizontally */
+      display: flex;
+      gap: 7px; /* Smaller spacing between buttons */
+    }
+
+    .button-panel button {
+      width: 10px;
+      height: 10px;
+      background-color: transparent; /* Start invisible */
+      border: none;
+      border-radius: 50%; /* Make buttons circular */
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .button-panel button:active {
+      background-color: black; /* Turn darker gray when pressed */
+    }
+
+    .channel-display {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif; /* Google Font */
+      text-align: center;
+      background-color: transparent; /* Start invisible */
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 10; /* Ensure it appears on top of the overlay */
+      display: none; /* Initially hidden when TV is off */
+    }
+
   </style>
 </head>
 <body>
   <div class="tv-container">
-    <div class="tv-screen">
-      <video id="videoPlayer" autoplay loop muted>
+    <div class="channel-display" id="channelDisplay">The Thing (1982)</div>
+    <div class="tv-screen" id="tvScreen">
+      <video id="videoPlayer" autoplay loop>
         <source src="https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
     <div class="tv-overlay"></div>
+    <div class="button-panel">
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <button id="volumeDown"></button>
+      <button id="volumeUp"></button>
+      <button id="channelDown"></button>
+      <button id="channelUp"></button>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <div class="spacer"></div>
+      <button id="power"></button>
+    </div>
   </div>
 
   <script>
     const channels = [
-      "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
-      "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4",
-      "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4",
-      "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
-      "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
-      "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4"
+      {
+        name: "The Thing (1982)",
+        video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
+      },
+      {
+        name: "Hocus Pocus (1993)",
+        video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4",
+      },
+      {
+        name: "Ghostbusters (1985)",
+        video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4",
+      },
     ];
     let currentChannel = 0;
+    let powerOn = false;
 
+    const tvScreen = document.getElementById("tvScreen");
     const videoPlayer = document.getElementById("videoPlayer");
+    const channelDisplay = document.getElementById("channelDisplay");
+    const channelUpButton = document.getElementById("channelUp");
+    const channelDownButton = document.getElementById("channelDown");
+    const volumeUpButton = document.getElementById("volumeUp");
+    const volumeDownButton = document.getElementById("volumeDown");
+    const powerButton = document.getElementById("power");
 
-    document.body.addEventListener("click", () => {
-      currentChannel = (currentChannel + 1) % channels.length;
-      changeChannel();
+    function updateChannel() {
+      const channel = channels[currentChannel];
+      videoPlayer.src = channel.video;
+      channelDisplay.textContent = `Playing: ${channel.name}`;
+    }
+
+    channelUpButton.addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel + 1) % channels.length;
+        updateChannel();
+      }
     });
 
-    function changeChannel() {
-      videoPlayer.src = channels[currentChannel];
-    }
+    channelDownButton.addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+        updateChannel();
+      }
+    });
+
+    volumeUpButton.addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+      }
+    });
+
+    volumeDownButton.addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+      }
+    });
+
+    powerButton.addEventListener("click", () => {
+      powerOn = !powerOn;
+      if (powerOn) {
+        tvScreen.style.display = "block";
+        channelDisplay.style.display = "block";
+        updateChannel();
+      } else {
+        tvScreen.style.display = "none";
+        channelDisplay.style.display = "none";
+        videoPlayer.pause();
+      }
+    });
+
+    // Initialize the first channel
+    updateChannel();
   </script>
 </body>
 </html>
