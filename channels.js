@@ -1,6 +1,7 @@
 const channels = [
   { name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
   { name: "Hocus Pocus (1993)", category: "Movies", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
+  { name: "The Mummy (1999)", category: "Movies", video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4" },
   { name: "The Matrix (1999)", category: "Movies", video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4" },
   { name: "Star Wars (1977)", category: "Movies", video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4" },
   { name: "Superman: The Movie (1978)", category: "Movies", video: "https://archive.org/download/superman-the-movie-1978-from-the-1979-wci-home-video-vhs/Superman%20The%20Movie%20%281978%29%20%5Bfrom%20the%201979%20WCI%20Home%20Video%20VHS%5D.mp4" },
