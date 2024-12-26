@@ -1,11 +1,18 @@
 const channels = [
-  { name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
-  { name: "Hocus Pocus (1993)", category: "Movies", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
-  { name: "The Mummy (1999)", category: "Movies", video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4" },
-  { name: "The Matrix (1999)", category: "Movies", video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4" },
+  /* { name: " (xxxx)", category: "Movies", video: "" }, */
+  { name: "The Aristocats (1970)", category: "Movies", video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4" },
   { name: "Star Wars (1977)", category: "Movies", video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4" },
   { name: "Superman: The Movie (1978)", category: "Movies", video: "https://archive.org/download/superman-the-movie-1978-from-the-1979-wci-home-video-vhs/Superman%20The%20Movie%20%281978%29%20%5Bfrom%20the%201979%20WCI%20Home%20Video%20VHS%5D.mp4" },
+  { name: "Monty Python's Life of Brian (1979)", category: "Movies", video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4" },
+  { name: "The Thing (1982)", category: "Movies", video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4" },
+  { name: "The Terminator (1984)", category: "Movies", video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4" },
   { name: "Ghostbusters (1985)", category: "Movies", video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4" },
+  { name: "Robin Hood (1986)", category: "Movies", video: "https://archive.org/download/robin-hood-1986-vhs/Robin%20Hood%20%281986%20VHS%29.mp4" },
+  { name: "Hocus Pocus (1993)", category: "Movies", video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4" },
+  { name: "Spice World (1998)", category: "Movies", video: "https://archive.org/download/spice-world_202208/SPICE%20WORLD.mp4" },
+  { name: "The Matrix (1999)", category: "Movies", video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4" },
+  { name: "The Mummy (1999)", category: "Movies", video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4" },
+
   { name: "Kids WB (2001) Part 1", category: "WB Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4" },
   { name: "Kids WB (2001) Part 2", category: "WB Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4" },
   { name: "Kids WB (2001) Part 3", category: "WB Cartoons", video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4" },
