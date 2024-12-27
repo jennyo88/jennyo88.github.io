@@ -10,6 +10,11 @@ const notification = document.getElementById("notification");
 const glowingButton = document.getElementById("glowingButton");
 const tvGuide = document.getElementById("tvGuide");
 
+const channels = [
+  { name: "Movies", video: "./assets/videos/movies.mp4", channelNumber: 1 },
+  { name: "Cartoons", video: "./assets/videos/cartoons.mp4", channelNumber: 2 }
+];
+
 const groupedChannels = channels.reduce((acc, channel) => {
   if (!acc[channel.category]) acc[channel.category] = {};
   const subcategory = channel.subcategory || "default";
