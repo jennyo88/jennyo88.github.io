@@ -386,13 +386,24 @@
     playNextPart();
   }
 
+    function playStatic(callback) {
+      videoPlayer.src = "https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tv-static.mp4"; // Replace with the path to your static video/GIF
+      channelDisplay.textContent = "Static...";
+      videoPlayer.onended = callback;
+      videoPlayer.play();
+    }
+
     function playChannel(channel) {
       videoPlayer.src = channel.video;
       channelDisplay.textContent = `Now Playing: ${channel.name}`;
 
       if (powerOn) {
-        videoPlayer.play();
-        showNotification(`Playing: ${channel.name}`);
+        playStatic(() => {
+          videoPlayer.src = channel.video;
+          channelDisplay.textContent = `Now Playing: ${channel.name}`;
+          videoPlayer.play();
+          showNotification(`Playing: ${channel.name}`);
+        });
       }
     }
 
