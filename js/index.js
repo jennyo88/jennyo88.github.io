@@ -29,105 +29,86 @@ function displaySubcategories(category) {
     tvGuide.appendChild(subcategoryItem);
   });
 
-    const backButton = document.createElement("div");
-    backButton.classList.add("back-button");
-    backButton.textContent = "Back to Main";
-    backButton.addEventListener("click", populateGuide);
-    tvGuide.appendChild(backButton);
-  }
+  const backButton = document.createElement("div");
+  backButton.classList.add("back-button");
+  backButton.textContent = "Back to Main";
+  backButton.addEventListener("click", populateGuide);
+  tvGuide.appendChild(backButton);
+}
 
 function displayChannels(category, subcategory) {
   tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
-  
-  // Get unique channel numbers for the given subcategory
   const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
 
-  // Sort channels by release year (optional enhancement)
   const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
     const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
     const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
-    return yearA - yearB; // Sort ascending by year
+    return yearA - yearB;
   });
 
   sortedUniqueChannels.forEach(channelNumber => {
-    // Group channels by the same channel number
     const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
     const channelName = channelGroup[0].name.split("Part")[0].trim();
     const description = channelGroup[0].description || "No description available.";
     const duration = channelGroup[0].duration || "Unknown duration";
     const releaseYear = channelGroup[0].releaseYear || "Unknown year";
 
-    // Create a channel item element
     const channelItem = document.createElement("div");
     channelItem.classList.add("channel-item");
-
-    // Add metadata to the display
     channelItem.innerHTML = `
       <strong>${channelName} (Channel ${channelNumber})</strong><br>
       <small>Year: ${releaseYear}</small>
     `;
 
-    // Add hover functionality to show metadata as a notification
     channelItem.addEventListener("mouseover", () => {
       showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
     });
 
-    channelItem.addEventListener("mouseout", () => {
-      hideNotification();
-    });
-
-    // Handle click to play the channel group
+    channelItem.addEventListener("mouseout", hideNotification);
     channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
     tvGuide.appendChild(channelItem);
   });
 
-    // Add a back button to navigate back to subcategories
-    const backButton = document.createElement("div");
-    backButton.classList.add("back-button");
-    backButton.textContent = "Back to Categories";
-    backButton.addEventListener("click", () => displaySubcategories(category));
-    tvGuide.appendChild(backButton);
-  }
+  const backButton = document.createElement("div");
+  backButton.classList.add("back-button");
+  backButton.textContent = "Back to Categories";
+  backButton.addEventListener("click", () => displaySubcategories(category));
+  tvGuide.appendChild(backButton);
+}
 
 function playChannelGroup(channelGroup) {
   let partIndex = 0;
 
-function playNextPart() {
-  if (partIndex < channelGroup.length) {
-    const channel = channelGroup[partIndex];
-    const channelName = channel.name;
+  function playNextPart() {
+    if (partIndex < channelGroup.length) {
+      const channel = channelGroup[partIndex];
+      const channelName = channel.name;
 
-    // Save position of the previous part
-    if (videoPlayer.src && !videoPlayer.ended) {
-      playbackPositions[channelName] = videoPlayer.currentTime;
-    }
+      if (videoPlayer.src && !videoPlayer.ended) {
+        playbackPositions[channelName] = videoPlayer.currentTime;
+      }
 
+      videoPlayer.src = channel.source;
       videoPlayer.onended = () => {
         partIndex++;
         playNextPart();
       };
-    });
-  } else {
-    showNotification("End of Channel");
+      videoPlayer.play();
+    } else {
+      showNotification("End of Channel");
+    }
   }
+
+  playNextPart();
 }
 
-    playNextPart();
-  }
-
 function showNotification(message) {
-  const notification = document.getElementById("notification");
   notification.textContent = message;
   notification.style.display = "block";
-      
-  // Automatically hide the notification after 3 seconds
-  setTimeout(() => {
-    hideNotification();
-  }, 3000);
+  setTimeout(hideNotification, 3000);
 }
 
 function hideNotification() {
-  const notification = document.getElementById("notification");
   notification.style.display = "none";
 }
 
@@ -139,43 +120,22 @@ function togglePower() {
     glowingButton.classList.add("on");
     channelDisplay.style.display = "block";
     videoPlayer.play();
-    showNotification(`Power On`);
+    showNotification("Power On");
   } else {
     tvScreen.classList.remove("on");
     videoPlayer.classList.remove("on");
     glowingButton.classList.remove("on");
     channelDisplay.style.display = "none";
     videoPlayer.pause();
-    showNotification(`Power Off`);
+    showNotification("Power Off");
   }
 }
-
-document.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "ArrowUp": // Increase volume
-      videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-      break;
-    case "ArrowDown": // Decrease volume
-      videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 1);
-      break;
-    case "ArrowRight": // Next channel
-      currentChannel = (currentChannel + 1) % channels.length;
-      playChannel(channels[currentChannel]);
-      break;
-    case "ArrowLeft": // Previous channel
-      currentChannel = (currentChannel - 1 + channels.length) % channels.length;
-      playChannel(channels[currentChannel]);
-      break;
-  }
-});
-
-
 
 function populateGuide() {
   tvGuide.innerHTML = `<h2>TV Guide</h2>`;
 
   const categories = [
-    { name: "Movies", channels: movisChannels },
+    { name: "Movies", channels: moviesChannels },
     { name: "Cartoons", channels: cartoonsChannels },
   ];
 
@@ -183,21 +143,19 @@ function populateGuide() {
     const categoryItem = document.createElement("div");
     categoryItem.classList.add("category-item");
     categoryItem.textContent = category.name;
-    
-    categoryItem.addEventListener("click", () => displayChannels(category.channels));
+
+    categoryItem.addEventListener("click", () => displaySubcategories(category.name));
     tvGuide.appendChild(categoryItem);
   });
 }
 
 function playStatic(callback) {
-  videoPlayer.src = "assets/videos/static.mp4"; // Example path
+  videoPlayer.src = "assets/videos/static.mp4";
   videoPlayer.muted = true;
   channelDisplay.textContent = "Static...";
   videoPlayer.play();
 
-  setTimeout(() => {
-    callback();
-  }, 2000);
+  setTimeout(callback, 2000);
 }
 
 function playChannel(channel) {
@@ -215,35 +173,27 @@ function playChannel(channel) {
 
       channelDisplay.textContent = `Now Playing: ${channel.name}`;
       videoPlayer.play();
-      
-      showNotification(
-        startTime > 0
-          ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
-          : `Playing: ${channel.name}`
-      );
+      showNotification(startTime > 0 ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s` : `Playing: ${channel.name}`);
     });
   }
 }
 
-// power on and off
 document.getElementById("power").addEventListener("click", togglePower);
 
-// channel up and down
 document.getElementById("channelUp").addEventListener("click", () => {
   if (powerOn) {
     currentChannel = (currentChannel + 1) % channels.length;
-    playChannel(channels[currentChannel], currentChannel);
+    playChannel(channels[currentChannel]);
   }
 });
 
 document.getElementById("channelDown").addEventListener("click", () => {
   if (powerOn) {
     currentChannel = (currentChannel - 1 + channels.length) % channels.length;
-    playChannel(channels[currentChannel], currentChannel);
+    playChannel(channels[currentChannel]);
   }
 });
 
-// volume up and down
 document.getElementById("volumeUp").addEventListener("click", () => {
   if (powerOn) {
     videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
@@ -259,10 +209,8 @@ document.getElementById("volumeDown").addEventListener("click", () => {
   }
 });
 
-// menu shuffle
 document.getElementById("menu").addEventListener("click", () => {
   if (powerOn) {
-    // Select a random channel different from the current one
     const previousChannel = currentChannel;
     let randomChannelIndex;
 
@@ -272,11 +220,8 @@ document.getElementById("menu").addEventListener("click", () => {
 
     currentChannel = randomChannelIndex;
     playChannel(channels[currentChannel]);
-
-    // Show "Channel Shuffled" notification (auto-hides after 3 seconds)
     showNotification("Channel Shuffled");
   }
 });
-
 
 populateGuide();
