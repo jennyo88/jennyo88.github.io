@@ -236,7 +236,7 @@
   <div class="container">
     <div class="tv-container">
       <div class="tv-screen" id="tvScreen">
-        <video id="videoPlayer" autoplay loop>
+        <video id="videoPlayer" autoplay muted loop>
           <source src="" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -366,14 +366,23 @@
   }
 
     function playStatic(callback) {
+      // Set the static video as the source
       videoPlayer.src = "https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/assets/tv-static.mp4"; // Replace with the path to your static video/GIF
-      channelDisplay.textContent = "Static...";
-      videoPlayer.play();
+      videoPlayer.muted = true; // Ensure autoplay works
 
-      // Wait for 1 second, then call the callback
-      setTimeout(() => {
-        callback();
-      }, 1000); // 1000 milliseconds = 1 second
+      // Show "Static" message
+      channelDisplay.textContent = "Static...";
+
+      // Play the static video
+      videoPlayer.play().then(() => {
+        // Wait for 1 second, then call the callback
+        setTimeout(() => {
+          callback();
+        }, 1000); // 1000 milliseconds = 1 second
+      }).catch((error) => {
+        console.error("Error playing static video:", error);
+        callback(); // Fallback: Load the next channel if static fails
+      });
     }
 
     function playChannel(channel) {
@@ -386,6 +395,7 @@
         }
         
         playStatic(() => {
+          // Switch to the actual video after static
           videoPlayer.src = channel.video;
 
           // Restore position if previously watched, otherwise start from 0
