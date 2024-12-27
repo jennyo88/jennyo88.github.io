@@ -23,6 +23,7 @@ const channels = [
     description: "A cyborg is sent to the past to kill Sarah Connor.",
     duration: "1h 47m",
     releaseYear: 1984,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/3450/WiKOlPsK0eb9wia5Nd4WRvch7WX9lCKNfl9tVU8h.webp",
   },
   {
     name: "The Mummy",
@@ -33,6 +34,7 @@ const channels = [
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
     duration: "2h 4m",
     releaseYear: 1999,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5233/LJqDoR5PDs0u2sm6U9d4Gge6CpApok7SmMfbHMlG.webp",
   },
   {
     name: "The Aristocats",
@@ -65,6 +67,7 @@ const channels = [
     description: "A comedic take on ghost-hunting in New York City.",
     duration: "1h 45m",
     releaseYear: 1985,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/8037/oiupZ4QWzdbSRqyaOFPqO7o0U4ahYLLrYbkO2fqp.webp",
   },
   {
     name: "Monty Python's Life of Brian",
@@ -74,7 +77,8 @@ const channels = [
     video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4",
     description: "A satirical musical comedy on religious epics by Monty Python.",
     duration: "1h 34m",
-    releaseYear: 1979, 
+    releaseYear: 1979,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9002/IzJf3NsBqbzZ3l2Jv5eIskvmzQ8S3oTWH5pEjATO.webp",
   },
   {
     name: "Hocus Pocus",
@@ -85,6 +89,7 @@ const channels = [
     description: "A trio of witches is resurrected on Halloween night.",
     duration: "1h 36m",
     releaseYear: 1993,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/21799/yaO08fRNFidoJtuUvO017nHaxTdlObbsA9dKtq0K.webp",
   },
   {
     name: "The Thing",
@@ -95,6 +100,7 @@ const channels = [
     description: "A tense sci-fi horror about an alien shape-shifter.",
     duration: "1h 49m",
     releaseYear: 1982,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5519/lnMC0cOyI16BFfZVaIMFRtEx9Cb8eab4wMvqgYNW.webp",
   },
   {
     name: "Spice World",
@@ -105,6 +111,7 @@ const channels = [
     description: "The Spice Girls embark on a wild, comedic adventure.",
     duration: "1h 33m",
     releaseYear: 1998,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/1960/Klof9nzovBpjzRrlalSalr6p1kr77l71LDYV3Pg8.webp",
   },
   { 
     name: "Beneath the Planet of the Apes",
@@ -137,6 +144,7 @@ const channels = [
     description: "A hacker learns the truth about his simulated reality.",
     duration: "2h 16m",
     releaseYear: 1999,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/633/ivJrTlaYC4LbgF2Zlg1Dt0WFrtgd9LpP07GTNsjA.webp",
   },
   {
     name: "The Time Machine",
@@ -147,6 +155,7 @@ const channels = [
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
     duration: "1h 39m",
     releaseYear: 1978,
+    poster: "https://m.media-amazon.com/images/M/MV5BNTYwNDQ0NjYtNTgwMC00MTI4LWI1YWItMmQ4ODIwNDQ3ZWNmXkEyXkFqcGc@._V1_.jpg",
   },
   {
     name: "Superman: The Movie",
@@ -168,6 +177,7 @@ const channels = [
     description: "Superman faces General Zod in an epic battle for Earth.",
     duration: "1h 56m",
     releaseYear: 1980,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9732/mKrX3QjoV8Wdg9LHuXm9ojXWtzszFgYwSfcvt79u.webp",
   },
   
 // Cartoons
@@ -179,6 +189,7 @@ const channels = [
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
     releaseYear: 2001,
+    poster: "https://abcdvdvideo.myshopify.com/cdn/shop/products/35m-6691_large.jpg",
   },
   {
     name: "Kids WB Part 2",
@@ -187,6 +198,7 @@ const channels = [
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
     releaseYear: 2001,
+    poster: "https://abcdvdvideo.myshopify.com/cdn/shop/products/35m-6691_large.jpg",
   },
   {
     name: "Kids WB Part 3",
@@ -195,6 +207,7 @@ const channels = [
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4",
     releaseYear: 2001,
+    poster: "https://abcdvdvideo.myshopify.com/cdn/shop/products/35m-6691_large.jpg",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -203,6 +216,7 @@ const channels = [
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_1.mp4",
     releaseYear: 1981,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -211,6 +225,7 @@ const channels = [
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_2.mp4",
     releaseYear: 1981,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -219,6 +234,7 @@ const channels = [
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_3.mp4",
     releaseYear: 1981,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -227,6 +243,7 @@ const channels = [
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_4.mp4",
     releaseYear: 1981,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -235,6 +252,7 @@ const channels = [
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_5.mp4",
     releaseYear: 1981,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -243,6 +261,7 @@ const channels = [
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_1.mp4",
     releaseYear: 1986,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -251,6 +270,7 @@ const channels = [
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_2.mp4",
     releaseYear: 1986,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -259,6 +279,7 @@ const channels = [
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_3.mp4",
     releaseYear: 1986,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -267,6 +288,7 @@ const channels = [
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_1.mp4",
     releaseYear: 1989,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -275,6 +297,7 @@ const channels = [
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_2.mp4",
     releaseYear: 1989,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -283,6 +306,7 @@ const channels = [
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_3.mp4",
     releaseYear: 1989,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -291,6 +315,7 @@ const channels = [
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_4.mp4",
     releaseYear: 1989,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -299,6 +324,7 @@ const channels = [
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_5.mp4",
     releaseYear: 1989,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -307,6 +333,7 @@ const channels = [
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4",
     releaseYear: 1993,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -315,6 +342,7 @@ const channels = [
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4",
     releaseYear: 1993,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -323,6 +351,7 @@ const channels = [
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4",
     releaseYear: 1993,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -331,6 +360,7 @@ const channels = [
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_4.mp4",
     releaseYear: 1993,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -339,6 +369,7 @@ const channels = [
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_5.mp4",
     releaseYear: 1993,
+    poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
   {
     name: "Candy Candy Ep 1",
@@ -347,6 +378,7 @@ const channels = [
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D01.mp4",
     releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
   {
     name: "Candy Candy Ep 2",
@@ -355,6 +387,7 @@ const channels = [
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D02.mp4",
     releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
   {
     name: "Candy Candy Ep 3",
@@ -363,6 +396,7 @@ const channels = [
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D03.mp4",
     releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
   {
     name: "Candy Candy Ep 4",
@@ -371,22 +405,7 @@ const channels = [
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D04.mp4",
     releaseYear: 1981,
-  },
-  {
-    name: "Candy Candy Ep 10",
-    category: "Cartoons",
-    subcategory: "Candy Candy",
-    channelNumber: 106,
-    video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D010.mp4",
-    releaseYear: 1981,
-  },
-  {
-    name: "Candy Candy Ep 11",
-    category: "Cartoons",
-    subcategory: "Candy Candy",
-    channelNumber: 106,
-    video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D011.mp4",
-    releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
   {
     name: "Candy Candy Ep 12",
@@ -395,5 +414,24 @@ const channels = [
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D012.mp4",
     releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   } 
+  {
+    name: "Candy Candy Ep 13",
+    category: "Cartoons",
+    subcategory: "Candy Candy",
+    channelNumber: 106,
+    video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D013.mp4",
+    releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
+  }
+  {
+    name: "Candy Candy Ep 16",
+    category: "Cartoons",
+    subcategory: "Candy Candy",
+    channelNumber: 106,
+    video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D016.mp4",
+    releaseYear: 1981,
+    poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
+  }
 ];
