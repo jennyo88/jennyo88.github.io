@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with Multi-Level TV Guide</title>
   <style>
-    /* General Styles */
     body { 
       margin: 0;
       background-color: black;
@@ -53,6 +52,10 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
+      display: none;
+    }
+
+    video.on {
       display: block;
     }
 
@@ -81,19 +84,19 @@
       cursor: pointer;
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
-                  inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-                  0 0 10px rgba(192, 192, 192, 0.6);
+              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+              0 0 10px rgba(192, 192, 192, 0.6);
     }
 
     .button-panel button:hover {
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-                  0 0 30px rgba(192, 192, 192, 0.6);
+              0 0 30px rgba(192, 192, 192, 0.6);
     }
 
     .button-panel button:active {
       background: linear-gradient(145deg, #e0e0e0, #b0b0b0);
       box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4),
-                  0 0 5px rgba(255, 255, 255, 0.5);
+              0 0 5px rgba(255, 255, 255, 0.5);
     }
 
     #power {
@@ -105,8 +108,46 @@
       cursor: pointer;
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
       box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
-                  inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-                  0 0 15px rgba(192, 192, 192, 0.8);
+              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+              0 0 15px rgba(192, 192, 192, 0.8);
+      margin-top: -9px;
+      margin-left: 5px;
+    }
+
+    .spacer {
+      width: 41px;
+      height: 10px;
+    }
+
+    .channel-display {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background-color: transparent;
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 10;
+      display: none;
+    }
+
+    .notification {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: limegreen;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      z-index: 15;
+      text-align: center;
     }
 
     .glowing-button {
@@ -134,12 +175,13 @@
       color: white;
       padding-top: 10px;
       overflow-y: auto;
+      border: none;
       border-radius: 10px;
     }
 
     .tv-guide h2 {
       text-align: center;
-      margin: 0;
+      margin-top: 0px;
       font-size: 20px;
       font-weight: bold;
       color: white;
@@ -159,7 +201,7 @@
     .channel-item:hover {
       background-color: rgba(128, 128, 128, 0.2);
     }
-
+    
     .channel-item.active {
       background-color: rgba(128, 128, 128, 0.4);
     }
@@ -186,7 +228,7 @@
   <div class="container">
     <div class="tv-container">
       <div class="tv-screen" id="tvScreen">
-        <video id="videoPlayer" autoplay muted loop>
+        <video id="videoPlayer" autoplay loop>
           <source src="" type="video/mp4">
           Your browser does not support the video tag.
         </video>
@@ -205,10 +247,12 @@
       </div>
       <div class="glowing-button" id="glowingButton"></div>
     </div>
+
     <div class="tv-guide" id="tvGuide">
       <h2>TV Guide</h2>
     </div>
   </div>
+
   <script src="js/movies.js"></script>
   <script src="js/cartoons.js"></script>
   <script src="js/index.js"></script>
