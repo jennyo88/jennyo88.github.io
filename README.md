@@ -64,7 +64,7 @@ const channels = [
 ## Screenshots
 
 ### Channel Display
-![Channel Display](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvclean.webp)
+![Channel Display](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/assests/images/tvclean.webp)
 
 ## Future Improvements
 - Add more customization options for channels.
