@@ -388,16 +388,14 @@
 
     function playChannel(channel) {
       videoPlayer.src = channel.video;
-      channelDisplay.innerHTML = `
-        <strong>${channel.name}</strong><br>
-        <small>${channel.releaseYear}</small>
-  `  ;
-      currentChannel = index;
+      channelDisplay.textContent = `Now Playing: ${channel.name}`;
+
       if (powerOn) {
         videoPlayer.play();
         showNotification(`Playing: ${channel.name}`);
       }
     }
+
 
     function showNotification(message) {
       const notification = document.getElementById("notification");
@@ -463,14 +461,25 @@
 
     document.getElementById("menu").addEventListener("click", () => {
       if (powerOn) {
-        const previousChannel = currentChannel;
-        while (currentChannel === previousChannel) {
-          currentChannel = Math.floor(Math.random() * channels.length);
-        }
-        playChannel(channels[currentChannel], currentChannel);
-        showNotification("Channel Shuffled");
-      }
-    });
+        // Select a random channel different from the current one
+      const previousChannel = currentChannel;
+      let randomChannelIndex;
+
+      do {
+        randomChannelIndex = Math.floor(Math.random() * channels.length);
+      } while (randomChannelIndex === previousChannel);
+
+      currentChannel = randomChannelIndex;
+      playChannel(channels[currentChannel]);
+
+      // Ensure "Power On" notification is cleared
+      hideNotification();
+
+      // Show "Shuffled" notification
+      showNotification("Channel Shuffled");
+    }
+  });
+
 
     populateGuide();
   </script>
