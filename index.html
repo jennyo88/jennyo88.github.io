@@ -468,7 +468,7 @@
               (ch) => ch.subcategory === subcategory
             );
 
-            if (sameSubcategoryChannels.length > 0) {
+            if (sameSubcategoryChannels && sameSubcategoryChannels.length > 0) {
               const shuffledChannels = shuffleArray(sameSubcategoryChannels);
               playChannel(shuffledChannels[0]); // Play the next shuffled video
             } else {
