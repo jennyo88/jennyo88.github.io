@@ -298,7 +298,7 @@
       </div>
       <!-- Movie Poster -->
       <div class="poster-container">
-        <img src="" alt="Channel Poster" id="poster" />
+        <img src="./assets/images/default-poster.jpg" alt="Default Poster" id="poster" />
       </div>
     </div>
   </div>
@@ -441,7 +441,7 @@
 
           // Update the poster
           const posterElement = document.getElementById ("poster");
-          posterElement.src = channel.poster;
+          posterElement.src = channel.poster || "./assets/images/default-poster.jpg";
 
           // Restore position if previously watched, otherwise start from 0
           const startTime = playbackPositions[channelName] || 0;
@@ -456,6 +456,10 @@
               : `Playing: ${channel.name}`
           );
         });
+      } else {
+        // No channel playing: Set default poster
+        const posterElement = document.getElementById("poster");
+        posterElement.src = "./assets/images/default-poster.jpg";
       }
     }
 
@@ -477,7 +481,7 @@
 
           // Update the poster
           const posterElement = document.getElementById("poster");
-          posterElement.src = channel.poster;
+          posterElement.src = channel.poster || "./assets/images/default-poster.jpg";
 
           // Restore position if previously watcher
           const startTime = playbackPositions[channelName] || 0;
@@ -493,6 +497,10 @@
         });
       } else {
         showNotification("End of Channel");
+
+        // End of channel group: Set default poster
+        const posterElement = document.getElementById("poster");
+        posterElement.src = "./assets/images/default-poster.jpg";
       }
     }
 
@@ -519,6 +527,8 @@
 
     function togglePower() {
       powerOn = !powerOn;
+      const posterElement = document.getElementById("poster");
+      
       if (powerOn) {
         tvScreen.classList.add("on");
         videoPlayer.classList.add("on");
@@ -533,6 +543,9 @@
         channelDisplay.style.display = "none";
         videoPlayer.pause();
         showNotification(`Power Off`);
+
+        // Set default poster when TV is off
+        posterElement.src = "./assets/images/default-poster.jpg";
       }
     }
 
