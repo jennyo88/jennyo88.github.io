@@ -11,9 +11,12 @@ const glowingButton = document.getElementById("glowingButton");
 const tvGuide = document.getElementById("tvGuide");
 
 const channels = [
-  { name: "Movies", video: "./assets/videos/movies.mp4", channelNumber: 1 },
-  { name: "Cartoons", video: "./assets/videos/cartoons.mp4", channelNumber: 2 }
+  ...moviesChannels,
+  ...cartoonsChannels
 ];
+
+// Example usage:
+console.log(channels); // Logs combined channels array
 
 const groupedChannels = channels.reduce((acc, channel) => {
   if (!acc[channel.category]) acc[channel.category] = {};
