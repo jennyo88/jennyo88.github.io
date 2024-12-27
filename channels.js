@@ -3,7 +3,7 @@ const channels = [
   { 
     name: "Beneath the Planet of the Apes",
     category: "Movies",
-    genre: "Sci-Fi",
+    subcategory: "Sci-Fi",
     channelNumber: 208,
     video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4",
     description: "A sci-fi sequel where astronauts discover the dark truth about Earth's future.",
@@ -13,7 +13,7 @@ const channels = [
   {
     name: "The Aristocats",
     category: "Movies",
-    genre: "Animation",
+    subcategory: "Animation",
     channelNumber: 202,
     video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4",
     description: "Disney's animated adventure of a family of cats lost in Paris.",
@@ -33,7 +33,7 @@ const channels = [
   {
     name: "Star Wars",
     category: "Movies",
-    genre: "Sci-Fi",
+    subcategory: "Sci-Fi",
     channelNumber: 208,
     video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4",
     description: "The epic space opera that began a cultural phenomenon.",
@@ -43,7 +43,7 @@ const channels = [
   {
     name: "Superman: The Movie",
     category: "Movies",
-    genre: "Superhero",
+    subcategory: "Superhero",
     channelNumber: 209,
     video: "https://archive.org/download/superman-the-movie-1978-from-the-1979-wci-home-video-vhs/Superman%20The%20Movie%20%281978%29%20%5Bfrom%20the%201979%20WCI%20Home%20Video%20VHS%5D.mp4",
     description: "The first big-screen superhero movie starring Christopher Reeve.",
@@ -53,7 +53,7 @@ const channels = [
   {
     name: "The Time Machine",
     category: "Movies",
-    genre: "Sci-Fi",
+    subcategory: "Sci-Fi",
     channelNumber: 208,
     video: "https://archive.org/download/the-time-machine-1978-time-travel-sci-fi/The%20Time%20Machine%20%281978%20Time%20Travel%20SciFi%29.mp4",
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
@@ -63,7 +63,7 @@ const channels = [
   {
     name: "Monty Python's Life of Brian",
     category: "Movies",
-    genre: "Comedy",
+    subcategory: "Comedy",
     channelNumber: 204,
     video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4",
     description: "A satirical musical comedy on religious epics by Monty Python.",
@@ -73,7 +73,7 @@ const channels = [
   {
     name: "Superman II",
     category: "Movies",
-    genre: "Superhero",
+    subcategory: "Superhero",
     channelNumber: 209,
     video: "https://archive.org/download/full-vhs-superman-ii-1981-warner-home-video-rental-edition/FULL%20VHS%20Superman%20II%20%281981%29%20%5BWarner%20Home%20Video%5D%20%28Rental%20Edition%29.mp4",
     description: "Superman faces General Zod in an epic battle for Earth.",
@@ -83,7 +83,7 @@ const channels = [
   {
     name: "The Thing",
     category: "Movies",
-    genre: "Horror",
+    subcategory: "Horror",
     channelNumber: 206,
     video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
     description: "A tense sci-fi horror about an alien shape-shifter.",
@@ -93,7 +93,7 @@ const channels = [
   {
     name: "The Terminator",
     category: "Movies",
-    genre: "Action",
+    subcategory: "Action",
     channelNumber: 201,
     video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4",
     description: "A cyborg is sent to the past to kill Sarah Connor.",
@@ -103,7 +103,7 @@ const channels = [
   {
     name: "Ghostbusters",
     category: "Movies",
-    genre: "Comedy",
+    subcategory: "Comedy",
     channelNumber: 204,
     video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4",
     description: "A comedic take on ghost-hunting in New York City.",
@@ -113,7 +113,7 @@ const channels = [
   {
     name: "Hocus Pocus",
     category: "Movies",
-    genre: "Fantasy",
+    subcategory: "Fantasy",
     channelNumber: 205,
     video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4",
     description: "A trio of witches is resurrected on Halloween night.",
@@ -123,7 +123,7 @@ const channels = [
   {
     name: "Spice World",
     category: "Movies",
-    genre: "Musical",
+    subcategory: "Musical",
     channelNumber: 207,
     video: "https://archive.org/download/spice-world_202208/SPICE%20WORLD.mp4",
     description: "The Spice Girls embark on a wild, comedic adventure.",
@@ -133,7 +133,7 @@ const channels = [
   {
     name: "The Matrix",
     category: "Movies",
-    genre: "Sci-Fi",
+    subcategory: "Sci-Fi",
     channelNumber: 208,
     video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4",
     description: "A hacker learns the truth about his simulated reality.",
@@ -143,7 +143,7 @@ const channels = [
   {
     name: "The Mummy",
     category: "Movies",
-    genre: "Adventure",
+    subcategory: "Adventure",
     channelNumber: 203,
     video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4",
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
