@@ -9,7 +9,7 @@ const channels = [
     description: "A sci-fi sequel where astronauts discover the dark truth about Earth's future.",
     duration: "1h 35m",
     releaseYear: 1970,
-    posterURL: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/1880/fLrzUkj1CTPrLgz57JjsTEXNvLktlLySJG609b8U.webp",
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/1880/fLrzUkj1CTPrLgz57JjsTEXNvLktlLySJG609b8U.webp",
   },
   {
     name: "The Aristocats",
@@ -20,7 +20,7 @@ const channels = [
     description: "Disney's animated adventure of a family of cats lost in Paris.",
     duration: "1h 18m",
     releaseYear: 1970,
-    posterURL: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/34603/TbORWeJeKJNVKRCRZfBQV01cQgjoQ1lbNGPqj8Hf.webp",
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/34603/TbORWeJeKJNVKRCRZfBQV01cQgjoQ1lbNGPqj8Hf.webp",
   },
   {
     name: "Robin Hood",
@@ -31,7 +31,7 @@ const channels = [
     description: "Disney's animated Robin Hood as a cunning fox outwits Prince John.",
     duration: "1h 23m",
     releaseYear: 1973,
-    posterURL: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/23952/hFKwLF3AENNdOLccAFMxqjzKmEPqVYqJBsghCpOL.webp",
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/23952/hFKwLF3AENNdOLccAFMxqjzKmEPqVYqJBsghCpOL.webp",
   },
   {
     name: "Star Wars",
@@ -42,7 +42,7 @@ const channels = [
     description: "The epic space opera that began a cultural phenomenon.",
     duration: "2h 1m",
     releaseYear: 1977,
-    posterURL: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/159/M9MM8ok5tph0fPXoBUP1iB0jL8jB6wXG7hRGODxD.webp",
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/159/M9MM8ok5tph0fPXoBUP1iB0jL8jB6wXG7hRGODxD.webp",
   },
   {
     name: "Superman: The Movie",
@@ -53,7 +53,7 @@ const channels = [
     description: "The first big-screen superhero movie starring Christopher Reeve.",
     duration: "2h 23m",
     releaseYear: 1978,
-    posterURL: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9730/guZXgOs6SZDYo8sWV0Kjysn3T0R21CZeeVLJy3xN.webp",
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9730/guZXgOs6SZDYo8sWV0Kjysn3T0R21CZeeVLJy3xN.webp",
   },
   {
     name: "The Time Machine",
@@ -64,7 +64,7 @@ const channels = [
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
     duration: "1h 39m",
     releaseYear: 1978,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "Monty Python's Life of Brian",
@@ -75,7 +75,7 @@ const channels = [
     description: "A satirical musical comedy on religious epics by Monty Python.",
     duration: "1h 34m",
     releaseYear: 1979, 
-    posterURL: "",
+    poster: "",
   },
   {
     name: "Superman II",
@@ -86,7 +86,7 @@ const channels = [
     description: "Superman faces General Zod in an epic battle for Earth.",
     duration: "1h 56m",
     releaseYear: 1980,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "The Thing",
@@ -97,7 +97,7 @@ const channels = [
     description: "A tense sci-fi horror about an alien shape-shifter.",
     duration: "1h 49m",
     releaseYear: 1982,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "The Terminator",
@@ -108,7 +108,7 @@ const channels = [
     description: "A cyborg is sent to the past to kill Sarah Connor.",
     duration: "1h 47m",
     releaseYear: 1984,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "Ghostbusters",
@@ -119,7 +119,7 @@ const channels = [
     description: "A comedic take on ghost-hunting in New York City.",
     duration: "1h 45m",
     releaseYear: 1985,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "Hocus Pocus",
@@ -130,7 +130,7 @@ const channels = [
     description: "A trio of witches is resurrected on Halloween night.",
     duration: "1h 36m",
     releaseYear: 1993,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "Spice World",
@@ -141,7 +141,7 @@ const channels = [
     description: "The Spice Girls embark on a wild, comedic adventure.",
     duration: "1h 33m",
     releaseYear: 1998,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "The Matrix",
@@ -152,7 +152,7 @@ const channels = [
     description: "A hacker learns the truth about his simulated reality.",
     duration: "2h 16m",
     releaseYear: 1999,
-    posterURL: "",
+    poster: "",
   },
   {
     name: "The Mummy",
@@ -163,7 +163,7 @@ const channels = [
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
     duration: "2h 4m",
     releaseYear: 1999,
-    posterURL: "",
+    poster: "",
   },
 
   {
