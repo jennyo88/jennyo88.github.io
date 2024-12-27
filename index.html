@@ -277,15 +277,16 @@
 
   <script src="channels.js"></script>
   <script>
-    let currentChannel = 0;
-    let powerOn = false;
-    const playbackTimes = {};
-    const tvScreen = document.getElementById("tvScreen");
-    const videoPlayer = document.getElementById("videoPlayer");
-    const channelDisplay = document.getElementById("channelDisplay");
-    const notification = document.getElementById("notification");
-    const glowingButton = document.getElementById("glowingButton");
-    const tvGuide = document.getElementById("tvGuide");
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentChannel = 0;
+      let powerOn = false;
+      const playbackTimes = {};
+      const tvScreen = document.getElementById("tvScreen");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const channelDisplay = document.getElementById("channelDisplay");
+      const notification = document.getElementById("notification");
+      const glowingButton = document.getElementById("glowingButton");
+      const tvGuide = document.getElementById("tvGuide");
 
     const groupedChannels = channels.reduce((acc, channel) => {
       if (!acc[channel.category]) acc[channel.category] = {};
@@ -389,6 +390,10 @@
 
     function clearPosterDisplay() {
       const posterDisplay = document.getElementById("posterDisplay");
+      if (!posterDisplay) {
+        console.error("Poster display element not found!");
+        return;
+      }
       posterDisplay.style.backgroundImage = "";
       posterDisplay.style.display = "none";
     }
@@ -513,6 +518,7 @@
 
 
     populateGuide();
+  });
   </script>
 </body>
 </html>
