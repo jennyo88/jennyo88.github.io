@@ -370,14 +370,16 @@
     function playNextPart() {
       if (partIndex < channelGroup.length) {
         const channel = channelGroup[partIndex];
-        videoPlayer.src = channel.video;
-        channelDisplay.textContent = `Now Playing: ${channel.name}`;
-        if (powerOn) videoPlayer.play();
+        playStatic (() => {
+          videoPlayer.src = channel.video;
+          channelDisplay.textContent = `Now Playing: ${channel.name}`;
+          videoPlayer.play();
 
-        videoPlayer.onended = () => {
-          partIndex++;
-          playNextPart();
-        };
+          videoPlayer.onended = () => {
+            partIndex++;
+            playNextPart();
+          };
+        });
       } else {
         showNotification("End of Channel");
       }
