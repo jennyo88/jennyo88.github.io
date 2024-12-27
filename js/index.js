@@ -1,6 +1,7 @@
 let currentChannel = 0;
 let powerOn = false;
 
+const playbackTimes = {};
 const playbackPositions = {};
 const tvScreen = document.getElementById("tvScreen");
 const videoPlayer = document.getElementById("videoPlayer");
