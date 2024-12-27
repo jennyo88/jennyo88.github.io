@@ -388,12 +388,12 @@
     tvGuide.appendChild(channelItem);
   });
 
-  // Add a back button to navigate back to subcategories
-  const backButton = document.createElement("div");
-  backButton.classList.add("back-button");
-  backButton.textContent = "Back to Categories";
-  backButton.addEventListener("click", () => displaySubcategories(category));
-  tvGuide.appendChild(backButton);
+    // Add a back button to navigate back to subcategories
+    const backButton = document.createElement("div");
+    backButton.classList.add("back-button");
+    backButton.textContent = "Back to Categories";
+    backButton.addEventListener("click", () => displaySubcategories(category));
+    tvGuide.appendChild(backButton);
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
