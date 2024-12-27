@@ -83,7 +83,8 @@ function playChannelGroup(channelGroup) {
     if (partIndex < channelGroup.length) {
       const channel = channelGroup[partIndex];
       const channelName = channel.name;
-
+      
+      // Save position of the previous part
       if (videoPlayer.src && !videoPlayer.ended) {
         playbackPositions[channelName] = videoPlayer.currentTime;
       }
@@ -98,7 +99,7 @@ function playChannelGroup(channelGroup) {
       showNotification("End of Channel");
     }
   }
-
+  
   playNextPart();
 }
 
