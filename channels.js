@@ -157,9 +157,7 @@ const channels = [
     subcategory: "Kids WB",
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
-    description: "",
     releaseYear: 2001,
-    poster: "",
   },
   {
     name: "Kids WB Part 2",
@@ -167,9 +165,7 @@ const channels = [
     subcategory: "Kids WB",
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
-    description: "",
     releaseYear: 2001,
-    poster: "",
   },
   {
     name: "Kids WB Part 3",
@@ -177,9 +173,7 @@ const channels = [
     subcategory: "Kids WB",
     channelNumber: 101,
     video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4",
-    description: "",
     releaseYear: 2001,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -187,9 +181,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_1.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -197,9 +189,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_2.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -207,9 +197,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_3.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -217,9 +205,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_4.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -227,9 +213,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 102,
     video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_5.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -237,9 +221,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_1.mp4",
-    description: "",
     releaseYear: 1986,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -247,9 +229,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_2.mp4",
-    description: "",
     releaseYear: 1986,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -257,9 +237,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 103,
     video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_3.mp4",
-    description: "",
     releaseYear: 1986,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -267,9 +245,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_1.mp4",
-    description: "",
     releaseYear: 1989,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -277,9 +253,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_2.mp4",
-    description: "",
     releaseYear: 1989,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -287,9 +261,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_3.mp4",
-    description: "",
     releaseYear: 1989,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -297,9 +269,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_4.mp4",
-    description: "",
     releaseYear: 1989,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -307,9 +277,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 104,
     video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_5.mp4",
-    description: "",
     releaseYear: 1989,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 1",
@@ -317,9 +285,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4",
-    description: "",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 2",
@@ -327,9 +293,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4",
-    description: "",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 3",
@@ -337,9 +301,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4",
-    description: "",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 4",
@@ -347,9 +309,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_4.mp4",
-    description: "",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "ABC Saturday Morning Part 5",
@@ -357,9 +317,7 @@ const channels = [
     subcategory: "ABC Saturday Morning",
     channelNumber: 105,
     video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_5.mp4",
-    description: "",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 1",
@@ -367,9 +325,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D01.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 2",
@@ -377,9 +333,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D02.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 3",
@@ -387,9 +341,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D03.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 4",
@@ -397,9 +349,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D04.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 10",
@@ -407,9 +357,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D010.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 11",
@@ -417,9 +365,7 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D011.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   },
   {
     name: "Candy Candy Ep 12",
@@ -427,8 +373,6 @@ const channels = [
     subcategory: "Candy Candy",
     channelNumber: 106,
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D012.mp4",
-    description: "",
     releaseYear: 1981,
-    poster: "",
   }, 
 ];
