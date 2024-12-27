@@ -79,9 +79,9 @@
     .tv-guide {
       position: absolute;
       top: 0;
-      left: 72%; /* Start where the video section ends */
-      width: 28%; /* One-third of the screen */
-      height: 35%; /* Top half of the remaining space */
+      left: 73%; /* Start where the video section ends */
+      width: 25%; /* One-third of the screen */
+      height: 38%; /* Top half of the remaining space */
       background-color: rgba(0, 0, 0, 0.8);
       padding: 5px;
       overflow-y: scroll;
@@ -92,7 +92,7 @@
       position: absolute;
       top: 40%; /* Start below the TV guide */
       left: 75%; /* Start where the video section ends */
-      width: 25%; /* One-third of the screen */
+      width: 20%; /* One-third of the screen */
       height: 60%; /* Bottom half of the remaining space */
       display: flex;
       justify-content: center;
@@ -428,6 +428,15 @@
       });
     }
 
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+
     function playChannel(channel) {
       if (powerOn) {
         const channelName = channel.name;
@@ -451,6 +460,21 @@
           
           channelDisplay.textContent = `Now Playing: ${channel.name}`;
           videoPlayer.play();
+
+          // Set up the "onended" event to shuffle videos
+          videoPlayer.onended = () => {
+            const subcategory = channel.subcategory;
+            const sameSubcategoryChannels = channels.filter(
+              (ch) => ch.subcategory === subcategory
+            );
+
+            if (sameSubcategoryChannels.length > 0) {
+              const shuffledChannels = shuffleArray(sameSubcategoryChannels);
+              playChannel(shuffledChannels[0]); // Play the next shuffled video
+            } else {
+              showNotification("No more videos in this subcategory!");
+            }
+          };
           
           showNotification(
             startTime > 0
