@@ -262,7 +262,16 @@
     </div>
   </div>
 
-  <script src="./js/channels.js"></script>
+  <script src="js/movies.js"></script>
+  <script src="js/cartoons.js"></script>
+  <script>
+    const channels = [
+      ...moviesChannels,
+      ...cartoonsChannels
+    ];
+  </script>
+  <script src="js/index.js"></script>
+
   <script>
     let currentChannel = 0;
     let powerOn = false;
