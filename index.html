@@ -170,7 +170,7 @@
 
     .tv-guide {
       width: 200px;
-      height: 300px;
+      height: 500px;
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
       padding-top: 10px;
@@ -194,22 +194,6 @@
               0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
     }
-
-    .poster-display {
-      margin-top: 10px;
-      text-align: center;
-      width: 200px; /* Adjust based on your TV guide width */
-      height: auto;
-    }  
-
-    .poster-display img {
-      max-width: 100%;
-      max-height: 300px; /* Ensure the poster fits nicely */
-      border: 2px solid #fff;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
-    }
-
 
     .category-item,
     .channel-item {
@@ -276,9 +260,6 @@
       <h2>TV Guide</h2>
       <!-- Categories and channels will be dynamically added here -->
     </div>
-    <div id="posterDisplay" class="poster-display">
-      <img id="posterImage" src="" alt="Movie Poster" style="display: none; max-width: 100%; border-radius: 10px;" />
-    </div>
   </div>
 
   <script src="channels.js"></script>
@@ -332,68 +313,56 @@
 
     function displayChannels(category, subcategory) {
       tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
+  
+      // Get unique channel numbers for the given subcategory
+      const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
 
-    // Get unique channel numbers for the given subcategory
-    const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
+      // Sort channels by release year (optional enhancement)
+      const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
+        const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
+        const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
+        return yearA - yearB; // Sort ascending by year
+      });
 
-    // Sort channels by release year
-    const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
-      const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
-      const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
-      return yearA - yearB; // Sort ascending by year
-    });
+      sortedUniqueChannels.forEach(channelNumber => {
+        // Group channels by the same channel number
+        const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
+        const channelName = channelGroup[0].name.split("Part")[0].trim();
+        const description = channelGroup[0].description || "No description available.";
+        const duration = channelGroup[0].duration || "Unknown duration";
+        const releaseYear = channelGroup[0].releaseYear || "Unknown year";
 
-    // Iterate through sorted channels
-    sortedUniqueChannels.forEach(channelNumber => {
-      // Group channels by the same channel number
-      const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
-      const channelName = channelGroup[0].name.split("Part")[0].trim();
-      const description = channelGroup[0].description || "No description available.";
-      const poster = channelGroup[0].poster || ""; // Fetch poster URL
-      const duration = channelGroup[0].duration || "Unknown duration";
-      const releaseYear = channelGroup[0].releaseYear || "Unknown year";
+        // Create a channel item element
+        const channelItem = document.createElement("div");
+        channelItem.classList.add("channel-item");
 
-    // Create a channel item element
-    const channelItem = document.createElement("div");
-    channelItem.classList.add("channel-item");
+        // Add metadata to the display
+        channelItem.innerHTML = `
+          <strong>${channelName} (Channel ${channelNumber})</strong><br>
+          <small>Year: ${releaseYear}</small>
+    `    ;
+        
+        // Add hover functionality to show metadata as a notification
+        channelItem.addEventListener("mouseover", () => {
+          showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
+        });
 
-    // Add metadata to the display
-    channelItem.innerHTML = `
-      <strong>${channelName} (Channel ${channelNumber})</strong><br>
-      <small>Year: ${releaseYear}</small>
-    `;
+        channelItem.addEventListener("mouseout", () => {
+          hideNotification();
+        });
 
-    // Add click event to show the poster
-    channelItem.addEventListener("click", () => {
-      const posterImage = document.getElementById("posterImage");
-      if (poster) {
-        posterImage.src = poster;
-        posterImage.style.display = "block";
-      } else {
-        posterImage.style.display = "none";
-      }
-    });
+        // Handle click to play the channel group
+        channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
+        tvGuide.appendChild(channelItem);
+      });
 
-    // Add hover functionality to show metadata as a notification
-    channelItem.addEventListener("mouseover", () => {
-      showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
-    });
-
-    channelItem.addEventListener("mouseout", () => {
-      hideNotification();
-    });
-
-    // Handle click to play the channel group
-    channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
-    tvGuide.appendChild(channelItem);
-  });
-
-    // Add a back button to navigate back to subcategories
-    const backButton = document.createElement("div");
-    backButton.classList.add("back-button");
-    backButton.textContent = "Back to Categories";
-    backButton.addEventListener("click", () => displaySubcategories(category));
-    tvGuide.appendChild(backButton);
+      // Add a back button to navigate back to subcategories
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Categories";
+      backButton.addEventListener("click", () => displaySubcategories(category));
+      tvGuide.appendChild(backButton);
+  }
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
@@ -420,14 +389,6 @@
     function playChannel(channel) {
       videoPlayer.src = channel.video;
       channelDisplay.textContent = `Now Playing: ${channel.name}`;
-
-      const posterImage = document.getElementById("posterImage");
-      if (channel.poster) {
-        posterImage.src = channel.poster;
-        posterImage.style.display = "block";
-      } else {
-        posterImage.style.display = "none";
-      }
 
       if (powerOn) {
         videoPlayer.play();
