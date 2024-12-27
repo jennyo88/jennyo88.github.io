@@ -390,12 +390,8 @@
 
     function playChannel(channel) {
       videoPlayer.src = channel.video;
-      channelDisplay.innerHTML = `
-        <strong>${channel.name}</strong><br>
-        <small>${channel.description}</small><br>
-        <small>Duration: ${channel.duration}</small><br>
-        <small>${channel.releaseYear}</small>
-  `  ;
+      channelDisplay.textContent = Now Playing: ${channel.name};
+      
       currentChannel = index;
       if (powerOn) {
         videoPlayer.play();
