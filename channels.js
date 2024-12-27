@@ -64,7 +64,6 @@ const channels = [
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
     duration: "1h 39m",
     releaseYear: 1978,
-    poster: "",
   },
   {
     name: "Monty Python's Life of Brian",
@@ -75,7 +74,6 @@ const channels = [
     description: "A satirical musical comedy on religious epics by Monty Python.",
     duration: "1h 34m",
     releaseYear: 1979, 
-    poster: "",
   },
   {
     name: "Superman II",
@@ -86,7 +84,6 @@ const channels = [
     description: "Superman faces General Zod in an epic battle for Earth.",
     duration: "1h 56m",
     releaseYear: 1980,
-    poster: "",
   },
   {
     name: "The Thing",
@@ -97,7 +94,6 @@ const channels = [
     description: "A tense sci-fi horror about an alien shape-shifter.",
     duration: "1h 49m",
     releaseYear: 1982,
-    poster: "",
   },
   {
     name: "The Terminator",
@@ -108,7 +104,6 @@ const channels = [
     description: "A cyborg is sent to the past to kill Sarah Connor.",
     duration: "1h 47m",
     releaseYear: 1984,
-    poster: "",
   },
   {
     name: "Ghostbusters",
@@ -119,7 +114,6 @@ const channels = [
     description: "A comedic take on ghost-hunting in New York City.",
     duration: "1h 45m",
     releaseYear: 1985,
-    poster: "",
   },
   {
     name: "Hocus Pocus",
@@ -130,7 +124,6 @@ const channels = [
     description: "A trio of witches is resurrected on Halloween night.",
     duration: "1h 36m",
     releaseYear: 1993,
-    poster: "",
   },
   {
     name: "Spice World",
@@ -141,7 +134,6 @@ const channels = [
     description: "The Spice Girls embark on a wild, comedic adventure.",
     duration: "1h 33m",
     releaseYear: 1998,
-    poster: "",
   },
   {
     name: "The Matrix",
@@ -152,7 +144,6 @@ const channels = [
     description: "A hacker learns the truth about his simulated reality.",
     duration: "2h 16m",
     releaseYear: 1999,
-    poster: "",
   },
   {
     name: "The Mummy",
@@ -163,7 +154,6 @@ const channels = [
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
     duration: "2h 4m",
     releaseYear: 1999,
-    poster: "",
   },
 
   {
