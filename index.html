@@ -63,7 +63,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background: url('https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/images/tvclean.webp') no-repeat center center;
+      background: url('./assets/tvclean.webp') no-repeat center center;
       background-size: contain;
     }
 
@@ -275,6 +275,13 @@
     const glowingButton = document.getElementById("glowingButton");
     const tvGuide = document.getElementById("tvGuide");
 
+    const body = document.body;
+    const themeToggleButton = document.getElementById("themeToggle");
+
+    themeToggleButton.addEventListener("click", () => {
+      body.classList.toggle("dark-theme");
+    });
+
     const groupedChannels = channels.reduce((acc, channel) => {
       if (!acc[channel.category]) acc[channel.category] = {};
       const subcategory = channel.subcategory || "default";
@@ -366,7 +373,7 @@
   }
 
     function playStatic(callback) {
-      videoPlayer.src = "https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/tv-static.mp4"; // Replace with the path to your static video/GIF
+      videoPlayer.src = "./assets/tv-static.mp4"; // Replace with the path to your static video/GIF
       channelDisplay.textContent = "Static...";
       videoPlayer.play();
 
@@ -503,6 +510,25 @@
         videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
         const volumeLevel = Math.round(videoPlayer.volume * 10);
         showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "ArrowUp": // Increase volume
+          videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+          break;
+        case "ArrowDown": // Decrease volume
+          videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 1);
+          break;
+        case "ArrowRight": // Next channel
+          currentChannel = (currentChannel + 1) % channels.length;
+          playChannel(channels[currentChannel]);
+          break;
+        case "ArrowLeft": // Previous channel
+          currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+          playChannel(channels[currentChannel]);
+          break;
       }
     });
 
