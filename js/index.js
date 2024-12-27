@@ -157,7 +157,7 @@ function populateGuide() {
 
 function playStatic(callback) {
   videoPlayer.src = "assets/videos/tv-static.mp4";
-  videoPlayer.muted = true; // Autoplay compatibility
+  videoPlayer.muted = false; // Unmute
   videoPlayer.play();
 
   setTime(() => {
