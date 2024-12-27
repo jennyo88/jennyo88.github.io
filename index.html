@@ -12,37 +12,28 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
       color: white;
       font-family: 'Roboto', sans-serif;
     }
 
-    .container {
+    .screen {
       display: flex;
-      align-items: flex-start; /* Align items to the top */
+      width: 100%;
+      height: 100%;
     }
 
-    .poster-container {
+    .video-section {
+      flex: 2; /* 2/3 of the screen */
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 10px; /* Space between video and poster */
-    }
-
-    .poster-container img {
-      width: 200px; /* Adjust poster size */
-      height: auto; /* Maintain aspect ratio */
-      border: 2px solid white; /* Optional border for styling */
-      border-radius: 5px; /* Optional rounded corners */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
+      blackground-color: black;
     }
 
     .tv-container {
+      width: 90%; /* Adjust video size withi its section */
+      height: 90%;
       position: relative;
-      width: 700px; /* 15% increase from 600px */
-      height: 550px; /* 15% increase from 450px */
-      background-color: black;
-      margin-right: 10px; /* Space between TV and guide */
     }
 
     .tv-screen {
@@ -82,12 +73,60 @@
       background-size: contain;
     }
 
+    .right-section {
+      flex: 1; /* 1/3 of the screen */
+      display: flex;
+      flex-direction: column; /* Stack TV Guide and Poster vertically */
+    }
+
+    .tv-guide {
+      flex: 1; /* 1/6 of the screen */
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      overflow-y: auto;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .poster-container {
+      flex: 1; /* 1/6 of the screen */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .poster-container img {
+      width: 90%; /* Fit neatly within the section */
+      max-height: 90%; /* Prevent overflow */
+      object-fit: contain;
+      border: 2px solid white; /* Optional border */
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+
+  
+    .tv-guide h2 {
+      text-align: center;
+      margin: 0;
+      font-size: 18px; /* Slightly smaller text */
+      font-weight: bold;
+      color: white; /* Text color to stand out on a grey background */
+      background: linear-gradient(180deg, #a9a9a9, #808080); /* Grey gradient for texture */
+      padding: 10px 15px; /* Reduced padding for smaller space */
+      border: 2px solid #606060; /* Darker border for TV frame-like look */
+      border-radius: 3px; /* Slight rounding for a soft edge */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
+              0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
+    }
+
     .button-panel {
       position: absolute;
       bottom: 7%;
-      left: 37.3%;
+      left: 50%; /* Center align */
+      transform: translateX(-50%);
       display: flex;
-      gap: 9px;
+      gap: 10px;
     }
 
     .button-panel button {
@@ -183,36 +222,10 @@
       box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
     }
 
-    .tv-guide {
-      width: 200px;
-      height: 500px;
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding-top: 10px;
-      overflow-y: auto;
-      border: none;
-      border-radius: 10px;
-    }
-
-    .tv-guide h2 {
-      text-align: center;
-      margin-top: 0px;
-      margin-bottom: none;
-      font-size: 20px; /* Slightly larger text */
-      font-weight: bold;
-      color: white; /* Text color to stand out on a grey background */
-      background: linear-gradient(180deg, #a9a9a9, #808080); /* Grey gradient for texture */
-      padding: 20px 30px; /* Padding for spacing */
-      border: 2px solid #606060; /* Darker border for TV frame-like look */
-      border-radius: 3px; /* Slight rounding for a soft edge */
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
-              0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
-    }
-
     .category-item,
     .channel-item {
-      padding: 10px;
+      padding: 5px;
+      font-size: 14px;
       margin: 5px 0;
       border: 1px solid grey;
       border-radius: 3px;
@@ -245,40 +258,48 @@
       background-color: black;
       color: grey;
     }
+  // EDIT!!!!
+    
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- New poster image -->
-    <div class="poster-container">
-      <img src="https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9730/guZXgOs6SZDYo8sWV0Kjysn3T0R21CZeeVLJy3xN.webp" alt="Channel Poster" id="poster">
-    </div>
-    
-    <div class="tv-container">
-      <div class="tv-screen" id="tvScreen">
-        <video id="videoPlayer" autoplay loop>
-          <source src="" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
+  <div class="screen">
+    <!-- Video Player -->
+    <div class="video-section">
+      <div class="tv-container">
+        <div class="tv-screen" id="tvScreen">
+          <video id="videoPlayer" autoplay loop>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="channel-display" id="channelDisplay"></div>
+        <div class="notification" id="notification"></div>
+        <div class="tv-overlay"></div>
+        <div class="button-panel">
+          <button id="menu"></button>
+          <button id="volumeDown"></button>
+          <button id="volumeUp"></button>
+          <button id="channelDown"></button>
+          <button id="channelUp"></button>
+          <div class="spacer"></div>
+          <button id="power"></button>
+        </div>
+        <div class="glowing-button" id="glowingButton"></div>
       </div>
-      <div class="channel-display" id="channelDisplay"></div>
-      <div class="notification" id="notification"></div>
-      <div class="tv-overlay"></div>
-      <div class="button-panel">
-        <button id="menu"></button>
-        <button id="volumeDown"></button>
-        <button id="volumeUp"></button>
-        <button id="channelDown"></button>
-        <button id="channelUp"></button>
-        <div class="spacer"></div>
-        <button id="power"></button>
-      </div>
-      <div class="glowing-button" id="glowingButton"></div>
     </div>
 
-    <div class="tv-guide" id="tvGuide">
-      <h2>TV Guide</h2>
-      <!-- Categories and channels will be dynamically added here -->
+    <!-- Right Section -->
+    <div class="right-section">
+      <!-- TV Guide -->
+      <div class="tv-guide" id="tvGuide">
+        <h2>TV Guide</h2>
+        <!-- Categories and channels will be dynamically added here -->
+      </div>
+      <!-- Movie Poster -->
+      <div class="poster-container">
+        <img src="./assets/images/poster.jpg" alt="Channel Poster" id="poster">
+      </div>
     </div>
   </div>
 
