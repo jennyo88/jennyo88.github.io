@@ -63,7 +63,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background: url('./assets/tvclean.webp') no-repeat center center;
+      background: url('./assets/images/tvclean.webp') no-repeat center center;
       background-size: contain;
     }
 
@@ -367,8 +367,8 @@
 
     function playStatic(callback) {
       // Set the static video as the source
-      videoPlayer.src = "https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/assets/tv-static.mp4"; // Replace with the path to your static video/GIF
-      videoPlayer.muted = true; // Ensure autoplay works
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with the path to your static video/GIF
+      videoPlayer.muted = false; // Ensure autoplay works
 
       // Show "Static" message
       channelDisplay.textContent = "Static...";
