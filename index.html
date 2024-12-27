@@ -170,7 +170,7 @@
 
     .tv-guide {
       width: 200px;
-      height: 500px;
+      height: 300px;
       background-color: rgba(0, 0, 0, 0.8);
       color: white;
       padding-top: 10px;
@@ -193,6 +193,18 @@
       box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
               0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
+    }
+
+    .poster-display {
+      width: 180px;
+      height:250px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin-top: 10px;
+      border: 1px solid gray;
+      border-radius: 10px;
+      display: none;
     }
 
     .category-item,
@@ -260,6 +272,7 @@
       <h2>TV Guide</h2>
       <!-- Categories and channels will be dynamically added here -->
     </div>
+    <div class="poster-display" id="posterDisplay"></div>
   </div>
 
   <script src="channels.js"></script>
@@ -329,6 +342,7 @@
         const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
         const channelName = channelGroup[0].name.split("Part")[0].trim();
         const description = channelGroup[0].description || "No description available.";
+        const posterURL = channelGroup[0].poster || ""; // Assuming poster URL is part of the channel object
         const duration = channelGroup[0].duration || "Unknown duration";
         const releaseYear = channelGroup[0].releaseYear || "Unknown year";
 
@@ -345,10 +359,12 @@
         // Add hover functionality to show metadata as a notification
         channelItem.addEventListener("mouseover", () => {
           showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
+          updatePosterDisplay(posterURL); // Update poster on hover
         });
 
         channelItem.addEventListener("mouseout", () => {
           hideNotification();
+          clearPosterDisplay(); // Clear poster on mouse out
         });
 
         // Handle click to play the channel group
@@ -362,7 +378,20 @@
       backButton.textContent = "Back to Categories";
       backButton.addEventListener("click", () => displaySubcategories(category));
       tvGuide.appendChild(backButton);
-  }
+    }
+
+    // Helper functions for updating poster display
+    fuction updatePosterDisplay(posterURL) {
+      const posterDisplay = document.getElementById("posterDisplay");
+      posterDisplay.style.backgroundImage = `url(${posterURL})`;
+      posterDisplay.style.display = "block";
+    }
+
+    function clearPosterDisplay() {
+      const posterDisplay = document.getElementById("posterDisplay");
+      posterDisplay.style.backgroundImage = "";
+      posterDisplay.style.display = "none";
+    }
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
