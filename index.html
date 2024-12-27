@@ -7,9 +7,11 @@
   <style>
     body { 
       margin: 0;
-      padding: 0;
       background-color: black;
       display: flex;
+      justify-content: cemter;
+      align-items: center;
+      height: 100vh;
       color: white;
       overflow: hidden; /* Prevent scrolling */
       font-family: 'Roboto', sans-serif;
@@ -25,18 +27,16 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 66.66%; /* Two-thirds of the screen width */
+      width: 68%; /* Two-thirds of the screen width */
       height: 100%; /* Full height of the screen */
       blackground-color: black;
     }
 
     .tv-container {
-      width: 95%; /* Adjust size of the video player within its section */
-      height: 95%;
+      width: 700px; /* Adjust size of the video player within its section */
+      height: 550px;
       position: relative;
       margin: auto;
-      top: 2.5%;
-      left: 2.5%;
     }
 
     .tv-screen {
@@ -79,11 +79,11 @@
     .tv-guide {
       position: absolute;
       top: 0;
-      left: 66.66%; /* Start where the video section ends */
-      width: 33.33%; /* One-third of the screen */
-      height: 40%; /* Top half of the remaining space */
+      left: 68%; /* Start where the video section ends */
+      width: 25%; /* One-third of the screen */
+      height: 35%; /* Top half of the remaining space */
       background-color: rgba(0, 0, 0, 0.8);
-      padding: 10px;
+      padding: 8px;
       overflow-y: auto;
       border-radius: 5px;
     }
@@ -91,8 +91,8 @@
     .poster-container {
       position: absolute;
       top: 40%; /* Start below the TV guide */
-      left: 66.66%; /* Start where the video section ends */
-      width: 33.33%; /* One-third of the screen */
+      left: 68%; /* Start where the video section ends */
+      width: 30%; /* One-third of the screen */
       height: 60%; /* Bottom half of the remaining space */
       display: flex;
       justify-content: center;
