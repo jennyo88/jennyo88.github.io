@@ -19,7 +19,22 @@
 
     .container {
       display: flex;
-      align-items: flex-start;
+      align-items: flex-start; /* Align items to the top */
+    }
+
+    .poster-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px; /* Space between video and poster */
+    }
+
+    .poster-container img {
+      width: 200px; /* Adjust poster size */
+      height: auto; /* Maintain aspect ratio */
+      border: 2px solid white; /* Optional border for styling */
+      border-radius: 5px; /* Optional rounded corners */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
     }
 
     .tv-container {
@@ -168,22 +183,6 @@
       box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
     }
 
-    .poster-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-left: 10px; /* Space between video and poster */
-    }
-
-  .poster-container img {
-    width: 200px; /* Adjust poster size */
-    height: auto; /* Maintain aspect ratio */
-    border: 2px solid white; /* Optional border for styling */
-    border-radius: 5px; /* Optional rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Optional shadow for depth */
-  }
-
-
     .tv-guide {
       width: 200px;
       height: 500px;
@@ -250,6 +249,11 @@
 </head>
 <body>
   <div class="container">
+    <!-- New poster image -->
+    <div class="poster-container">
+      <img src="https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9730/guZXgOs6SZDYo8sWV0Kjysn3T0R21CZeeVLJy3xN.webp" alt="Channel Poster" id="poster">
+    </div>
+    
     <div class="tv-container">
       <div class="tv-screen" id="tvScreen">
         <video id="videoPlayer" autoplay loop>
@@ -270,11 +274,6 @@
         <button id="power"></button>
       </div>
       <div class="glowing-button" id="glowingButton"></div>
-    </div>
-
-    <!-- New poster image -->
-    <div class="poster-container">
-      <img src="https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9730/guZXgOs6SZDYo8sWV0Kjysn3T0R21CZeeVLJy3xN.webp" alt="Channel Poster" id="poster">
     </div>
 
     <div class="tv-guide" id="tvGuide">
