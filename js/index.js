@@ -151,7 +151,7 @@ function populateGuide() {
 }
 
 function playStatic(callback) {
-  videoPlayer.src = "assets/videos/static.mp4";
+  videoPlayer.src = "assets/videos/tv-static.mp4";
   videoPlayer.muted = true;
   channelDisplay.textContent = "Static...";
   videoPlayer.play();
