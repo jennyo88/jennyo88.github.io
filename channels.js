@@ -415,7 +415,7 @@ const channels = [
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D012.mp4",
     releaseYear: 1981,
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
-  } 
+  },
   {
     name: "Candy Candy Ep 13",
     category: "Cartoons",
@@ -424,7 +424,7 @@ const channels = [
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D013.mp4",
     releaseYear: 1981,
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
-  }
+  },
   {
     name: "Candy Candy Ep 16",
     category: "Cartoons",
@@ -433,5 +433,5 @@ const channels = [
     video: "https://archive.org/download/tauklv20210929anime1976candycandykyokomizukiyumikoigarashivoblat01p001/Anime/%281976%29%20Candy%20Candy%20%28Ky%C5%8Dko%20Mizuki%3B%20Yumiko%20Igarashi%E2%80%8E%29%20VOB%20%5BLAT%5D%2001/%281976%29%20Candy%20Candy%20COMPLETE%20LATiNO/Candy_Candy_Vol.1/CANDYCANDY_D016.mp4",
     releaseYear: 1981,
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
-  }
+  },
 ];
