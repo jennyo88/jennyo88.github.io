@@ -267,6 +267,7 @@
     let currentChannel = 0;
     let powerOn = false;
     const playbackTimes = {};
+    const playbackPositions = {};
     const tvScreen = document.getElementById("tvScreen");
     const videoPlayer = document.getElementById("videoPlayer");
     const channelDisplay = document.getElementById("channelDisplay");
@@ -377,11 +378,28 @@
 
     function playChannel(channel) {
       if (powerOn) {
+        const channelName = channel.name;
+
+        // Save current position if switching from a video
+        if (videoPlayer.src && !videoPlayer.ended) {
+          playbackPositions[channelName] = videoPlayer.currentTime;
+        }
+        
         playStatic(() => {
           videoPlayer.src = channel.video;
+
+          // Restore position if previously watched, otherwise start from 0
+          const startTime = playbackPositions[channelName] || 0;
+          videoPlayer.currentTime = startTime;
+          
           channelDisplay.textContent = `Now Playing: ${channel.name}`;
           videoPlayer.play();
-          showNotification(`Playing: ${channel.name}`);
+          
+          showNotification(
+            startTime > 0
+              ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
+              : `Playing: ${channel.name}`
+          );
         });
       }
     }
@@ -392,8 +410,20 @@
     function playNextPart() {
       if (partIndex < channelGroup.length) {
         const channel = channelGroup[partIndex];
+        const channelName = channel.name;
+
+        // Save position of the previous part
+        if (videoPlayer.src && !videoPlayer.ended) {
+          playbackPositions[channelName] = videoPlayer.currentTime;
+        }
+
         playStatic (() => {
           videoPlayer.src = channel.video;
+
+          // Restore position if previously watcher
+          const startTime = playbackPositions[channelName] || 0;
+          videoPlayer.currentTime = startTime;
+
           channelDisplay.textContent = `Now Playing: ${channel.name}`;
           videoPlayer.play();
 
