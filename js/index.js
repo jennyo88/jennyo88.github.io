@@ -152,11 +152,12 @@ function populateGuide() {
 
 function playStatic(callback) {
   videoPlayer.src = "assets/videos/tv-static.mp4";
-  videoPlayer.muted = true;
-  channelDisplay.textContent = "Static...";
+  videoPlayer.muted = true; // Autoplay compatibility
   videoPlayer.play();
 
-  setTimeout(callback, 2000);
+  setTime(() => {
+    callback(); // Move to the next video or action
+  }, 2000); // 2 seconds static duration
 }
 
 function playChannel(channel) {
