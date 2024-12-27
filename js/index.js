@@ -54,17 +54,68 @@ function playChannel(channel) {
 
       channelDisplay.textContent = `Now Playing: ${channel.name}`;
       videoPlayer.play();
-      showNotification(`Playing: ${channel.name}`);
+      
+      showNotification(
+        startTime > 0
+          ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
+          : `Playing: ${channel.name}`
+      );
     });
   }
 }
 
+// power on and off
 document.getElementById("power").addEventListener("click", togglePower);
+
+// channel up and down
 document.getElementById("channelUp").addEventListener("click", () => {
   if (powerOn) {
     currentChannel = (currentChannel + 1) % channels.length;
-    playChannel(channels[currentChannel]);
+    playChannel(channels[currentChannel], currentChannel);
   }
 });
+
+document.getElementById("channelDown").addEventListener("click", () => {
+  if (powerOn) {
+    currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+    playChannel(channels[currentChannel], currentChannel);
+  }
+});
+
+// volume up and down
+document.getElementById("volumeUp").addEventListener("click", () => {
+  if (powerOn) {
+    videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+    showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+  }
+});
+
+document.getElementById("volumeDown").addEventListener("click", () => {
+  if (powerOn) {
+    videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+    const volumeLevel = Math.round(videoPlayer.volume * 10);
+    showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+  }
+});
+
+// menu shuffle
+document.getElementById("menu").addEventListener("click", () => {
+  if (powerOn) {
+    // Select a random channel different from the current one
+    const previousChannel = currentChannel;
+    let randomChannelIndex;
+
+    do {
+      randomChannelIndex = Math.floor(Math.random() * channels.length);
+    } while (randomChannelIndex === previousChannel);
+
+    currentChannel = randomChannelIndex;
+    playChannel(channels[currentChannel]);
+
+    // Show "Channel Shuffled" notification (auto-hides after 3 seconds)
+    showNotification("Channel Shuffled");
+  }
+});
+
 
 populateGuide();
