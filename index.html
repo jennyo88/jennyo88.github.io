@@ -401,6 +401,11 @@
       const notification = document.getElementById("notification");
       notification.textContent = message;
       notification.style.display = "block";
+      
+      // Automatically hide the notification after 3 seconds
+      setTimeout(() => {
+        hideNotification();
+      }, 3000);
     }
 
     function hideNotification() {
@@ -472,10 +477,7 @@
       currentChannel = randomChannelIndex;
       playChannel(channels[currentChannel]);
 
-      // Ensure "Power On" notification is cleared
-      hideNotification();
-
-      // Show "Shuffled" notification
+      // Show "Channel Shuffled" notification (auto-hides after 3 seconds)
       showNotification("Channel Shuffled");
     }
   });
