@@ -401,20 +401,19 @@
       backButton.addEventListener("click", populateGuide);
       tvGuide.appendChild(backButton);
     }
-
     function displayChannels(category, subcategory) {
       tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
-  
+    
       // Get unique channel numbers for the given subcategory
       const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
-
+    
       // Sort channels by release year (optional enhancement)
       const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
         const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
         const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
         return yearA - yearB; // Sort ascending by year
       });
-
+    
       sortedUniqueChannels.forEach(channelNumber => {
         // Group channels by the same channel number
         const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
@@ -422,57 +421,108 @@
         const description = channelGroup[0].description || "No description available.";
         const duration = channelGroup[0].duration || "Unknown duration";
         const releaseYear = channelGroup[0].releaseYear || "Unknown year";
-
+    
         // Create a channel item element
         const channelItem = document.createElement("div");
         channelItem.classList.add("channel-item");
-
+    
         // Add metadata to the display
         channelItem.innerHTML = `
           <strong>${channelName} (Channel ${channelNumber})</strong><br>
           <small>Year: ${releaseYear}</small>
-    `    ;
-        
+        `;
+    
         // Add hover functionality to show metadata as a notification
         channelItem.addEventListener("mouseover", () => {
           showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
         });
-
+    
         channelItem.addEventListener("mouseout", () => {
           hideNotification();
         });
-
-        // Handle click to play the channel group
-        channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
+    
+        // Handle click to play or display episodes
+        if (channelGroup[0].episodes) {
+          channelItem.addEventListener("click", () => displayEpisodes(channelGroup[0]));
+        } else {
+          channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
+        }
+    
         tvGuide.appendChild(channelItem);
       });
-
+    
       // Add a back button to navigate back to subcategories
       const backButton = document.createElement("div");
       backButton.classList.add("back-button");
       backButton.textContent = "Back to Categories";
       backButton.addEventListener("click", () => displaySubcategories(category));
       tvGuide.appendChild(backButton);
-  }
+    }
+
+    function displayEpisodes(channel) {
+      tvGuide.innerHTML = `<h2>${channel.name} Episodes</h2>`;
+    
+      channel.episodes.forEach((episode, index) => {
+        const episodeItem = document.createElement("div");
+        episodeItem.classList.add("channel-item");
+        episodeItem.textContent = `Episode ${index + 1}: ${episode.title || `Part ${index + 1}`}`;
+    
+        // Handle click to play an individual episode
+        episodeItem.addEventListener("click", () => playEpisode(episode, channel));
+    
+        tvGuide.appendChild(episodeItem);
+      });
+    
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Channels";
+      backButton.addEventListener("click", populateGuide);
+      tvGuide.appendChild(backButton);
+    }
+
+    function playEpisode(episode, channel) {
+      playStatic(() => {
+        videoPlayer.src = episode.video;
+    
+        // Update poster
+        const posterElement = document.getElementById("poster");
+        posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+    
+        channelDisplay.textContent = `Now Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`;
+        videoPlayer.play();
+    
+        showNotification(`Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`);
+      });
+    }
 
     function playStatic(callback) {
       // Set the static video as the source
       videoPlayer.src = "./assets/videos/tv-static.mp4"; // Path to your static video
+      videoPlayer.currentTime = 0; // Start static from the beginning
       videoPlayer.muted = false; // Ensure autoplay works
-      videoPlayer.play()
+    
+      videoPlayer
+        .play()
         .then(() => {
           // Display "Static" message
           channelDisplay.textContent = "Static...";
-
+    
           // Wait for 1 second, then call the callback
-          setTimeout(callback, 1000);
+          setTimeout(() => {
+            callback();
+          }, 1000);
         })
         .catch((error) => {
           console.error("Error playing static video:", error);
-          // Fallback: Call the callback immediately
+    
+          // Fallback: Call the callback immediately without delay
           callback();
         });
-    }  
+    }
+
+
+
+     
 
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -489,53 +539,50 @@
       if (currentChannel) playChannel(currentChannel);
     }, 6000); // Check every minute
 
-
     function playChannel(channel) {
       if (powerOn) {
         const channelName = channel.name;
-
+    
         // Save current position if switching from a video
         if (videoPlayer.src && !videoPlayer.ended) {
           playbackPositions[channelName] = videoPlayer.currentTime;
         }
-        
+    
         playStatic(() => {
           // Switch to the actual video after static
           videoPlayer.src = channel.video;
-
+    
           // Update the poster
-          const posterElement = document.getElementById ("poster");
+          const posterElement = document.getElementById("poster");
           posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
-          
-
+    
           // Restore position if previously watched, otherwise start from 0
           const startTime = playbackPositions[channelName] || 0;
           videoPlayer.currentTime = startTime;
-          
+    
           channelDisplay.textContent = `Now Playing: ${channel.name}`;
           videoPlayer.play();
-
-          // Set up the "onended" event to shuffle videos
+    
+          // Set up the "onended" event
           videoPlayer.onended = () => {
             const subcategory = channel.subcategory;
             const sameSubcategoryChannels = channels.filter(
               (ch) => ch.subcategory === subcategory
             );
-
-            if (sameSubcategoryChannels && sameSubcategoryChannels.length > 0) {
+    
+            if (sameSubcategoryChannels && sameSubcategoryChannels.length > 1) {
               const shuffledChannels = shuffleArray(sameSubcategoryChannels);
-              playChannel(shuffledChannels[0]); // Play the next shuffled video
+              playChannel(shuffledChannels[0]); // Play the next shuffled video in the same subcategory
             } else {
               showNotification("No more videos in this subcategory!");
+              // Optionally, loop back to the same video or stop playback
+              playStatic(() => {
+                videoPlayer.src = "./assets/videos/tv-static.mp4";
+                channelDisplay.textContent = "Static...";
+              });
             }
           };
-
-          // Autoplay feature across unrelated channels
-          videoPlayer.onended = () => {
-            currentChannel = (currentChannel + 1) % channels.length;
-            playerChannel(channels[currentChannel]);
-          };
-          
+    
           showNotification(
             startTime > 0
               ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
@@ -543,7 +590,7 @@
           );
         });
       } else {
-        // No channel playing: Set default poster
+        // TV is off: Set default poster
         const posterElement = document.getElementById("poster");
         posterElement.src = "./assets/images/default_poster.jpg";
       }
@@ -551,47 +598,58 @@
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
-
-    function playNextPart() {
-      if (partIndex < channelGroup.length) {
-        const channel = channelGroup[partIndex];
-        const channelName = channel.name;
-
-        // Save position of the previous part
-        if (videoPlayer.src && !videoPlayer.ended) {
-          playbackPositions[channelName] = videoPlayer.currentTime;
-        }
-
-        playStatic (() => {
-          videoPlayer.src = channel.video;
-
-          // Update the poster
+    
+      function playNextPart() {
+        if (partIndex < channelGroup.length) {
+          const channel = channelGroup[partIndex];
+          const channelName = channel.name;
+    
+          // Save position of the previous part if playback was in progress
+          if (videoPlayer.src && videoPlayer.currentTime > 0 && !videoPlayer.ended) {
+            playbackPositions[channelName] = videoPlayer.currentTime;
+          }
+    
+          playStatic(() => {
+            if (channel.video) {
+              videoPlayer.src = channel.video;
+    
+              // Update the poster
+              const posterElement = document.getElementById("poster");
+              posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+    
+              // Restore position if previously watched, otherwise start at 0
+              const startTime = playbackPositions[channelName] || 0;
+              videoPlayer.currentTime = startTime;
+    
+              channelDisplay.textContent = `Now Playing: ${channel.name}`;
+              videoPlayer.play();
+    
+              // Play the next part when the current video ends
+              videoPlayer.onended = () => {
+                partIndex++;
+                playNextPart();
+              };
+    
+              showNotification(
+                startTime > 0
+                  ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
+                  : `Playing: ${channel.name}`
+              );
+            } else {
+              showNotification("Error: Missing video source.");
+            }
+          });
+        } else {
+          showNotification("End of Channel Group");
+    
+          // End of channel group: Set default poster
           const posterElement = document.getElementById("poster");
-          posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
-
-          // Restore position if previously watcher
-          const startTime = playbackPositions[channelName] || 0;
-          videoPlayer.currentTime = startTime;
-
-          channelDisplay.textContent = `Now Playing: ${channel.name}`;
-          videoPlayer.play();
-
-          videoPlayer.onended = () => {
-            partIndex++;
-            playNextPart();
-          };
-        });
-      } else {
-        showNotification("End of Channel");
-
-        // End of channel group: Set default poster
-        const posterElement = document.getElementById("poster");
-        posterElement.src = "./assets/images/default_poster.jpg";
+          posterElement.src = "./assets/images/default_poster.jpg";
+        }
       }
+    
+      playNextPart();
     }
-
-    playNextPart();
-  }
 
 
     function showNotification(message) {
