@@ -441,3 +441,34 @@ const channels = [
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
 ];
+
+const blocks = [
+  {
+    name: "Morning Cartoons",
+    startTime: "06:00", // 6:00 AM
+    endTime: "09:00", // 9:00 AM
+    content: [
+      { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4", duration: 3600 }, // duration in seconds
+      { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4", duration: 3600 },
+      { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4", duration: 3600 },
+    ],
+  },
+  {
+    name: "Action Time",
+    startTime: "09:00", // 9:00 AM
+    endTime: "13:00", // 1:00 PM
+    content: [
+      { video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4", duration: 7200 },
+      { video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4", duration: 7200 },
+    ],
+  },
+  {
+    name: "Sci-Fi Marathon",
+    startTime: "13:00", // 1:00 PM
+    endTime: "16:30", // 4:30 PM
+    content: [
+      { video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4", duration: 5400 },
+      { video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4", duration: 7200 },
+    ],
+  },
+];
