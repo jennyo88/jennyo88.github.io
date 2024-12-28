@@ -30,7 +30,7 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768) {
       .tv-container {
         width: 90%; /* Reduce width for smaller screens */
         height: auto;
@@ -292,11 +292,6 @@
     .channel-item.active {
       background-color: rgba(128, 128, 128, 0.4);
     }
-// REMOVE IF BLOCKS DO NOT WORK
-    .block-item.active {
-      background-color: rgba(0, 255, 0, 0.2);
-      border: 1px solid limegreen;
-    }
 
     .back-button {
       padding: 10px;
@@ -380,7 +375,6 @@
 
     function populateGuide() {
       tvGuide.innerHTML = `<h2>TV Guide</h2>`;
-    /* Commented off for testing
       Object.keys(groupedChannels).forEach(category => {
         const categoryItem = document.createElement("div");
         categoryItem.classList.add("category-item");
@@ -389,26 +383,6 @@
         tvGuide.appendChild(categoryItem);
       });
     }
-    */
-      blocks.forEach(block => {
-        const isActive = getCurrentBlock(blocks) === block;
-        tvGuide.innerHTML += `
-          <div class="block-item ${isActive ? 'active' : ''}">
-            <strong>${block.name}</strong>
-            <p>${block.startTime} - ${block.endTime}</p>
-          </div>`;
-      });
-      
-      blocks.forEach(block => {
-        tvGuide.innerHTML += `
-          <div class="block-item">
-            <strong>${block.name}</strong>
-            <p>${block.startTime} - ${block.endTime}</p>
-          </div>`;
-      });
-    }
-
-    localStorage.setItem("lastPlayedBlock", currentBlock.name);
 
     function displaySubcategories(category) {
       tvGuide.innerHTML = `<h2>${category}</h2>`;
@@ -480,56 +454,6 @@
       backButton.addEventListener("click", () => displaySubcategories(category));
       tvGuide.appendChild(backButton);
   }
-
-    function getCurrentTime() {
-      const now = new Date();
-      return now.toTimeString().slice(0, 5); // HH:MM format
-  }
-
-    function getCurrentBlock(blocks) {
-      const currentTime = getCurrentTime();
-      return blocks.find(block => currentTime >= block.startTime && currentTime < block.endTime);
-  }
-    
-    function playBlockContent(block) {
-      let contentIndex = 0;
-
-      function playNext() {
-        if (contentIndex < block.content.length) {
-          const video = block.content[contentIndex];
-          videoPlayer.src = video.video;
-          videoPlayer.play();
-      
-          // Set up "onended" to play the next video
-          videoPlayer.onended = () => {
-            contentIndex++;
-            playNext();
-          };
-
-          showNotification(`Now Playing: ${block.name} - ${block.content[contentIndex].title || "Untitled"}`);
-        } else {
-          console.log("Block finished. Waiting for the next block.");
-        }
-      }
-
-      playNext();
-    }
-
-    setInterval(() => {
-      const currentBlock = getCurrentBlock(blocks);
-
-      if (currentBlock) {
-        if (!videoPlayer.playing || videoPlayer.src !== currentBlock.content[0].video) {
-          console.log(`Switching to block: ${currentBlock.name}`);
-          playBlockContent(currentBlock);
-        }
-      } else {
-        // No block active: Display "Off-Air" content
-        videoPlayer.src = "./assets/videos/off-air.mp4";
-        videoPlayer.play();
-        showNotification("Off-Air");
-      }
-    }, 10000); // Check every 10 seconds
 
     function playStatic(callback) {
       // Set the static video as the source
