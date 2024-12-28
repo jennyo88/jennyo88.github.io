@@ -541,60 +541,70 @@
 
     function playChannel(channel) {
       if (powerOn) {
-        const channelName = channel.name;
+        if (channel.episodes && channel.episodes.length > 0) {
+          // If the channel has episodes, play the first episode
+          playEpisode(channel.episodes[0], channel);
+        } else if (channel.parts && channel.parts.length > 0) {
+          // If the channel has parts, play them sequentially
+          playChannelGroup(channel.parts);
+        } else {
+          // Otherwise, play as a single video channel
+          const channelName = channel.name;
     
-        // Save current position if switching from a video
-        if (videoPlayer.src && !videoPlayer.ended) {
-          playbackPositions[channelName] = videoPlayer.currentTime;
-        }
+          // Save current position if switching from a video
+          if (videoPlayer.src && !videoPlayer.ended) {
+            playbackPositions[channelName] = videoPlayer.currentTime;
+          }
     
-        playStatic(() => {
-          // Switch to the actual video after static
-          videoPlayer.src = channel.video;
+          playStatic(() => {
+            // Switch to the actual video after static
+            videoPlayer.src = channel.video;
     
-          // Update the poster
-          const posterElement = document.getElementById("poster");
-          posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+            // Update the poster
+            const posterElement = document.getElementById("poster");
+            posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
     
-          // Restore position if previously watched, otherwise start from 0
-          const startTime = playbackPositions[channelName] || 0;
-          videoPlayer.currentTime = startTime;
+            // Restore position if previously watched, otherwise start from 0
+            const startTime = playbackPositions[channelName] || 0;
+            videoPlayer.currentTime = startTime;
     
-          channelDisplay.textContent = `Now Playing: ${channel.name}`;
-          videoPlayer.play();
+            channelDisplay.textContent = `Now Playing: ${channel.name}`;
+            videoPlayer.play();
     
-          // Set up the "onended" event
-          videoPlayer.onended = () => {
-            const subcategory = channel.subcategory;
-            const sameSubcategoryChannels = channels.filter(
-              (ch) => ch.subcategory === subcategory
+            // Set up the "onended" event
+            videoPlayer.onended = () => {
+              const subcategory = channel.subcategory;
+              const sameSubcategoryChannels = channels.filter(
+                (ch) => ch.subcategory === subcategory
+              );
+    
+              if (sameSubcategoryChannels && sameSubcategoryChannels.length > 1) {
+                const shuffledChannels = shuffleArray(sameSubcategoryChannels);
+                playChannel(shuffledChannels[0]); // Play the next shuffled video in the same subcategory
+              } else {
+                showNotification("No more videos in this subcategory!");
+                // Optionally, loop back to the same video or stop playback
+                playStatic(() => {
+                  videoPlayer.src = "./assets/videos/tv-static.mp4";
+                  channelDisplay.textContent = "Static...";
+                });
+              }
+            };
+    
+            showNotification(
+              startTime > 0
+                ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
+                : `Playing: ${channel.name}`
             );
-    
-            if (sameSubcategoryChannels && sameSubcategoryChannels.length > 1) {
-              const shuffledChannels = shuffleArray(sameSubcategoryChannels);
-              playChannel(shuffledChannels[0]); // Play the next shuffled video in the same subcategory
-            } else {
-              showNotification("No more videos in this subcategory!");
-              // Optionally, loop back to the same video or stop playback
-              playStatic(() => {
-                videoPlayer.src = "./assets/videos/tv-static.mp4";
-                channelDisplay.textContent = "Static...";
-              });
-            }
-          };
-    
-          showNotification(
-            startTime > 0
-              ? `Resumed: ${channel.name} at ${Math.floor(startTime)}s`
-              : `Playing: ${channel.name}`
-          );
-        });
+          });
+        }
       } else {
         // TV is off: Set default poster
         const posterElement = document.getElementById("poster");
         posterElement.src = "./assets/images/default_poster.jpg";
       }
     }
+
 
     function playChannelGroup(channelGroup) {
       let partIndex = 0;
@@ -696,14 +706,14 @@
     document.getElementById("channelUp").addEventListener("click", () => {
       if (powerOn) {
         currentChannel = (currentChannel + 1) % channels.length;
-        playChannel(channels[currentChannel], currentChannel);
+        playChannel(channels[currentChannel]);
       }
     });
 
     document.getElementById("channelDown").addEventListener("click", () => {
       if (powerOn) {
         currentChannel = (currentChannel - 1 + channels.length) % channels.length;
-        playChannel(channels[currentChannel], currentChannel);
+        playChannel(channels[currentChannel]);
       }
     });
 
@@ -723,23 +733,37 @@
     });
 
     document.addEventListener("keydown", (event) => {
+      if (!powerOn) return; // Ensure the TV is on
+    
       switch (event.key) {
         case "ArrowUp": // Increase volume
           videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+          showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
           break;
+    
         case "ArrowDown": // Decrease volume
-          videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 1);
+          videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+          const volumeLevel = Math.round(videoPlayer.volume * 10);
+          showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
           break;
+    
         case "ArrowRight": // Next channel
           currentChannel = (currentChannel + 1) % channels.length;
           playChannel(channels[currentChannel]);
+          showNotification(`Channel: ${channels[currentChannel].name}`);
           break;
+    
         case "ArrowLeft": // Previous channel
           currentChannel = (currentChannel - 1 + channels.length) % channels.length;
           playChannel(channels[currentChannel]);
+          showNotification(`Channel: ${channels[currentChannel].name}`);
           break;
+    
+        default:
+          break; // Ignore other keys
       }
     });
+
 
     document.getElementById("power").addEventListener("click", togglePower);
 
