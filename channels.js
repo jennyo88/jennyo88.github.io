@@ -197,7 +197,7 @@ const channels = [
   {
     name: "Kids WB Block",
     category: "Cartoons",
-    subcategory: "Kids WB",
+    subcategory: "2000s",
     channelNumber: 101,
     episodes: [
       {
@@ -220,7 +220,7 @@ const channels = [
   {
     name: "ABC Saturday Morning",
     category: "Cartoons",
-    subcategory: "1981 Programming",
+    subcategory: "1980s",
     channelNumber: 102,
     episodes: [
       {
@@ -251,7 +251,7 @@ const channels = [
   {
     name: "ABC Saturday Morning",
     category: "Cartoons",
-    subcategory: "1986 Programming",
+    subcategory: "1980s",
     channelNumber: 103,
     episodes: [
       {
@@ -274,7 +274,7 @@ const channels = [
   {
     name: "ABC Saturday Morning",
     category: "Cartoons",
-    subcategory: "1989 Programming",
+    subcategory: "1980s",
     channelNumber: 104,
     episodes: [
       {
@@ -305,7 +305,7 @@ const channels = [
   {
     name: "ABC Saturday Morning",
     category: "Cartoons",
-    subcategory: "1993 Programming",
+    subcategory: "1990s",
     channelNumber: 105,
     episodes: [
       {
@@ -336,7 +336,7 @@ const channels = [
   {
     name: "Candy Candy",
     category: "Cartoons",
-    subcategory: "Anime",
+    subcategory: "1980s",
     channelNumber: 106,
     episodes: [
       {
@@ -407,7 +407,7 @@ const channels = [
   {
     name: "Dragon Ball Z",
     category: "Cartoons",
-    subcategory: "Anime",
+    subcategory: "1990s",
     channelNumber: 107,
     episodes: [
       {
