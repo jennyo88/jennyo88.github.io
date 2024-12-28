@@ -408,19 +408,6 @@
       });
     }
 
-    const currentBlock = getCurrentBlock(blocks);
-    if (currentBlock) {
-      localStorage.setItem("lastPlayedBlock", currentBlock.name);
-    } else {
-      console.log("No active block found.");
-    }
-
-    function getCurrentBlock(blocks) {
-      const currentTime = getCurrentTime();
-      return blocks.find(block => currentTime >= block.startTime && currentTime < block.endTime);
-    }
-
-
 
     function displaySubcategories(category) {
       tvGuide.innerHTML = `<h2>${category}</h2>`;
@@ -493,6 +480,49 @@
       tvGuide.appendChild(backButton);
   }
 
+    const blocks = [
+      {
+        name: "Morning Cartoons",
+        startTime: "06:00", // 6:00 AM
+        endTime: "09:00", // 9:00 AM
+        content: [
+          { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4", duration: 3600 }, // duration in seconds
+          { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4", duration: 3600 },
+          { video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4", duration: 3600 },
+        ],
+      },
+      {
+        name: "Action Time",
+        startTime: "09:00", // 9:00 AM
+        endTime: "13:00", // 1:00 PM
+        content: [
+          { video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4", duration: 7200 },
+          { video: "https://ia601201.us.archive.org/23/items/the-mummy_202312/The%20Mummy.mp4", duration: 7200 },
+        ],
+      },
+      {
+        name: "Sci-Fi Marathon",
+        startTime: "13:00", // 1:00 PM
+        endTime: "16:30", // 4:30 PM
+        content: [
+          { video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4", duration: 5400 },
+          { video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4", duration: 7200 },
+        ],
+      },
+      {
+        name: "Comedy Marathon",
+        startTime: "16:30", // 4:30 PM
+        endTime: "24:00", // 12:00 PM
+        content: [
+          { video: "https://archive.org/download/spice-world_202208/SPICE%20WORLD.mp4", duration: 5400 },
+          { video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4", duration: 5400 },
+          { video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4", duration: 6000 },
+          { video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4", duration: 6000 },
+          { video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4", duration: 4200 },
+        ],
+      },
+    ];
+    
     function getCurrentTime() {
       const now = new Date();
       return now.toTimeString().slice(0, 5); // HH:MM format
