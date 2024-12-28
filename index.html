@@ -17,15 +17,53 @@
       font-family: 'Roboto', sans-serif;
     }
 
-    @media (max-width: 768) {
+    @media (max-width: 1200px) {
       .video-section, .tv-guide, .poster-container {
         width: 100%;
         height: auto;
+        flex-direction: column; /* Stack sections */
       }
       .tv-guide, .poster-container {
         position: relative;
         left: 0;
         top: 0;
+      }
+    }
+
+    @media (max-width: 768) {
+      .tv-container {
+        width: 90%; /* Reduce width for smaller screens */
+        height: auto;
+      }
+      .tv-guide, .poster-container {
+        width: 100%; /* Full width for smaller screens */
+        height: auto;
+        margin-top: 10px; /* Add spacing */
+      }
+      .tv-guide h2 {
+        font-size: 16px; /* Adjust font size */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-section {
+        width: 100%;
+        height: auto;
+      }
+      .tv-container {
+        width: 100%; /* Full screen width */
+        height: auto;
+      }
+      .tv-guide {
+        font-size: 14px; /* Adjust font size for small screens */
+      }
+      .poster-container img {
+        width: 90%;
+        height: auto;
+      }
+      .button-panel {
+        flex-direction: row; /* Arrange buttons in a row */
+        gap: 5px; /* Reduce gap between buttons */
       }
     }
 
