@@ -340,63 +340,63 @@ const channels = [
     channelNumber: 106,
     episodes: [
       {
-        title: "Cap 001 - Una niña hábil que no renuncia",
+        title: "Capítulo 001",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20001.%20Una%20ni%C3%B1a%20h%C3%A1bil%20que%20no%20renuncia.mp4",
       },
       {
-        title: "Cap 002 - ¡Viaje! Aventuras juntas",
+        title: "Capítulo 002",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20002%20.%20%C2%A1Viaje%21%20Aventuras%20juntas.mp4",
       },
       {
-        title: "Cap 003 - El carruaje que transporta un adiós",
+        title: "Capítulo 003",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20003%20.%20El%20carruaje%20que%20transporta%20un%20adi%C3%B3s.mp4",
       },
       {
-        title: "Cap 004 - ¡Estás preciosa cuando sonríes!",
+        title: "Capítulo 004",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20004%20.%20%C2%A1Est%C3%A1s%20preciosa%20cuando%20sonr%C3%ADes%21.mp4",
       },
       {
-        title: "Cap 005 - Desde hoy soy una princesa",
+        title: "Capítulo 005",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20005%20.%20Desde%20hoy%20soy%20una%20princesa.mp4",
       },
       {
-        title: "Cap 006 - La persona que encontré en la verja de las rosas",
+        title: "Capítulo 006",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20006%20.%20La%20persona%20que%20encontr%C3%A9%20en%20la%20verja%20de%20las%20rosas.mp4",
       },
       {
-        title: "Cap 007 - ¿Estoy elegante?",
+        title: "Capítulo 007",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20007%20.%20%C2%BFEstoy%20elegante.mp4",
       },
       {
-        title: "Cap 008 - Invitación a la felicidad",
+        title: "Capítulo 008",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20008%20.%20Invitaci%C3%B3n%20a%20la%20felicidad.mp4",
       },
       {
-        title: "Cap 009 - El baile en el que encontré a aquella persona",
+        title: "Capítulo 009",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20009%20.%20El%20baile%20en%20el%20que%20encontr%C3%A9%20a%20aquella%20persona.mp4",
       },
       {
-        title: "Cap 010 - Una dama en el establo",
+        title: "Capítulo 010",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20010%20.%20Una%20dama%20en%20el%20establo.mp4",
       },
       {
-        title: "Cap 011 - Una pequeña cinta amarra los corazones",
+        title: "Capítulo 011",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20011%20.%20Una%20peque%C3%B1a%20cinta%20amarra%20los%20corazones.mp4",
       },
       {
-        title: "Cap 012 - Cumpleaños con olor a rosas",
+        title: "Capítulo 012",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20012%20.%20Cumplea%C3%B1os%20con%20olor%20a%20rosas.mp4",
       },
       {
-        title: "Cap 013 - Los tres solitarios",
+        title: "Capítulo 013",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20013%20.%20Los%20tres%20solitarios.mp4",
       },
       {
-        title: "Cap 014 - El gran árbol lleno de brisa primaveral",
+        title: "Capítulo 014",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20014%20.%20El%20gran%20%C3%A1rbol%20lleno%20de%20brisa%20primaveral.mp4",
       },
       {
-        title: "Cap 015 - La decisión que arrebata la felicidad",
+        title: "Capítulo 015",
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20015%20.%20La%20decisi%C3%B3n%20que%20arrebata%20la%20felicidad.mp4",
       },
       // Add more episodes here...
@@ -411,7 +411,7 @@ const channels = [
     channelNumber: 107,
     episodes: [
       {
-        title: "Cap 001 - Aparece un mini Goku, su nombre es Gohan",
+        title: "Capítulo 001",
         video: "https://dn720407.ca.archive.org/0/items/dragon-ball-zvideoplaytv/%5B001%5D%20Aparece%20un%20mini%20Goku%2C%20su%20nombre%20es%20Gohan.mp4",
       },
       // Add more episodes here...
