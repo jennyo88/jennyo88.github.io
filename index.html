@@ -467,9 +467,8 @@
 
           // Update the poster
           const posterElement = document.getElementById ("poster");
-          posterElement.onerror = () => {
-            posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
-          };
+          posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+          
 
           // Restore position if previously watched, otherwise start from 0
           const startTime = playbackPositions[channelName] || 0;
@@ -595,10 +594,6 @@
 
         // Set default poster when TV is off
         posterElement.src = "./assets/images/default_poster.jpg";
-        channelDisplay.textContent = "";
-        document.querySelectorAll(".channel-item").forEach(item => {
-          item.classList.remove("active");
-        });
       }
     }
 
