@@ -347,7 +347,7 @@
     }
 
     function displaySubcategories(category) {
-      tvGuide.innerHTML = `<h2>${category}</h2><p><small>Back to: <a href="#" onclick="populateGuide()">Categories</a></small></p>`;
+      tvGuide.innerHTML = `<h2>${category}</h2>`;
       const subcategories = groupedChannels[category];
       Object.keys(subcategories).forEach(subcategory => {
         const subcategoryItem = document.createElement("div");
