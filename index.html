@@ -17,6 +17,18 @@
       font-family: 'Roboto', sans-serif;
     }
 
+    @media (max-width: 768) {
+      .video-section, .tv-guide, .poster-container {
+        width: 100%;
+        height: auto;
+      }
+      .tv-guide, .poster-container {
+        position: relative;
+        left: 0;
+        top: 0;
+      }
+    }
+
     .screen {
       position: relative;
       width: 100vw;
@@ -24,10 +36,7 @@
     }
 
     .video-section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 68%; /* Two-thirds of the screen width */
+      width: 70%; /* Slightly wider for a better viewing experience */
       height: 100%; /* Full height of the screen */
       blackground-color: black;
     }
@@ -300,7 +309,7 @@
       </div>
       <!-- Movie Poster -->
       <div class="poster-container">
-        <img src="./assets/images/default_poster.jpg" alt="Default Poster" id="poster" />
+        <img src="./assets/images/default_poster.jpg" loading="lazy" alt="Default Poster" id="poster" />
       </div>
     </div>
   </div>
@@ -338,7 +347,7 @@
     }
 
     function displaySubcategories(category) {
-      tvGuide.innerHTML = `<h2>${category}</h2>`;
+      tvGuide.innerHTML = `<h2>${category}</h2><p><small>Back to: <a href="#" onclick="populateGuide()">Categories</a></small></p>`;
       const subcategories = groupedChannels[category];
       Object.keys(subcategories).forEach(subcategory => {
         const subcategoryItem = document.createElement("div");
@@ -410,23 +419,22 @@
 
     function playStatic(callback) {
       // Set the static video as the source
-      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with the path to your static video/GIF
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Path to your static video
       videoPlayer.muted = false; // Ensure autoplay works
+      videoPlayer.play()
+        .then(() => {
+          // Display "Static" message
+          channelDisplay.textContent = "Static...";
 
-      // Show "Static" message
-      channelDisplay.textContent = "Static...";
-
-      // Play the static video
-      videoPlayer.play().then(() => {
-        // Wait for 1 second, then call the callback
-        setTimeout(() => {
+          // Wait for 1 second, then call the callback
+          setTimeout(callback, 1000);
+        })
+        .catch((error) => {
+          console.error("Error playing static video:", error);
+          // Fallback: Call the callback immediately
           callback();
-        }, 1000); // 1000 milliseconds = 1 second
-      }).catch((error) => {
-        console.error("Error playing static video:", error);
-        callback(); // Fallback: Load the next channel if static fails
-      });
-    }
+        });
+    }  
 
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -435,6 +443,13 @@
       }
       return array;
     }
+
+    setInterval(() => {
+      const now = new Date();
+      const hour = now.getHours();
+      const currentChannel = channels.find(ch => ch.schedule && ch.schedule.includes(hour));
+      if (currentChannel) playChannel(currentChannel);
+    }, 6000); // Check every minute
 
 
     function playChannel(channel) {
@@ -452,7 +467,9 @@
 
           // Update the poster
           const posterElement = document.getElementById ("poster");
-          posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+          posterElement.onerror = () => {
+            posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+          };
 
           // Restore position if previously watched, otherwise start from 0
           const startTime = playbackPositions[channelName] || 0;
@@ -474,6 +491,12 @@
             } else {
               showNotification("No more videos in this subcategory!");
             }
+          };
+
+          // Autoplay feature across unrelated channels
+          videoPlayer.onended = () => {
+            currentChannel = (currentChannel + 1) % channels.length;
+            playerChannel(channels[currentChannel]);
           };
           
           showNotification(
@@ -572,6 +595,10 @@
 
         // Set default poster when TV is off
         posterElement.src = "./assets/images/default_poster.jpg";
+        channelDisplay.textContent = "";
+        document.querySelectorAll(".channel-item").forEach(item => {
+          item.classList.remove("active");
+        });
       }
     }
 
