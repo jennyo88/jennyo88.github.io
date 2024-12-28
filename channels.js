@@ -471,4 +471,16 @@ const blocks = [
       { video: "https://dn720403.ca.archive.org/0/items/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4", duration: 7200 },
     ],
   },
+  {
+    name: "Comedy Marathon",
+    startTime: "16:30", // 4:30 PM
+    endTime: "24:00", // 12:00 PM
+    content: [
+      { video: "https://archive.org/download/spice-world_202208/SPICE%20WORLD.mp4", duration: 5400 },
+      { video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4", duration: 5400 },
+      { video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4", duration: 6000 },
+      { video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4", duration: 6000 },
+      { video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4", duration: 4200 },
+    ],
+  },
 ];
