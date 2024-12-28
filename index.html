@@ -408,7 +408,19 @@
       });
     }
 
-    localStorage.setItem("lastPlayedBlock", currentBlock.name);
+    const currentBlock = getCurrentBlock(blocks);
+    if (currentBlock) {
+      localStorage.setItem("lastPlayedBlock", currentBlock.name);
+    } else {
+      console.log("No active block found.");
+    }
+
+    function getCurrentBlock(blocks) {
+      const currentTime = getCurrentTime();
+      return blocks.find(block => currentTime >= block.startTime && currentTime < block.endTime);
+    }
+
+
 
     function displaySubcategories(category) {
       tvGuide.innerHTML = `<h2>${category}</h2>`;
@@ -484,12 +496,20 @@
     function getCurrentTime() {
       const now = new Date();
       return now.toTimeString().slice(0, 5); // HH:MM format
-  }
+    }
 
     function getCurrentBlock(blocks) {
       const currentTime = getCurrentTime();
       return blocks.find(block => currentTime >= block.startTime && currentTime < block.endTime);
-  }
+    }
+
+    const currentBlock = getCurrentBlock(blocks);
+    if (currentBlock) {
+      localStorage.setItem("lastPlayedBlock", currentBlock.name);
+    } else {
+      console.log("No active block found.");
+    }
+
     
     function playBlockContent(block) {
       let contentIndex = 0;
