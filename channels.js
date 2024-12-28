@@ -512,4 +512,13 @@ const channels = [
     releaseYear: 1981,
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
+  {
+    name: "Dragon Ball Z Cap 001",
+    category: "Cartoons",
+    subcategory: "Dragon Ball Z",
+    channelNumber: 107,
+    video: "https://dn720407.ca.archive.org/0/items/dragon-ball-zvideoplaytv/%5B001%5D%20Aparece%20un%20mini%20Goku%2C%20su%20nombre%20es%20Gohan.mp4",
+    releaseYear: 1989,
+    poster: "https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png",
+  },
 ];
