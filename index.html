@@ -491,7 +491,7 @@
         channelDisplay.textContent = `Now Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`;
         videoPlayer.play();
     
-        showNotification(`Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`);
+        showNotification(`Playing: ${channel.name} - ${episode.title || `Part ${index + 1}`}`);
       });
     }
 
