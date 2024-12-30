@@ -41,8 +41,7 @@
         margin-top: 10px; /* Add spacing */
       }
       .tv-guide h2 {
-        /* font-size: 16px; Adjust font size */
-        font-size: clamp(14px, 2vw, 18px);
+        font-size: 16px; /* Adjust font size */
       }
     }
 
@@ -291,8 +290,7 @@
     }
     
     .channel-item.active {
-      background-color: #444;
-      color: white;
+      background-color: rgba(128, 128, 128, 0.4);
     }
 
     .back-button {
@@ -321,11 +319,11 @@
       <div class="tv-container">
         <div class="tv-screen" id="tvScreen">
           <video id="videoPlayer" autoplay preload="auto">
+            <source src="" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
         <div class="channel-display" id="channelDisplay"></div>
-        <div id="loadingSpinner" style="display: none;">Loading...</div>
         <div class="notification" id="notification"></div>
         <div class="tv-overlay"></div>
         <div class="button-panel">
@@ -354,7 +352,7 @@
     </div>
   </div>
 
-  <script src="channels.js" defer></script>
+  <script src="channels.js"></script>
   <script>
     let currentChannel = 0;
     let powerOn = false;
@@ -384,13 +382,6 @@
         categoryItem.addEventListener("click", () => displaySubcategories(category));
         tvGuide.appendChild(categoryItem);
       });
-    }
-
-    function showLoading() {
-      document.getElementById("loadingSpinner").style.display = "block";
-    }
-    function hideLoading() {
-      document.getElementById("loadingSpinner").style.display = "none";
     }
 
     function displaySubcategories(category) {
