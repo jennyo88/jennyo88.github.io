@@ -575,21 +575,31 @@
             videoPlayer.onended = () => {
               const subcategory = channel.subcategory;
               const sameSubcategoryChannels = channels.filter(
-                (ch) => ch.subcategory === subcategory
+                  (ch) => ch.subcategory === subcategory
               );
-    
+          
               if (sameSubcategoryChannels && sameSubcategoryChannels.length > 1) {
-                const shuffledChannels = shuffleArray(sameSubcategoryChannels);
-                playChannel(shuffledChannels[0]); // Play the next shuffled video in the same subcategory
+                  // Shuffle the same subcategory channels for randomness
+                  const shuffledChannels = shuffleArray(sameSubcategoryChannels);
+          
+                  // Get the next video in the shuffled list
+                  const nextChannelIndex = (shuffledChannels.indexOf(channel) + 1) % shuffledChannels.length;
+                  const nextChannel = shuffledChannels[nextChannelIndex];
+          
+                  // Play the next channel in the shuffled subcategory
+                  playChannel(nextChannel);
               } else {
-                showNotification("No more videos in this subcategory!");
-                // Optionally, loop back to the same video or stop playback
-                playStatic(() => {
-                  videoPlayer.src = "./assets/videos/tv-static.mp4";
-                  channelDisplay.textContent = "Static...";
-                });
+                  // If no other videos in the subcategory, notify and display static
+                  showNotification("No more videos in this subcategory!");
+                  
+                  // Display static video
+                  playStatic(() => {
+                      videoPlayer.src = "./assets/videos/tv-static.mp4";
+                      channelDisplay.textContent = "Static...";
+                      videoPlayer.play(); // Play static video
+                  });
               }
-            };
+          };
     
             showNotification(
               startTime > 0
