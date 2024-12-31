@@ -388,19 +388,23 @@
     function playScheduledProgram(program) {
       playStatic(() => {
         if (program.video) {
-          // Set the video source
           videoPlayer.src = program.video;
     
-          // Update the poster
           const posterElement = document.getElementById("poster");
           if (program.poster) {
+            console.log("Attempting to load poster:", program.poster);
             posterElement.src = program.poster;
+    
+            // Handle fallback if poster fails to load
+            posterElement.onerror = () => {
+              console.warn("Failed to load poster:", program.poster);
+              posterElement.src = "./assets/images/default_poster.jpg";
+            };
           } else {
             console.warn(`Missing poster for program: ${program.name}`);
             posterElement.src = "./assets/images/default_poster.jpg";
           }
     
-          // Update the on-screen display
           channelDisplay.textContent = `Now Playing: ${program.name}`;
           videoPlayer.play();
     
@@ -410,6 +414,7 @@
         }
       });
     }
+
 
 
 
