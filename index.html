@@ -402,22 +402,27 @@
         
             const channel = channels.find(channel => channel.subcategory === subcategory);
             if (channel) {
-                if (channel.video) {
+                const firstEpisode = channel.episodes && channel.episodes.length > 0 ? channel.episodes[0] : null;
+                if (firstEpisode && firstEpisode.video) {
+                    videoPlayer.src = firstEpisode.video;
+                    videoPlayer.load();
+                    videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
+                } else if (channel.video) {
                     videoPlayer.src = channel.video;
                     videoPlayer.load();
-                    videoPlayer.play().catch(error => {
-                        console.error('Error during playback:', error.message);
-                    });
+                    videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                 } else {
                     console.error(`Video source is undefined for channel: ${channel.name}`);
                 }
-                poster.src = channel.poster || 'default_poster.jpg'; // Set poster
+                // Update the poster
+                poster.src = channel.poster || 'default_poster.jpg';
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
             }
         
             populateTVGuide(subcategory);
         };
+
 
 
         const shuffleChannels = () => {
