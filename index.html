@@ -398,6 +398,31 @@
     let currentBlockIndex = 0;
     let currentVideoIndex = 0;
 
+    function playStatic(callback) {
+      // Set the static video as the source
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with your static video file path
+      videoPlayer.currentTime = 0; // Start from the beginning
+      videoPlayer.muted = false; // Ensure autoplay works
+    
+      videoPlayer
+        .play()
+        .then(() => {
+          // Display "Static" message
+          channelDisplay.textContent = "Static...";
+    
+          // Wait for 1 second, then call the callback
+          setTimeout(() => {
+            callback();
+          }, 1000);
+        })
+        .catch((error) => {
+          console.error("Error playing static video:", error);
+    
+          // Fallback: Call the callback immediately without delay
+          callback();
+        });
+    }
+
     function playNextVideoInBlock() {
       const block = dynamicScheduleBlocks[currentBlockIndex];
       const videos = block.videos;
