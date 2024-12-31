@@ -61,11 +61,33 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: none;
+            position: absolute;
+            z-index: 1;
         }
 
-        video.on {
-            display: block;
+        .power-off {
+            background: radial-gradient(circle, #000, #111 60%, #222 80%, #000 100%);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: crt-effect 1.5s infinite;
+        }
+
+        @keyframes crt-effect {
+            0%, 100% {
+                opacity: 0.8;
+                transform: scaleY(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scaleY(0.98);
+            }
         }
 
         .tv-overlay {
@@ -74,20 +96,7 @@
             height: 100%;
             background: url('./assets/images/tvclean.webp') no-repeat center center;
             background-size: contain;
-        }
-
-        .power-off {
-            background-color: black;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 5;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
+            z-index: 3;
         }
 
         .sidebar {
@@ -247,8 +256,8 @@
         <!-- Video Section -->
         <div class="video-section">
             <video id="video-player" controls autoplay muted loop></video>
-            <div class="tv-overlay"></div>
             <div id="power-off-overlay" class="power-off"></div>
+            <div class="tv-overlay"></div>
         </div>
 
         <!-- Sidebar -->
