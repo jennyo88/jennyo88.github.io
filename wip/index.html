@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with Multi-Level TV Guide</title>
   <style>
-    /* Existing styles from your file */
     body { 
       margin: 0;
       background-color: black;
@@ -16,6 +15,56 @@
       color: white;
       overflow: hidden; /* Prevent scrolling */
       font-family: 'Roboto', sans-serif;
+    }
+
+    @media (max-width: 1200px) {
+      .video-section, .tv-guide, .poster-container {
+        width: 100%;
+        height: auto;
+        flex-direction: column; /* Stack sections */
+      }
+      .tv-guide, .poster-container {
+        position: relative;
+        left: 0;
+        top: 0;
+      }
+    }
+
+    @media (max-width: 768) {
+      .tv-container {
+        width: 90%; /* Reduce width for smaller screens */
+        height: auto;
+      }
+      .tv-guide, .poster-container {
+        width: 100%; /* Full width for smaller screens */
+        height: auto;
+        margin-top: 10px; /* Add spacing */
+      }
+      .tv-guide h2 {
+        font-size: 16px; /* Adjust font size */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .video-section {
+        width: 100%;
+        height: auto;
+      }
+      .tv-container {
+        width: 100%; /* Full screen width */
+        height: auto;
+      }
+      .tv-guide {
+        font-size: 14px; /* Adjust font size for small screens */
+      }
+      .poster-container img {
+        width: 90%;
+        height: auto;
+      }
+      .button-panel {
+        flex-direction: row; /* Arrange buttons in a row */
+        gap: 5px; /* Reduce gap between buttons */
+      }
     }
 
     .screen {
@@ -66,6 +115,14 @@
       display: block;
     }
 
+    .tv-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('./assets/images/tvclean.webp') no-repeat center center;
+      background-size: contain;
+    }
+
     .tv-guide {
       position: absolute;
       top: 0;
@@ -73,44 +130,9 @@
       width: 25%; /* One-third of the screen */
       height: 38%; /* Top half of the remaining space */
       background-color: rgba(0, 0, 0, 0.8);
-      padding: 10px;
+      padding: 5px;
       overflow-y: scroll;
       border-radius: 5px;
-      border: 2px solid #ffffff;
-    }
-
-    .tv-guide h2 {
-      text-align: center;
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-      padding: 10px 0;
-    }
-
-    .guide-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .channel-item {
-      flex: 1;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .time-slot {
-      flex: 1;
-      text-align: center;
-      color: #cccccc;
-    }
-
-    .program-item {
-      flex: 2;
-      text-align: left;
-      padding-left: 10px;
     }
 
     .poster-container {
@@ -132,11 +154,167 @@
       border-radius: 5px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
+
+  
+    .tv-guide h2 {
+      text-align: center;
+      margin: 0;
+      font-size: 18px; /* Slightly smaller text */
+      font-weight: bold;
+      color: white; /* Text color to stand out on a grey background */
+      background: linear-gradient(180deg, #a9a9a9, #808080); /* Grey gradient for texture */
+      padding: 10px 15px; /* Reduced padding for smaller space */
+      border: 2px solid #606060; /* Darker border for TV frame-like look */
+      border-radius: 3px; /* Slight rounding for a soft edge */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
+              0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
+    }
+
+    .button-panel {
+      position: absolute;
+      bottom: 7%;
+      left: 50%; /* Center align */
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .button-panel button {
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
+              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+              0 0 10px rgba(192, 192, 192, 0.6); /* Gradient halo */
+    }
+
+    .button-panel button:hover {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+              0 0 30px rgba(192, 192, 192, 0.6); /* Stronger halo on hover */
+    }
+
+    .button-panel button:active {
+      background: linear-gradient(145deg, #e0e0e0, #b0b0b0); /* Slightly darker metallic look */
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4),
+              0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    #power {
+      width: 25px; /* Larger width */
+      height: 25px; /* Larger height */
+      background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
+              inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+              0 0 15px rgba(192, 192, 192, 0.8); /* Larger halo for power button */
+      margin-top: -9px; /* Adjust alignment */
+      margin-left: 5px; /* Adjust alignment */
+    }
+
+    .spacer {
+      width: 41px;
+      height: 10px;
+    }
+
+    .channel-display {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+      background-color: transparent;
+      padding: 5px 10px;
+      border-radius: 5px;
+      z-index: 10;
+      display: none;
+    }
+
+    .notification {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 14px;
+      color: limegreen;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: none;
+      z-index: 15;
+      text-align: center;
+    }
+
+    .glowing-button {
+      position: absolute;
+      bottom: 7%;
+      left: 54.2%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 14px;
+      background-color: red;
+      border-radius: 20%;
+      box-shadow: 0 0 5px red, 0 0 10px red, 0 0 10px red;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glowing-button.on {
+      background-color: limegreen;
+      box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
+    }
+
+    .category-item,
+    .channel-item {
+      padding: 5px;
+      font-size: 14px;
+      margin: 5px 0;
+      border: 1px solid grey;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .category-item:hover,
+    .channel-item:hover {
+      background-color: rgba(128, 128, 128, 0.2);
+    }
+    
+    .channel-item.active {
+      background-color: rgba(128, 128, 128, 0.4);
+    }
+
+    .back-button {
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid grey;
+      border-radius: 3px;
+      background-color: grey;
+      color: black;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: black;
+      color: grey;
+    }
+    
   </style>
 </head>
 <body>
   <div class="screen">
-    <!-- Video Player Section -->
+    <!-- Video Player -->
     <div class="video-section">
       <div class="tv-container">
         <div class="tv-screen" id="tvScreen">
@@ -160,61 +338,331 @@
         <div class="glowing-button" id="glowingButton"></div>
       </div>
     </div>
-
-    <!-- TV Guide Section -->
+    <!-- Right Section -->
+    <!-- TV Guide -->
     <div class="tv-guide" id="tvGuide">
       <h2>TV Guide</h2>
-      <div id="guideGrid">
-        <!-- Dynamic content will be injected here -->
-      </div>
+      <!-- Categories and channels will be dynamically added here -->
+      <ul id="scheduleList"></ul>
     </div>
-
-    <!-- Movie Poster Section -->
+    <!-- Movie Poster -->
     <div class="poster-container">
       <img src="./assets/images/default_poster.jpg" alt="Default Poster" id="poster" />
     </div>
   </div>
 
+  <script src="channels.js"></script>
   <script>
-    // TV Schedule
-    const tvSchedule = [
-      { channel: 1, time: "6:00 AM", program: "Morning News" },
-      { channel: 1, time: "6:30 AM", program: "Weather Update" },
-      { channel: 2, time: "6:00 AM", program: "Cartoons" },
-      { channel: 2, time: "6:30 AM", program: "Comedy Show" },
-      { channel: 3, time: "6:00 AM", program: "Sports Highlights" },
-      { channel: 3, time: "6:30 AM", program: "Fitness Hour" },
-    ];
+    let currentChannel = 0;
+    let powerOn = false;
+    const playbackTimes = {};
+    const playbackPositions = {};
+    const tvScreen = document.getElementById("tvScreen");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const channelDisplay = document.getElementById("channelDisplay");
+    const notification = document.getElementById("notification");
+    const glowingButton = document.getElementById("glowingButton");
+    const tvGuide = document.getElementById("tvGuide");
 
-    // Populate TV Guide
+    const groupedChannels = channels.reduce((acc, channel) => {
+      if (!acc[channel.category]) acc[channel.category] = {};
+      const subcategory = channel.subcategory || "default";
+      if (!acc[channel.category][subcategory]) acc[channel.category][subcategory] = [];
+      acc[channel.category][subcategory].push(channel);
+      return acc;
+    }, {});
+
+    function playStatic(callback) {
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Static video path
+      videoPlayer.currentTime = 0; // Start from the beginning
+      videoPlayer.muted = false;
+      videoPlayer.play()
+        .then(() => {
+          channelDisplay.textContent = "Static...";
+          setTimeout(callback, 1000); // Play static for 1 second before the next video
+        })
+        .catch((error) => {
+          console.error("Error playing static video:", error);
+          callback(); // Proceed without static if there's an error
+        });
+    }
+
+    function createDynamicSchedule() {
+      const schedule = [];
+      let currentTime = new Date();
+      currentTime.setMinutes(0, 0, 0);
+
+      channels.forEach(channel => {
+        if (channel.episodes) {
+          channel.episodes.forEach(episode => {
+            schedule.push({
+              time: formatTime(currentTime),
+              name: `${channel.name} - Episode`,
+              video: episode.video,
+            });
+            currentTime = new Date(currentTime.getTime() + 30 * 60000); // Add 30 mins
+          });
+        } else {
+          schedule.push({
+            time: formatTime(currentTime),
+            name: channel.name,
+            video: channel.video,
+          });
+          currentTime = new Date(currentTime.getTime() + 90 * 60000); // Add 90 mins
+        }
+      });
+
+      return schedule;
+    }
+
+    function formatTime(date) {
+      return date.toTimeString().slice(0, 5);
+    }
+
+    function playScheduledBlock() {
+      const now = new Date();
+      const currentTime = formatTime(now);
+      const dynamicSchedule = createDynamicSchedule();
+
+      const currentBlock = dynamicSchedule.find(block => block.time === currentTime);
+
+      if (currentBlock) {
+        playStatic(() => {
+          videoPlayer.src = currentBlock.video;
+          channelDisplay.textContent = `Now Playing: ${currentBlock.name}`;
+          videoPlayer.play();
+        });
+      }
+    }
+
+    setInterval(playScheduledBlock, 60000); // Check every minute
+
     function populateGuide() {
-      const guideGrid = document.getElementById("guideGrid");
-      guideGrid.innerHTML = ""; // Clear existing content
-
-      tvSchedule.forEach((entry) => {
-        const channelDiv = document.createElement("div");
-        channelDiv.className = "channel-item";
-        channelDiv.textContent = `Channel ${entry.channel}`;
-
-        const timeDiv = document.createElement("div");
-        timeDiv.className = "time-slot";
-        timeDiv.textContent = entry.time;
-
-        const programDiv = document.createElement("div");
-        programDiv.className = "program-item";
-        programDiv.textContent = entry.program;
-
-        const rowDiv = document.createElement("div");
-        rowDiv.className = "guide-row";
-
-        rowDiv.appendChild(channelDiv);
-        rowDiv.appendChild(timeDiv);
-        rowDiv.appendChild(programDiv);
-        guideGrid.appendChild(rowDiv);
+      tvGuide.innerHTML = `<h2>TV Guide</h2>`;
+      Object.keys(groupedChannels).forEach(category => {
+        const categoryItem = document.createElement("div");
+        categoryItem.classList.add("category-item");
+        categoryItem.textContent = category;
+        categoryItem.addEventListener("click", () => displaySubcategories(category));
+        tvGuide.appendChild(categoryItem);
       });
     }
 
-    // Populate the TV Guide on page load
+    function displaySubcategories(category) {
+      tvGuide.innerHTML = `<h2>${category}</h2>`;
+      const subcategories = groupedChannels[category];
+      Object.keys(subcategories).forEach(subcategory => {
+        const subcategoryItem = document.createElement("div");
+        subcategoryItem.classList.add("category-item");
+        subcategoryItem.textContent = subcategory === "default" ? "Uncategorized" : subcategory;
+        subcategoryItem.addEventListener("click", () => displayChannels(category, subcategory));
+        tvGuide.appendChild(subcategoryItem);
+      });
+
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Main";
+      backButton.addEventListener("click", populateGuide);
+      tvGuide.appendChild(backButton);
+    }
+
+    function displayChannels(category, subcategory) {
+      tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
+      const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
+      const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
+        const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
+        const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
+        return yearA - yearB;
+      });
+
+      sortedUniqueChannels.forEach(channelNumber => {
+        const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
+        const channelName = channelGroup[0].name.split("Part")[0].trim();
+        const description = channelGroup[0].description || "No description available.";
+        const duration = channelGroup[0].duration || "Unknown duration";
+        const releaseYear = channelGroup[0].releaseYear || "Unknown year";
+
+        const channelItem = document.createElement("div");
+        channelItem.classList.add("channel-item");
+        channelItem.innerHTML = `<strong>${channelName} (Channel ${channelNumber})</strong><br><small>Year: ${releaseYear}</small>`;
+
+        channelItem.addEventListener("mouseover", () => {
+          showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
+        });
+        channelItem.addEventListener("mouseout", hideNotification);
+
+        if (channelGroup[0].episodes) {
+          channelItem.addEventListener("click", () => displayEpisodes(channelGroup[0]));
+        } else {
+          channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
+        }
+
+        tvGuide.appendChild(channelItem);
+      });
+
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Categories";
+      backButton.addEventListener("click", () => displaySubcategories(category));
+      tvGuide.appendChild(backButton);
+    }
+
+    function displayEpisodes(channel) {
+      tvGuide.innerHTML = `<h2>${channel.name} Episodes</h2>`;
+      channel.episodes.forEach((episode, index) => {
+        const episodeItem = document.createElement("div");
+        episodeItem.classList.add("channel-item");
+        episodeItem.textContent = `Episode ${index + 1}: ${episode.title || `Part ${index + 1}`}`;
+        episodeItem.addEventListener("click", () => playEpisode(episode, channel));
+        tvGuide.appendChild(episodeItem);
+      });
+
+      const backButton = document.createElement("div");
+      backButton.classList.add("back-button");
+      backButton.textContent = "Back to Channels";
+      backButton.addEventListener("click", populateGuide);
+      tvGuide.appendChild(backButton);
+    }
+
+    function playEpisode(episode, channel) {
+      playStatic(() => {
+        videoPlayer.src = episode.video;
+        const posterElement = document.getElementById("poster");
+        posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
+        channelDisplay.textContent = `Now Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`;
+        videoPlayer.play();
+        showNotification(`Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`);
+      });
+    }
+
+    function playChannelGroup(channelGroup) {
+      playStatic(() => {
+        const firstChannel = channelGroup[0];
+        videoPlayer.src = firstChannel.video;
+        const posterElement = document.getElementById("poster");
+        posterElement.src = firstChannel.poster || "./assets/images/default_poster.jpg";
+        channelDisplay.textContent = `Now Playing: ${firstChannel.name}`;
+        videoPlayer.play();
+      });
+    }
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = "block";
+      setTimeout(hideNotification, 3000);
+    }
+
+    function hideNotification() {
+      notification.style.display = "none";
+    }
+
+    function togglePower() {
+      powerOn = !powerOn;
+      const posterElement = document.getElementById("poster");
+      
+      if (powerOn) {
+        tvScreen.classList.add("on");
+        videoPlayer.classList.add("on");
+        glowingButton.classList.add("on");
+        channelDisplay.style.display = "block";
+        videoPlayer.play();
+        showNotification(`Power On`);
+      } else {
+        tvScreen.classList.remove("on");
+        videoPlayer.classList.remove("on");
+        glowingButton.classList.remove("on");
+        channelDisplay.style.display = "none";
+        videoPlayer.pause();
+        showNotification(`Power Off`);
+
+        // Set default poster when TV is off
+        posterElement.src = "./assets/images/default_poster.jpg";
+      }
+    }
+
+    document.getElementById("channelUp").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel + 1) % channels.length;
+        playChannel(channels[currentChannel]);
+      }
+    });
+
+    document.getElementById("channelDown").addEventListener("click", () => {
+      if (powerOn) {
+        currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+        playChannel(channels[currentChannel]);
+      }
+    });
+
+    document.getElementById("volumeUp").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+      }
+    });
+
+    document.getElementById("volumeDown").addEventListener("click", () => {
+      if (powerOn) {
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        const volumeLevel = Math.round(videoPlayer.volume * 10);
+        showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!powerOn) return; // Ensure the TV is on
+    
+      switch (event.key) {
+        case "ArrowUp": // Increase volume
+          videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+          showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+          break;
+    
+        case "ArrowDown": // Decrease volume
+          videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+          const volumeLevel = Math.round(videoPlayer.volume * 10);
+          showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+          break;
+    
+        case "ArrowRight": // Next channel
+          currentChannel = (currentChannel + 1) % channels.length;
+          playChannel(channels[currentChannel]);
+          showNotification(`Channel: ${channels[currentChannel].name}`);
+          break;
+    
+        case "ArrowLeft": // Previous channel
+          currentChannel = (currentChannel - 1 + channels.length) % channels.length;
+          playChannel(channels[currentChannel]);
+          showNotification(`Channel: ${channels[currentChannel].name}`);
+          break;
+    
+        default:
+          break; // Ignore other keys
+      }
+    });
+
+
+    document.getElementById("power").addEventListener("click", togglePower);
+
+    document.getElementById("menu").addEventListener("click", () => {
+      if (powerOn) {
+        // Select a random channel different from the current one
+      const previousChannel = currentChannel;
+      let randomChannelIndex;
+
+      do {
+        randomChannelIndex = Math.floor(Math.random() * channels.length);
+      } while (randomChannelIndex === previousChannel);
+
+      currentChannel = randomChannelIndex;
+      playChannel(channels[currentChannel]);
+
+      // Show "Channel Shuffled" notification (auto-hides after 3 seconds)
+      showNotification("Channel Shuffled");
+    }
+  });
+
+
     populateGuide();
   </script>
 </body>
