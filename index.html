@@ -360,7 +360,7 @@
             const channel = channels.find(channel => channel.subcategory === subcategory);
             if (channel) {
                 categoryInfo.textContent = `Category: ${channel.category}`;
-                subcategoryInfo.textContent = `Subcategory: ${channel.subcategory}`;
+                subcategoryInfo.textContent = `Playing: ${channel.subcategory}`;
             }
 
             let startTime = new Date(currentStartTime);
