@@ -331,17 +331,16 @@
     <script src="./channels.js"></script>
     <script>
         const videoPlayer = document.getElementById('video-player');
+        const tvGuideList = document.getElementById('tv-guide-list');
+        const shuffleButton = document.getElementById('shuffle');
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
         const powerButton = document.getElementById('power');
-        const shuffleButton = document.getElementById('shuffle');
-        const tvGuideList = document.getElementById('tv-guide-list');
         const poster = document.getElementById('poster');
         const playbackTimes = {}; // Cache playback times
-
-        let powerOn = true;
         let currentChannelIndex = 0;
         let currentStartTime = new Date();
+        let lastShuffleIndex = -1;
 
         const subcategories = (() => {
             return Object.keys(channels.reduce((acc, channel) => {
@@ -358,7 +357,13 @@
 
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
             channelVideos.forEach(video => {
-                const episodes = video.episodes || [{ name: video.name, duration: video.duration }];
+                const episodes = video.episodes && video.episodes.length > 0 
+                    ? video.episodes.map(episode => ({
+                        name: episode.name || 'Unnamed Episode',
+                        duration: episode.duration || 30
+                    })) 
+                    : [{ name: video.name || 'Untitled', duration: video.duration || 30 }];
+
                 episodes.forEach(episode => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
@@ -378,6 +383,10 @@
         };
 
         const setChannel = (index) => {
+            if (index < 0 || index >= subcategories.length) {
+                console.error('Index out of bounds for subcategories');
+                return;
+            }
             updatePlaybackTime(subcategories[currentChannelIndex]);
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
@@ -385,76 +394,63 @@
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
             if (channelVideos.length > 0) {
                 const channel = channelVideos[0];
-                videoPlayer.src = channel.video;
-                adjustPlaybackTime(subcategory);
-                videoPlayer.play();
+                if (channel.video) {
+                    videoPlayer.src = channel.video;
+                    poster.src = channel.poster || 'default_poster.jpg'; // Ensure the poster is set
+                    adjustPlaybackTime(subcategory);
+                    videoPlayer.play();
+                } else {
+                    console.error(`Video source is undefined for channel: ${channel.name}`);
+                }
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
             }
 
             populateTVGuide(subcategory);
-            showNotification(`Channel: ${subcategory}`, 'limegreen');
         };
 
         const shuffleChannels = () => {
-            const randomIndex = Math.floor(Math.random() * subcategories.length);
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * subcategories.length);
+            } while (randomIndex === lastShuffleIndex);
+
+            lastShuffleIndex = randomIndex;
             updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(randomIndex);
         };
 
-        const adjustVolume = (increase) => {
-            const volumeStep = 0.1;
-            videoPlayer.volume = Math.min(Math.max(videoPlayer.volume + (increase ? volumeStep : -volumeStep), 0), 1);
-            const message = videoPlayer.volume === 1 ? 'Volume Maxed!' : videoPlayer.volume === 0 ? 'Muted' : increase ? 'Volume Up' : 'Volume Down';
-            showNotification(message, 'limegreen');
+        const showVolumeIndicator = (volume) => {
+            const notification = document.querySelector('.notification');
+            notification.textContent = `Volume: ${Math.round(volume * 100)}%`;
+            notification.style.color = 'limegreen';
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 1000);
         };
 
-        powerButton.addEventListener('click', () => {
-            powerOn = !powerOn;
-            if (powerOn) {
-                powerOverlay.style.display = 'none';
-                powerLight.style.background = 'green';
-                powerLight.style.boxShadow = '0 0 15px green';
-                videoPlayer.play();
-                showNotification('Power ON', 'limegreen');
-            } else {
-                powerOverlay.style.display = 'flex';
-                powerLight.style.background = 'red';
-                powerLight.style.boxShadow = '0 0 15px red';
-                videoPlayer.pause();
-                showNotification('Power OFF', 'red');
-            }
-        });
-
-        shuffleButton.addEventListener('click', () => {
-            updatePlaybackTime(subcategories[currentChannelIndex]);
-            setChannel(Math.floor(Math.random() * subcategories.length));
-        });
+        shuffleButton.addEventListener('click', shuffleChannels);
 
         document.getElementById('channel-up').addEventListener('click', () => {
-            updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(currentChannelIndex + 1);
         });
 
         document.getElementById('channel-down').addEventListener('click', () => {
-            updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(currentChannelIndex - 1);
         });
 
-        document.getElementById('volume-up').addEventListener('click', () => adjustVolume(true));
-        document.getElementById('volume-down').addEventListener('click', () => adjustVolume(false));
+        document.getElementById('volume-up').addEventListener('click', () => {
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+            showVolumeIndicator(videoPlayer.volume);
+        });
+
+        document.getElementById('volume-down').addEventListener('click', () => {
+            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+            showVolumeIndicator(videoPlayer.volume);
+        });
 
         setChannel(currentChannelIndex);
-
-        function showNotification(message, color = 'limegreen') {
-            const notification = document.querySelector('.notification');
-            notification.textContent = message;
-            notification.style.color = color;
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
     </script>
 </body>
 </html>
