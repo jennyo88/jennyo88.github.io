@@ -136,8 +136,8 @@
         }
 
         .poster-container img {
-            width: 75px;
-            height: 100px;
+            width: 120px;
+            height: 160px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
@@ -275,7 +275,7 @@
         <!-- Video Section -->
         <div class="video-section">
             <video id="video-player" controls autoplay loop></video>
-            <div class="power-off">Powered Off</div>
+            <div class="power-off"></div>
             <div class="tv-overlay"></div>
         </div>
 
@@ -340,10 +340,10 @@
         let powerOn = true;
         let currentChannelIndex = 0;
 
-        const subcategories = Object.keys(channels.reduce((acc, channel) => {
+        const subcategories = channels && Array.isArray(channels) ? Object.keys(channels.reduce((acc, channel) => {
             acc[channel.subcategory] = true;
             return acc;
-        }, {}));
+        }, {})) : [];
 
         powerButton.addEventListener('click', () => {
             powerOn = !powerOn;
@@ -380,7 +380,7 @@
             if (channelVideos.length > 0) {
                 const channel = channelVideos[0];
                 videoPlayer.src = channel.video;
-                poster.src = channel.poster;
+                poster.src = channel.poster || 'default_poster.jpg';
                 if (powerOn) {
                     videoPlayer.play();
                 }
@@ -414,7 +414,10 @@
 
         function showNotification(message, color = 'limegreen') {
             const notification = document.querySelector('.notification');
-            notification.textContent = message;
+            const sanitizedMessage = document.createElement('div');
+            sanitizedMessage.textContent = message;
+            notification.innerHTML = ''; // Clear previous notification
+            notification.appendChild(sanitizedMessage);
             notification.style.color = color;
             notification.style.display = 'block';
             setTimeout(() => {
