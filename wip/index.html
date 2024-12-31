@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with Multi-Level TV Guide</title>
-    <style>
+  <style>
     body { 
       margin: 0;
       background-color: black;
@@ -30,7 +30,7 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 768) {
       .tv-container {
         width: 90%; /* Reduce width for smaller screens */
         height: auto;
@@ -39,9 +39,6 @@
         width: 100%; /* Full width for smaller screens */
         height: auto;
         margin-top: 10px; /* Add spacing */
-      }
-      .tv-guide h2 {
-        font-size: 16px; /* Adjust font size */
       }
     }
 
@@ -155,21 +152,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
 
-    .tv-guide h2 {
-      text-align: center;
-      margin: 0;
-      font-size: 18px; /* Slightly smaller text */
-      font-weight: bold;
-      color: white; /* Text color to stand out on a grey background */
-      background: linear-gradient(180deg, #a9a9a9, #808080); /* Grey gradient for texture */
-      padding: 10px 15px; /* Reduced padding for smaller space */
-      border: 2px solid #606060; /* Darker border for TV frame-like look */
-      border-radius: 3px; /* Slight rounding for a soft edge */
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.6), /* Inner shadow for depth */
-              0 4px 6px rgba(0, 0, 0, 0.3); /* Outer shadow for subtle elevation */
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Subtle shadow for retro TV text effect */
-    }
-
     .button-panel {
       position: absolute;
       bottom: 7%;
@@ -222,7 +204,7 @@
       width: 41px;
       height: 10px;
     }
-      
+
     .channel-display {
       position: absolute;
       top: 80%;
@@ -272,26 +254,6 @@
       box-shadow: 0 0 5px limegreen, 0 0 10px limegreen, 0 0 10px limegreen;
     }
 
-    .category-item,
-    .channel-item {
-      padding: 5px;
-      font-size: 14px;
-      margin: 5px 0;
-      border: 1px solid grey;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .category-item:hover,
-    .channel-item:hover {
-      background-color: rgba(128, 128, 128, 0.2);
-    }
-    
-    .channel-item.active {
-      background-color: rgba(128, 128, 128, 0.4);
-    }
-
     .back-button {
       padding: 10px;
       margin: 10px 0;
@@ -337,16 +299,17 @@
         <div class="glowing-button" id="glowingButton"></div>
       </div>
     </div>
+
     <!-- Right Section -->
-    <!-- TV Guide -->
-    <div class="tv-guide" id="tvGuide">
-      <h2>TV Guide</h2>
-      <!-- Categories and channels will be dynamically added here -->
-      <ul id="scheduleList"></ul>
-    </div>
-    <!-- Movie Poster -->
-    <div class="poster-container">
-      <img src="./assets/images/default_poster.jpg" alt="Default Poster" id="poster" />
+      <!-- TV Guide -->
+      <div class="tv-guide" id="tvGuide">
+        <h2>TV Guide</h2>
+        <!-- Categories and channels will be dynamically added here -->
+      </div>
+      <!-- Movie Poster -->
+      <div class="poster-container">
+        <img src="./assets/images/default_poster.jpg" alt="Default Poster" id="poster" />
+      </div>
     </div>
   </div>
 
@@ -363,191 +326,277 @@
     const glowingButton = document.getElementById("glowingButton");
     const tvGuide = document.getElementById("tvGuide");
 
-    let dynamicScheduleBlocks = [];
+    const groupedChannels = channels.reduce((acc, channel) => {
+      if (!acc[channel.category]) acc[channel.category] = {};
+      const subcategory = channel.subcategory || "default";
+      if (!acc[channel.category][subcategory]) acc[channel.category][subcategory] = [];
+      acc[channel.category][subcategory].push(channel);
+      return acc;
+    }, {});
 
-    function createDynamicSchedule() {
-      const validCategories = ["Movies", "Cartoons"]; // Specify the categories you want to include
-      const subcategories = Array.from(
-        new Set(
-          channels
-            .filter(channel => validCategories.includes(channel.category))
-            .map(channel => channel.subcategory)
-        )
-      );
-
-      dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
-        const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
-        const endHour = startHour + 3;
-        const timeString = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`;
-        return {
-          time: timeString,
-          name: `${subcategory} Block`,
-          videos: getVideosBySubcategory(subcategory)
-        };
+    function populateSchedule() {
+      tvGuide.innerHTML = `<h2>Today's Schedule</h2>`;
+    
+      const scheduleBlock = document.createElement("div");
+      scheduleBlock.classList.add("schedule-block");
+    
+      // Generate or fetch the schedule dynamically
+      const schedule = getSchedule(); // Replace with your schedule logic
+    
+      schedule.forEach((program) => {
+        const programItem = document.createElement("div");
+        programItem.classList.add("program-item");
+    
+        // Add program and episode details
+        programItem.innerHTML = `
+          <strong>${program.name}</strong><br>
+          <small>${program.startTime} - ${program.endTime}</small><br>
+          <small>${program.description}</small>
+          ${program.episodes ? `<br><small>Episodes: ${program.episodes.map(ep => ep.title).join(", ")}</small>` : ""}
+        `;
+    
+        scheduleBlock.appendChild(programItem);
       });
+    
+      tvGuide.appendChild(scheduleBlock);
     }
 
-    function getVideosBySubcategory(subcategory) {
-      return channels
-        .filter(channel => channel.subcategory === subcategory)
-        .flatMap(channel => channel.episodes ? channel.episodes.map(ep => ep.video) : [channel.video]);
-    }
+    
 
-    let currentBlockIndex = 0;
-    let currentVideoIndex = 0;
-
-    function playNextVideoInBlock() {
-      const block = dynamicScheduleBlocks[currentBlockIndex];
-      const videos = block.videos;
-
-      if (currentVideoIndex >= videos.length) {
-        currentVideoIndex = 0;
-      }
-
-      const videoSrc = videos[currentVideoIndex];
-
+    function playScheduledProgram(program) {
       playStatic(() => {
-        videoPlayer.src = videoSrc;
-        videoPlayer.play();
-        channelDisplay.textContent = `Now Playing: ${block.name}`;
-        currentVideoIndex++;
+        if (program.episodes && program.episodes.length > 0) {
+          // Play the first episode in the program
+          const episode = program.episodes[0];
+          videoPlayer.src = episode.video;
+    
+          // Update poster and metadata
+          const posterElement = document.getElementById("poster");
+          posterElement.src = program.poster || "./assets/images/default_poster.jpg";
+          channelDisplay.textContent = `Now Playing: ${program.name} - ${episode.title}`;
+    
+          videoPlayer.play();
+    
+          // Handle end of episode
+          videoPlayer.onended = () => {
+            // Logic to play the next episode or program
+          };
+    
+          showNotification(`Playing: ${program.name} - ${episode.title}`);
+        } else {
+          // Play as a single video program
+          videoPlayer.src = program.video;
+          videoPlayer.play();
+        }
       });
     }
 
-    function updateCurrentBlock() {
-      const now = new Date();
-      const currentTime = now.getHours() * 60 + now.getMinutes();
+    
 
-      for (let i = 0; i < dynamicScheduleBlocks.length; i++) {
-        const blockTime = dynamicScheduleBlocks[i].time.split("-");
-        const blockStart = parseInt(blockTime[0].split(":")[0]) * 60 + parseInt(blockTime[0].split(":")[1]);
-        const blockEnd = parseInt(blockTime[1].split(":")[0]) * 60 + parseInt(blockTime[1].split(":")[1]);
+    function playStatic(callback) {
+      // Set the static video as the source
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Path to your static video
+      videoPlayer.currentTime = 0; // Start static from the beginning
+      videoPlayer.muted = false; // Ensure autoplay works
+    
+      videoPlayer
+        .play()
+        .then(() => {
+          // Display "Static" message
+          channelDisplay.textContent = "Static...";
+    
+          // Wait for 1 second, then call the callback
+          setTimeout(() => {
+            callback();
+          }, 1000);
+        })
+        .catch((error) => {
+          console.error("Error playing static video:", error);
+    
+          // Fallback: Call the callback immediately without delay
+          callback();
+        });
+    }
 
-        if (currentTime >= blockStart && currentTime < blockEnd) {
-          if (currentBlockIndex !== i) {
-            currentBlockIndex = i;
-            currentVideoIndex = 0; // Reset video index for the new block
-            playNextVideoInBlock();
-          }
-          break;
+     
+
+    function playScheduledProgram(program) {
+      playStatic(() => {
+        if (program.parts && program.parts.length > 0) {
+          // Play as a group
+          playPartsSequentially(program.parts);
+        } else {
+          // Play as a single video
+          videoPlayer.src = program.video;
+          videoPlayer.play();
+          channelDisplay.textContent = `Now Playing: ${program.name}`;
+        }
+      });
+    }
+    
+    function playPartsSequentially(parts) {
+      let partIndex = 0;
+    
+      function playNextPart() {
+        if (partIndex < parts.length) {
+          const part = parts[partIndex];
+          videoPlayer.src = part.video;
+          videoPlayer.play();
+          channelDisplay.textContent = `Now Playing: ${part.name}`;
+          videoPlayer.onended = () => {
+            partIndex++;
+            playNextPart();
+          };
+        } else {
+          showNotification("End of Program");
         }
       }
+    
+      playNextPart();
     }
 
-    function startDynamicSchedule() {
-      setInterval(() => {
-        updateCurrentBlock();
-        if (!videoPlayer.paused && videoPlayer.ended) {
-          playNextVideoInBlock();
-        }
-      }, 1000);
+
+
+    function showNotification(message) {
+      const notification = document.getElementById("notification");
+      notification.textContent = message;
+      notification.style.display = "block";
+    
+      // Automatically hide the notification after 3 seconds
+      setTimeout(hideNotification, 3000);
     }
 
-    function populateGuide() {
-      const guideList = document.getElementById("scheduleList");
-      guideList.innerHTML = ""; // Clear existing content
 
-      dynamicScheduleBlocks.forEach(block => {
-        const listItem = document.createElement("li");
-        listItem.textContent = `${block.time} - ${block.name}`;
-        guideList.appendChild(listItem);
-      });
+    function hideNotification() {
+      const notification = document.getElementById("notification");
+      notification.style.display = "none";
     }
 
-    createDynamicSchedule();
-    populateGuide();
-    startDynamicSchedule();
 
     function togglePower() {
       powerOn = !powerOn;
       const posterElement = document.getElementById("poster");
-
+      const glowingButton = document.getElementById("glowingButton");
+    
       if (powerOn) {
+        // Turn on the TV
         tvScreen.classList.add("on");
         videoPlayer.classList.add("on");
         glowingButton.classList.add("on");
         channelDisplay.style.display = "block";
-        videoPlayer.play();
-        showNotification(`Power On`);
+    
+        // Start playing the scheduled program
+        const currentProgram = getCurrentProgram(); // Fetch the current program based on time
+        if (currentProgram) {
+          playScheduledProgram(currentProgram);
+          showNotification("Power On: Playing Scheduled Program");
+        } else {
+          showNotification("Power On: No Program Scheduled");
+        }
       } else {
+        // Turn off the TV
         tvScreen.classList.remove("on");
         videoPlayer.classList.remove("on");
         glowingButton.classList.remove("on");
         channelDisplay.style.display = "none";
-        videoPlayer.pause();
-        showNotification(`Power Off`);
-
-        // Set default poster when TV is off
-        posterElement.src = "./assets/images/default_poster.jpg";
+    
+        videoPlayer.pause(); // Pause any ongoing playback
+        posterElement.src = "./assets/images/default_poster.jpg"; // Reset to default poster
+        showNotification("Power Off");
       }
     }
 
+
     document.getElementById("channelUp").addEventListener("click", () => {
       if (powerOn) {
-        currentBlockIndex = (currentBlockIndex + 1) % dynamicScheduleBlocks.length;
-        currentVideoIndex = 0; // Reset to the first video in the new block
-        playNextVideoInBlock();
-        showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+        currentChannel = (currentChannel + 1) % schedule.length; // Loop through the schedule
+        const nextProgram = schedule[currentChannel];
+        playScheduledProgram(nextProgram);
+        showNotification(`Next Program: ${nextProgram.name}`);
       }
     });
 
+
     document.getElementById("channelDown").addEventListener("click", () => {
       if (powerOn) {
-        currentBlockIndex = (currentBlockIndex - 1 + dynamicScheduleBlocks.length) % dynamicScheduleBlocks.length;
-        currentVideoIndex = 0; // Reset to the first video in the new block
-        playNextVideoInBlock();
-        showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+        currentChannel = (currentChannel - 1 + schedule.length) % schedule.length; // Loop backward
+        const previousProgram = schedule[currentChannel];
+        playScheduledProgram(previousProgram);
+        showNotification(`Previous Program: ${previousProgram.name}`);
       }
     });
 
     document.getElementById("volumeUp").addEventListener("click", () => {
       if (powerOn) {
-        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-        showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1); // Max volume is 1
+        showNotification(`Volume: ${Math.round(videoPlayer.volume * 100)}%`);
       }
     });
 
     document.getElementById("volumeDown").addEventListener("click", () => {
       if (powerOn) {
-        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-        const volumeLevel = Math.round(videoPlayer.volume * 10);
-        showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0); // Min volume is 0
+        showNotification(videoPlayer.volume === 0 ? "Mute" : `Volume: ${Math.round(videoPlayer.volume * 100)}%`);
       }
     });
 
+
     document.addEventListener("keydown", (event) => {
       if (!powerOn) return; // Ensure the TV is on
-
+    
       switch (event.key) {
         case "ArrowUp": // Increase volume
           videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-          showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
+          showNotification(`Volume: ${Math.round(videoPlayer.volume * 100)}%`);
           break;
-
+    
         case "ArrowDown": // Decrease volume
           videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-          const volumeLevel = Math.round(videoPlayer.volume * 10);
-          showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
+          showNotification(videoPlayer.volume === 0 ? "Mute" : `Volume: ${Math.round(videoPlayer.volume * 100)}%`);
           break;
-
-        case "ArrowRight": // Next channel
-          currentBlockIndex = (currentBlockIndex + 1) % dynamicScheduleBlocks.length;
-          currentVideoIndex = 0; // Reset to the first video in the new block
-          playNextVideoInBlock();
-          showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+    
+        case "ArrowRight": // Next program
+          currentChannel = (currentChannel + 1) % schedule.length;
+          const nextProgram = schedule[currentChannel];
+          playScheduledProgram(nextProgram);
+          showNotification(`Next Program: ${nextProgram.name}`);
           break;
-
-        case "ArrowLeft": // Previous channel
-          currentBlockIndex = (currentBlockIndex - 1 + dynamicScheduleBlocks.length) % dynamicScheduleBlocks.length;
-          currentVideoIndex = 0; // Reset to the first video in the new block
-          playNextVideoInBlock();
-          showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+    
+        case "ArrowLeft": // Previous program
+          currentChannel = (currentChannel - 1 + schedule.length) % schedule.length;
+          const previousProgram = schedule[currentChannel];
+          playScheduledProgram(previousProgram);
+          showNotification(`Previous Program: ${previousProgram.name}`);
           break;
-
+    
         default:
           break; // Ignore other keys
       }
     });
+
+
+
+    document.getElementById("power").addEventListener("click", togglePower);
+
+
+    document.getElementById("menu").addEventListener("click", () => {
+      if (powerOn) {
+        const previousChannel = currentChannel;
+        let randomChannelIndex;
+    
+        do {
+          randomChannelIndex = Math.floor(Math.random() * schedule.length);
+        } while (randomChannelIndex === previousChannel);
+    
+        currentChannel = randomChannelIndex;
+        const randomProgram = schedule[currentChannel];
+        playScheduledProgram(randomProgram);
+        showNotification(`Random Program: ${randomProgram.name}`);
+      }
+    });
+
+
+    populateSchedule(); // Display the dynamic schedule instead of the guide
   </script>
 </body>
 </html>
