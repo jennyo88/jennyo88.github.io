@@ -18,40 +18,61 @@
 
         .container {
             display: flex;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
         }
 
         .video-section {
-            flex: 1;
-            height: 100%;
             position: relative;
+            width: 70%;
+            height: 100%;
             background-color: black;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .video-section video {
-            width: 90%;
-            height: 75%;
-            object-fit: contain;
+        .tv-container {
+            width: 700px;
+            height: 550px;
             position: relative;
-            z-index: 1;
+        }
+
+        .tv-screen {
+            position: absolute;
+            top: 9%;
+            left: 7%;
+            width: 86%;
+            height: 72%;
+            overflow: hidden;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%, black 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .tv-screen.on {
+            background: none;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        video.on {
+            display: block;
         }
 
         .tv-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             background: url('./assets/images/tvclean.webp') no-repeat center center;
-            background-size: cover;
-            pointer-events: none;
-            z-index: 2;
+            background-size: contain;
         }
 
         .power-off {
@@ -61,7 +82,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            z-index: 4;
+            z-index: 5;
             box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
             display: none;
             justify-content: center;
@@ -69,11 +90,11 @@
         }
 
         .sidebar {
-            width: 400px;
+            width: 30%;
+            background: #444;
             display: flex;
             flex-direction: column;
             padding: 20px;
-            background: #444;
             overflow-y: auto;
         }
 
@@ -128,7 +149,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
-            z-index: 5;
+            z-index: 6;
         }
 
         .button-panel button {
@@ -170,11 +191,6 @@
             margin-left: 5px;
         }
 
-        .spacer {
-            width: 41px;
-            height: 10px;
-        }
-
         #power-light {
             width: 25px;
             height: 25px;
@@ -194,19 +210,6 @@
             text-align: center;
             margin-top: 5px;
             color: #fff;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .button-container-large {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
         }
     </style>
 </head>
