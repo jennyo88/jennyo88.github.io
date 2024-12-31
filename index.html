@@ -55,38 +55,55 @@
 
         .button-panel {
             position: absolute;
-            top: 10%;
-            right: 10%;
-            z-index: 3;
-            display: grid;
-            grid-template-columns: repeat(2, 60px) 120px;
-            grid-gap: 10px;
-            justify-items: center;
-            align-items: center;
-        }
-
-        .button {
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 10px;
+            bottom: 7%;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-            color: #fff;
+            gap: 10px;
+        }
+
+        .button-panel button {
+            width: 10px;
+            height: 10px;
+            background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
+            border: none;
+            border-radius: 50%;
             cursor: pointer;
-            backdrop-filter: blur(5px);
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
+                        inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+                        0 0 10px rgba(192, 192, 192, 0.6);
         }
 
-        .button.power, .button.indicator {
-            width: 120px;
-            height: 120px;
+        .button-panel button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+                        0 0 30px rgba(192, 192, 192, 0.6);
         }
 
-        .button.indicator {
-            background: red;
+        .button-panel button:active {
+            background: linear-gradient(145deg, #e0e0e0, #b0b0b0);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4),
+                        0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        #power {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
+                        inset 0 -1px 2px rgba(0, 0, 0, 0.4),
+                        0 0 15px rgba(192, 192, 192, 0.8);
+            margin-top: -9px;
+            margin-left: 5px;
+        }
+
+        .spacer {
+            width: 41px;
+            height: 10px;
         }
     </style>
 </head>
@@ -94,7 +111,7 @@
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <video id="video-player" controls autoplay loop></video>
+            <video id="video-player" controls autoplay muted loop></video>
             <div class="tv-overlay"></div>
             <div class="button-panel">
                 <button class="button" id="menu">Menu</button>
@@ -102,8 +119,8 @@
                 <button class="button" id="vol-up">Vol +</button>
                 <button class="button" id="ch-down">Ch -</button>
                 <button class="button" id="ch-up">Ch +</button>
-                <div class="button indicator" id="indicator"></div>
-                <button class="button power" id="power">Power</button>
+                <div class="spacer"></div>
+                <button id="power"></button>
             </div>
         </div>
 
@@ -126,90 +143,15 @@
         const tvGuideList = document.getElementById('tv-guide-list');
         const posterContainer = document.getElementById('poster-container');
         const powerButton = document.getElementById('power');
-        const indicator = document.getElementById('indicator');
         let isPoweredOn = true;
 
-        // Create blocks based on subcategories and randomize schedule
-        function createSchedule() {
-            const blocks = {};
-            channels.forEach(channel => {
-                if (!blocks[channel.subcategory]) {
-                    blocks[channel.subcategory] = [];
-                }
-                blocks[channel.subcategory].push(channel);
-            });
-
-            const schedule = [];
-            Object.keys(blocks).forEach(subcategory => {
-                const shuffled = blocks[subcategory]
-                    .sort(() => Math.random() - 0.5)
-                    .map(channel => ({
-                        name: channel.name,
-                        description: channel.description,
-                    }));
-                schedule.push(...shuffled);
-            });
-
-            return schedule;
-        }
-
-        function updateTVGuide() {
-            const schedule = createSchedule();
-            tvGuideList.innerHTML = '';
-
-            schedule.forEach((item, index) => {
-                const guideItem = document.createElement('li');
-                guideItem.textContent = `${8 + Math.floor(index / 2)}:${index % 2 === 0 ? '00' : '30'} AM - ${item.name} - ${item.description}`;
-                tvGuideList.appendChild(guideItem);
-            });
-        }
-
-        channels.forEach(channel => {
-            // Add to Poster Container
-            const poster = document.createElement('img');
-            poster.src = channel.poster;
-            poster.alt = channel.name;
-            poster.onclick = () => {
-                videoPlayer.src = channel.video;
-                videoPlayer.play();
-            };
-            posterContainer.appendChild(poster);
-        });
-
-        if (channels.length > 0) {
-            videoPlayer.src = channels[0].video;
-        }
-
-        updateTVGuide();
-
-        // Button Functionality
+        // Button functionality for power toggle
         powerButton.addEventListener('click', () => {
             isPoweredOn = !isPoweredOn;
-            indicator.style.background = isPoweredOn ? 'red' : 'gray';
             videoPlayer.style.display = isPoweredOn ? 'block' : 'none';
         });
 
-        document.getElementById('vol-down').addEventListener('click', () => {
-            videoPlayer.volume = Math.max(0, videoPlayer.volume - 0.1);
-        });
-
-        document.getElementById('vol-up').addEventListener('click', () => {
-            videoPlayer.volume = Math.min(1, videoPlayer.volume + 0.1);
-        });
-
-        let currentChannelIndex = 0;
-
-        document.getElementById('ch-down').addEventListener('click', () => {
-            currentChannelIndex = (currentChannelIndex - 1 + channels.length) % channels.length;
-            videoPlayer.src = channels[currentChannelIndex].video;
-            videoPlayer.play();
-        });
-
-        document.getElementById('ch-up').addEventListener('click', () => {
-            currentChannelIndex = (currentChannelIndex + 1) % channels.length;
-            videoPlayer.src = channels[currentChannelIndex].video;
-            videoPlayer.play();
-        });
+        // Add other button functionalities as needed
     </script>
 </body>
 </html>
