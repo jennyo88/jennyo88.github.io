@@ -297,7 +297,7 @@
     <!-- Button Panel -->
     <div class="button-panel">
         <div class="button-container">
-            <button id="menu"></button>
+            <button id="shuffle"></button>
         </div>
         <div class="button-container">
             <button id="volume-down"></button>
@@ -334,12 +334,13 @@
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
         const powerButton = document.getElementById('power');
-        const menuButton = document.getElementById('menu');
+        const shuffleButton = document.getElementById('shuffle');
         const tvGuideList = document.getElementById('tv-guide-list');
         const poster = document.getElementById('poster');
 
         let powerOn = true;
         let currentChannelIndex = 0;
+        let currentStartTime = new Date();
 
         const subcategories = Object.keys(channels.reduce((acc, channel) => {
             acc[channel.subcategory] = true;
@@ -369,16 +370,24 @@
             showNotification('Shuffled to Random Channel', 'limegreen');
         };
 
-        menuButton.addEventListener('click', shuffleChannels);
+        shuffleButton.addEventListener('click', shuffleChannels);
 
+        const formatTime = (time) => {
+            return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
 
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
+            let startTime = new Date(currentStartTime);
+
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
             channelVideos.forEach(video => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${video.name} - ${video.description}`;
+                listItem.textContent = `${formatTime(startTime)} - ${video.name} (${video.description})`;
                 tvGuideList.appendChild(listItem);
+
+                // Increment start time by video duration
+                startTime.setMinutes(startTime.getMinutes() + video.duration);
             });
         };
 
@@ -428,7 +437,6 @@
             }
         });
 
-
         setChannel(currentChannelIndex);
 
         function showNotification(message, color = 'limegreen') {
@@ -443,3 +451,5 @@
     </script>
 </body>
 </html>
+    
+    
