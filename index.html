@@ -366,6 +366,8 @@
 
         const shuffleChannels = () => {
             const randomIndex = Math.floor(Math.random() * subcategories.length);
+            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
+            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
             setChannel(randomIndex);
             showNotification('Shuffled to Random Channel', 'limegreen');
         };
@@ -412,10 +414,14 @@
         };
 
         document.getElementById('channel-up').addEventListener('click', () => {
+            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
+            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
             setChannel(currentChannelIndex + 1);
         });
 
         document.getElementById('channel-down').addEventListener('click', () => {
+            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
+            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
             setChannel(currentChannelIndex - 1);
         });
 
@@ -451,3 +457,4 @@
     </script>
 </body>
 </html>
+
