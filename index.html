@@ -363,12 +363,12 @@
     const notification = document.getElementById("notification");
     const glowingButton = document.getElementById("glowingButton");
     const tvGuide = document.getElementById("tvGuide");
-  
+
     let dynamicScheduleBlocks = [];
-  
+
     function createDynamicSchedule() {
       const subcategories = Array.from(new Set(channels.map(channel => channel.subcategory)));
-  
+
       dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
         const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
         const endHour = startHour + 3;
@@ -380,26 +380,26 @@
         };
       });
     }
-  
+
     function getVideosBySubcategory(subcategory) {
       return channels
         .filter(channel => channel.subcategory === subcategory)
         .flatMap(channel => channel.episodes ? channel.episodes.map(ep => ep.video) : [channel.video]);
     }
-  
+
     let currentBlockIndex = 0;
     let currentVideoIndex = 0;
-  
+
     function playNextVideoInBlock() {
       const block = dynamicScheduleBlocks[currentBlockIndex];
       const videos = block.videos;
-  
+
       if (currentVideoIndex >= videos.length) {
         currentVideoIndex = 0;
       }
-  
+
       const videoSrc = videos[currentVideoIndex];
-  
+
       playStatic(() => {
         videoPlayer.src = videoSrc;
         videoPlayer.play();
@@ -407,16 +407,16 @@
         currentVideoIndex++;
       });
     }
-  
+
     function updateCurrentBlock() {
       const now = new Date();
       const currentTime = now.getHours() * 60 + now.getMinutes();
-  
+
       for (let i = 0; i < dynamicScheduleBlocks.length; i++) {
         const blockTime = dynamicScheduleBlocks[i].time.split("-");
         const blockStart = parseInt(blockTime[0].split(":")[0]) * 60 + parseInt(blockTime[0].split(":")[1]);
         const blockEnd = parseInt(blockTime[1].split(":")[0]) * 60 + parseInt(blockTime[1].split(":")[1]);
-  
+
         if (currentTime >= blockStart && currentTime < blockEnd) {
           if (currentBlockIndex !== i) {
             currentBlockIndex = i;
@@ -427,7 +427,7 @@
         }
       }
     }
-  
+
     function startDynamicSchedule() {
       setInterval(() => {
         updateCurrentBlock();
@@ -436,15 +436,26 @@
         }
       }, 1000);
     }
-  
+
+    function populateGuide() {
+      const guideList = document.getElementById("scheduleList");
+      guideList.innerHTML = ""; // Clear existing content
+
+      dynamicScheduleBlocks.forEach(block => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${block.time} - ${block.name}`;
+        guideList.appendChild(listItem);
+      });
+    }
+
     createDynamicSchedule();
+    populateGuide();
     startDynamicSchedule();
-  
-    // Adjust power and controls
+
     function togglePower() {
       powerOn = !powerOn;
       const posterElement = document.getElementById("poster");
-  
+
       if (powerOn) {
         tvScreen.classList.add("on");
         videoPlayer.classList.add("on");
@@ -459,12 +470,12 @@
         channelDisplay.style.display = "none";
         videoPlayer.pause();
         showNotification(`Power Off`);
-  
+
         // Set default poster when TV is off
         posterElement.src = "./assets/images/default_poster.jpg";
       }
     }
-  
+
     document.getElementById("channelUp").addEventListener("click", () => {
       if (powerOn) {
         currentBlockIndex = (currentBlockIndex + 1) % dynamicScheduleBlocks.length;
@@ -473,7 +484,7 @@
         showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
       }
     });
-  
+
     document.getElementById("channelDown").addEventListener("click", () => {
       if (powerOn) {
         currentBlockIndex = (currentBlockIndex - 1 + dynamicScheduleBlocks.length) % dynamicScheduleBlocks.length;
@@ -482,14 +493,14 @@
         showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
       }
     });
-  
+
     document.getElementById("volumeUp").addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
         showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
       }
     });
-  
+
     document.getElementById("volumeDown").addEventListener("click", () => {
       if (powerOn) {
         videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
@@ -497,36 +508,36 @@
         showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
       }
     });
-  
+
     document.addEventListener("keydown", (event) => {
       if (!powerOn) return; // Ensure the TV is on
-  
+
       switch (event.key) {
         case "ArrowUp": // Increase volume
           videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
           showNotification(`Volume: ${Math.round(videoPlayer.volume * 10)}`);
           break;
-  
+
         case "ArrowDown": // Decrease volume
           videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
           const volumeLevel = Math.round(videoPlayer.volume * 10);
           showNotification(volumeLevel === 0 ? "Mute" : `Volume: ${volumeLevel}`);
           break;
-  
+
         case "ArrowRight": // Next channel
           currentBlockIndex = (currentBlockIndex + 1) % dynamicScheduleBlocks.length;
           currentVideoIndex = 0;
           playNextVideoInBlock();
           showNotification(`Channel: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
           break;
-  
+
         case "ArrowLeft": // Previous channel
           currentBlockIndex = (currentBlockIndex - 1 + dynamicScheduleBlocks.length) % dynamicScheduleBlocks.length;
           currentVideoIndex = 0;
           playNextVideoInBlock();
           showNotification(`Channel: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
           break;
-  
+
         default:
           break;
       }
