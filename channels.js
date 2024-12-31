@@ -201,17 +201,17 @@ const channels = [
     channelNumber: 101,
     episodes: [
       {
-        name: "Part 1",
+        name: "2001 - Part 1",
         duration: 86,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
       },
       {
-        name: "Part 2",
+        name: "2001 - Part 2",
         duration: 87,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
       },
       {
-        name: "Part 3",
+        name: "2001 - Part 3",
         duration: 75,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4",
       },
@@ -227,27 +227,27 @@ const channels = [
     channelNumber: 102,
     episodes: [
       {
-        name: "Part 1",
+        name: "1981 - Part 1",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        name: "Part 2",
+        name: "1981 - Part 2",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        name: "Part 3",
+        name: "1981 - Part 3",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        name: "Part 4",
+        name: "1981 - Part 4",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        name: "Part 5",
+        name: "1981 - Part 5",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
@@ -263,17 +263,17 @@ const channels = [
     channelNumber: 103,
     episodes: [
       {
-        name: "Part 1",
+        name: "1986 - Part 1",
         duration: 30,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        name: "Part 2",
+        name: "1986 - Part 2",
         duration: 30,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        name: "Part 3",
+        name: "1986 - Part 3",
         duration: 05,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
@@ -289,27 +289,27 @@ const channels = [
     channelNumber: 104,
     episodes: [
       {
-        name: "Part 1",
+        name: "1989 - Part 1",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        name: "Part 2",
+        name: "1989 - Part 2",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        name: "Part 3",
+        name: "1989 - Part 3",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        name: "Part 4",
+        name: "1989 - Part 4",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        name: "Part 5",
+        name: "1989 - Part 5",
         duration: 12,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
@@ -325,27 +325,27 @@ const channels = [
     channelNumber: 105,
     episodes: [
       {
-        name: "Part 1",
+        name: "1993 - Part 1",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        name: "Part 2",
+        name: "1993 - Part 2",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        name: "Part 3",
+        name: "1993 - Part 3",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        name: "Part 4",
+        name: "1993 - Part 4",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        name: "Part 5",
+        name: "1993 - Part 5",
         duration: 02,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
