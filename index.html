@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with Multi-Level TV Guide</title>
   <style>
+    /* Existing styles from your file */
     body { 
       margin: 0;
       background-color: black;
@@ -144,6 +145,19 @@
             Your browser does not support the video tag.
           </video>
         </div>
+        <div class="channel-display" id="channelDisplay"></div>
+        <div class="notification" id="notification"></div>
+        <div class="tv-overlay"></div>
+        <div class="button-panel">
+          <button id="menu"></button>
+          <button id="volumeDown"></button>
+          <button id="volumeUp"></button>
+          <button id="channelDown"></button>
+          <button id="channelUp"></button>
+          <div class="spacer"></div>
+          <button id="power"></button>
+        </div>
+        <div class="glowing-button" id="glowingButton"></div>
       </div>
     </div>
 
@@ -162,6 +176,7 @@
   </div>
 
   <script>
+    // TV Schedule
     const tvSchedule = [
       { channel: 1, time: "6:00 AM", program: "Morning News" },
       { channel: 1, time: "6:30 AM", program: "Weather Update" },
@@ -171,6 +186,7 @@
       { channel: 3, time: "6:30 AM", program: "Fitness Hour" },
     ];
 
+    // Populate TV Guide
     function populateGuide() {
       const guideGrid = document.getElementById("guideGrid");
       guideGrid.innerHTML = ""; // Clear existing content
