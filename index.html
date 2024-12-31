@@ -401,14 +401,22 @@
         });
 
         document.getElementById('volume-up').addEventListener('click', () => {
-            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-            showNotification('Volume Up', 'limegreen');
-        });
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1.1); // Go up to 11
+            if (videoPlayer.volume > 1) {
+                showNotification('Volume Maxed at 11!', 'limegreen');
+            } else {
+                showNotification('Volume Up', 'limegreen');
+            }
+        }););
 
         document.getElementById('volume-down').addEventListener('click', () => {
             videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-            showNotification('Volume Down', 'limegreen');
-        });
+            if (videoPlayer.volume === 0) {
+                showNotification('Muted', 'limegreen');
+            } else {
+                showNotification('Volume Down', 'limegreen');
+            }
+        }););
 
         setChannel(currentChannelIndex);
 
