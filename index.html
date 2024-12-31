@@ -136,8 +136,8 @@
         }
 
         .poster-container img {
-            width: 150px;
-            height: 200px;
+            width: 120px;
+            height: 160px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
@@ -340,10 +340,10 @@
         let powerOn = true;
         let currentChannelIndex = 0;
 
-        const subcategories = channels && Array.isArray(channels) ? Object.keys(channels.reduce((acc, channel) => {
+        const subcategories = Object.keys(channels.reduce((acc, channel) => {
             acc[channel.subcategory] = true;
             return acc;
-        }, {})) : [];
+        }, {}));
 
         powerButton.addEventListener('click', () => {
             powerOn = !powerOn;
@@ -352,13 +352,13 @@
                 powerLight.style.background = 'green';
                 powerLight.style.boxShadow = '0 0 15px green';
                 videoPlayer.play();
-                showNotification('Power On', 'limegreen');
+                showNotification('Power ON', 'limegreen');
             } else {
                 powerOverlay.style.display = 'flex';
                 powerLight.style.background = 'red';
                 powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
-                showNotification('Power Off', 'red');
+                showNotification('Power OFF', 'red');
             }
         });
 
@@ -401,36 +401,34 @@
         });
 
         document.getElementById('volume-up').addEventListener('click', () => {
-            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1.1); // Go up to 11
-            if (videoPlayer.volume > 1) {
-                showNotification('Volume Maxed at 11!', 'limegreen');
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1); // Maximum volume is 1
+            if (videoPlayer.volume === 1) {
+                showNotification('Volume Maxed!', 'limegreen');
             } else {
                 showNotification('Volume Up', 'limegreen');
             }
-        }););
-
+        });
+        
         document.getElementById('volume-down').addEventListener('click', () => {
-            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0); // Minimum volume is 0
             if (videoPlayer.volume === 0) {
                 showNotification('Muted', 'limegreen');
             } else {
                 showNotification('Volume Down', 'limegreen');
             }
-        }););
+        });
+
 
         setChannel(currentChannelIndex);
 
         function showNotification(message, color = 'limegreen') {
             const notification = document.querySelector('.notification');
-            const sanitizedMessage = document.createElement('div');
-            sanitizedMessage.textContent = message;
-            notification.innerHTML = ''; // Clear previous notification
-            notification.appendChild(sanitizedMessage);
+            notification.textContent = message;
             notification.style.color = color;
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 4000);
+            }, 3000);
         }
     </script>
 </body>
