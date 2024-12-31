@@ -283,7 +283,9 @@
         <div class="sidebar">
             <!-- TV Guide -->
             <div class="tv-guide">
-                <h2>TV Guide</h2>
+                <h1>TV Guide</h1>
+                <h2 id="tv-guide-category"></h2>
+                <h3 id="tv-guide-subcategory"></h3>
                 <ul id="tv-guide-list"></ul>
             </div>
 
@@ -332,6 +334,8 @@
     <script>
         const videoPlayer = document.getElementById('video-player');
         const tvGuideList = document.getElementById('tv-guide-list');
+        const tvGuideCategory = document.getElementById('tv-guide-category');
+        const tvGuideSubcategory = document.getElementById('tv-guide-subcategory');
         const shuffleButton = document.getElementById('shuffle');
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
@@ -352,6 +356,8 @@
         const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         const populateTVGuide = (subcategory) => {
+            tvGuideCategory.textContent = `${category}`;
+            tvGuideSubcategory.textContent = `Genre: ${subcategory}`;
             tvGuideList.innerHTML = '';
             let startTime = new Date(currentStartTime);
 
