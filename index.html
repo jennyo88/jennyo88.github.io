@@ -369,6 +369,9 @@
     function createDynamicSchedule() {
       const subcategories = Array.from(new Set(channels.map(channel => channel.subcategory)));
 
+      console.log("Available Subcategories:", subcategories);
+      console.log("Dynamic Schedule Blocks:", dynamicScheduleBlocks);
+
       dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
         const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
         const endHour = startHour + 3;
