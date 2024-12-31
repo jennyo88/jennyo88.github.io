@@ -399,29 +399,31 @@
     let currentVideoIndex = 0;
 
     function playStatic(callback) {
-      // Set the static video as the source
-      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with your static video file path
-      videoPlayer.currentTime = 0; // Start from the beginning
-      videoPlayer.muted = false; // Ensure autoplay works
+      // Check if static video exists
+      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with the correct path
+      videoPlayer.currentTime = 0;
+      videoPlayer.muted = true; // Static sound is usually muted
     
       videoPlayer
         .play()
         .then(() => {
-          // Display "Static" message
           channelDisplay.textContent = "Static...";
-    
-          // Wait for 1 second, then call the callback
           setTimeout(() => {
             callback();
-          }, 1000);
+          }, 1000); // Play static for 1 second
         })
         .catch((error) => {
           console.error("Error playing static video:", error);
     
-          // Fallback: Call the callback immediately without delay
-          callback();
+          // Fallback: Show a black screen with static text
+          channelDisplay.textContent = "Static...";
+          setTimeout(() => {
+            channelDisplay.textContent = "";
+            callback();
+          }, 1000);
         });
     }
+
 
     function playNextVideoInBlock() {
       const block = dynamicScheduleBlocks[currentBlockIndex];
