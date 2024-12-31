@@ -50,77 +50,25 @@
             height: 100%;
             background: url('./assets/images/tvclean.webp') no-repeat center center;
             background-size: cover;
-            pointer-events: none;
             z-index: 2;
         }
 
-        .sidebar {
-            width: 400px;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            background: #444;
-            overflow-y: auto;
-        }
-
-        .tv-guide {
-            margin-bottom: 20px;
-            background: #555;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .tv-guide h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.5rem;
-        }
-
-        .tv-guide ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .tv-guide li {
-            margin-bottom: 10px;
-            padding: 10px;
-            background: #666;
-            border-radius: 5px;
-        }
-
-        .poster-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            background: #555;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .poster-container img {
-            width: 150px;
-            height: 200px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
         .button-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 20px;
-            background: #555;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            justify-content: center;
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            z-index: 3;
+            display: grid;
+            grid-template-columns: repeat(2, 60px) 120px;
+            grid-gap: 10px;
+            justify-items: center;
+            align-items: center;
         }
 
         .button {
             width: 60px;
             height: 60px;
-            background: #666;
+            background: rgba(255, 255, 255, 0.2);
             border: none;
             border-radius: 10px;
             display: flex;
@@ -129,7 +77,7 @@
             font-size: 1rem;
             color: #fff;
             cursor: pointer;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .button.power, .button.indicator {
@@ -140,21 +88,23 @@
         .button.indicator {
             background: red;
         }
-
-        .button-space {
-            width: 120px;
-            height: 120px;
-            background: transparent;
-            border: none;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <video id="video-player" controls autoplay muted loop></video>
+            <video id="video-player" controls autoplay loop></video>
             <div class="tv-overlay"></div>
+            <div class="button-panel">
+                <button class="button" id="menu">Menu</button>
+                <button class="button" id="vol-down">Vol -</button>
+                <button class="button" id="vol-up">Vol +</button>
+                <button class="button" id="ch-down">Ch -</button>
+                <button class="button" id="ch-up">Ch +</button>
+                <div class="button indicator" id="indicator"></div>
+                <button class="button power" id="power">Power</button>
+            </div>
         </div>
 
         <!-- Sidebar -->
@@ -167,18 +117,6 @@
 
             <!-- Poster Container -->
             <div class="poster-container" id="poster-container"></div>
-
-            <!-- Button Panel -->
-            <div class="button-panel">
-                <button class="button">Menu</button>
-                <button class="button">Vol -</button>
-                <button class="button">Vol +</button>
-                <button class="button">Ch -</button>
-                <button class="button">Ch +</button>
-                <button class="button indicator"></button>
-                <button class="button-space"></button>
-                <button class="button power">Power</button>
-            </div>
         </div>
     </div>
 
@@ -187,13 +125,46 @@
         const videoPlayer = document.getElementById('video-player');
         const tvGuideList = document.getElementById('tv-guide-list');
         const posterContainer = document.getElementById('poster-container');
+        const powerButton = document.getElementById('power');
+        const indicator = document.getElementById('indicator');
+        let isPoweredOn = true;
+
+        // Create blocks based on subcategories and randomize schedule
+        function createSchedule() {
+            const blocks = {};
+            channels.forEach(channel => {
+                if (!blocks[channel.subcategory]) {
+                    blocks[channel.subcategory] = [];
+                }
+                blocks[channel.subcategory].push(channel);
+            });
+
+            const schedule = [];
+            Object.keys(blocks).forEach(subcategory => {
+                const shuffled = blocks[subcategory]
+                    .sort(() => Math.random() - 0.5)
+                    .map(channel => ({
+                        name: channel.name,
+                        description: channel.description,
+                    }));
+                schedule.push(...shuffled);
+            });
+
+            return schedule;
+        }
+
+        function updateTVGuide() {
+            const schedule = createSchedule();
+            tvGuideList.innerHTML = '';
+
+            schedule.forEach((item, index) => {
+                const guideItem = document.createElement('li');
+                guideItem.textContent = `${8 + Math.floor(index / 2)}:${index % 2 === 0 ? '00' : '30'} AM - ${item.name} - ${item.description}`;
+                tvGuideList.appendChild(guideItem);
+            });
+        }
 
         channels.forEach(channel => {
-            // Add to TV Guide
-            const guideItem = document.createElement('li');
-            guideItem.textContent = `${channel.name} - ${channel.description}`;
-            tvGuideList.appendChild(guideItem);
-
             // Add to Poster Container
             const poster = document.createElement('img');
             poster.src = channel.poster;
@@ -208,6 +179,37 @@
         if (channels.length > 0) {
             videoPlayer.src = channels[0].video;
         }
+
+        updateTVGuide();
+
+        // Button Functionality
+        powerButton.addEventListener('click', () => {
+            isPoweredOn = !isPoweredOn;
+            indicator.style.background = isPoweredOn ? 'red' : 'gray';
+            videoPlayer.style.display = isPoweredOn ? 'block' : 'none';
+        });
+
+        document.getElementById('vol-down').addEventListener('click', () => {
+            videoPlayer.volume = Math.max(0, videoPlayer.volume - 0.1);
+        });
+
+        document.getElementById('vol-up').addEventListener('click', () => {
+            videoPlayer.volume = Math.min(1, videoPlayer.volume + 0.1);
+        });
+
+        let currentChannelIndex = 0;
+
+        document.getElementById('ch-down').addEventListener('click', () => {
+            currentChannelIndex = (currentChannelIndex - 1 + channels.length) % channels.length;
+            videoPlayer.src = channels[currentChannelIndex].video;
+            videoPlayer.play();
+        });
+
+        document.getElementById('ch-up').addEventListener('click', () => {
+            currentChannelIndex = (currentChannelIndex + 1) % channels.length;
+            videoPlayer.src = channels[currentChannelIndex].video;
+            videoPlayer.play();
+        });
     </script>
 </body>
 </html>
