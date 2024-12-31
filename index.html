@@ -367,8 +367,15 @@
     let dynamicScheduleBlocks = [];
 
     function createDynamicSchedule() {
-      const subcategories = Array.from(new Set(channels.map(channel => channel.subcategory)));
-
+      const validCategories = ["Movies", "Cartoons"]; // Specify the categories you want to include
+      const subcategories = Array.from(
+        new Set(
+          channels
+            .filter(channel => validCategories.includes(channel.category))
+            .map(channel => channel.subcategory)
+        )
+      );
+    
       dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
         const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
         const endHour = startHour + 3;
@@ -380,6 +387,7 @@
         };
       });
     }
+
 
     function getVideosBySubcategory(subcategory) {
       return channels
