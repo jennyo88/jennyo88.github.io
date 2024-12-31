@@ -144,11 +144,10 @@
         .button-panel {
             position: absolute;
             bottom: 7%;
-            left: 50%;
+            left: 50%; /* Center align */
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            align-items: center;
             z-index: 6;
         }
 
@@ -156,39 +155,39 @@
             width: 10px;
             height: 10px;
             background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
-            border: 1px solid black;
+            border: none;
             border-radius: 50%;
             cursor: pointer;
             transition: background-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
                         inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-                        0 0 10px rgba(192, 192, 192, 0.6);
+                        0 0 10px rgba(192, 192, 192, 0.6); /* Gradient halo */
         }
 
         .button-panel button:hover {
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
-                        0 0 30px rgba(192, 192, 192, 0.6);
+                        0 0 30px rgba(192, 192, 192, 0.6); /* Stronger halo on hover */
         }
-
+        
         .button-panel button:active {
-            background: linear-gradient(145deg, #e0e0e0, #b0b0b0);
+            background: linear-gradient(145deg, #e0e0e0, #b0b0b0); /* Slightly darker metallic look */
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4),
                         0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         #power {
-            width: 25px;
-            height: 25px;
+            width: 25px; /* Larger width */
+            height: 25px; /* Larger height */
             background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
-            border: 1px solid black;
+            border: none;
             border-radius: 50%;
             cursor: pointer;
             transition: background-color 0.2s ease, box-shadow 0.2s ease;
             box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
                         inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-                        0 0 15px rgba(192, 192, 192, 0.8);
-            margin-top: -9px;
-            margin-left: 5px;
+                        0 0 15px rgba(192, 192, 192, 0.8); /* Larger halo for power button */
+            margin-top: -9px; /* Adjust alignment */
+            margin-left: 5px; /* Adjust alignment */
         }
 
         #power-light {
@@ -211,6 +210,38 @@
             margin-top: 5px;
             color: #fff;
         }
+
+        .spacer {
+            width: 41px;
+            height: 10px;
+        }
+
+        .notification {
+            position: fixed; /* Fixed position to always stay on top of the screen */
+            top: 10px; /* Near the top of the screen */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: limegreen;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+            z-index: 15;
+            text-align: center;
+            animation: fadeInOut 3s ease; /* Smooth fade-in and fade-out */
+        }
+        
+        /* Animation for fade-in and fade-out */
+        @keyframes fadeInOut {
+            0%, 90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
 
         @media (max-width: 768px) {
             .container {
@@ -242,10 +273,11 @@
     </style>
 </head>
 <body>
+    <!-- Main Interface -->
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <video id="video-player" controls autoplay muted loop></video>
+            <video id="video-player" controls autoplay loop></video>
             <div id="power-off-overlay" class="power-off"></div>
             <div class="tv-overlay"></div>
         </div>
@@ -260,6 +292,7 @@
 
             <!-- Poster Container -->
             <div class="poster-container" id="poster-container"></div>
+                <img id="poster" src="default-poster.jpg" alt="Poster">
         </div>
     </div>
 
@@ -296,16 +329,30 @@
         </div>
     </div>
 
+    <!-- Notification Area -->
+    <div class="notification"></div>
+
+    <!-- JavaScript for Interactivity -->
     <script src="./channels.js"></script>
     <script>
+        // Core TV functionality and notifications
         const videoPlayer = document.getElementById('video-player');
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.getElementById('power-off-overlay');
         const powerButton = document.getElementById('power');
         const tvGuideList = document.getElementById('tv-guide-list');
+        const poster = document.getElementById('poster');
 
         let powerOn = true;
+        let currentChannelIndex = 0;
 
+        const subcategories = Object.keys(channels.reduce((acc, channel) => {
+            acc[channel.subcategory] = true;
+            return acc;
+        }, {}));
+
+        
+        // Power toggle
         powerButton.addEventListener('click', () => {
             powerOn = !powerOn;
             if (powerOn) {
@@ -313,20 +360,17 @@
                 powerLight.style.background = 'green';
                 powerLight.style.boxShadow = '0 0 15px green';
                 videoPlayer.play();
+                showNotification('Power ON', 'limegreen');
             } else {
                 powerOverlay.style.display = 'flex';
                 powerLight.style.background = 'red';
                 powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
+                showNotification('Power OFF', 'red');
             }
         });
-
-        let currentChannelIndex = 0;
-        const subcategories = Object.keys(channels.reduce((acc, channel) => {
-            acc[channel.subcategory] = true;
-            return acc;
-        }, {}));
-
+        
+        // Populate TV Guide
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
@@ -336,7 +380,8 @@
                 tvGuideList.appendChild(listItem);
             });
         };
-
+        
+        // Set channel
         const setChannel = (index) => {
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
@@ -344,12 +389,14 @@
 
             if (channelVideos.length > 0) {
                 videoPlayer.src = channelVideos[0].video;
+                poster.src = channel.poster; // Update the poster
                 if (powerOn) {
                     videoPlayer.play();
                 }
             }
 
             populateTVGuide(subcategory);
+            showNotification(`Channel: ${subcategory}`, 'limegreen');
         };
 
         document.getElementById('channel-up').addEventListener('click', () => {
@@ -362,14 +409,44 @@
 
         document.getElementById('volume-up').addEventListener('click', () => {
             videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+            showNotification('Volume Up', 'limegreen');
         });
 
         document.getElementById('volume-down').addEventListener('click', () => {
             videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+            showNotification('Volume Down', 'limegreen');
         });
 
         // Initialize the first channel
         setChannel(currentChannelIndex);
+
+        // Notification functionality
+        function showNotification(message, color = 'limegreen') {
+            const notification = document.querySelector('.notification');
+            notification.textContent = message; // Set the message
+            notification.style.color = color; // Set the text color
+            notification.style.display = 'block'; // Show the notification
+    
+            // Hide the notification after 3 seconds
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    
+        // Example button event listeners
+        document.querySelectorAll('.button-panel button').forEach((button, index) => {
+            button.addEventListener('click', () => {
+                showNotification(`Button ${index + 1} pressed`);
+            });
+        });
+    
+        // Power button event listener
+        document.getElementById('power').addEventListener('click', () => {
+            const isPoweredOn = document.body.classList.toggle('power-off'); // Toggle power-off class
+            showNotification(isPoweredOn ? 'Power Off' : 'Power On', isPoweredOn ? 'red' : 'limegreen');
+        });
+
+
     </script>
 </body>
 </html>
