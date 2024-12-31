@@ -291,7 +291,7 @@
 
             <!-- Poster Container -->
             <div class="poster-container" id="poster-container">
-                <img id="poster" src="default_poster.jpg" alt="Poster">
+                <img id="poster" src="default_poster.jpg" alt="Channel Poster" style="width: 100%; margin-top: 10px;">
             </div>
         </div>
     </div>
@@ -405,11 +405,16 @@
                 const channel = channelVideos[0];
                 if (channel.video) {
                     videoPlayer.src = channel.video;
-                    poster.src = channel.poster || 'default_poster.jpg'; // Ensure the poster is set
                     adjustPlaybackTime(subcategory);
                     videoPlayer.play();
                 } else {
                     console.error(`Video source is undefined for channel: ${channel.name}`);
+                }
+                // Update the poster
+                if (channel.poster) {
+                    poster.src = channel.poster;
+                } else {
+                    poster.src = 'default_poster.jpg'; // Fallback poster
                 }
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
