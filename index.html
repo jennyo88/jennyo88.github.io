@@ -334,6 +334,7 @@
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
         const powerButton = document.getElementById('power');
+        const menuButton = document.getElementById('menu');
         const tvGuideList = document.getElementById('tv-guide-list');
         const poster = document.getElementById('poster');
 
@@ -361,6 +362,15 @@
                 showNotification('Power OFF', 'red');
             }
         });
+
+        const shuffleChannels = () => {
+            const randomIndex = Math.floor(Math.random() * subcategories.length);
+            setChannel(randomIndex);
+            showNotification('Shuffled to Random Channel', 'limegreen');
+        };
+
+        menuButton.addEventListener('click', shuffleChannels);
+
 
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
