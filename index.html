@@ -130,8 +130,8 @@
             justify-content: center;
             gap: 10px;
             background: #555;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
@@ -217,14 +217,14 @@
 
         .notification {
             position: fixed;
-            top: 20%;
+            top: 10px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 16px;
+            transform: translateX(-50%);
+            font-size: 14px;
             color: limegreen;
             background: rgba(0, 0, 0, 0.8);
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 5px;
             display: none;
             z-index: 15;
             text-align: center;
@@ -275,7 +275,7 @@
         <!-- Video Section -->
         <div class="video-section">
             <video id="video-player" controls autoplay loop></video>
-            <div class="power-off">Powered Off</div>
+            <div class="power-off"></div>
             <div class="tv-overlay"></div>
         </div>
 
@@ -430,7 +430,7 @@
             notification.style.display = 'block';
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 3000);
+            }, 4000);
         }
     </script>
 </body>
