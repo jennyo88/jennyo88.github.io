@@ -385,35 +385,33 @@
     }
 
 
-    
-
     function playScheduledProgram(program) {
       playStatic(() => {
-        if (program.episodes && program.episodes.length > 0) {
-          // Play the first episode in the program
-          const episode = program.episodes[0];
-          videoPlayer.src = episode.video;
-    
-          // Update poster and metadata
-          const posterElement = document.getElementById("poster");
-          posterElement.src = program.poster || "./assets/images/default_poster.jpg";
-          channelDisplay.textContent = `Now Playing: ${program.name} - ${episode.title}`;
-    
-          videoPlayer.play();
-    
-          // Handle end of episode
-          videoPlayer.onended = () => {
-            // Logic to play the next episode or program
-          };
-    
-          showNotification(`Playing: ${program.name} - ${episode.title}`);
-        } else {
-          // Play as a single video program
+        if (program.video) {
+          // Set the video source
           videoPlayer.src = program.video;
+    
+          // Update the poster
+          const posterElement = document.getElementById("poster");
+          if (program.poster) {
+            posterElement.src = program.poster;
+          } else {
+            console.warn(`Missing poster for program: ${program.name}`);
+            posterElement.src = "./assets/images/default_poster.jpg";
+          }
+    
+          // Update the on-screen display
+          channelDisplay.textContent = `Now Playing: ${program.name}`;
           videoPlayer.play();
+    
+          showNotification(`Playing: ${program.name}`);
+        } else {
+          showNotification("Error: No video source available for this program.");
         }
       });
     }
+
+
 
     function getCurrentProgram() {
       const now = new Date();
