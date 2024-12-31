@@ -208,7 +208,7 @@
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <video id="video-player" controls autoplay muted loop></video>
+            <video id="video-player" controls autoplay loop></video>
             <div class="tv-overlay"></div>
             <div id="power-off-overlay" class="power-off"></div>
         </div>
@@ -265,13 +265,14 @@
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.getElementById('power-off-overlay');
         const powerButton = document.getElementById('power');
+        const tvGuideList = document.getElementById('tv-guide-list');
 
         let powerOn = true;
 
         powerButton.addEventListener('click', () => {
             powerOn = !powerOn;
             if (powerOn) {
-                powerOverlay.style.display = 'none';
+                powerOverlay.style.display = 'flex';
                 powerLight.style.background = 'green';
                 videoPlayer.play();
             } else {
@@ -287,6 +288,16 @@
             return acc;
         }, {}));
 
+        const populateTVGuide = (subcategory) => {
+            tvGuideList.innerHTML = '';
+            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
+            channelVideos.forEach(video => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${video.name} - ${video.description}`;
+                tvGuideList.appendChild(listItem);
+            });
+        };
+
         const setChannel = (index) => {
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
@@ -298,6 +309,8 @@
                     videoPlayer.play();
                 }
             }
+
+            populateTVGuide(subcategory);
         };
 
         document.getElementById('channel-up').addEventListener('click', () => {
