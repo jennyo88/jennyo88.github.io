@@ -364,187 +364,82 @@
     const glowingButton = document.getElementById("glowingButton");
     const tvGuide = document.getElementById("tvGuide");
 
-    const groupedChannels = channels.reduce((acc, channel) => {
-      if (!acc[channel.category]) acc[channel.category] = {};
-      const subcategory = channel.subcategory || "default";
-      if (!acc[channel.category][subcategory]) acc[channel.category][subcategory] = [];
-      acc[channel.category][subcategory].push(channel);
-      return acc;
-    }, {});
-
-    function playStatic(callback) {
-      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Static video path
-      videoPlayer.currentTime = 0; // Start from the beginning
-      videoPlayer.muted = false;
-      videoPlayer.play()
-        .then(() => {
-          channelDisplay.textContent = "Static...";
-          setTimeout(callback, 1000); // Play static for 1 second before the next video
-        })
-        .catch((error) => {
-          console.error("Error playing static video:", error);
-          callback(); // Proceed without static if there's an error
-        });
-    }
+    let dynamicScheduleBlocks = [];
 
     function createDynamicSchedule() {
-      const schedule = [];
-      let currentTime = new Date();
-      currentTime.setMinutes(0, 0, 0);
+      const subcategories = Array.from(new Set(channels.map(channel => channel.subcategory)));
 
-      channels.forEach(channel => {
-        if (channel.episodes) {
-          channel.episodes.forEach(episode => {
-            schedule.push({
-              time: formatTime(currentTime),
-              name: `${channel.name} - Episode`,
-              video: episode.video,
-            });
-            currentTime = new Date(currentTime.getTime() + 30 * 60000); // Add 30 mins
-          });
-        } else {
-          schedule.push({
-            time: formatTime(currentTime),
-            name: channel.name,
-            video: channel.video,
-          });
-          currentTime = new Date(currentTime.getTime() + 90 * 60000); // Add 90 mins
-        }
+      dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
+        const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
+        const endHour = startHour + 3;
+        const timeString = `${String(startHour).padStart(2, '0')}:00-${String(endHour).padStart(2, '0')}:00`;
+        return {
+          time: timeString,
+          name: `${subcategory} Block`,
+          videos: getVideosBySubcategory(subcategory)
+        };
       });
-
-      return schedule;
     }
 
-    function formatTime(date) {
-      return date.toTimeString().slice(0, 5);
+    function getVideosBySubcategory(subcategory) {
+      return channels
+        .filter(channel => channel.subcategory === subcategory)
+        .flatMap(channel => channel.episodes ? channel.episodes.map(ep => ep.video) : [channel.video]);
     }
 
-    function playScheduledBlock() {
+    let currentBlockIndex = 0;
+    let currentVideoIndex = 0;
+
+    function playNextVideoInBlock() {
+      const block = dynamicScheduleBlocks[currentBlockIndex];
+      const videos = block.videos;
+
+      if (currentVideoIndex >= videos.length) {
+        currentVideoIndex = 0;
+      }
+
+      const videoSrc = videos[currentVideoIndex];
+
+      playStatic(() => {
+        videoPlayer.src = videoSrc;
+        videoPlayer.play();
+        channelDisplay.textContent = `Now Playing: ${block.name}`;
+        currentVideoIndex++;
+      });
+    }
+
+    
+    function updateCurrentBlock() {
       const now = new Date();
-      const currentTime = formatTime(now);
-      const dynamicSchedule = createDynamicSchedule();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
 
-      const currentBlock = dynamicSchedule.find(block => block.time === currentTime);
+      for (let i = 0; i < dynamicScheduleBlocks.length; i++) {
+        const blockTime = dynamicScheduleBlocks[i].time.split("-");
+        const blockStart = parseInt(blockTime[0].split(":")[0]) * 60 + parseInt(blockTime[0].split(":")[1]);
+        const blockEnd = parseInt(blockTime[1].split(":")[0]) * 60 + parseInt(blockTime[1].split(":")[1]);
 
-      if (currentBlock) {
-        playStatic(() => {
-          videoPlayer.src = currentBlock.video;
-          channelDisplay.textContent = `Now Playing: ${currentBlock.name}`;
-          videoPlayer.play();
-        });
+        if (currentTime >= blockStart && currentTime < blockEnd) {
+          if (currentBlockIndex !== i) {
+            currentBlockIndex = i;
+            currentVideoIndex = 0; // Reset video index for the new block
+            playNextVideoInBlock();
+          }
+          break;
+        }
       }
     }
 
-    setInterval(playScheduledBlock, 60000); // Check every minute
-
-    function populateGuide() {
-      tvGuide.innerHTML = `<h2>TV Guide</h2>`;
-      Object.keys(groupedChannels).forEach(category => {
-        const categoryItem = document.createElement("div");
-        categoryItem.classList.add("category-item");
-        categoryItem.textContent = category;
-        categoryItem.addEventListener("click", () => displaySubcategories(category));
-        tvGuide.appendChild(categoryItem);
-      });
-    }
-
-    function displaySubcategories(category) {
-      tvGuide.innerHTML = `<h2>${category}</h2>`;
-      const subcategories = groupedChannels[category];
-      Object.keys(subcategories).forEach(subcategory => {
-        const subcategoryItem = document.createElement("div");
-        subcategoryItem.classList.add("category-item");
-        subcategoryItem.textContent = subcategory === "default" ? "Uncategorized" : subcategory;
-        subcategoryItem.addEventListener("click", () => displayChannels(category, subcategory));
-        tvGuide.appendChild(subcategoryItem);
-      });
-
-      const backButton = document.createElement("div");
-      backButton.classList.add("back-button");
-      backButton.textContent = "Back to Main";
-      backButton.addEventListener("click", populateGuide);
-      tvGuide.appendChild(backButton);
-    }
-
-    function displayChannels(category, subcategory) {
-      tvGuide.innerHTML = `<h2>${subcategory === "default" ? category : subcategory}</h2>`;
-      const uniqueChannels = [...new Set(groupedChannels[category][subcategory].map(ch => ch.channelNumber))];
-      const sortedUniqueChannels = uniqueChannels.sort((a, b) => {
-        const yearA = groupedChannels[category][subcategory].find(ch => ch.channelNumber === a).releaseYear || 0;
-        const yearB = groupedChannels[category][subcategory].find(ch => ch.channelNumber === b).releaseYear || 0;
-        return yearA - yearB;
-      });
-
-      sortedUniqueChannels.forEach(channelNumber => {
-        const channelGroup = groupedChannels[category][subcategory].filter(ch => ch.channelNumber === channelNumber);
-        const channelName = channelGroup[0].name.split("Part")[0].trim();
-        const description = channelGroup[0].description || "No description available.";
-        const duration = channelGroup[0].duration || "Unknown duration";
-        const releaseYear = channelGroup[0].releaseYear || "Unknown year";
-
-        const channelItem = document.createElement("div");
-        channelItem.classList.add("channel-item");
-        channelItem.innerHTML = `<strong>${channelName} (Channel ${channelNumber})</strong><br><small>Year: ${releaseYear}</small>`;
-
-        channelItem.addEventListener("mouseover", () => {
-          showNotification(`Description: ${description} | Duration: ${duration} | Year: ${releaseYear}`);
-        });
-        channelItem.addEventListener("mouseout", hideNotification);
-
-        if (channelGroup[0].episodes) {
-          channelItem.addEventListener("click", () => displayEpisodes(channelGroup[0]));
-        } else {
-          channelItem.addEventListener("click", () => playChannelGroup(channelGroup));
+    function startDynamicSchedule() {
+      setInterval(() => {
+        updateCurrentBlock();
+        if (!videoPlayer.paused && videoPlayer.ended) {
+          playNextVideoInBlock();
         }
-
-        tvGuide.appendChild(channelItem);
-      });
-
-      const backButton = document.createElement("div");
-      backButton.classList.add("back-button");
-      backButton.textContent = "Back to Categories";
-      backButton.addEventListener("click", () => displaySubcategories(category));
-      tvGuide.appendChild(backButton);
+      }, 1000);
     }
 
-    function displayEpisodes(channel) {
-      tvGuide.innerHTML = `<h2>${channel.name} Episodes</h2>`;
-      channel.episodes.forEach((episode, index) => {
-        const episodeItem = document.createElement("div");
-        episodeItem.classList.add("channel-item");
-        episodeItem.textContent = `Episode ${index + 1}: ${episode.title || `Part ${index + 1}`}`;
-        episodeItem.addEventListener("click", () => playEpisode(episode, channel));
-        tvGuide.appendChild(episodeItem);
-      });
-
-      const backButton = document.createElement("div");
-      backButton.classList.add("back-button");
-      backButton.textContent = "Back to Channels";
-      backButton.addEventListener("click", populateGuide);
-      tvGuide.appendChild(backButton);
-    }
-
-    function playEpisode(episode, channel) {
-      playStatic(() => {
-        videoPlayer.src = episode.video;
-        const posterElement = document.getElementById("poster");
-        posterElement.src = channel.poster || "./assets/images/default_poster.jpg";
-        channelDisplay.textContent = `Now Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`;
-        videoPlayer.play();
-        showNotification(`Playing: ${channel.name} - ${episode.title || `Part ${channel.episodes.indexOf(episode) + 1}`}`);
-      });
-    }
-
-    function playChannelGroup(channelGroup) {
-      playStatic(() => {
-        const firstChannel = channelGroup[0];
-        videoPlayer.src = firstChannel.video;
-        const posterElement = document.getElementById("poster");
-        posterElement.src = firstChannel.poster || "./assets/images/default_poster.jpg";
-        channelDisplay.textContent = `Now Playing: ${firstChannel.name}`;
-        videoPlayer.play();
-      });
-    }
+    createDynamicSchedule();
+    startDynamicSchedule();
 
     function showNotification(message) {
       notification.textContent = message;
@@ -556,6 +451,7 @@
       notification.style.display = "none";
     }
 
+    
     function togglePower() {
       powerOn = !powerOn;
       const posterElement = document.getElementById("poster");
@@ -661,7 +557,6 @@
       showNotification("Channel Shuffled");
     }
   });
-
 
     populateGuide();
   </script>
