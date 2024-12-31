@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RetroTV with Multi-Level TV Guide</title>
-  <style>
+    <style>
     body { 
       margin: 0;
       background-color: black;
@@ -30,7 +30,7 @@
       }
     }
 
-    @media (max-width: 768) {
+    @media (max-width: 768px) {
       .tv-container {
         width: 90%; /* Reduce width for smaller screens */
         height: auto;
@@ -155,7 +155,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     }
 
-  
     .tv-guide h2 {
       text-align: center;
       margin: 0;
@@ -223,7 +222,7 @@
       width: 41px;
       height: 10px;
     }
-
+      
     .channel-display {
       position: absolute;
       top: 80%;
@@ -375,7 +374,7 @@
             .map(channel => channel.subcategory)
         )
       );
-    
+
       dynamicScheduleBlocks = subcategories.map((subcategory, index) => {
         const startHour = 6 + index * 3; // Blocks are 3 hours each, starting from 6:00 AM
         const endHour = startHour + 3;
@@ -388,7 +387,6 @@
       });
     }
 
-
     function getVideosBySubcategory(subcategory) {
       return channels
         .filter(channel => channel.subcategory === subcategory)
@@ -397,33 +395,6 @@
 
     let currentBlockIndex = 0;
     let currentVideoIndex = 0;
-
-    function playStatic(callback) {
-      // Check if static video exists
-      videoPlayer.src = "./assets/videos/tv-static.mp4"; // Replace with the correct path
-      videoPlayer.currentTime = 0;
-      videoPlayer.muted = true; // Static sound is usually muted
-    
-      videoPlayer
-        .play()
-        .then(() => {
-          channelDisplay.textContent = "Static...";
-          setTimeout(() => {
-            callback();
-          }, 1000); // Play static for 1 second
-        })
-        .catch((error) => {
-          console.error("Error playing static video:", error);
-    
-          // Fallback: Show a black screen with static text
-          channelDisplay.textContent = "Static...";
-          setTimeout(() => {
-            channelDisplay.textContent = "";
-            callback();
-          }, 1000);
-        });
-    }
-
 
     function playNextVideoInBlock() {
       const block = dynamicScheduleBlocks[currentBlockIndex];
@@ -561,20 +532,20 @@
 
         case "ArrowRight": // Next channel
           currentBlockIndex = (currentBlockIndex + 1) % dynamicScheduleBlocks.length;
-          currentVideoIndex = 0;
+          currentVideoIndex = 0; // Reset to the first video in the new block
           playNextVideoInBlock();
-          showNotification(`Channel: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+          showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
           break;
 
         case "ArrowLeft": // Previous channel
           currentBlockIndex = (currentBlockIndex - 1 + dynamicScheduleBlocks.length) % dynamicScheduleBlocks.length;
-          currentVideoIndex = 0;
+          currentVideoIndex = 0; // Reset to the first video in the new block
           playNextVideoInBlock();
-          showNotification(`Channel: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
+          showNotification(`Now Playing: ${dynamicScheduleBlocks[currentBlockIndex].name}`);
           break;
 
         default:
-          break;
+          break; // Ignore other keys
       }
     });
   </script>
