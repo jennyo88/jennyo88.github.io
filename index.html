@@ -11,19 +11,20 @@
             padding: 0;
             background-color: #333;
             color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            width: 100%;
         }
 
         .video-section {
+            flex: 1;
+            height: 100%;
             position: relative;
-            width: 640px;
-            height: 480px; /* 4:3 aspect ratio */
             background-color: black;
             overflow: hidden;
             border-radius: 20px;
@@ -47,11 +48,18 @@
             pointer-events: none;
         }
 
-        .tv-guide {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 800px;
+        .sidebar {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
             background: #444;
+            overflow-y: auto;
+        }
+
+        .tv-guide {
+            margin-bottom: 20px;
+            background: #555;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -70,16 +78,19 @@
         .tv-guide li {
             margin-bottom: 10px;
             padding: 10px;
-            background: #555;
+            background: #666;
             border-radius: 5px;
         }
 
         .poster-container {
-            margin-top: 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
+            gap: 10px;
+            background: #555;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .poster-container img {
@@ -94,27 +105,29 @@
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <video id="video-player" controls autoplay muted loop></video>
+            <video id="video-player" controls autoplay loop></video>
             <div class="tv-overlay"></div>
         </div>
 
-        <!-- TV Guide -->
-        <div class="tv-guide">
-            <h2>TV Guide</h2>
-            <ul id="tv-guide-list"></ul>
-        </div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- TV Guide -->
+            <div class="tv-guide">
+                <h2>TV Guide</h2>
+                <ul id="tv-guide-list"></ul>
+            </div>
 
-        <!-- Poster Container -->
-        <div class="poster-container" id="poster-container"></div>
+            <!-- Poster Container -->
+            <div class="poster-container" id="poster-container"></div>
+        </div>
     </div>
 
-    <script src="channels.js"></script>
+    <script src="./channels.js"></script>
     <script>
         const videoPlayer = document.getElementById('video-player');
         const tvGuideList = document.getElementById('tv-guide-list');
         const posterContainer = document.getElementById('poster-container');
 
-        // Load the first video and populate the TV guide and poster container
         channels.forEach(channel => {
             // Add to TV Guide
             const guideItem = document.createElement('li');
@@ -132,7 +145,6 @@
             posterContainer.appendChild(poster);
         });
 
-        // Set the first video as default
         if (channels.length > 0) {
             videoPlayer.src = channels[0].video;
         }
