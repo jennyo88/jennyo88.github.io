@@ -50,7 +50,60 @@
             height: 100%;
             background: url('./assets/images/tvclean.webp') no-repeat center center;
             background-size: cover;
+            pointer-events: none;
             z-index: 2;
+        }
+
+        .sidebar {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: #444;
+            overflow-y: auto;
+        }
+
+        .tv-guide {
+            margin-bottom: 20px;
+            background: #555;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .tv-guide h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .tv-guide ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tv-guide li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #666;
+            border-radius: 5px;
+        }
+
+        .poster-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            background: #555;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .poster-container img {
+            width: 150px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         .button-panel {
@@ -105,6 +158,14 @@
             width: 41px;
             height: 10px;
         }
+
+        #power-light {
+            width: 25px;
+            height: 25px;
+            background: red;
+            border-radius: 50%;
+            box-shadow: 0 0 15px red;
+        }
     </style>
 </head>
 <body>
@@ -113,15 +174,6 @@
         <div class="video-section">
             <video id="video-player" controls autoplay muted loop></video>
             <div class="tv-overlay"></div>
-            <div class="button-panel">
-                <button class="button" id="menu">Menu</button>
-                <button class="button" id="vol-down">Vol -</button>
-                <button class="button" id="vol-up">Vol +</button>
-                <button class="button" id="ch-down">Ch -</button>
-                <button class="button" id="ch-up">Ch +</button>
-                <div class="spacer"></div>
-                <button id="power"></button>
-            </div>
         </div>
 
         <!-- Sidebar -->
@@ -137,21 +189,58 @@
         </div>
     </div>
 
+    <!-- Button Panel -->
+    <div class="button-panel">
+        <button id="menu"></button>
+        <button id="volume-down"></button>
+        <button id="volume-up"></button>
+        <button id="channel-down"></button>
+        <button id="channel-up"></button>
+        <div class="spacer"></div>
+        <div id="power-light"></div>
+        <button id="power"></button>
+    </div>
+
     <script src="./channels.js"></script>
     <script>
         const videoPlayer = document.getElementById('video-player');
         const tvGuideList = document.getElementById('tv-guide-list');
         const posterContainer = document.getElementById('poster-container');
-        const powerButton = document.getElementById('power');
-        let isPoweredOn = true;
 
-        // Button functionality for power toggle
-        powerButton.addEventListener('click', () => {
-            isPoweredOn = !isPoweredOn;
-            videoPlayer.style.display = isPoweredOn ? 'block' : 'none';
+        // Randomize and group content by subcategory
+        const randomizedChannels = channels.sort(() => Math.random() - 0.5);
+        const groupedChannels = randomizedChannels.reduce((acc, channel) => {
+            if (!acc[channel.subcategory]) {
+                acc[channel.subcategory] = [];
+            }
+            acc[channel.subcategory].push(channel);
+            return acc;
+        }, {});
+
+        Object.keys(groupedChannels).forEach(subcategory => {
+            const subcategoryHeader = document.createElement('h3');
+            subcategoryHeader.textContent = subcategory;
+            tvGuideList.appendChild(subcategoryHeader);
+
+            groupedChannels[subcategory].forEach(channel => {
+                const guideItem = document.createElement('li');
+                guideItem.textContent = `${channel.name} - ${channel.description}`;
+                tvGuideList.appendChild(guideItem);
+
+                const poster = document.createElement('img');
+                poster.src = channel.poster;
+                poster.alt = channel.name;
+                poster.onclick = () => {
+                    videoPlayer.src = channel.video;
+                    videoPlayer.play();
+                };
+                posterContainer.appendChild(poster);
+            });
         });
 
-        // Add other button functionalities as needed
+        if (channels.length > 0) {
+            videoPlayer.src = channels[0].video;
+        }
     </script>
 </body>
 </html>
