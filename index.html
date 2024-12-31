@@ -250,40 +250,41 @@
         const tvGuideList = document.getElementById('tv-guide-list');
         const posterContainer = document.getElementById('poster-container');
 
-        // Randomize and group content by subcategory
-        const randomizedChannels = channels.sort(() => Math.random() - 0.5);
-        const groupedChannels = randomizedChannels.reduce((acc, channel) => {
-            if (!acc[channel.subcategory]) {
-                acc[channel.subcategory] = [];
-            }
-            acc[channel.subcategory].push(channel);
+        let currentChannelIndex = 0;
+        const subcategories = Object.keys(channels.reduce((acc, channel) => {
+            acc[channel.subcategory] = true;
             return acc;
-        }, {});
+        }, {}));
 
-        Object.keys(groupedChannels).forEach(subcategory => {
-            const subcategoryHeader = document.createElement('h3');
-            subcategoryHeader.textContent = subcategory;
-            tvGuideList.appendChild(subcategoryHeader);
+        const setChannel = (index) => {
+            currentChannelIndex = (index + subcategories.length) % subcategories.length;
+            const subcategory = subcategories[currentChannelIndex];
+            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
 
-            groupedChannels[subcategory].forEach(channel => {
-                const guideItem = document.createElement('li');
-                guideItem.textContent = `${channel.name} - ${channel.description}`;
-                tvGuideList.appendChild(guideItem);
+            if (channelVideos.length > 0) {
+                videoPlayer.src = channelVideos[0].video;
+                videoPlayer.play();
+            }
+        };
 
-                const poster = document.createElement('img');
-                poster.src = channel.poster;
-                poster.alt = channel.name;
-                poster.onclick = () => {
-                    videoPlayer.src = channel.video;
-                    videoPlayer.play();
-                };
-                posterContainer.appendChild(poster);
-            });
+        document.getElementById('channel-up').addEventListener('click', () => {
+            setChannel(currentChannelIndex + 1);
         });
 
-        if (channels.length > 0) {
-            videoPlayer.src = channels[0].video;
-        }
+        document.getElementById('channel-down').addEventListener('click', () => {
+            setChannel(currentChannelIndex - 1);
+        });
+
+        document.getElementById('volume-up').addEventListener('click', () => {
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        });
+
+        document.getElementById('volume-down').addEventListener('click', () => {
+            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        });
+
+        // Initialize the first channel
+        setChannel(currentChannelIndex);
     </script>
 </body>
 </html>
