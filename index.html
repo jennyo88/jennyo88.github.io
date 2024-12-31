@@ -113,14 +113,13 @@
             transform: translateX(-50%);
             display: flex;
             gap: 10px;
-            align-items: center;
         }
 
         .button-panel button {
             width: 10px;
             height: 10px;
             background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
-            border: none;
+            border: 10px;
             border-radius: 50%;
             cursor: pointer;
             transition: background-color 0.2s ease, box-shadow 0.2s ease;
@@ -167,26 +166,6 @@
             border-radius: 50%;
             box-shadow: 0 0 15px red;
         }
-
-        .button-label {
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 5px;
-            color: #fff;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .button-container-large {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: 10px;
-        }
     </style>
 </head>
 <body>
@@ -212,35 +191,14 @@
 
     <!-- Button Panel -->
     <div class="button-panel">
-        <div class="button-container">
-            <button id="menu"></button>
-            <div class="button-label">Menu</div>
-        </div>
-        <div class="button-container">
-            <button id="volume-down"></button>
-            <div class="button-label">Volume -</div>
-        </div>
-        <div class="button-container">
-            <button id="volume-up"></button>
-            <div class="button-label">Volume +</div>
-        </div>
-        <div class="button-container">
-            <button id="channel-down"></button>
-            <div class="button-label">Channel -</div>
-        </div>
-        <div class="button-container">
-            <button id="channel-up"></button>
-            <div class="button-label">Channel +</div>
-        </div>
+        <button id="menu"></button>
+        <button id="volume-down"></button>
+        <button id="volume-up"></button>
+        <button id="channel-down"></button>
+        <button id="channel-up"></button>
         <div class="spacer"></div>
-        <div class="button-container-large">
-            <div id="power-light"></div>
-            <div class="button-label">Power Light</div>
-        </div>
-        <div class="button-container-large">
-            <button id="power"></button>
-            <div class="button-label">Power</div>
-        </div>
+        <div id="power-light"></div>
+        <button id="power"></button>
     </div>
 
     <script src="./channels.js"></script>
