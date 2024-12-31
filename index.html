@@ -292,7 +292,7 @@
 
             <!-- Poster Container -->
             <div class="poster-container" id="poster-container"></div>
-                <img id="poster" src="default-poster.jpg" alt="Poster">
+                <img id="poster" src="default_poster.jpg" alt="Poster">
         </div>
     </div>
 
@@ -388,12 +388,16 @@
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
 
             if (channelVideos.length > 0) {
-                videoPlayer.src = channelVideos[0].video;
-                poster.src = channel.poster; // Update the poster
+                const channel = channelVideos[0];
+                videoPlayer.src = channel.video;
+                poster.src = channel.poster; // Update the poster only if the channel exists
                 if (powerOn) {
                     videoPlayer.play();
                 }
+            } else {
+                showNotification('No channels available in this category', 'red');
             }
+
 
             populateTVGuide(subcategory);
             showNotification(`Channel: ${subcategory}`, 'limegreen');
