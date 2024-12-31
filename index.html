@@ -399,29 +399,26 @@
             updatePlaybackTime(subcategories[currentChannelIndex]);
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
-
-            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
-            if (channelVideos.length > 0) {
-                const channel = channelVideos[0];
+        
+            const channel = channels.find(channel => channel.subcategory === subcategory);
+            if (channel) {
                 if (channel.video) {
                     videoPlayer.src = channel.video;
-                    adjustPlaybackTime(subcategory);
-                    videoPlayer.play();
+                    videoPlayer.load();
+                    videoPlayer.play().catch(error => {
+                        console.error('Error during playback:', error.message);
+                    });
                 } else {
                     console.error(`Video source is undefined for channel: ${channel.name}`);
                 }
-                // Update the poster
-                if (channel.poster) {
-                    poster.src = channel.poster;
-                } else {
-                    poster.src = 'default_poster.jpg'; // Fallback poster
-                }
+                poster.src = channel.poster || 'default_poster.jpg'; // Set poster
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
             }
-
+        
             populateTVGuide(subcategory);
         };
+
 
         const shuffleChannels = () => {
             let randomIndex;
