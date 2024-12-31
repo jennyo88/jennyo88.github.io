@@ -39,15 +39,6 @@
             position: relative;
         }
 
-        .tv-overlay {
-            position: absolute;
-            width: 700px;
-            height: 550px;
-            background: url('./assets/images/tvclean.webp') no-repeat center center;
-            background-size: contain;
-            z-index: 3;
-        }
-
         .tv-screen {
             position: absolute;
             top: 9%;
@@ -55,14 +46,20 @@
             width: 86%;
             height: 72%;
             overflow: hidden;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%, black 100%);
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: background 0.5s ease-in-out;
+        }
+
+        .tv-screen.on {
+            background: none;
         }
 
         video {
-            width: 100%;
-            height: 100%;
+            width: 90%;
+            height: 90%;
             object-fit: contain;
             position: absolute;
             z-index: 1;
@@ -70,8 +67,8 @@
 
         .power-off {
             background: radial-gradient(circle, #000, #111 60%, #222 80%, #000 100%);
-            width: 100%;
-            height: 100%;
+            width: 90%;
+            height: 90%;
             position: absolute;
             top: 0;
             left: 0;
@@ -79,6 +76,15 @@
             display: none;
             justify-content: center;
             align-items: center;
+        }
+
+        .tv-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('./assets/images/tvclean.webp') no-repeat center center;
+            background-size: contain;
+            z-index: 3;
         }
 
         .sidebar {
@@ -237,13 +243,9 @@
     <div class="container">
         <!-- Video Section -->
         <div class="video-section">
-            <div class="tv-container">
-                <div class="tv-overlay"></div>
-                <div class="tv-screen">
-                    <video id="video-player" controls autoplay muted loop></video>
-                    <div id="power-off-overlay" class="power-off"></div>
-                </div>
-            </div>
+            <video id="video-player" controls autoplay muted loop></video>
+            <div id="power-off-overlay" class="power-off"></div>
+            <div class="tv-overlay"></div>
         </div>
 
         <!-- Sidebar -->
