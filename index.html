@@ -325,14 +325,39 @@
     const notification = document.getElementById("notification");
     const glowingButton = document.getElementById("glowingButton");
     const tvGuide = document.getElementById("tvGuide");
+    // Generate the schedule dynamically
+    const schedule = getSchedule();
 
-    const groupedChannels = channels.reduce((acc, channel) => {
-      if (!acc[channel.category]) acc[channel.category] = {};
-      const subcategory = channel.subcategory || "default";
-      if (!acc[channel.category][subcategory]) acc[channel.category][subcategory] = [];
-      acc[channel.category][subcategory].push(channel);
-      return acc;
-    }, {});
+
+    function getSchedule() {
+      // Assume `channels` is imported or defined in channels.js
+      const schedule = [];
+      const startTime = new Date();
+      startTime.setHours(6, 0, 0); // Schedule starts at 6:00 AM
+    
+      channels.forEach((channel) => {
+        const durationMinutes = channel.duration || 60; // Default duration 60 minutes
+        const endTime = new Date(startTime.getTime() + durationMinutes * 60 * 1000);
+    
+        schedule.push({
+          name: channel.name,
+          category: channel.category,
+          subcategory: channel.subcategory || "default",
+          startTime: `${startTime.getHours().toString().padStart(2, "0")}:${startTime.getMinutes().toString().padStart(2, "0")}`,
+          endTime: `${endTime.getHours().toString().padStart(2, "0")}:${endTime.getMinutes().toString().padStart(2, "0")}`,
+          description: channel.description || "No description available",
+          video: channel.video || null, // Video source for playback
+          episodes: channel.episodes || null, // Optional episodes
+          poster: channel.poster || "./assets/images/default_poster.jpg", // Default poster
+        });
+    
+        // Update startTime for the next program
+        startTime.setTime(endTime.getTime());
+      });
+    
+      return schedule;
+    }
+
 
     function populateSchedule() {
       tvGuide.innerHTML = `<h2>Today's Schedule</h2>`;
@@ -340,19 +365,17 @@
       const scheduleBlock = document.createElement("div");
       scheduleBlock.classList.add("schedule-block");
     
-      // Generate or fetch the schedule dynamically
-      const schedule = getSchedule(); // Replace with your schedule logic
-    
+      // Iterate over the dynamically generated schedule
       schedule.forEach((program) => {
         const programItem = document.createElement("div");
         programItem.classList.add("program-item");
     
-        // Add program and episode details
         programItem.innerHTML = `
           <strong>${program.name}</strong><br>
           <small>${program.startTime} - ${program.endTime}</small><br>
+          <small>Category: ${program.category}</small><br>
+          <small>Subcategory: ${program.subcategory}</small><br>
           <small>${program.description}</small>
-          ${program.episodes ? `<br><small>Episodes: ${program.episodes.map(ep => ep.title).join(", ")}</small>` : ""}
         `;
     
         scheduleBlock.appendChild(programItem);
@@ -360,6 +383,7 @@
     
       tvGuide.appendChild(scheduleBlock);
     }
+
 
     
 
@@ -390,6 +414,22 @@
         }
       });
     }
+
+    function getCurrentProgram() {
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+    
+      return schedule.find((program) => {
+        const [startHour, startMinute] = program.startTime.split(":").map(Number);
+        const [endHour, endMinute] = program.endTime.split(":").map(Number);
+    
+        const programStartTime = startHour * 60 + startMinute;
+        const programEndTime = endHour * 60 + endMinute;
+    
+        return currentTime >= programStartTime && currentTime < programEndTime;
+      });
+    }
+
 
     
 
