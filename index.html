@@ -341,11 +341,85 @@
         let powerOn = true;
         let currentChannelIndex = 0;
         let currentStartTime = new Date();
+        let playbackTimes = {}; // Cache playback times
 
-        const subcategories = Object.keys(channels.reduce((acc, channel) => {
-            acc[channel.subcategory] = true;
-            return acc;
-        }, {}));
+        const subcategories = (() => {
+            const result = Object.keys(channels.reduce((acc, channel) => {
+                acc[channel.subcategory] = true;
+                return acc;
+            }, {}));
+            return result;
+        })();
+
+        const calculateElapsed = () => {
+            return Math.floor((new Date() - currentStartTime) / 60000);
+        };
+
+        const adjustPlaybackTime = (category) => {
+            if (playbackTimes[category] == null) {
+                playbackTimes[category] = 0;
+            }
+            videoPlayer.currentTime = playbackTimes[category];
+        };
+
+        const updatePlaybackTime = (category) => {
+            playbackTimes[category] = videoPlayer.currentTime;
+        };
+
+        const shuffleChannels = () => {
+            const randomIndex = Math.floor(Math.random() * subcategories.length);
+            updatePlaybackTime(subcategories[currentChannelIndex]);
+            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - calculateElapsed()));
+            setChannel(randomIndex);
+            showNotification('Shuffled to Random Channel', 'limegreen');
+        };
+
+        const formatTime = (time) => {
+            return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
+
+        const populateTVGuide = (subcategory) => {
+            tvGuideList.innerHTML = '';
+            let startTime = new Date(currentStartTime);
+
+            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
+            channelVideos.forEach(video => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${formatTime(startTime)} - ${video.name} (${video.description})`;
+                tvGuideList.appendChild(listItem);
+
+                startTime.setMinutes(startTime.getMinutes() + video.duration);
+            });
+        };
+
+        const setChannel = (index) => {
+            updatePlaybackTime(subcategories[currentChannelIndex]);
+            currentChannelIndex = (index + subcategories.length) % subcategories.length;
+            const subcategory = subcategories[currentChannelIndex];
+            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
+
+            if (channelVideos.length > 0) {
+                const channel = channelVideos[0];
+                videoPlayer.src = channel.video;
+                poster.src = channel.poster || 'default_poster.jpg';
+                adjustPlaybackTime(subcategory);
+                if (powerOn) {
+                    videoPlayer.play();
+                }
+            } else {
+                showNotification('No channels available in this category', 'red');
+            }
+
+            populateTVGuide(subcategory);
+            showNotification(`Channel: ${subcategory}`, 'limegreen');
+        };
+
+        const adjustVolume = (increase) => {
+            const volumeStep = 0.1;
+            videoPlayer.volume = Math.min(Math.max(videoPlayer.volume + (increase ? volumeStep : -volumeStep), 0), 1);
+            const message = videoPlayer.volume === 1 ? 'Volume Maxed!' : videoPlayer.volume === 0 ? 'Muted' : increase ? 'Volume Up' : 'Volume Down';
+            showNotification(message, 'limegreen');
+        };
 
         powerButton.addEventListener('click', () => {
             powerOn = !powerOn;
@@ -364,84 +438,20 @@
             }
         });
 
-        const shuffleChannels = () => {
-            const randomIndex = Math.floor(Math.random() * subcategories.length);
-            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
-            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
-            setChannel(randomIndex);
-            showNotification('Shuffled to Random Channel', 'limegreen');
-        };
-
         shuffleButton.addEventListener('click', shuffleChannels);
 
-        const formatTime = (time) => {
-            return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        };
-
-        const populateTVGuide = (subcategory) => {
-            tvGuideList.innerHTML = '';
-            let startTime = new Date(currentStartTime);
-
-            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
-            channelVideos.forEach(video => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${formatTime(startTime)} - ${video.name} (${video.description})`;
-                tvGuideList.appendChild(listItem);
-
-                // Increment start time by video duration
-                startTime.setMinutes(startTime.getMinutes() + video.duration);
-            });
-        };
-
-        const setChannel = (index) => {
-            currentChannelIndex = (index + subcategories.length) % subcategories.length;
-            const subcategory = subcategories[currentChannelIndex];
-            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
-
-            if (channelVideos.length > 0) {
-                const channel = channelVideos[0];
-                videoPlayer.src = channel.video;
-                poster.src = channel.poster || 'default_poster.jpg';
-                if (powerOn) {
-                    videoPlayer.play();
-                }
-            } else {
-                showNotification('No channels available in this category', 'red');
-            }
-
-            populateTVGuide(subcategory);
-            showNotification(`Channel: ${subcategory}`, 'limegreen');
-        };
-
         document.getElementById('channel-up').addEventListener('click', () => {
-            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
-            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
+            updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(currentChannelIndex + 1);
         });
 
         document.getElementById('channel-down').addEventListener('click', () => {
-            const elapsed = Math.floor((new Date() - currentStartTime) / 60000); // minutes
-            currentStartTime = new Date(new Date().setMinutes(new Date().getMinutes() - elapsed));
+            updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(currentChannelIndex - 1);
         });
 
-        document.getElementById('volume-up').addEventListener('click', () => {
-            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1); // Maximum volume is 1
-            if (videoPlayer.volume === 1) {
-                showNotification('Volume Maxed!', 'limegreen');
-            } else {
-                showNotification('Volume Up', 'limegreen');
-            }
-        });
-        
-        document.getElementById('volume-down').addEventListener('click', () => {
-            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0); // Minimum volume is 0
-            if (videoPlayer.volume === 0) {
-                showNotification('Muted', 'limegreen');
-            } else {
-                showNotification('Volume Down', 'limegreen');
-            }
-        });
+        document.getElementById('volume-up').addEventListener('click', () => adjustVolume(true));
+        document.getElementById('volume-down').addEventListener('click', () => adjustVolume(false));
 
         setChannel(currentChannelIndex);
 
@@ -457,4 +467,5 @@
     </script>
 </body>
 </html>
+
 
