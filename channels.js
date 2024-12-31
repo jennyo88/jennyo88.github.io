@@ -201,17 +201,17 @@ const channels = [
     channelNumber: 101,
     episodes: [
       {
-        title: "Part 1",
+        name: "Part 1",
         duration: 86,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_1.mp4",
       },
       {
-        title: "Part 2",
+        name: "Part 2",
         duration: 87,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_2.mp4",
       },
       {
-        title: "Part 3",
+        name: "Part 3",
         duration: 75,
         video: "https://archive.org/download/kids-wb-cartoon-network-toonami-full-block-july-2001-woc-monster-rancher-batman-/Kids%20WB%20Cartoon%20Network%20Toonami%20Full%20Block%20July%202001%20WOC%20%28Monster%20Rancher%20Batman%20Beyond%20Pokemon%20Yu-Gi-Oh%20Dragon%20Ball%20Z%20Mobile%20Suit%20Gundam%20Cartoon%20Network%27s%20Toonami%20Block%20On%20Kids%20WB%20July%202001%20Full%20Recording%20WOC%29/VTS_01_3.mp4",
       },
@@ -227,27 +227,27 @@ const channels = [
     channelNumber: 102,
     episodes: [
       {
-        title: "Part 1",
+        name: "Part 1",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        title: "Part 2",
+        name: "Part 2",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        title: "Part 3",
+        name: "Part 3",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        title: "Part 4",
+        name: "Part 4",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        title: "Part 5",
+        name: "Part 5",
         duration: 27,
         video: "https://archive.org/download/vts-01-1_20200929/ABC%20Saturday%20Morning%20Cartoons%2012-19-81%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
@@ -263,17 +263,17 @@ const channels = [
     channelNumber: 103,
     episodes: [
       {
-        title: "Part 1",
+        name: "Part 1",
         duration: 30,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        title: "Part 2",
+        name: "Part 2",
         duration: 30,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        title: "Part 3",
+        name: "Part 3",
         duration: 05,
         video: "https://archive.org/download/vts-01-1_20200929_2234/ABC%20Saturday%20Morning%20Cartoons%2012-20-86%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
@@ -289,27 +289,27 @@ const channels = [
     channelNumber: 104,
     episodes: [
       {
-        title: "Part 1",
+        name: "Part 1",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        title: "Part 2",
+        name: "Part 2",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        title: "Part 3",
+        name: "Part 3",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        title: "Part 4",
+        name: "Part 4",
         duration: 38,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        title: "Part 5",
+        name: "Part 5",
         duration: 12,
         video: "https://archive.org/download/vts-01-1_20200825/ABC%20Saturday%20Morning%20Cartoons%209-9-89%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
@@ -325,27 +325,27 @@ const channels = [
     channelNumber: 105,
     episodes: [
       {
-        title: "Part 1",
+        name: "Part 1",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_1.mp4",
       },
       {
-        title: "Part 2",
+        name: "Part 2",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_2.mp4",
       },
       {
-        title: "Part 3",
+        name: "Part 3",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_3.mp4",
       },
       {
-        title: "Part 4",
+        name: "Part 4",
         duration: 29,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_4.mp4",
       },
       {
-        title: "Part 5",
+        name: "Part 5",
         duration: 02,
         video: "https://archive.org/download/vts-01-2_20200824/ABC%20Saturday%20Morning%20Cartoons%20%208-21-93%20WOC/VIDEO_TS/VTS_01_5.mp4",
       },
@@ -361,77 +361,77 @@ const channels = [
     channelNumber: 106,
     episodes: [
       {
-        title: "Capítulo 001",
+        name: "Capítulo 001",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20001.%20Una%20ni%C3%B1a%20h%C3%A1bil%20que%20no%20renuncia.mp4",
       },
       {
-        title: "Capítulo 002",
+        name: "Capítulo 002",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20002%20.%20%C2%A1Viaje%21%20Aventuras%20juntas.mp4",
       },
       {
-        title: "Capítulo 003",
+        name: "Capítulo 003",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20003%20.%20El%20carruaje%20que%20transporta%20un%20adi%C3%B3s.mp4",
       },
       {
-        title: "Capítulo 004",
+        name: "Capítulo 004",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20004%20.%20%C2%A1Est%C3%A1s%20preciosa%20cuando%20sonr%C3%ADes%21.mp4",
       },
       {
-        title: "Capítulo 005",
+        name: "Capítulo 005",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20005%20.%20Desde%20hoy%20soy%20una%20princesa.mp4",
       },
       {
-        title: "Capítulo 006",
+        name: "Capítulo 006",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20006%20.%20La%20persona%20que%20encontr%C3%A9%20en%20la%20verja%20de%20las%20rosas.mp4",
       },
       {
-        title: "Capítulo 007",
+        name: "Capítulo 007",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20007%20.%20%C2%BFEstoy%20elegante.mp4",
       },
       {
-        title: "Capítulo 008",
+        name: "Capítulo 008",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20008%20.%20Invitaci%C3%B3n%20a%20la%20felicidad.mp4",
       },
       {
-        title: "Capítulo 009",
+        name: "Capítulo 009",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20009%20.%20El%20baile%20en%20el%20que%20encontr%C3%A9%20a%20aquella%20persona.mp4",
       },
       {
-        title: "Capítulo 010",
+        name: "Capítulo 010",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20010%20.%20Una%20dama%20en%20el%20establo.mp4",
       },
       {
-        title: "Capítulo 011",
+        name: "Capítulo 011",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20011%20.%20Una%20peque%C3%B1a%20cinta%20amarra%20los%20corazones.mp4",
       },
       {
-        title: "Capítulo 012",
+        name: "Capítulo 012",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20012%20.%20Cumplea%C3%B1os%20con%20olor%20a%20rosas.mp4",
       },
       {
-        title: "Capítulo 013",
+        name: "Capítulo 013",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20013%20.%20Los%20tres%20solitarios.mp4",
       },
       {
-        title: "Capítulo 014",
+        name: "Capítulo 014",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20014%20.%20El%20gran%20%C3%A1rbol%20lleno%20de%20brisa%20primaveral.mp4",
       },
       {
-        title: "Capítulo 015",
+        name: "Capítulo 015",
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20015%20.%20La%20decisi%C3%B3n%20que%20arrebata%20la%20felicidad.mp4",
       },
@@ -447,7 +447,7 @@ const channels = [
     channelNumber: 107,
     episodes: [
       {
-        title: "Capítulo 001",
+        name: "Capítulo 001",
         duration: 24,
         video: "https://dn720407.ca.archive.org/0/items/dragon-ball-zvideoplaytv/%5B001%5D%20Aparece%20un%20mini%20Goku%2C%20su%20nombre%20es%20Gohan.mp4",
       },
