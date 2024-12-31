@@ -283,9 +283,9 @@
         <div class="sidebar">
             <!-- TV Guide -->
             <div class="tv-guide">
-                <h1>TV Guide</h1>
-                <h2 id="tv-guide-category"></h2>
-                <h3 id="tv-guide-subcategory"></h3>
+                <h2>TV Guide</h2>
+                <p id="category-info"></p>
+                <p id="subcategory-info"></p>
                 <ul id="tv-guide-list"></ul>
             </div>
 
@@ -334,8 +334,8 @@
     <script>
         const videoPlayer = document.getElementById('video-player');
         const tvGuideList = document.getElementById('tv-guide-list');
-        const tvGuideCategory = document.getElementById('tv-guide-category');
-        const tvGuideSubcategory = document.getElementById('tv-guide-subcategory');
+        const categoryInfo = document.getElementById('category-info');
+        const subcategoryInfo = document.getElementById('subcategory-info');
         const shuffleButton = document.getElementById('shuffle');
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
@@ -356,11 +356,14 @@
         const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
         const populateTVGuide = (subcategory) => {
-            tvGuideCategory.textContent = `${category}`;
-            tvGuideSubcategory.textContent = `Genre: ${subcategory}`;
             tvGuideList.innerHTML = '';
-            let startTime = new Date(currentStartTime);
+            const channel = channels.find(channel => channel.subcategory === subcategory);
+            if (channel) {
+                categoryInfo.textContent = `Category: ${channel.category}`;
+                subcategoryInfo.textContent = `Subcategory: ${channel.subcategory}`;
+            }
 
+            let startTime = new Date(currentStartTime);
             const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
             channelVideos.forEach(video => {
                 const episodes = video.episodes && video.episodes.length > 0 
@@ -424,6 +427,7 @@
             lastShuffleIndex = randomIndex;
             updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(randomIndex);
+            showNotification('Shuffled to a new channel', 'blue');
         };
 
         const showVolumeIndicator = (volume) => {
@@ -436,14 +440,26 @@
             }, 1000);
         };
 
+        const showNotification = (message, color = 'limegreen') => {
+            const notification = document.querySelector('.notification');
+            notification.textContent = message;
+            notification.style.color = color;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        };
+
         shuffleButton.addEventListener('click', shuffleChannels);
 
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
+            showNotification('Channel up', 'orange');
         });
 
         document.getElementById('channel-down').addEventListener('click', () => {
             setChannel(currentChannelIndex - 1);
+            showNotification('Channel down', 'orange');
         });
 
         document.getElementById('volume-up').addEventListener('click', () => {
