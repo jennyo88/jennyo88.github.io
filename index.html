@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetroTV with Multi-Level TV Guide</title>
+  <style>
+    body { 
+      margin: 0;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      overflow: hidden; /* Prevent scrolling */
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .screen {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .video-section {
+      width: 70%; /* Slightly wider for a better viewing experience */
+      height: 100%; /* Full height of the screen */
+      background-color: black;
+    }
+
+    .tv-container {
+      width: 700px; /* Adjust size of the video player within its section */
+      height: 550px;
+      position: relative;
+      margin: auto;
+    }
+
+    .tv-screen {
+      position: absolute;
+      top: 9%;
+      left: 7%;
+      width: 86%;
+      height: 72%;
+      overflow: hidden;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.8) 70%, black 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background 0.5s ease-in-out;
+    }
+
+    .tv-screen.on {
+      background: none;
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    video.on {
+      display: block;
+    }
+
+    .tv-guide {
+      position: absolute;
+      top: 0;
+      left: 73%; /* Start where the video section ends */
+      width: 25%; /* One-third of the screen */
+      height: 38%; /* Top half of the remaining space */
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      overflow-y: scroll;
+      border-radius: 5px;
+      border: 2px solid #ffffff;
+    }
+
+    .tv-guide h2 {
+      text-align: center;
+      margin: 0;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      padding: 10px 0;
+    }
+
+    .guide-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .channel-item {
+      flex: 1;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .time-slot {
+      flex: 1;
+      text-align: center;
+      color: #cccccc;
+    }
+
+    .program-item {
+      flex: 2;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .poster-container {
+      position: absolute;
+      top: 40%; /* Start below the TV guide */
+      left: 75%; /* Start where the video section ends */
+      width: 20%; /* One-third of the screen */
+      height: 60%; /* Bottom half of the remaining space */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .poster-container img {
+      width: 80%; /* Fit neatly within the section */
+      height: auto; /* Maintain aspect ratio */
+      max-height: 90%;
+      border: none; /* Optional border */
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <!-- Video Player Section -->
+    <div class="video-section">
+      <div class="tv-container">
+        <div class="tv-screen" id="tvScreen">
+          <video id="videoPlayer" autoplay preload="auto">
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <!-- TV Guide Section -->
+    <div class="tv-guide" id="tvGuide">
+      <h2>TV Guide</h2>
+      <div id="guideGrid">
+        <!-- Dynamic content will be injected here -->
+      </div>
+    </div>
+
+    <!-- Movie Poster Section -->
+    <div class="poster-container">
+      <img src="./assets/images/default_poster.jpg" alt="Default Poster" id="poster" />
+    </div>
+  </div>
+
+  <script>
+    const tvSchedule = [
+      { channel: 1, time: "6:00 AM", program: "Morning News" },
+      { channel: 1, time: "6:30 AM", program: "Weather Update" },
+      { channel: 2, time: "6:00 AM", program: "Cartoons" },
+      { channel: 2, time: "6:30 AM", program: "Comedy Show" },
+      { channel: 3, time: "6:00 AM", program: "Sports Highlights" },
+      { channel: 3, time: "6:30 AM", program: "Fitness Hour" },
+    ];
+
+    function populateGuide() {
+      const guideGrid = document.getElementById("guideGrid");
+      guideGrid.innerHTML = ""; // Clear existing content
+
+      tvSchedule.forEach((entry) => {
+        const channelDiv = document.createElement("div");
+        channelDiv.className = "channel-item";
+        channelDiv.textContent = `Channel ${entry.channel}`;
+
+        const timeDiv = document.createElement("div");
+        timeDiv.className = "time-slot";
+        timeDiv.textContent = entry.time;
+
+        const programDiv = document.createElement("div");
+        programDiv.className = "program-item";
+        programDiv.textContent = entry.program;
+
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "guide-row";
+
+        rowDiv.appendChild(channelDiv);
+        rowDiv.appendChild(timeDiv);
+        rowDiv.appendChild(programDiv);
+        guideGrid.appendChild(rowDiv);
+      });
+    }
+
+    // Populate the TV Guide on page load
+    populateGuide();
+  </script>
+</body>
+</html>
