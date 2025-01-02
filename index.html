@@ -421,9 +421,20 @@
             return array;
         };
     
+        // Pre-shuffle all videos once during initialization
+        const preShuffledChannels = channels.map(channel => {
+            const shuffledEpisodes = channel.episodes && channel.episodes.length > 0
+                ? shuffleArray([...channel.episodes])
+                : null;
+            return {
+                ...channel,
+                episodes: shuffledEpisodes
+            };
+        });
+    
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
-            const channel = channels.find(channel => channel.subcategory === subcategory);
+            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
             if (channel) {
                 categoryInfo.textContent = `Category: ${channel.category}`;
                 subcategoryInfo.textContent = `Playing: ${channel.subcategory}`;
@@ -435,26 +446,23 @@
     
             let startTime = new Date(currentStartTime);
     
-            const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
-            channelVideos.forEach(video => {
-                const episodes = video.episodes && video.episodes.length > 0
-                    ? shuffleArray(video.episodes.map(episode => ({
-                        name: episode.name || 'Unnamed Episode',
-                        duration: episode.duration || 30,
-                        video: episode.video || video.video,
-                        poster: episode.poster || video.poster || 'default_poster.jpg'
-                    })))
-                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30, video: video.video, poster: video.poster || 'default_poster.jpg' }]);
+            const episodes = channel.episodes && channel.episodes.length > 0
+                ? channel.episodes.map(episode => ({
+                    name: episode.name || 'Unnamed Episode',
+                    duration: episode.duration || 30,
+                    video: episode.video || channel.video,
+                    poster: episode.poster || channel.poster || 'default_poster.jpg'
+                }))
+                : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
     
-                episodes.forEach(episode => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
-                    listItem.setAttribute('data-duration', episode.duration);
-                    listItem.setAttribute('data-video', episode.video);
-                    listItem.setAttribute('data-poster', episode.poster);
-                    tvGuideList.appendChild(listItem);
-                    startTime.setMinutes(startTime.getMinutes() + episode.duration);
-                });
+            episodes.forEach(episode => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
+                listItem.setAttribute('data-duration', episode.duration);
+                listItem.setAttribute('data-video', episode.video);
+                listItem.setAttribute('data-poster', episode.poster);
+                tvGuideList.appendChild(listItem);
+                startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
         };
     
@@ -504,7 +512,7 @@
             updatePlaybackTime(subcategories[currentChannelIndex]);
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
-            const channel = channels.find(channel => channel.subcategory === subcategory);
+            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
     
             if (!channel) {
                 console.error(`No channel found for subcategory: ${subcategory}`);
@@ -538,7 +546,7 @@
             updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(randomIndex);
     
-            const channel = channels.find(channel => channel.subcategory === subcategories[randomIndex]);
+            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[randomIndex]);
             if (channel) {
                 showNotification(
                     `Shuffled to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
