@@ -447,21 +447,31 @@
         
             let startTime = new Date(currentStartTime);
         
-            const episodes = channel.episodes && channel.episodes.length > 0
+            // Combine episodes and single videos, then shuffle
+            const videos = (channel.episodes && channel.episodes.length > 0
                 ? channel.episodes.map(episode => ({
                     name: episode.name || 'Unnamed Episode',
                     duration: episode.duration || 30,
                     video: episode.video || channel.video,
                     poster: episode.poster || channel.poster || 'default_poster.jpg'
                 }))
-                : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
+                : []).concat(
+                channel.video ? [{
+                    name: channel.name || 'Untitled',
+                    duration: channel.duration || 30,
+                    video: channel.video,
+                    poster: channel.poster || 'default_poster.jpg'
+                }] : []
+            );
         
-            episodes.forEach((episode, index) => {
+            const shuffledVideos = shuffleArray(videos);
+        
+            shuffledVideos.forEach((video, index) => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
-                listItem.setAttribute('data-duration', episode.duration);
-                listItem.setAttribute('data-video', episode.video);
-                listItem.setAttribute('data-poster', episode.poster);
+                listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
+                listItem.setAttribute('data-duration', video.duration);
+                listItem.setAttribute('data-video', video.video);
+                listItem.setAttribute('data-poster', video.poster);
                 listItem.setAttribute('data-start-time', startTime.getTime());
         
                 if (index === 0) {
@@ -472,19 +482,19 @@
                 }
         
                 tvGuideList.appendChild(listItem);
-                startTime.setMinutes(startTime.getMinutes() + episode.duration);
+                startTime.setMinutes(startTime.getMinutes() + video.duration);
             });
         
-            // For single-video channels, show "Now Playing" and populate other videos for "Up Next"
-            if (episodes.length === 1) {
-                const additionalVideos = preShuffledChannels
+            // For single-video channels, populate other videos for "Up Next"
+            if (shuffledVideos.length === 1) {
+                const additionalVideos = shuffleArray(preShuffledChannels
                     .filter(ch => ch.subcategory === subcategory && ch !== channel)
                     .map(ch => ({
                         name: ch.name || 'Untitled',
                         duration: ch.duration || 30,
                         video: ch.video,
                         poster: ch.poster || 'default_poster.jpg'
-                    }));
+                    })));
         
                 additionalVideos.forEach((video, index) => {
                     const listItem = document.createElement('li');
@@ -506,6 +516,8 @@
         };
 
 
+
+        
     
     
 
