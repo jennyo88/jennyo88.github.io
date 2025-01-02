@@ -3,41 +3,100 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M3U8 Video Player</title>
+  <title>M3U Playlist Video Player</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
       background-color: #000;
+      color: #fff;
+    }
+    #channel-list {
+      margin: 10px 0;
+      max-height: 200px;
+      overflow-y: auto;
+      width: 80%;
+      max-width: 600px;
+      border: 1px solid #fff;
+      background-color: #222;
+    }
+    #channel-list div {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #444;
+    }
+    #channel-list div:hover {
+      background-color: #444;
     }
     video {
       width: 80%;
       max-width: 800px;
       border: 2px solid #fff;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
+  <h1>M3U Playlist Player</h1>
+  <div id="channel-list">Loading channels...</div>
   <video id="video" controls autoplay></video>
+  
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
+    const playlistUrl = 'http://192.168.0.213:8001/api/channels.m3u'; // Replace with your M3U URL
+    const channelList = document.getElementById('channel-list');
     const video = document.getElementById('video');
-    const videoSrc = 'http://192.168.0.213:8001/api/channels.m3u'; // Replace with your M3U8 URL
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-    } else {
-      alert('Your browser does not support M3U8 playback.');
+    async function fetchAndParseM3U(url) {
+      const response = await fetch(url);
+      const text = await response.text();
+      return parseM3U(text);
     }
+
+    function parseM3U(content) {
+      const lines = content.split('\n').filter(line => line.trim());
+      const channels = [];
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].startsWith('#EXTINF')) {
+          const name = lines[i].split(',')[1];
+          const url = lines[i + 1];
+          channels.push({ name, url });
+        }
+      }
+      return channels;
+    }
+
+    function loadChannels(channels) {
+      channelList.innerHTML = '';
+      channels.forEach(channel => {
+        const div = document.createElement('div');
+        div.textContent = channel.name;
+        div.onclick = () => playChannel(channel.url);
+        channelList.appendChild(div);
+      });
+    }
+
+    function playChannel(url) {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+      } else {
+        alert('Your browser does not support M3U8 playback.');
+      }
+    }
+
+    // Load and display channels
+    fetchAndParseM3U(playlistUrl).then(loadChannels).catch(err => {
+      channelList.textContent = 'Failed to load playlist.';
+      console.error(err);
+    });
   </script>
 </body>
 </html>
