@@ -455,13 +455,13 @@
                             name: episode.name || 'Unnamed Episode',
                             duration: episode.duration || 30,
                             video: episode.video || channel.video,
-                            poster: channel.poster || 'default_poster.jpg'
+                            poster: channel.poster || 'assets/images/default_poster.jpg'
                         }))
                         : [{
                             name: channel.name || 'Untitled',
                             duration: channel.duration || 30,
                             video: channel.video,
-                            poster: channel.poster || 'default_poster.jpg'
+                            poster: channel.poster || 'assets/images/default_poster.jpg'
                         }];
                     return channelVideos;
                 }));
@@ -560,7 +560,7 @@
         
             // Set poster to the first video in the shuffled list
             const firstVideo = shuffledVideosCache[subcategory]?.[0];
-            poster.src = firstVideo?.poster || channel.poster || 'default_poster.jpg';
+            poster.src = firstVideo?.poster || channel.poster || 'assets/images/default_poster.jpg';
         
             showNotification(
                 `Switched to Channel: ${channel.subcategory} (Channel ${channel.channelNumber})`,
