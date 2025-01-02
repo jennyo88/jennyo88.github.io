@@ -430,7 +430,6 @@
             }
         
             let startTime = new Date(currentStartTime);
-            startTime.setHours(6, 0, 0, 0); // Set start time to 6:00 AM every day
         
             // Shuffle the videos for the subcategory
             const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
