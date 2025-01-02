@@ -455,6 +455,7 @@
                 }))
                 : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
     
+            let nextUpSet = false;
             episodes.forEach((episode, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
@@ -462,10 +463,15 @@
                 listItem.setAttribute('data-video', episode.video);
                 listItem.setAttribute('data-poster', episode.poster);
                 listItem.setAttribute('data-start-time', startTime.getTime());
-                listItem.classList.add(index === 0 ? 'now-playing' : 'up-next');
-                if (index > 0) {
+    
+                if (index === 0) {
+                    listItem.classList.add('now-playing');
+                } else if (!nextUpSet && startTime > new Date()) {
                     listItem.textContent += " (Up Next)";
+                    listItem.classList.add('up-next');
+                    nextUpSet = true;
                 }
+    
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
@@ -526,8 +532,13 @@
                 item.classList.remove('up-next');
             });
             allItems[index]?.classList.add('now-playing');
-            if (index + 1 < allItems.length) {
-                allItems[index + 1]?.classList.add('up-next');
+            for (let i = index + 1; i < allItems.length; i++) {
+                const nextItem = allItems[i];
+                const startTime = parseInt(nextItem.getAttribute('data-start-time'), 10);
+                if (startTime > new Date().getTime()) {
+                    nextItem.classList.add('up-next');
+                    break;
+                }
             }
         };
     
@@ -610,6 +621,7 @@
                 }, 500);
             }, 1000);
         };
+
     
         const showNotification = (message, color = 'limegreen') => {
             const notification = document.querySelector('.notification');
