@@ -229,32 +229,51 @@
                         0 0 5px rgba(255, 255, 255, 0.5);
         }
 
-        #power {
-            width: 25px;
-            height: 25px;
-            background: radial-gradient(circle, rgba(192, 192, 192, 0.5), rgba(0, 0, 0, 0) 70%);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6),
-                        inset 0 -1px 2px rgba(0, 0, 0, 0.4),
-                        0 0 15px rgba(192, 192, 192, 0.8);
+        /* Power Light Pulse Effect */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 0, 1), 0 0 40px rgba(0, 255, 0, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.6);
+            }
         }
-
-        #power-light {
-            width: 25px;
-            height: 25px;
-            background: green;
-            border-radius: 50%;
-            box-shadow: 0 0 15px green;
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        
+        #power-light.pulse {
+            animation: pulse 1.5s infinite;
         }
-
+        
         .power-off #power-light {
             background: red;
             box-shadow: 0 0 15px red;
+            animation: none; /* Stop pulsing when powered off */
         }
+        
+        /* Hover Effects for Power Button */
+        #power:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(192, 192, 192, 0.6);
+            background: radial-gradient(circle, rgba(192, 192, 192, 0.8), rgba(0, 0, 0, 0) 70%);
+        }
+        
+        #power:active {
+            background: linear-gradient(145deg, #e0e0e0, #b0b0b0);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4), 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Power Status Text */
+        #power-status {
+            font-size: 0.8rem;
+            color: limegreen;
+            transition: color 0.3s ease;
+        }
+        
+        .power-off #power-status {
+            color: red;
+        }
+
 
         .button-label {
             font-size: 0.8rem;
@@ -373,12 +392,13 @@
             <div class="button-label">Ch +</div>
         </div>
         <div class="button-container-large">
-            <div id="power-light"></div>
+            <div id="power-light" class="pulse"></div>
         </div>
         <div class="spacer"></div>
         <div class="button-container-large">
             <button id="power"></button>
         </div>
+        <div id="power-status" class="button-label">Power: ON</div>
     </div>
 
     <!-- Notification Area -->
@@ -392,9 +412,10 @@
         const categoryInfo = document.getElementById('category-info');
         const subcategoryInfo = document.getElementById('subcategory-info');
         const shuffleButton = document.getElementById('shuffle');
-        const powerLight = document.getElementById('power-light');
-        const powerOverlay = document.querySelector('.power-off');
         const powerButton = document.getElementById('power');
+        const powerOverlay = document.querySelector('.power-off');
+        const powerLight = document.getElementById('power-light');
+        const powerStatus = document.getElementById('power-status');
         const poster = document.getElementById('poster');
         const playbackTimes = {}; // Cache playback times
         let currentChannelIndex = 0;
@@ -596,13 +617,22 @@
 
         // Toggle power functionality
         powerButton.addEventListener('click', () => {
-            const isPoweredOn = !powerOverlay.style.display || powerOverlay.style.display === 'none';
+            const isPoweredOn = powerOverlay.style.display === 'none';
+            
+            // Toggle power overlay
+            powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
+            
+            // Pause or play the video
             if (isPoweredOn) {
-                powerOverlay.style.display = 'block'; // Show the power-off overlay
-                videoPlayer.pause(); // Pause the video
+                videoPlayer.pause();
+                powerLight.classList.remove('pulse');
+                powerStatus.textContent = 'Power: OFF';
+                powerStatus.style.color = 'red';
             } else {
-                powerOverlay.style.display = 'none'; // Hide the power-off overlay
-                videoPlayer.play(); // Resume video playback
+                videoPlayer.play();
+                powerLight.classList.add('pulse');
+                powerStatus.textContent = 'Power: ON';
+                powerStatus.style.color = 'limegreen';
             }
         });
 
