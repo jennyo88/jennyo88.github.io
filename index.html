@@ -513,7 +513,7 @@
                     }
         
                     if (poster.src !== posterSrc) {
-                        poster.src = posterSrc;
+                        poster.src = posterSrc; // Update the poster dynamically
                     }
         
                     guideItems.forEach(item => item.classList.remove('now-playing', 'up-next'));
@@ -547,7 +547,10 @@
             populateTVGuide(subcategory);
             synchronizePlayback();
         
-            poster.src = channel.poster || 'default_poster.jpg';
+            // Set poster to the first video in the shuffled list
+            const firstVideo = shuffledVideosCache[subcategory]?.[0];
+            poster.src = firstVideo?.poster || channel.poster || 'default_poster.jpg';
+        
             showNotification(
                 `Switched to Channel: ${channel.subcategory} (Channel ${channel.channelNumber})`,
                 'limegreen'
