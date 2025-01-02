@@ -436,23 +436,26 @@
             // Shuffle the videos for the subcategory
             const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
             channelVideos.forEach(video => {
-                // Shuffle the episodes within each video
                 const episodes = video.episodes && video.episodes.length > 0
                     ? shuffleArray(video.episodes.map(episode => ({
                         name: episode.name || 'Unnamed Episode',
                         duration: episode.duration || 30,
+                        video: episode.video || video.video, // Associate video URL
                     })))
-                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30 }]);
+                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30, video: video.video }]);
         
                 episodes.forEach(episode => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
-                    listItem.setAttribute('data-duration', episode.duration); // Store duration as a data attribute
+                    listItem.setAttribute('data-duration', episode.duration); // Store duration
+                    listItem.setAttribute('data-video', episode.video); // Store video URL
                     tvGuideList.appendChild(listItem);
                     startTime.setMinutes(startTime.getMinutes() + episode.duration);
                 });
             });
         };
+
+        
         
         // Sync playback with TV guide
         const updateGuideForPlayback = () => {
@@ -476,69 +479,46 @@
             allItems[index]?.classList.add('now-playing'); // Highlight the currently playing item
         };
         
-        // Attach the playback time update event
-        videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
-        
-        // Show static effect
-        const showStatic = () => {
-            staticOverlay.style.display = 'block';
-            setTimeout(() => {
-                staticOverlay.style.display = 'none';
-            }, 500);
-        };
-        
-        // Adjust playback time for categories
-        const adjustPlaybackTime = (category) => {
-            if (!playbackTimes[category]) playbackTimes[category] = 0;
-            videoPlayer.currentTime = playbackTimes[category];
-        };
-        
-        // Update playback time for a category
-        const updatePlaybackTime = (category) => {
-            playbackTimes[category] = videoPlayer.currentTime;
-        };
-        
         // Set the channel and update the guide
         const setChannel = (index) => {
             if (index < 0 || index >= subcategories.length) {
                 console.error('Index out of bounds for subcategories');
                 return;
             }
+        
             updatePlaybackTime(subcategories[currentChannelIndex]);
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
-            const currentTime = new Date();
         
             const channel = channels.find(channel => channel.subcategory === subcategory);
             if (channel) {
-                let elapsedMinutes = Math.floor((currentTime - currentStartTime) / 60000);
+                let elapsedMinutes = Math.floor((new Date() - currentStartTime) / 60000);
+        
                 let videoToPlay = null;
                 let startTime = 0;
         
-                if (channel.episodes && channel.episodes.length > 0) {
-                    for (const episode of channel.episodes) {
-                        if (elapsedMinutes < episode.duration) {
-                            videoToPlay = episode;
-                            startTime = elapsedMinutes;
-                            break;
-                        }
-                        elapsedMinutes -= episode.duration;
+                const guideItems = document.querySelectorAll('.tv-guide li');
+                for (let i = 0; i < guideItems.length; i++) {
+                    const duration = parseInt(guideItems[i].getAttribute('data-duration'), 10);
+                    const videoSrc = guideItems[i].getAttribute('data-video');
+        
+                    if (elapsedMinutes < duration) {
+                        videoToPlay = videoSrc;
+                        startTime = elapsedMinutes;
+                        updateNowPlaying(i); // Highlight the current guide entry
+                        break;
                     }
+                    elapsedMinutes -= duration;
                 }
         
-                if (videoToPlay && videoToPlay.video) {
-                    videoPlayer.src = videoToPlay.video;
+                if (videoToPlay) {
+                    videoPlayer.src = videoToPlay;
                     videoPlayer.load();
                     videoPlayer.currentTime = startTime * 60; // Convert minutes to seconds
                     videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
-                } else if (channel.video) {
-                    videoPlayer.src = channel.video;
-                    videoPlayer.load();
-                    videoPlayer.currentTime = elapsedMinutes * 60; // Fallback for single video channels
-                    videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                 } else {
-                    console.error(`No video source found for channel: ${channel.name}`);
-                    showNotification(`No available videos for Channel: ${channel.name}`, 'red');
+                    console.error(`No video source found for subcategory: ${subcategory}`);
+                    showNotification(`No available videos for subcategory: ${subcategory}`, 'red');
                 }
         
                 poster.src = channel.poster || 'default_poster.jpg';
@@ -554,8 +534,8 @@
             populateTVGuide(subcategory);
         };
         
-        // Initial population of the TV guide
-        populateTVGuide('default-subcategory');
+        // Attach the playback time update event to sync the guide
+        videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
 
 
         const shuffleChannels = () => {
