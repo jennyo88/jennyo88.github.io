@@ -435,38 +435,37 @@
 
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
-            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
-            if (channel) {
-                categoryInfo.textContent = `Category: ${channel.category}`;
-                subcategoryInfo.textContent = `Playing: ${channel.subcategory}`;
-            } else {
+            const channelsInSubcategory = preShuffledChannels.filter(channel => channel.subcategory === subcategory);
+            if (channelsInSubcategory.length === 0) {
                 console.error(`Subcategory "${subcategory}" not found in channels.`);
                 subcategoryInfo.textContent = "Subcategory not found.";
                 return;
             }
         
+            categoryInfo.textContent = `Category: ${channelsInSubcategory[0].category}`;
+            subcategoryInfo.textContent = `Playing: ${subcategory}`;
+        
             let startTime = new Date(currentStartTime);
         
-            // Combine episodes and single videos, then shuffle
-            const videos = (channel.episodes && channel.episodes.length > 0
-                ? channel.episodes.map(episode => ({
-                    name: episode.name || 'Unnamed Episode',
-                    duration: episode.duration || 30,
-                    video: episode.video || channel.video,
-                    poster: episode.poster || channel.poster || 'default_poster.jpg'
-                }))
-                : []).concat(
-                channel.video ? [{
-                    name: channel.name || 'Untitled',
-                    duration: channel.duration || 30,
-                    video: channel.video,
-                    poster: channel.poster || 'default_poster.jpg'
-                }] : []
-            );
+            // Combine videos from all channels in the subcategory, then shuffle
+            const videos = shuffleArray(channelsInSubcategory.flatMap(channel => {
+                const channelVideos = channel.episodes && channel.episodes.length > 0
+                    ? channel.episodes.map(episode => ({
+                        name: episode.name || 'Unnamed Episode',
+                        duration: episode.duration || 30,
+                        video: episode.video || channel.video,
+                        poster: episode.poster || channel.poster || 'default_poster.jpg'
+                    }))
+                    : [{
+                        name: channel.name || 'Untitled',
+                        duration: channel.duration || 30,
+                        video: channel.video,
+                        poster: channel.poster || 'default_poster.jpg'
+                    }];
+                return channelVideos;
+            }));
         
-            const shuffledVideos = shuffleArray(videos);
-        
-            shuffledVideos.forEach((video, index) => {
+            videos.forEach((video, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
                 listItem.setAttribute('data-duration', video.duration);
@@ -484,41 +483,7 @@
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + video.duration);
             });
-        
-            // For single-video channels, populate other videos for "Up Next"
-            if (shuffledVideos.length === 1) {
-                const additionalVideos = shuffleArray(preShuffledChannels
-                    .filter(ch => ch.subcategory === subcategory && ch !== channel)
-                    .map(ch => ({
-                        name: ch.name || 'Untitled',
-                        duration: ch.duration || 30,
-                        video: ch.video,
-                        poster: ch.poster || 'default_poster.jpg'
-                    })));
-        
-                additionalVideos.forEach((video, index) => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
-                    listItem.setAttribute('data-duration', video.duration);
-                    listItem.setAttribute('data-video', video.video);
-                    listItem.setAttribute('data-poster', video.poster);
-                    listItem.setAttribute('data-start-time', startTime.getTime());
-        
-                    if (index === 0) {
-                        listItem.textContent += " (Up Next)";
-                        listItem.classList.add('up-next');
-                    }
-        
-                    tvGuideList.appendChild(listItem);
-                    startTime.setMinutes(startTime.getMinutes() + video.duration);
-                });
-            }
         };
-
-
-
-        
-    
     
 
         
