@@ -520,6 +520,9 @@
                 return;
             }
     
+            const savedTime = playbackTimes[subcategory] || 0;
+            videoPlayer.currentTime = savedTime;
+    
             currentStartTime = new Date();
             populateTVGuide(subcategory);
             updateGuideForPlayback();
@@ -594,7 +597,7 @@
     
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
-            const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
                 showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
@@ -604,7 +607,7 @@
     
         document.getElementById('channel-down').addEventListener('click', () => {
             setChannel(currentChannelIndex - 1);
-            const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
                 showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
@@ -638,6 +641,7 @@
         videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
         populateTVGuide(subcategories[0]);
     </script>
+
 
 </body>
 </html>
