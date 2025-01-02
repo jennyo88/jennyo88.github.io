@@ -24,7 +24,7 @@ RetroTV is an interactive web-based simulation of a retro TV set with a dynamic 
 ## File Structure
 - **`index.html`**: The main HTML file that integrates the TV and TV guide functionality.
 - **`channels.js`**: Contains the list of channels and categories in JavaScript format.
-- **`tvclean.webp`**: Background overlay for the TV screen.
+- **`tvbackclean.webp`**: Background overlay for the TV screen.
 
 ## How It Works
 1. **Power On/Off**:
