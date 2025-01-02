@@ -466,7 +466,7 @@
         
                 if (index === 0) {
                     listItem.classList.add('now-playing');
-                } else if (!nextUpSet && startTime > new Date()) {
+                } else if (!nextUpSet && (startTime.getTime() > new Date().getTime())) {
                     listItem.textContent += " (Up Next)";
                     listItem.classList.add('up-next');
                     nextUpSet = true;
@@ -475,7 +475,17 @@
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
+        
+            // Ensure "Up Next" is shown even for single-video channels
+            if (!nextUpSet && episodes.length === 1) {
+                const singleVideo = document.querySelector('.tv-guide li');
+                if (singleVideo) {
+                    singleVideo.textContent += " (Up Next)";
+                    singleVideo.classList.add('up-next');
+                }
+            }
         };
+
         
         const updateGuideForPlayback = () => {
             const currentTime = new Date().getTime();
