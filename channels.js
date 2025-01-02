@@ -14,6 +14,17 @@ const channels = [
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/3450/WiKOlPsK0eb9wia5Nd4WRvch7WX9lCKNfl9tVU8h.webp",
   },
   {
+    name: "Deep Rising",
+    category: "Movies",
+    subcategory: "Action",
+    channelNumber: 19,
+    video: "https://dn720303.ca.archive.org/0/items/VHSPreservationProject/Deep%20Rising%20%281998%29.mp4",
+    description: "A group of mercenaries and passengers battle a deadly sea creature aboard a luxury cruise ship.",
+    duration: 106, // In minutes
+    releaseYear: 1998,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/60977/7nEIIabSwXwYczMjJrhNrEGklBRGCOcPXz4RsmQG.webp",
+  },
+  {
     name: "The Mummy",
     category: "Movies",
     subcategory: "Adventure",
@@ -122,6 +133,17 @@ const channels = [
     duration: 139,
     releaseYear: 1998,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/4147/UtNrbf3Mb1K43mMbTmwhMZ3OvVKXjWnAjnbHewyT.webp",
+  },
+  {
+    name: "Starship Troopers",
+    category: "Movies",
+    subcategory: "Sci-Fi",
+    channelNumber: 18,
+    video: "https://dn720303.ca.archive.org/0/items/VHSPreservationProject/Starship%20Troopers%20%281997%29.mp4",
+    description: "Humans battle alien Bugs in a dystopian, satirical sci-fi war.",
+    duration: 129,
+    releaseYear: 1997,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/12836/naJOadZBchYblCxFdZJLRIfv1G5pw89vJ5Y9P5Vz.webp",
   },
   {
     name: "Star Wars",
