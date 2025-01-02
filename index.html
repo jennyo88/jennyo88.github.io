@@ -243,7 +243,7 @@
                         0 0 15px rgba(192, 192, 192, 0.8);
         }
         
-        /* Existing styles for power light */
+        /* Power light when powered on */
         #power-light {
             width: 25px;
             height: 25px;
@@ -253,42 +253,15 @@
             transition: box-shadow 0.3s ease, background-color 0.3s ease;
         }
         
-        /* New pulse effect */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(0, 255, 0, 1), 0 0 50px rgba(0, 255, 0, 0.8);
-            }
-            100% {
-                box-shadow: 0 0 15px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.6);
-            }
-        }
-        
-        /* Apply the pulse effect when powered on */
-        #power-light.pulse {
-            animation: pulse 1.5s infinite;
-        }
-        
         /* Power light when powered off */
         .power-off #power-light {
-            background: red;
+            background: red; /* Red overlay when powered off */
             box-shadow: 0 0 15px red;
-            animation: none; /* Stop pulsing when off */
         }
         
-        /* Optional power status text */
-        .button-label {
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 5px;
-            color: #fff;
-            transition: color 0.3s ease;
-        }
-        
-        .power-off .button-label {
-            color: red;
+        /* Optional hover effect for button */
+        #power:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(192, 192, 192, 0.6);
         }
 
         .spacer {
@@ -423,7 +396,6 @@
         const powerButton = document.getElementById('power');
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
-        const powerStatus = document.querySelector('.button-label');
         const poster = document.getElementById('poster');
         const playbackTimes = {}; // Cache playback times
         let currentChannelIndex = 0;
@@ -630,17 +602,15 @@
             // Toggle the power overlay
             powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
         
-            // Pause or play the video
+            // Toggle power light indicator
             if (isPoweredOn) {
+                powerLight.style.background = 'red'; // Change to red overlay
+                powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
-                powerLight.classList.remove('pulse'); // Stop the pulse effect
-                powerStatus.textContent = 'Power: OFF';
-                powerStatus.style.color = 'red';
             } else {
+                powerLight.style.background = 'green'; // Change to green overlay
+                powerLight.style.boxShadow = '0 0 15px green';
                 videoPlayer.play();
-                powerLight.classList.add('pulse'); // Start the pulse effect
-                powerStatus.textContent = 'Power: ON';
-                powerStatus.style.color = 'limegreen';
             }
         });
 
