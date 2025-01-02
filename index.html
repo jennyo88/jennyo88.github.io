@@ -702,8 +702,12 @@
     
         shuffleButton.addEventListener('click', shuffleChannels);
     
+        // Attach the playback time update event
         videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
+        
+        // Populate the TV guide and play the first video
         populateTVGuide(subcategories[0]);
+        updateGuideForPlayback();
     </script>
 
 
