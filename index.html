@@ -499,32 +499,11 @@
             allItems[index]?.classList.add('now-playing');
         };
 
-        document.getElementById('scroll-up').addEventListener('click', () => {
-            tvGuideList.scrollBy({ top: -100, behavior: 'smooth' });
-        });
-
-        document.getElementById('scroll-down').addEventListener('click', () => {
-            tvGuideList.scrollBy({ top: 100, behavior: 'smooth' });
-        });
-
         const formatTime = (date) => {
             return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         };
 
         populateTVGuide('default-subcategory'); // Pass the desired subcategory here
-
-        const showStatic = () => {
-            staticOverlay.style.display = 'block';
-            setTimeout(() => {
-                staticOverlay.style.display = 'none';
-            }, 500);
-        };
-
-        const updateNowPlaying = (index) => {
-            const allItems = document.querySelectorAll('.tv-guide li');
-            allItems.forEach(item => item.classList.remove('now-playing'));
-            allItems[index]?.classList.add('now-playing');
-        };
 
 
         const adjustPlaybackTime = (category) => {
