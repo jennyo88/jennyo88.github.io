@@ -432,6 +432,7 @@
             };
         });
 
+
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
             const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
@@ -446,7 +447,6 @@
         
             let startTime = new Date(currentStartTime);
         
-            // Populate episodes or fallback to single video with similar category videos as "Up Next"
             const episodes = channel.episodes && channel.episodes.length > 0
                 ? channel.episodes.map(episode => ({
                     name: episode.name || 'Unnamed Episode',
@@ -456,16 +456,7 @@
                 }))
                 : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
         
-            const similarCategoryVideos = preShuffledChannels.filter(ch => ch.category === channel.category && ch.subcategory !== subcategory)
-                .map(ch => ({
-                    name: ch.name || 'Untitled',
-                    duration: ch.duration || 30,
-                    video: ch.video,
-                    poster: ch.poster || 'default_poster.jpg'
-                }));
-        
-            let nextUpSet = false;
-            episodes.concat(similarCategoryVideos).forEach((episode, index) => {
+            episodes.forEach((episode, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
                 listItem.setAttribute('data-duration', episode.duration);
@@ -475,19 +466,47 @@
         
                 if (index === 0) {
                     listItem.classList.add('now-playing');
-                } else if (!nextUpSet && (startTime.getTime() > new Date().getTime())) {
+                } else if (index === 1) {
                     listItem.textContent += " (Up Next)";
                     listItem.classList.add('up-next');
-                    nextUpSet = true;
                 }
         
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
+        
+            // For single-video channels, show "Now Playing" and populate other videos for "Up Next"
+            if (episodes.length === 1) {
+                const additionalVideos = preShuffledChannels
+                    .filter(ch => ch.subcategory === subcategory && ch !== channel)
+                    .map(ch => ({
+                        name: ch.name || 'Untitled',
+                        duration: ch.duration || 30,
+                        video: ch.video,
+                        poster: ch.poster || 'default_poster.jpg'
+                    }));
+        
+                additionalVideos.forEach((video, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
+                    listItem.setAttribute('data-duration', video.duration);
+                    listItem.setAttribute('data-video', video.video);
+                    listItem.setAttribute('data-poster', video.poster);
+                    listItem.setAttribute('data-start-time', startTime.getTime());
+        
+                    if (index === 0) {
+                        listItem.textContent += " (Up Next)";
+                        listItem.classList.add('up-next');
+                    }
+        
+                    tvGuideList.appendChild(listItem);
+                    startTime.setMinutes(startTime.getMinutes() + video.duration);
+                });
+            }
         };
 
-    
 
+    
     
 
         
