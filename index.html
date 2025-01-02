@@ -355,6 +355,15 @@
 
         const formatTime = (time) => time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
+        // Utility function to shuffle an array
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+        
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
             const channel = channels.find(channel => channel.subcategory === subcategory);
@@ -362,17 +371,20 @@
                 categoryInfo.textContent = `Category: ${channel.category}`;
                 subcategoryInfo.textContent = `Playing: ${channel.subcategory}`;
             }
-
+        
             let startTime = new Date(currentStartTime);
-            const channelVideos = channels.filter(channel => channel.subcategory === subcategory);
+        
+            // Shuffle the videos for the subcategory
+            const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
             channelVideos.forEach(video => {
-                const episodes = video.episodes && video.episodes.length > 0 
-                    ? video.episodes.map(episode => ({
+                // Shuffle the episodes within each video
+                const episodes = video.episodes && video.episodes.length > 0
+                    ? shuffleArray(video.episodes.map(episode => ({
                         name: episode.name || 'Unnamed Episode',
-                        duration: episode.duration || 30
-                    })) 
-                    : [{ name: video.name || 'Untitled', duration: video.duration || 30 }];
-
+                        duration: episode.duration || 30,
+                    })))
+                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30 }]);
+        
                 episodes.forEach(episode => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
@@ -381,6 +393,7 @@
                 });
             });
         };
+
 
         const adjustPlaybackTime = (category) => {
             if (!playbackTimes[category]) playbackTimes[category] = 0;
