@@ -92,55 +92,124 @@
 
         .sidebar {
             width: 30%;
-            background: #444;
+            background: #333; /* Darker background for retro contrast */
             display: flex;
             flex-direction: column;
             padding: 20px;
             overflow-y: auto;
+            border-right: 3px solid #222; /* Simulate a retro TV frame */
+            position: relative;
         }
-
+        
+        .sidebar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.1) 4px
+            );
+            pointer-events: none;
+        }
+        
         .tv-guide {
             margin-bottom: 20px;
-            background: #555;
+            background: linear-gradient(to bottom, #555, #444); /* Add gradient for depth */
             border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6); /* Retro "glow" effect */
+            color: #eee; /* Light text for contrast */
+            font-family: 'Verdana', sans-serif; /* Retro font */
         }
-
+        
         .tv-guide h2 {
             margin: 0 0 10px 0;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Add shadow for retro look */
+            color: #ffcc00; /* Bright, nostalgic title color */
+            text-transform: uppercase;
         }
-
+        
         .tv-guide ul {
             list-style: none;
             padding: 0;
         }
-
+        
         .tv-guide li {
             margin-bottom: 10px;
-            padding: 10px;
-            background: #666;
+            padding: 15px;
+            background: linear-gradient(to right, #666, #444); /* Subtle gradient */
             border-radius: 5px;
+            font-size: 1rem;
+            color: #fff;
+            font-family: 'Courier New', monospace; /* Nostalgic typeface */
+            display: flex;
+            justify-content: space-between; /* Align time and title */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, background 0.2s ease;
         }
-
+        
+        .tv-guide li:hover {
+            background: #777;
+            transform: scale(1.05); /* Retro "pop-out" effect */
+        }
+        
+        .tv-guide li.now-playing {
+            background: #ffcc00; /* Bright highlight */
+            color: #000;
+            font-weight: bold;
+            animation: glow 1s infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px #ffcc00; }
+            100% { box-shadow: 0 0 15px #ffcc00; }
+        }
+        
         .poster-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            background: #555;
+            background: linear-gradient(to top, #444, #222); /* Gradient for depth */
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
         }
-
+        
         .poster-container img {
             width: 180px;
             height: 240px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        
+        .poster-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
+        }
+        
+        .scroll-button {
+            position: sticky;
+            bottom: 20px;
+            width: 100%;
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        .scroll-button:hover {
+            background: #555;
+        }
+
+
 
         .button-panel {
             position: absolute;
@@ -293,8 +362,14 @@
             <div class="poster-container" id="poster-container">
                 <img id="poster" src="./assets/images/default_poster.jpg" alt="Channel Poster" >
             </div>
+
+            <!-- Scroll Buttons -->
+            <button id="scroll-up" class="scroll-button">⬆</button>
+            <button id="scroll-down" class="scroll-button">⬇</button>
         </div>
     </div>
+
+    <div id="static-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('static.gif') center/cover; z-index: 1000;"></div>
 
     <!-- Button Panel -->
     <div class="button-panel">
@@ -393,6 +468,27 @@
                 });
             });
         };
+
+        const showStatic = () => {
+            staticOverlay.style.display = 'block';
+            setTimeout(() => {
+                staticOverlay.style.display = 'none';
+            }, 500);
+        };
+
+        const updateNowPlaying = (index) => {
+            const allItems = document.querySelectorAll('.tv-guide li');
+            allItems.forEach(item => item.classList.remove('now-playing'));
+            allItems[index]?.classList.add('now-playing');
+        };
+
+        document.getElementById('scroll-up').addEventListener('click', () => {
+            tvGuideList.scrollBy({ top: -100, behavior: 'smooth' });
+        });
+
+        document.getElementById('scroll-down').addEventListener('click', () => {
+            tvGuideList.scrollBy({ top: 100, behavior: 'smooth' });
+        });
 
 
         const adjustPlaybackTime = (category) => {
