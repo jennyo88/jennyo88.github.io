@@ -73,7 +73,7 @@
             top: 10%;
             left: 15%;
             z-index: 2;
-            display: none;
+            display: none; /* Hidden by default */
             justify-content: center;
             align-items: center;
             color: white;
@@ -521,7 +521,7 @@
                 poster.src = channel.poster || 'default_poster.jpg';
                 showNotification(
                     `Switched to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
-                    'blue'
+                    'limegreen'
                 );
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
@@ -547,7 +547,7 @@
             if (channel) {
                 showNotification(
                     `Shuffled to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
-                    'blue'
+                    'limegreen'
                 );
             } else {
                 showNotification('Error: Could not find channel details.', 'red');
@@ -601,7 +601,7 @@
             setChannel(currentChannelIndex + 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+                showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
                 showNotification('Channel up: No channel found', 'red');
             }
@@ -611,7 +611,7 @@
             setChannel(currentChannelIndex - 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+                showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
                 showNotification('Channel down: No channel found', 'red');
             }
@@ -627,6 +627,17 @@
             showVolumeIndicator(videoPlayer.volume);
         });
 
+        // Toggle power functionality
+        powerButton.addEventListener('click', () => {
+            const isPoweredOn = !powerOverlay.style.display || powerOverlay.style.display === 'none';
+            if (isPoweredOn) {
+                powerOverlay.style.display = 'block'; // Show the power-off overlay
+                videoPlayer.pause(); // Pause the video
+            } else {
+                powerOverlay.style.display = 'none'; // Hide the power-off overlay
+                videoPlayer.play(); // Resume video playback
+            }
+        });
 
         setChannel(currentChannelIndex);
     </script>
