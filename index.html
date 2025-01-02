@@ -464,6 +464,12 @@
                 const duration = parseInt(item.getAttribute('data-duration'), 10);
                 if (currentTime >= elapsed && currentTime < elapsed + duration) {
                     updateNowPlaying(index);
+                    const videoSrc = item.getAttribute('data-video');
+                    if (videoPlayer.src !== videoSrc) {
+                        videoPlayer.src = videoSrc;
+                        videoPlayer.load();
+                        videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
+                    }
                 }
                 elapsed += duration;
             });
@@ -500,42 +506,15 @@
                 return;
             }
     
-            let elapsedMinutes = Math.floor((new Date() - currentStartTime) / 60000);
-    
-            let videoToPlay = null;
-            let startTime = 0;
-    
-            const guideItems = document.querySelectorAll('.tv-guide li');
-            for (let i = 0; i < guideItems.length; i++) {
-                const duration = parseInt(guideItems[i].getAttribute('data-duration'), 10);
-                const videoSrc = guideItems[i].getAttribute('data-video');
-    
-                if (elapsedMinutes < duration) {
-                    videoToPlay = videoSrc;
-                    startTime = elapsedMinutes;
-                    updateNowPlaying(i);
-                    break;
-                }
-                elapsedMinutes -= duration;
-            }
-    
-            if (videoToPlay) {
-                videoPlayer.src = videoToPlay;
-                videoPlayer.load();
-                videoPlayer.currentTime = startTime * 60;
-                videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
-            } else {
-                console.error(`No video source found for subcategory: ${subcategory}`);
-                showNotification(`No available videos for subcategory: ${subcategory}`, 'red');
-            }
+            currentStartTime = new Date();
+            populateTVGuide(subcategory);
+            updateGuideForPlayback();
     
             poster.src = channel.poster || 'default_poster.jpg';
             showNotification(
                 `Switched to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
                 'limegreen'
             );
-    
-            populateTVGuide(subcategory);
         };
     
         const shuffleChannels = () => {
@@ -563,11 +542,6 @@
                 showNotification('Error: Could not find channel details.', 'red');
             }
         };
-    
-        videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
-        populateTVGuide(subcategories[0]); // Default to the first available subcategory
-
-
 
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
@@ -589,7 +563,6 @@
             }, 1000);
         };
 
-
         const showNotification = (message, color = 'limegreen') => {
             const notification = document.querySelector('.notification');
         
@@ -608,27 +581,6 @@
                 }, 500); // Wait for fade-out to complete
             }, 3000);
         };
-
-        // Toggle power functionality
-        powerButton.addEventListener('click', () => {
-            const isPoweredOn = powerOverlay.style.display === 'none';
-        
-            // Toggle the power overlay
-            powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
-        
-            // Toggle power light indicator
-            if (isPoweredOn) {
-                powerLight.style.background = 'red'; // Change to red overlay
-                powerLight.style.boxShadow = '0 0 15px red';
-                videoPlayer.pause();
-            } else {
-                powerLight.style.background = 'green'; // Change to green overlay
-                powerLight.style.boxShadow = '0 0 15px green';
-                videoPlayer.play();
-            }
-        });
-
-        shuffleButton.addEventListener('click', shuffleChannels);
 
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
@@ -660,8 +612,31 @@
             showVolumeIndicator(videoPlayer.volume);
         });
 
+        // Toggle power functionality
+        powerButton.addEventListener('click', () => {
+            const isPoweredOn = powerOverlay.style.display === 'none';
+        
+            // Toggle the power overlay
+            powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
+        
+            // Toggle power light indicator
+            if (isPoweredOn) {
+                powerLight.style.background = 'red'; // Change to red overlay
+                powerLight.style.boxShadow = '0 0 15px red';
+                videoPlayer.pause();
+            } else {
+                powerLight.style.background = 'green'; // Change to green overlay
+                powerLight.style.boxShadow = '0 0 15px green';
+                videoPlayer.play();
+            }
+        });
+        
 
-        setChannel(currentChannelIndex);
+        shuffleButton.addEventListener('click', shuffleChannels);
+    
+        videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
+        populateTVGuide(subcategories[0]);
+        
     </script>
 </body>
 </html>
