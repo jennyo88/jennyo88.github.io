@@ -521,7 +521,7 @@
                 poster.src = channel.poster || 'default_poster.jpg';
                 showNotification(
                     `Switched to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
-                    'blue'
+                    'limegreen'
                 );
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
@@ -547,7 +547,7 @@
             if (channel) {
                 showNotification(
                     `Shuffled to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
-                    'blue'
+                    'limegreen'
                 );
             } else {
                 showNotification('Error: Could not find channel details.', 'red');
@@ -560,7 +560,7 @@
         
             // Update notification content and styling
             notification.textContent = `Volume: ${volumePercent}%`;
-            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'orange' : 'limegreen'; // Dynamic color
+            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'limegreen' : 'limegreen'; // Dynamic color
             notification.style.display = 'block';
         
             // Fade out smoothly after 1 second
@@ -612,7 +612,7 @@
             setChannel(currentChannelIndex + 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+                showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
                 showNotification('Channel up: No channel found', 'red');
             }
@@ -622,7 +622,7 @@
             setChannel(currentChannelIndex - 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+                showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'limegreen');
             } else {
                 showNotification('Channel down: No channel found', 'red');
             }
