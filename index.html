@@ -399,22 +399,39 @@
             updatePlaybackTime(subcategories[currentChannelIndex]);
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
+            const currentTime = new Date();
         
             const channel = channels.find(channel => channel.subcategory === subcategory);
             if (channel) {
-                const firstEpisode = channel.episodes && channel.episodes.length > 0 ? channel.episodes[0] : null;
-                if (firstEpisode && firstEpisode.video) {
-                    videoPlayer.src = firstEpisode.video;
+                let elapsedMinutes = Math.floor((currentTime - currentStartTime) / 60000);
+                let videoToPlay = null;
+                let startTime = 0;
+        
+                if (channel.episodes && channel.episodes.length > 0) {
+                    for (const episode of channel.episodes) {
+                        if (elapsedMinutes < episode.duration) {
+                            videoToPlay = episode;
+                            startTime = elapsedMinutes;
+                            break;
+                        }
+                        elapsedMinutes -= episode.duration;
+                    }
+                }
+        
+                if (videoToPlay && videoToPlay.video) {
+                    videoPlayer.src = videoToPlay.video;
                     videoPlayer.load();
+                    videoPlayer.currentTime = startTime * 60; // Convert minutes to seconds
                     videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                 } else if (channel.video) {
                     videoPlayer.src = channel.video;
                     videoPlayer.load();
+                    videoPlayer.currentTime = elapsedMinutes * 60; // Fallback for single video channels
                     videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                 } else {
-                    console.error(`Video source is undefined for channel: ${channel.name}`);
+                    console.error(`No video source found for channel: ${channel.name}`);
                 }
-                // Update the poster
+        
                 poster.src = channel.poster || 'default_poster.jpg';
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
@@ -422,6 +439,7 @@
         
             populateTVGuide(subcategory);
         };
+
 
 
 
