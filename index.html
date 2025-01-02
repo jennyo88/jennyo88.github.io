@@ -559,10 +559,15 @@
 
 
         const shuffleChannels = () => {
+            if (!subcategories || subcategories.length === 0) {
+                showNotification('Error: No subcategories available to shuffle.', 'red');
+                return;
+            }
+        
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * subcategories.length);
-            } while (randomIndex === lastShuffleIndex);
+            } while (randomIndex === lastShuffleIndex && subcategories.length > 1);
         
             lastShuffleIndex = randomIndex;
             updatePlaybackTime(subcategories[currentChannelIndex]);
@@ -578,6 +583,7 @@
                 showNotification('Error: Could not find channel details.', 'red');
             }
         };
+
 
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
