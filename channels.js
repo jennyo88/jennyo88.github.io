@@ -7,7 +7,7 @@ const channels = [
     category: "RetroTV",
     subcategory: "TV",
     channelNumber: 99,
-    video: "http://192.168.0.213:8001/media-player/0.m3u",
+    video: "http://192.168.0.213:8001/m3u8?channel=0",
     description: "Full TV schedule.",
     duration: 9999,
     releaseYear: 2025,
