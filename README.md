@@ -57,14 +57,14 @@ const channels = [
 ```
 
 ## Setup for GitHub Pages
-1. Add all files (`index.html`, `channels.js`, `tvclean.webp`) to your repository.
+1. Add all files (`index.html`, `channels.js`, `tvblankclean.webp`) to your repository.
 2. Enable GitHub Pages in the repository settings.
 3. Access your site using the provided GitHub Pages URL.
 
 ## Screenshots
 
 ### Channel Display
-![Channel Display](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/assets/images/tvclean.webp)
+![Channel Display](https://raw.githubusercontent.com/jennyo88/jennyo88.github.io/refs/heads/main/assets/images/tvblankclean.webp)
 
 ## Future Improvements
 - Add more customization options for channels.
