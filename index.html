@@ -582,14 +582,6 @@
             }
         };
         
-        // Call this on page load to align playback and guide
-        synchronizePlayback();
-        
-        // Optionally, keep updating during playback
-        videoPlayer.addEventListener('timeupdate', synchronizePlayback);
-
-
-    
     
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
@@ -626,6 +618,8 @@
                 }, 500);
             }, 3000);
         };
+
+        shuffleButton.addEventListener('click', shuffleChannels);
     
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
@@ -675,6 +669,15 @@
                 videoPlayer.play();
             }
         });
+
+        // Optionally, keep updating during playback
+        videoPlayer.addEventListener('timeupdate', synchronizePlayback);
+        
+        // Populate the TV guide and play the first video
+        populateTVGuide(subcategories[0]);
+        
+        // Call this on page load to align playback and guide
+        synchronizePlayback();
 
     </script>
 
