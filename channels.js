@@ -205,7 +205,7 @@ const channels = [
     category: "Movies",
     subcategory: "Superhero",
     channelNumber: 17,
-    video: "https://archive.org/download/full-vhs-superman-ii-1981-warner-home-video-rental-edition/FULL%20VHS%20Superman%20II%20%281981%29%20%5BWarner%20Home%20Video%5D%20%28Rental%20Edition%29.mp4",
+    video: "https://dn720403.ca.archive.org/0/items/vts-01-1-merge-2/VTS_01_1_Merge%282%29.ia.mp4",
     description: "Superman faces General Zod in an epic battle for Earth.",
     duration: 116,
     releaseYear: 1980,
