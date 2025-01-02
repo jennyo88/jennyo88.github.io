@@ -431,7 +431,7 @@
                 episodes: shuffledEpisodes
             };
         });
-    
+
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
             const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
@@ -446,6 +446,7 @@
         
             let startTime = new Date(currentStartTime);
         
+            // Populate episodes or fallback to single video with similar category videos as "Up Next"
             const episodes = channel.episodes && channel.episodes.length > 0
                 ? channel.episodes.map(episode => ({
                     name: episode.name || 'Unnamed Episode',
@@ -455,8 +456,16 @@
                 }))
                 : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
         
+            const similarCategoryVideos = preShuffledChannels.filter(ch => ch.category === channel.category && ch.subcategory !== subcategory)
+                .map(ch => ({
+                    name: ch.name || 'Untitled',
+                    duration: ch.duration || 30,
+                    video: ch.video,
+                    poster: ch.poster || 'default_poster.jpg'
+                }));
+        
             let nextUpSet = false;
-            episodes.forEach((episode, index) => {
+            episodes.concat(similarCategoryVideos).forEach((episode, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
                 listItem.setAttribute('data-duration', episode.duration);
@@ -475,16 +484,11 @@
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
-        
-            // Ensure "Up Next" is shown even for single-video channels
-            if (!nextUpSet && episodes.length === 1) {
-                const singleVideo = document.querySelector('.tv-guide li');
-                if (singleVideo) {
-                    singleVideo.textContent += " (Up Next)";
-                    singleVideo.classList.add('up-next');
-                }
-            }
         };
+
+    
+
+    
 
         
         const updateGuideForPlayback = () => {
