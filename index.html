@@ -430,16 +430,21 @@
                     videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                 } else {
                     console.error(`No video source found for channel: ${channel.name}`);
+                    showNotification(`No available videos for Channel: ${channel.name}`, 'red');
                 }
         
                 poster.src = channel.poster || 'default_poster.jpg';
+                showNotification(
+                    `Switched to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
+                    'blue'
+                );
             } else {
                 console.error(`No videos available for subcategory: ${subcategory}`);
+                showNotification(`No videos available for subcategory: ${subcategory}`, 'red');
             }
         
             populateTVGuide(subcategory);
         };
-
 
 
 
@@ -448,54 +453,95 @@
             do {
                 randomIndex = Math.floor(Math.random() * subcategories.length);
             } while (randomIndex === lastShuffleIndex);
-
+        
             lastShuffleIndex = randomIndex;
             updatePlaybackTime(subcategories[currentChannelIndex]);
             setChannel(randomIndex);
-            showNotification('Shuffled to a new channel', 'blue');
+        
+            const channel = channels.find(channel => channel.subcategory === subcategories[randomIndex]);
+            if (channel) {
+                showNotification(
+                    `Shuffled to Channel: ${channel.name} (Channel ${channel.channelNumber})`,
+                    'blue'
+                );
+            } else {
+                showNotification('Error: Could not find channel details.', 'red');
+            }
         };
 
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
-            notification.textContent = `Volume: ${Math.round(volume * 100)}%`;
-            notification.style.color = 'limegreen';
+            const volumePercent = Math.round(volume * 100);
+        
+            // Update notification content and styling
+            notification.textContent = `Volume: ${volumePercent}%`;
+            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'orange' : 'limegreen'; // Dynamic color
             notification.style.display = 'block';
+        
+            // Fade out smoothly after 1 second
             setTimeout(() => {
-                notification.style.display = 'none';
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1'; // Reset opacity for next notification
+                }, 500);
             }, 1000);
         };
 
+
         const showNotification = (message, color = 'limegreen') => {
             const notification = document.querySelector('.notification');
+        
+            // Update the content and style
             notification.textContent = message;
             notification.style.color = color;
             notification.style.display = 'block';
+            notification.style.transition = 'opacity 0.5s ease'; // Add fade-in/out effect
+            notification.style.opacity = '1';
+        
+            // Hide the notification after 3 seconds with a fade-out
             setTimeout(() => {
-                notification.style.display = 'none';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500); // Wait for fade-out to complete
             }, 3000);
         };
+
 
         shuffleButton.addEventListener('click', shuffleChannels);
 
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
-            showNotification('Channel up', 'orange');
+            const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            if (channel) {
+                showNotification(`Channel up: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+            } else {
+                showNotification('Channel up: No channel found', 'red');
+            }
         });
-
+        
         document.getElementById('channel-down').addEventListener('click', () => {
             setChannel(currentChannelIndex - 1);
-            showNotification('Channel down', 'orange');
+            const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            if (channel) {
+                showNotification(`Channel down: ${channel.name} (Channel ${channel.channelNumber})`, 'orange');
+            } else {
+                showNotification('Channel down: No channel found', 'red');
+            }
         });
-
+        
         document.getElementById('volume-up').addEventListener('click', () => {
             videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
             showVolumeIndicator(videoPlayer.volume);
         });
-
+        
         document.getElementById('volume-down').addEventListener('click', () => {
             videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
             showVolumeIndicator(videoPlayer.volume);
         });
+
 
         setChannel(currentChannelIndex);
     </script>
