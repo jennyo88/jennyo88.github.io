@@ -27,7 +27,7 @@
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     const video = document.getElementById('video');
-    const videoSrc = 'http://192.168.0.213:8001/media-player/fast/0.m3u'; // Replace with your M3U8 URL
+    const videoSrc = 'http://192.168.0.213:8001/api/channels.m3u'; // Replace with your M3U8 URL
 
     if (Hls.isSupported()) {
       const hls = new Hls();
