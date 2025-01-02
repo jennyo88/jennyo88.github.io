@@ -407,6 +407,10 @@
                 return acc;
             }, {}));
         })();
+
+        const formatTime = (date) => {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
         
         // Utility function to shuffle an array
         const shuffleArray = (array) => {
@@ -416,15 +420,10 @@
             }
             return array;
         };
-    
+        
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
-            if (!channels || channels.length === 0) {
-                console.error('No channels available.');
-                return;
-            }
-
-            const channel = channels.find(ch => ch.subcategory === subcategory);
+            const channel = channels.find(channel => channel.subcategory === subcategory);
             if (channel) {
                 categoryInfo.textContent = `Category: ${channel.category}`;
                 subcategoryInfo.textContent = `Playing: ${channel.subcategory}`;
@@ -434,22 +433,22 @@
             const weeklySchedule = {};
 
             let currentDay = new Date();
-            currentDay.setHours(6, 0, 0, 0);
+            currentDay.setHours(6, 0, 0, 0); // Start at 6:00 AM each day
 
             // Generate a weekly schedule
             DAYS.forEach(day => {
                 let daySchedule = [];
                 let startTime = new Date(currentDay);
+                const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
 
-                const channelVideos = shuffleArray(channels.filter(ch => ch.subcategory === subcategory));
-                while (startTime.getHours() < 24) {
+                while (startTime.getHours() < 24) { // Fill the schedule until midnight
                     channelVideos.forEach(video => {
                         const episodes = video.episodes && video.episodes.length > 0
                             ? shuffleArray(video.episodes.map(episode => ({
                                 name: episode.name || 'Unnamed Episode',
                                 duration: episode.duration || 30,
                             })))
-                            : [{ name: video.name || 'Untitled', duration: video.duration || 30 }];
+                            : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30 }]);
 
                         episodes.forEach(episode => {
                             if (startTime.getHours() < 24) {
@@ -468,8 +467,8 @@
                 }
 
                 weeklySchedule[day] = daySchedule;
-                currentDay.setDate(currentDay.getDate() + 1);
-                currentDay.setHours(6, 0, 0, 0);
+                currentDay.setDate(currentDay.getDate() + 1); // Move to the next day
+                currentDay.setHours(6, 0, 0, 0); // Reset to 6:00 AM
             });
 
             // Populate the TV Guide UI
@@ -485,6 +484,26 @@
                 });
             }
         };
+        
+            // Shuffle the videos for the subcategory
+            const channelVideos = shuffleArray(channels.filter(channel => channel.subcategory === subcategory));
+            channelVideos.forEach(video => {
+                // Shuffle the episodes within each video
+                const episodes = video.episodes && video.episodes.length > 0
+                    ? shuffleArray(video.episodes.map(episode => ({
+                        name: episode.name || 'Unnamed Episode',
+                        duration: episode.duration || 30,
+                    })))
+                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30 }]);
+        
+                episodes.forEach(episode => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
+                    tvGuideList.appendChild(listItem);
+                    startTime.setMinutes(startTime.getMinutes() + episode.duration);
+                });
+            });
+        };
 
         const showStatic = () => {
             staticOverlay.style.display = 'block';
@@ -497,10 +516,6 @@
             const allItems = document.querySelectorAll('.tv-guide li');
             allItems.forEach(item => item.classList.remove('now-playing'));
             allItems[index]?.classList.add('now-playing');
-        };
-
-        const formatTime = (date) => {
-            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         };
 
         populateTVGuide('default-subcategory'); // Pass the desired subcategory here
@@ -671,5 +686,3 @@
     </script>
 </body>
 </html>
-
-
