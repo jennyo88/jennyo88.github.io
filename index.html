@@ -451,21 +451,6 @@
             });
         };
 
-        const togglePower = () => {
-            const isPoweredOn = powerOverlay.style.display === 'none' || !powerOverlay.style.display;
-            if (isPoweredOn) {
-                powerOverlay.style.display = 'block'; // Show the power-off overlay
-                videoPlayer.pause(); // Pause the video
-                powerLight.style.backgroundColor = 'red'; // Turn power light red
-            } else {
-                powerOverlay.style.display = 'none'; // Hide the power-off overlay
-                videoPlayer.play(); // Resume video playback
-                powerLight.style.backgroundColor = 'green'; // Turn power light green
-            }
-        };
-
-        powerButton.addEventListener('click', togglePower);
-
         const showStatic = () => {
             staticOverlay.style.display = 'block';
             setTimeout(() => {
