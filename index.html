@@ -397,7 +397,6 @@
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
         const poster = document.getElementById('poster');
-        const playbackTimes = {}; // Cache playback times
         let currentChannelIndex = 0;
         let currentStartTime = new Date();
         let lastShuffleIndex = -1;
@@ -587,9 +586,7 @@
         videoPlayer.addEventListener('timeupdate', synchronizePlayback);
 
 
-        
-        
-        
+    
     
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
@@ -675,8 +672,6 @@
                 videoPlayer.play();
             }
         });
-    
-        shuffleButton.addEventListener('click', shuffleChannels);
 
     </script>
 
