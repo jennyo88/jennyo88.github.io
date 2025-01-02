@@ -442,14 +442,16 @@
                         name: episode.name || 'Unnamed Episode',
                         duration: episode.duration || 30,
                         video: episode.video || video.video,
+                        poster: episode.poster || video.poster || 'default_poster.jpg'
                     })))
-                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30, video: video.video }]);
+                    : shuffleArray([{ name: video.name || 'Untitled', duration: video.duration || 30, video: video.video, poster: video.poster || 'default_poster.jpg' }]);
     
                 episodes.forEach(episode => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
                     listItem.setAttribute('data-duration', episode.duration);
                     listItem.setAttribute('data-video', episode.video);
+                    listItem.setAttribute('data-poster', episode.poster);
                     tvGuideList.appendChild(listItem);
                     startTime.setMinutes(startTime.getMinutes() + episode.duration);
                 });
@@ -465,10 +467,14 @@
                 if (currentTime >= elapsed && currentTime < elapsed + duration) {
                     updateNowPlaying(index);
                     const videoSrc = item.getAttribute('data-video');
+                    const posterSrc = item.getAttribute('data-poster');
                     if (videoPlayer.src !== videoSrc) {
                         videoPlayer.src = videoSrc;
                         videoPlayer.load();
                         videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
+                    }
+                    if (poster.src !== posterSrc) {
+                        poster.src = posterSrc;
                     }
                 }
                 elapsed += duration;
@@ -542,46 +548,42 @@
                 showNotification('Error: Could not find channel details.', 'red');
             }
         };
-
+    
         const showVolumeIndicator = (volume) => {
             const notification = document.querySelector('.notification');
             const volumePercent = Math.round(volume * 100);
-        
-            // Update notification content and styling
+    
             notification.textContent = `Volume: ${volumePercent}%`;
-            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'limegreen' : 'limegreen'; // Dynamic color
+            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'limegreen' : 'limegreen';
             notification.style.display = 'block';
-        
-            // Fade out smoothly after 1 second
+    
             setTimeout(() => {
                 notification.style.transition = 'opacity 0.5s ease';
                 notification.style.opacity = '0';
                 setTimeout(() => {
                     notification.style.display = 'none';
-                    notification.style.opacity = '1'; // Reset opacity for next notification
+                    notification.style.opacity = '1';
                 }, 500);
             }, 1000);
         };
-
+    
         const showNotification = (message, color = 'limegreen') => {
             const notification = document.querySelector('.notification');
-        
-            // Update the content and style
+    
             notification.textContent = message;
             notification.style.color = color;
             notification.style.display = 'block';
-            notification.style.transition = 'opacity 0.5s ease'; // Add fade-in/out effect
+            notification.style.transition = 'opacity 0.5s ease';
             notification.style.opacity = '1';
-        
-            // Hide the notification after 3 seconds with a fade-out
+    
             setTimeout(() => {
                 notification.style.opacity = '0';
                 setTimeout(() => {
                     notification.style.display = 'none';
-                }, 500); // Wait for fade-out to complete
+                }, 500);
             }, 3000);
         };
-
+    
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
@@ -591,7 +593,7 @@
                 showNotification('Channel up: No channel found', 'red');
             }
         });
-        
+    
         document.getElementById('channel-down').addEventListener('click', () => {
             setChannel(currentChannelIndex - 1);
             const channel = channels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
@@ -601,42 +603,33 @@
                 showNotification('Channel down: No channel found', 'red');
             }
         });
-        
+    
         document.getElementById('volume-up').addEventListener('click', () => {
             videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
             showVolumeIndicator(videoPlayer.volume);
         });
-        
+    
         document.getElementById('volume-down').addEventListener('click', () => {
             videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
             showVolumeIndicator(videoPlayer.volume);
         });
-
-        // Toggle power functionality
+    
         powerButton.addEventListener('click', () => {
             const isPoweredOn = powerOverlay.style.display === 'none';
-        
-            // Toggle the power overlay
             powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
-        
-            // Toggle power light indicator
+            powerLight.style.background = isPoweredOn ? 'red' : 'green';
             if (isPoweredOn) {
-                powerLight.style.background = 'red'; // Change to red overlay
-                powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
             } else {
-                powerLight.style.background = 'green'; // Change to green overlay
-                powerLight.style.boxShadow = '0 0 15px green';
-                videoPlayer.play();
+                videoPlayer.play().catch(error => console.error('Error resuming video:', error.message));
             }
         });
-        
-
+    
         shuffleButton.addEventListener('click', shuffleChannels);
     
         videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
         populateTVGuide(subcategories[0]);
-        
     </script>
+
 </body>
 </html>
