@@ -461,31 +461,37 @@
                 listItem.setAttribute('data-duration', episode.duration);
                 listItem.setAttribute('data-video', episode.video);
                 listItem.setAttribute('data-poster', episode.poster);
+                listItem.setAttribute('data-start-time', startTime.getTime());
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
         };
     
         const updateGuideForPlayback = () => {
-            const currentTime = videoPlayer.currentTime / 60;
+            const currentTime = new Date().getTime();
             const guideItems = document.querySelectorAll('.tv-guide li');
-            let elapsed = 0;
             guideItems.forEach((item, index) => {
-                const duration = parseInt(item.getAttribute('data-duration'), 10);
-                if (currentTime >= elapsed && currentTime < elapsed + duration) {
+                const startTime = parseInt(item.getAttribute('data-start-time'), 10);
+                const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
+                const endTime = startTime + duration;
+    
+                if (currentTime >= startTime && currentTime < endTime) {
                     updateNowPlaying(index);
                     const videoSrc = item.getAttribute('data-video');
                     const posterSrc = item.getAttribute('data-poster');
+    
+                    const elapsedTime = (currentTime - startTime) / 1000; // Elapsed time in seconds
+    
                     if (videoPlayer.src !== videoSrc) {
                         videoPlayer.src = videoSrc;
                         videoPlayer.load();
+                        videoPlayer.currentTime = elapsedTime;
                         videoPlayer.play().catch(error => console.error('Error playing video:', error.message));
                     }
                     if (poster.src !== posterSrc) {
                         poster.src = posterSrc;
                     }
                 }
-                elapsed += duration;
             });
         };
     
@@ -519,9 +525,6 @@
                 showNotification(`No videos available for subcategory: ${subcategory}`, 'red');
                 return;
             }
-    
-            const savedTime = playbackTimes[subcategory] || 0;
-            videoPlayer.currentTime = savedTime;
     
             currentStartTime = new Date();
             populateTVGuide(subcategory);
@@ -641,6 +644,8 @@
         videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
         populateTVGuide(subcategories[0]);
     </script>
+
+
 
 
 </body>
