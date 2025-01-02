@@ -3,60 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M3U Playlist Video Player</title>
+  <title>M3U Playlist Player</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background-color: #000;
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background-color: #000;
-      color: #fff;
+      justify-content: center;
     }
-    #channel-list {
-      margin: 10px 0;
-      max-height: 200px;
-      overflow-y: auto;
-      width: 80%;
-      max-width: 600px;
-      border: 1px solid #fff;
-      background-color: #222;
-    }
-    #channel-list div {
-      padding: 10px;
-      cursor: pointer;
-      border-bottom: 1px solid #444;
-    }
-    #channel-list div:hover {
-      background-color: #444;
-    }
-    video {
+    .player-container {
       width: 80%;
       max-width: 800px;
+      margin: 20px;
+    }
+    video {
+      width: 100%;
       border: 2px solid #fff;
+    }
+    .playlist {
       margin-top: 20px;
+      max-height: 200px;
+      overflow-y: auto;
+      background-color: #222;
+      border: 1px solid #fff;
+    }
+    .playlist-item {
+      padding: 10px;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+    }
+    .playlist-item:hover {
+      background-color: #444;
+    }
+    .now-playing {
+      margin: 10px 0;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>M3U Playlist Player</h1>
-  <div id="channel-list">Loading channels...</div>
-  <video id="video" controls autoplay></video>
-  
+  <div class="player-container">
+    <div class="now-playing">Now Playing: <span id="current-channel">None</span></div>
+    <video id="video" controls autoplay></video>
+    <div class="playlist" id="playlist">Loading channels...</div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    const playlistUrl = 'http://192.168.0.213:8001/api/channels.m3u'; // Replace with your M3U URL
-    const channelList = document.getElementById('channel-list');
+    const m3uFileUrl = 'http://192.168.0.213:8001/api/channels.m3u'; // Replace with your M3U file URL
     const video = document.getElementById('video');
+    const playlist = document.getElementById('playlist');
+    const currentChannel = document.getElementById('current-channel');
 
+    // Function to fetch and parse the M3U file
     async function fetchAndParseM3U(url) {
-      const response = await fetch(url);
-      const text = await response.text();
-      return parseM3U(text);
+      try {
+        const response = await fetch(url);
+        const text = await response.text();
+        return parseM3U(text);
+      } catch (error) {
+        console.error('Failed to fetch M3U file:', error);
+        playlist.innerHTML = '<div>Error loading playlist.</div>';
+      }
     }
 
+    // Function to parse M3U content
     function parseM3U(content) {
       const lines = content.split('\n').filter(line => line.trim());
       const channels = [];
@@ -64,39 +80,45 @@
         if (lines[i].startsWith('#EXTINF')) {
           const name = lines[i].split(',')[1];
           const url = lines[i + 1];
-          channels.push({ name, url });
+          if (name && url) {
+            channels.push({ name, url });
+          }
         }
       }
       return channels;
     }
 
-    function loadChannels(channels) {
-      channelList.innerHTML = '';
+    // Function to load channels into the playlist UI
+    function loadPlaylist(channels) {
+      playlist.innerHTML = '';
       channels.forEach(channel => {
-        const div = document.createElement('div');
-        div.textContent = channel.name;
-        div.onclick = () => playChannel(channel.url);
-        channelList.appendChild(div);
+        const item = document.createElement('div');
+        item.className = 'playlist-item';
+        item.textContent = channel.name;
+        item.onclick = () => playChannel(channel);
+        playlist.appendChild(item);
       });
+
+      // Auto-play the first channel
+      if (channels.length > 0) playChannel(channels[0]);
     }
 
-    function playChannel(url) {
+    // Function to play a selected channel
+    function playChannel(channel) {
+      currentChannel.textContent = channel.name;
       if (Hls.isSupported()) {
         const hls = new Hls();
-        hls.loadSource(url);
+        hls.loadSource(channel.url);
         hls.attachMedia(video);
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
+        video.src = channel.url;
       } else {
         alert('Your browser does not support M3U8 playback.');
       }
     }
 
-    // Load and display channels
-    fetchAndParseM3U(playlistUrl).then(loadChannels).catch(err => {
-      channelList.textContent = 'Failed to load playlist.';
-      console.error(err);
-    });
+    // Fetch and load the playlist
+    fetchAndParseM3U(m3uFileUrl).then(loadPlaylist);
   </script>
 </body>
 </html>
