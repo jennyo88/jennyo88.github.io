@@ -455,13 +455,17 @@
                 }))
                 : [{ name: channel.name || 'Untitled', duration: channel.duration || 30, video: channel.video, poster: channel.poster || 'default_poster.jpg' }];
     
-            episodes.forEach(episode => {
+            episodes.forEach((episode, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
                 listItem.setAttribute('data-duration', episode.duration);
                 listItem.setAttribute('data-video', episode.video);
                 listItem.setAttribute('data-poster', episode.poster);
                 listItem.setAttribute('data-start-time', startTime.getTime());
+                listItem.classList.add(index === 0 ? 'now-playing' : 'up-next');
+                if (index > 0) {
+                    listItem.textContent += " (Up Next)";
+                }
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + episode.duration);
             });
@@ -470,13 +474,14 @@
         const updateGuideForPlayback = () => {
             const currentTime = new Date().getTime();
             const guideItems = document.querySelectorAll('.tv-guide li');
-            guideItems.forEach((item, index) => {
+            for (let i = 0; i < guideItems.length; i++) {
+                const item = guideItems[i];
                 const startTime = parseInt(item.getAttribute('data-start-time'), 10);
                 const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
                 const endTime = startTime + duration;
     
                 if (currentTime >= startTime && currentTime < endTime) {
-                    updateNowPlaying(index);
+                    updateNowPlaying(i);
                     const videoSrc = item.getAttribute('data-video');
                     const posterSrc = item.getAttribute('data-poster');
     
@@ -491,14 +496,39 @@
                     if (poster.src !== posterSrc) {
                         poster.src = posterSrc;
                     }
+                    return;
+                } else if (currentTime >= endTime) {
+                    // Skip to the next video if current video has ended
+                    updateNowPlaying(i + 1);
+                    const nextItem = guideItems[i + 1];
+                    if (nextItem) {
+                        const nextVideoSrc = nextItem.getAttribute('data-video');
+                        const nextPosterSrc = nextItem.getAttribute('data-poster');
+    
+                        if (videoPlayer.src !== nextVideoSrc) {
+                            videoPlayer.src = nextVideoSrc;
+                            videoPlayer.load();
+                            videoPlayer.currentTime = 0; // Start from the beginning of the next video
+                            videoPlayer.play().catch(error => console.error('Error playing next video:', error.message));
+                        }
+                        if (poster.src !== nextPosterSrc) {
+                            poster.src = nextPosterSrc;
+                        }
+                    }
                 }
-            });
+            }
         };
     
         const updateNowPlaying = (index) => {
             const allItems = document.querySelectorAll('.tv-guide li');
-            allItems.forEach(item => item.classList.remove('now-playing'));
+            allItems.forEach(item => {
+                item.classList.remove('now-playing');
+                item.classList.remove('up-next');
+            });
             allItems[index]?.classList.add('now-playing');
+            if (index + 1 < allItems.length) {
+                allItems[index + 1]?.classList.add('up-next');
+            }
         };
     
         const updatePlaybackTime = (category) => {
@@ -628,14 +658,22 @@
             showVolumeIndicator(videoPlayer.volume);
         });
     
+        // Toggle power functionality
         powerButton.addEventListener('click', () => {
             const isPoweredOn = powerOverlay.style.display === 'none';
+        
+            // Toggle the power overlay
             powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
-            powerLight.style.background = isPoweredOn ? 'red' : 'green';
+        
+            // Toggle power light indicator
             if (isPoweredOn) {
+                powerLight.style.background = 'red'; // Change to red overlay
+                powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
             } else {
-                videoPlayer.play().catch(error => console.error('Error resuming video:', error.message));
+                powerLight.style.background = 'green'; // Change to green overlay
+                powerLight.style.boxShadow = '0 0 15px green';
+                videoPlayer.play();
             }
         });
     
@@ -644,7 +682,6 @@
         videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
         populateTVGuide(subcategories[0]);
     </script>
-
 
 
 
