@@ -432,6 +432,7 @@
             };
         });
 
+        let shuffledVideosCache = {};
 
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
@@ -447,23 +448,27 @@
         
             let startTime = new Date(currentStartTime);
         
-            // Combine videos from all channels in the subcategory, then shuffle
-            const videos = shuffleArray(channelsInSubcategory.flatMap(channel => {
-                const channelVideos = channel.episodes && channel.episodes.length > 0
-                    ? channel.episodes.map(episode => ({
-                        name: episode.name || 'Unnamed Episode',
-                        duration: episode.duration || 30,
-                        video: episode.video || channel.video,
-                        poster: episode.poster || channel.poster || 'default_poster.jpg'
-                    }))
-                    : [{
-                        name: channel.name || 'Untitled',
-                        duration: channel.duration || 30,
-                        video: channel.video,
-                        poster: channel.poster || 'default_poster.jpg'
-                    }];
-                return channelVideos;
-            }));
+            // Use cached shuffle or shuffle only once per refresh
+            if (!shuffledVideosCache[subcategory]) {
+                shuffledVideosCache[subcategory] = shuffleArray(channelsInSubcategory.flatMap(channel => {
+                    const channelVideos = channel.episodes && channel.episodes.length > 0
+                        ? channel.episodes.map(episode => ({
+                            name: episode.name || 'Unnamed Episode',
+                            duration: episode.duration || 30,
+                            video: episode.video || channel.video,
+                            poster: episode.poster || channel.poster || 'default_poster.jpg'
+                        }))
+                        : [{
+                            name: channel.name || 'Untitled',
+                            duration: channel.duration || 30,
+                            video: channel.video,
+                            poster: channel.poster || 'default_poster.jpg'
+                        }];
+                    return channelVideos;
+                }));
+            }
+        
+            const videos = shuffledVideosCache[subcategory];
         
             videos.forEach((video, index) => {
                 const listItem = document.createElement('li');
@@ -484,7 +489,10 @@
                 startTime.setMinutes(startTime.getMinutes() + video.duration);
             });
         };
-    
+
+
+
+        
 
         
         const updateGuideForPlayback = () => {
