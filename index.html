@@ -421,7 +421,8 @@
             }
             return array;
         };
-        
+
+        // Existing populateTVGuide
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
             const channel = channels.find(channel => channel.subcategory === subcategory);
@@ -446,37 +447,58 @@
                 episodes.forEach(episode => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `${formatTime(startTime)} - ${episode.name}`;
+                    listItem.setAttribute('data-duration', episode.duration); // Store duration as a data attribute
                     tvGuideList.appendChild(listItem);
                     startTime.setMinutes(startTime.getMinutes() + episode.duration);
                 });
             });
         };
-
+        
+        // Sync playback with TV guide
+        const updateGuideForPlayback = () => {
+            const currentTime = videoPlayer.currentTime / 60; // Convert seconds to minutes
+            const guideItems = document.querySelectorAll('.tv-guide li');
+            
+            let elapsed = 0;
+            guideItems.forEach((item, index) => {
+                const duration = parseInt(item.getAttribute('data-duration'), 10);
+                if (currentTime >= elapsed && currentTime < elapsed + duration) {
+                    updateNowPlaying(index); // Highlight the current program
+                }
+                elapsed += duration;
+            });
+        };
+        
+        // Highlight the currently playing program
+        const updateNowPlaying = (index) => {
+            const allItems = document.querySelectorAll('.tv-guide li');
+            allItems.forEach(item => item.classList.remove('now-playing'));
+            allItems[index]?.classList.add('now-playing'); // Highlight the currently playing item
+        };
+        
+        // Attach the playback time update event
+        videoPlayer.addEventListener('timeupdate', updateGuideForPlayback);
+        
+        // Show static effect
         const showStatic = () => {
             staticOverlay.style.display = 'block';
             setTimeout(() => {
                 staticOverlay.style.display = 'none';
             }, 500);
         };
-
-        const updateNowPlaying = (index) => {
-            const allItems = document.querySelectorAll('.tv-guide li');
-            allItems.forEach(item => item.classList.remove('now-playing'));
-            allItems[index]?.classList.add('now-playing');
-        };
-
-        populateTVGuide('default-subcategory'); // Pass the desired subcategory here
-
-
+        
+        // Adjust playback time for categories
         const adjustPlaybackTime = (category) => {
             if (!playbackTimes[category]) playbackTimes[category] = 0;
             videoPlayer.currentTime = playbackTimes[category];
         };
-
+        
+        // Update playback time for a category
         const updatePlaybackTime = (category) => {
             playbackTimes[category] = videoPlayer.currentTime;
         };
-
+        
+        // Set the channel and update the guide
         const setChannel = (index) => {
             if (index < 0 || index >= subcategories.length) {
                 console.error('Index out of bounds for subcategories');
@@ -531,7 +553,9 @@
         
             populateTVGuide(subcategory);
         };
-
+        
+        // Initial population of the TV guide
+        populateTVGuide('default-subcategory');
 
 
         const shuffleChannels = () => {
