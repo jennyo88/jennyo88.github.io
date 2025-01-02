@@ -194,22 +194,6 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); /* Glow effect */
         }
         
-        .scroll-button {
-            position: sticky;
-            bottom: 20px;
-            width: 100%;
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-        
-        .scroll-button:hover {
-            background: #555;
-        }
-
-
 
         .button-panel {
             position: absolute;
@@ -362,10 +346,6 @@
             <div class="poster-container" id="poster-container">
                 <img id="poster" src="./assets/images/default_poster.jpg" alt="Channel Poster" >
             </div>
-
-            <!-- Scroll Buttons -->
-            <button id="scroll-up" class="scroll-button">⬆</button>
-            <button id="scroll-down" class="scroll-button">⬇</button>
         </div>
     </div>
 
@@ -483,14 +463,6 @@
             allItems.forEach(item => item.classList.remove('now-playing'));
             allItems[index]?.classList.add('now-playing');
         };
-
-        document.getElementById('scroll-up').addEventListener('click', () => {
-            tvGuideList.scrollBy({ top: -100, behavior: 'smooth' });
-        });
-
-        document.getElementById('scroll-down').addEventListener('click', () => {
-            tvGuideList.scrollBy({ top: 100, behavior: 'smooth' });
-        });
 
         populateTVGuide('default-subcategory'); // Pass the desired subcategory here
 
