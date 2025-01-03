@@ -3,11 +3,11 @@ const channels = [
   // CHANNEL NUMBERING GUIDE
   // ==========================
   // 000s - Movies (current: 019)
-  //        Action/Adventure
-  //        Drama/Romance
-  //        Comedy/Family
-  //        Horror/Thriller
-  //        Fantasy/Sci-Fi
+  //        Action & Adventure
+  //        Drama & Romance
+  //        Comedy & Family
+  //        Horror & Thriller
+  //        Fantasy & Sci-Fi
   // 100s - Kids Programming (current: 105)
   // 200s - Cartoon Designated (current: 203)
   // 300s - TV Show Designated (current: 301)
@@ -19,7 +19,7 @@ const channels = [
   {
     name: "The Terminator",
     category: "Movies",
-    subcategory: "Action/Adventure",
+    subcategory: "Action& Adventure",
     channelNumber: 001,
     video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4",
     description: "A cyborg is sent to the past to kill Sarah Connor.",
@@ -30,7 +30,7 @@ const channels = [
   {
     name: "Deep Rising",
     category: "Movies",
-    subcategory: "Action/Adventure",
+    subcategory: "Action& Adventure",
     channelNumber: 002,
     video: "https://archive.org/download/VHSPreservationProject/Deep%20Rising%20%281998%29.mp4",
     description: "A group of mercenaries and passengers battle a deadly sea creature aboard a luxury cruise ship.",
@@ -41,7 +41,7 @@ const channels = [
   {
     name: "The Mummy",
     category: "Movies",
-    subcategory: "Action/Adventure",
+    subcategory: "Action& Adventure",
     channelNumber: 003,
     video: "https://archive.org/download/the-mummy_202312/The%20Mummy.mp4",
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
@@ -52,7 +52,7 @@ const channels = [
   {
     name: "Superman: The Movie",
     category: "Movies",
-    subcategory: "Action/Adventure",
+    subcategory: "Action& Adventure",
     channelNumber: 004,
     video: "https://archive.org/download/Superman1978BRRipDualAudio720pByeArnavSinha_201903/Superman%201978-BRRip%20Dual%20Audio%20720p%20Bye%20Arnav%20Sinha.mp4",
     description: "The first big-screen superhero movie starring Christopher Reeve.",
@@ -63,7 +63,7 @@ const channels = [
   {
     name: "Superman II",
     category: "Movies",
-    subcategory: "Action/Adventure",
+    subcategory: "Action& Adventure",
     channelNumber: 005,
     video: "https://archive.org/download/vts-01-1-merge-2/VTS_01_1_Merge%282%29.ia.mp4",
     description: "Superman faces General Zod in an epic battle for Earth.",
@@ -74,7 +74,7 @@ const channels = [
   {
     name: "The Aristocats",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 006,
     video: "https://archive.org/download/the-aristocats/The%20Aristocats.mp4",
     description: "Disney's animated adventure of a family of cats lost in Paris.",
@@ -85,7 +85,7 @@ const channels = [
   {
     name: "Robin Hood",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 007,
     video: "https://archive.org/download/robin-hood-1986-vhs/Robin%20Hood%20%281986%20VHS%29.mp4",
     description: "Disney's animated Robin Hood as a cunning fox outwits Prince John.",
@@ -96,7 +96,7 @@ const channels = [
   {
     name: "Ghostbusters",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 008,
     video: "https://archive.org/download/ghostbusters-from-the-original-vhs-release-in-1985/Ghostbusters%20from%20the%20Original%20VHS%20Release%20in%201985.ia.mp4",
     description: "A comedic take on ghost-hunting in New York City.",
@@ -107,7 +107,7 @@ const channels = [
   {
     name: "Monty Python's Life of Brian",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 009,
     video: "https://archive.org/download/full-vhs-monty-pythons-life-of-brian-1979-wci-home-video-1980-vhs/FULL%20VHS%20Monty%20Python%27s%20Life%20of%20Brian%20%281979%29%20%5BWCI%20Home%20Video%5D%20%281980%20VHS%29.mp4",
     description: "A satirical musical comedy on religious epics by Monty Python.",
@@ -118,7 +118,7 @@ const channels = [
   {
     name: "Spice World",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 010,
     video: "https://archive.org/download/spice-world_202208/SPICE%20WORLD.mp4",
     description: "The Spice Girls embark on a wild, comedic adventure.",
@@ -129,7 +129,7 @@ const channels = [
   {
     name: "Hocus Pocus",
     category: "Movies",
-    subcategory: "Comedy/Family",
+    subcategory: "Comedy & Family",
     channelNumber: 011,
     video: "https://archive.org/download/hocus-pocus_202312/Hocus%20Pocus.mp4",
     description: "A trio of witches is resurrected on Halloween night.",
@@ -140,7 +140,7 @@ const channels = [
   {
     name: "The Thing",
     category: "Movies",
-    subcategory: "Horror/Thriller",
+    subcategory: "Horror & Thriller",
     channelNumber: 012,
     video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
     description: "A tense sci-fi horror about an alien shape-shifter.",
@@ -151,7 +151,7 @@ const channels = [
   { 
     name: "Beneath the Planet of the Apes",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 013,
     video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4",
     description: "A sci-fi sequel where astronauts discover the dark truth about Earth's future.",
@@ -162,7 +162,7 @@ const channels = [
   { 
     name: "Godzilla",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 014,
     video: "https://archive.org/download/godzilla_20230622/Godzilla.mp4",
     description: "A giant lizard attacks New York City, and a team tries to stop it.",
@@ -173,7 +173,7 @@ const channels = [
   {
     name: "Starship Troopers",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 015,
     video: "https://archive.org/download/VHSPreservationProject/Starship%20Troopers%20%281997%29.mp4",
     description: "Humans battle alien Bugs in a dystopian, satirical sci-fi war.",
@@ -184,7 +184,7 @@ const channels = [
   {
     name: "Star Wars",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 016,
     video: "https://archive.org/download/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4",
     description: "The epic space opera that began a cultural phenomenon.",
@@ -195,7 +195,7 @@ const channels = [
   {
     name: "The Lost World: Jurassic Park",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 017,
     video: "https://archive.org/download/jurassic-park-the-lost-world/Jurassic%20Park%20The%20Lost%20World.mp4",
     description: "A team faces danger on an island of wild dinosaurs.",
@@ -206,7 +206,7 @@ const channels = [
   {
     name: "The Matrix",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 018,
     video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4",
     description: "A hacker learns the truth about his simulated reality.",
@@ -217,7 +217,7 @@ const channels = [
   {
     name: "The Time Machine",
     category: "Movies",
-    subcategory: "Fantasy/Sci-Fi",
+    subcategory: "Fantasy & Sci-Fi",
     channelNumber: 019,
     video: "https://archive.org/download/the-time-machine-1978-time-travel-sci-fi/The%20Time%20Machine%20%281978%20Time%20Travel%20SciFi%29.mp4",
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
@@ -233,7 +233,7 @@ const channels = [
   {
     name: "Kids WB Block",
     category: "Cartoons",
-    subcategory: Kids Programming",
+    subcategory: "Kids Programming",
     channelNumber: 101,
     episodes: [
       {
