@@ -1,21 +1,22 @@
 const channels = [
-  // ==========================
+  // ========================================
   // CHANNEL NUMBERING GUIDE
-  // ==========================
-  //   0s - Movies (current: 21)
-  //        Action & Adventure
-  //        Comedy & Family
-  //        Drama & Romance
-  //        Fantasy & Sci-Fi
-  //        Horror & Thriller
-  // 100s - Kids Programming (current: 105)
-  // 200s - Cartoon Designated (current: 203)
-  // 300s - TV Show Designated (current: 301)
-  // ==========================
+  // ========================================
+  //   0s - Movies                       (21)
+  //        Action & Adventure     (1-5)  (5)
+  //        Comedy & Family       (6-11)  (6)
+  //        Drama & Romance      (12-13)  (2)
+  //        Fantasy & Sci-Fi     (14-20)  (7)
+  //        Horror & Thriller    (21-21)  (1)
+  // ========================================
+  // 100s - Kids Programming   (101-105)  (5)
+  // 200s - Cartoon Designated (201-203)  (3)
+  // 300s - TV Show Designated (301-301)  (1)
+  // ========================================
   //
-  // ==========================
+  // ========================================
   // Movies
-  // ==========================
+  // ========================================
   {
     name: "The Terminator",
     category: "Movies",
@@ -249,9 +250,9 @@ const channels = [
   },
   // Add more movies here...
 
-  // ==========================
+  // ========================================
   // Cartoons
-  // ==========================
+  // ========================================
   {
     name: "Kids WB Block",
     category: "Cartoons",
@@ -567,9 +568,9 @@ const channels = [
   },
   // Add more cartoons here...
 
-  // ==========================
+  // ========================================
   // TV Shows
-  // ==========================
+  // ========================================
   {
     name: "El Chavo del 8",
     category: "Shows",
