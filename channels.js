@@ -2,12 +2,12 @@ const channels = [
   // ==========================
   // CHANNEL NUMBERING GUIDE
   // ==========================
-  //   0s - Movies (current: 19)
+  //   0s - Movies (current: 21)
   //        Action & Adventure
-  //        Drama & Romance
   //        Comedy & Family
-  //        Horror & Thriller
+  //        Drama & Romance
   //        Fantasy & Sci-Fi
+  //        Horror & Thriller
   // 100s - Kids Programming (current: 105)
   // 200s - Cartoon Designated (current: 203)
   // 300s - TV Show Designated (current: 301)
@@ -71,7 +71,7 @@ const channels = [
     releaseYear: 1980,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/9732/mKrX3QjoV8Wdg9LHuXm9ojXWtzszFgYwSfcvt79u.webp",
   },
-  {
+ {
     name: "The Aristocats",
     category: "Movies",
     subcategory: "Comedy & Family",
@@ -138,21 +138,32 @@ const channels = [
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/21799/yaO08fRNFidoJtuUvO017nHaxTdlObbsA9dKtq0K.webp",
   },
   {
-    name: "The Thing",
+    name: "That Hamilton Woman",
     category: "Movies",
-    subcategory: "Horror & Thriller",
+    subcategory: "Drama & Romance",
     channelNumber: 12,
-    video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
-    description: "A tense sci-fi horror about an alien shape-shifter.",
-    duration: 109,
-    releaseYear: 1982,
-    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5519/lnMC0cOyI16BFfZVaIMFRtEx9Cb8eab4wMvqgYNW.webp",
+    video: "https://archive.org/download/The_Hamilton_Woman/That_Hamilton_Woman_1941.mp4",
+    description: "",
+    duration: 119,
+    releaseYear: 1941,
+    poster: "https://image.tmdb.org/t/p/original/zDXsdF9Eqk9hs9KyxakRYYijKxK.jpg",
+  },
+  {
+    name: "The Best Years of Our Lives",
+    category: "Movies",
+    subcategory: "Drama & Romance",
+    channelNumber: 13,
+    video: "https://archive.org/download/tbyool435345435110/tbyool435345435110.mp4",
+    description: "",
+    duration: 169,
+    releaseYear: 1946,
+    poster: "https://image.tmdb.org/t/p/original/gd5EoAU4MM57sW3vlWxJ0NMM8cV.jpg",
   },
   { 
     name: "Beneath the Planet of the Apes",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 13,
+    channelNumber: 14,
     video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4",
     description: "A sci-fi sequel where astronauts discover the dark truth about Earth's future.",
     duration: 95,
@@ -163,7 +174,7 @@ const channels = [
     name: "Godzilla",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 14,
+    channelNumber: 15,
     video: "https://archive.org/download/godzilla_20230622/Godzilla.mp4",
     description: "A giant lizard attacks New York City, and a team tries to stop it.",
     duration: 139,
@@ -174,7 +185,7 @@ const channels = [
     name: "Starship Troopers",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 15,
+    channelNumber: 16,
     video: "https://archive.org/download/VHSPreservationProject/Starship%20Troopers%20%281997%29.mp4",
     description: "Humans battle alien Bugs in a dystopian, satirical sci-fi war.",
     duration: 129,
@@ -185,7 +196,7 @@ const channels = [
     name: "Star Wars",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 16,
+    channelNumber: 17,
     video: "https://archive.org/download/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4",
     description: "The epic space opera that began a cultural phenomenon.",
     duration: 121,
@@ -196,7 +207,7 @@ const channels = [
     name: "The Lost World: Jurassic Park",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 17,
+    channelNumber: 18,
     video: "https://archive.org/download/jurassic-park-the-lost-world/Jurassic%20Park%20The%20Lost%20World.mp4",
     description: "A team faces danger on an island of wild dinosaurs.",
     duration: 129,
@@ -207,7 +218,7 @@ const channels = [
     name: "The Matrix",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 18,
+    channelNumber: 19,
     video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4",
     description: "A hacker learns the truth about his simulated reality.",
     duration: 136,
@@ -218,12 +229,23 @@ const channels = [
     name: "The Time Machine",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 19,
+    channelNumber: 20,
     video: "https://archive.org/download/the-time-machine-1978-time-travel-sci-fi/The%20Time%20Machine%20%281978%20Time%20Travel%20SciFi%29.mp4",
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
     duration: 99,
     releaseYear: 1978,
     poster: "https://m.media-amazon.com/images/M/MV5BNTYwNDQ0NjYtNTgwMC00MTI4LWI1YWItMmQ4ODIwNDQ3ZWNmXkEyXkFqcGc@._V1_.jpg",
+  },
+  {
+    name: "The Thing",
+    category: "Movies",
+    subcategory: "Horror & Thriller",
+    channelNumber: 21,
+    video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
+    description: "A tense sci-fi horror about an alien shape-shifter.",
+    duration: 109,
+    releaseYear: 1982,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5519/lnMC0cOyI16BFfZVaIMFRtEx9Cb8eab4wMvqgYNW.webp",
   },
   // Add more movies here...
 
