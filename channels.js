@@ -19,7 +19,7 @@ const channels = [
   {
     name: "The Terminator",
     category: "Movies",
-    subcategory: "Action& Adventure",
+    subcategory: "Action/Adventure",
     channelNumber: 001,
     video: "https://archive.org/download/the-terminator-1984_202206/The%20Terminator%20%281984%29.mp4",
     description: "A cyborg is sent to the past to kill Sarah Connor.",
@@ -30,7 +30,7 @@ const channels = [
   {
     name: "Deep Rising",
     category: "Movies",
-    subcategory: "Action& Adventure",
+    subcategory: "Action/Adventure",
     channelNumber: 002,
     video: "https://archive.org/download/VHSPreservationProject/Deep%20Rising%20%281998%29.mp4",
     description: "A group of mercenaries and passengers battle a deadly sea creature aboard a luxury cruise ship.",
@@ -41,7 +41,7 @@ const channels = [
   {
     name: "The Mummy",
     category: "Movies",
-    subcategory: "Action& Adventure",
+    subcategory: "Action/Adventure",
     channelNumber: 003,
     video: "https://archive.org/download/the-mummy_202312/The%20Mummy.mp4",
     description: "An adventurer awakens an ancient curse in this thrilling action-horror.",
@@ -52,7 +52,7 @@ const channels = [
   {
     name: "Superman: The Movie",
     category: "Movies",
-    subcategory: "Action& Adventure",
+    subcategory: "Action/Adventure",
     channelNumber: 004,
     video: "https://archive.org/download/Superman1978BRRipDualAudio720pByeArnavSinha_201903/Superman%201978-BRRip%20Dual%20Audio%20720p%20Bye%20Arnav%20Sinha.mp4",
     description: "The first big-screen superhero movie starring Christopher Reeve.",
@@ -63,7 +63,7 @@ const channels = [
   {
     name: "Superman II",
     category: "Movies",
-    subcategory: "Action& Adventure",
+    subcategory: "Action/Adventure",
     channelNumber: 005,
     video: "https://archive.org/download/vts-01-1-merge-2/VTS_01_1_Merge%282%29.ia.mp4",
     description: "Superman faces General Zod in an epic battle for Earth.",
