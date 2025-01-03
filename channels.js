@@ -479,7 +479,7 @@ const channels = [
     poster: "https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png",
   },
   {
-    name: "Tom & Jerry",
+    name: "The Tom and Jerry Show",
     category: "Cartoons",
     subcategory: "Tom & Jerry",
     channelNumber: 107,
@@ -526,8 +526,8 @@ const channels = [
       },
       // Add more episodes here...
     ],
-    releaseYear: 1989,
-    poster: "https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png",
+    releaseYear: 1975,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
   },
   // Add more cartoons here...
 
