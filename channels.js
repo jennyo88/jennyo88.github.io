@@ -486,7 +486,7 @@ const channels = [
   {
     name: "El Chavo del 8",
     category: "Shows",
-    subcategory: "Sitcom",
+    subcategory: "El Chavo del 8",
     channelNumber: 301,
     episodes: [
       {
