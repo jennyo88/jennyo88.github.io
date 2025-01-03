@@ -566,7 +566,7 @@
             poster.src = firstVideo?.poster || channel.poster || 'assets/images/default_poster.jpg';
         
             showNotification(
-                `Switched to Channel: ${channel.subcategory} (Channel ${channel.channelNumber})`,
+                `Switched to Channel: ${channel.subcategory}`,
                 'limegreen'
             );
         };
@@ -588,7 +588,7 @@
             const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[randomIndex]);
             if (channel) {
                 showNotification(
-                    `Shuffled to Channel: ${channel.subcategory} (Channel ${channel.channelNumber})`,
+                    `Shuffled to Channel: ${channel.subcategory}`,
                     'limegreen'
                 );
             } else {
@@ -639,7 +639,7 @@
             setChannel(currentChannelIndex + 1);
             const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel up: ${channel.subcategory} (Channel ${channel.channelNumber})`, 'limegreen');
+                showNotification(`Channel up: ${channel.subcategory}`, 'limegreen');
             } else {
                 showNotification('Channel up: No channel found', 'red');
             }
@@ -649,7 +649,7 @@
             setChannel(currentChannelIndex - 1);
             const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
             if (channel) {
-                showNotification(`Channel down: ${channel.subcategory} (Channel ${channel.channelNumber})`, 'limegreen');
+                showNotification(`Channel down: ${channel.subcategory}`, 'limegreen');
             } else {
                 showNotification('Channel down: No channel found', 'red');
             }
