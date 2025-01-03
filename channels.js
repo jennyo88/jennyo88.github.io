@@ -479,6 +479,128 @@ const channels = [
     poster: "https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png",
   },
   // Add more cartoons here...
+
+  // ==========================
+  // TV Shows
+  // ==========================
+  {
+    name: "El Chavo del 8",
+    category: "Shows",
+    subcategory: "Sitcom",
+    channelNumber: 301,
+    episodes: [
+      {
+        name: "Volumen 1",
+        duration: 104,
+        video: "https://dn720405.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-1/LoMejorDelChavo_DVDR1.mp4",
+      },
+      {
+        name: "Volumen 2",
+        duration: 63,
+        video: "https://dn720405.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-2/LoMejorDelChavo_DVDR2.mp4",
+      },
+      {
+        name: "Volumen 3",
+        duration: 60,
+        video: "hhttps://archive.org/download/lo-mejor-del-chavo-dvdr-3/LoMejorDelChavo_DVDR3.mp4",
+      },
+      {
+        name: "Volumen 4",
+        duration: 70,
+        video: "https://dn720404.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-4/LoMejorDelChavo_DVDR4.mp4",
+      },
+      {
+        name: "Volumen 5",
+        duration: 65,
+        video: "https://dn720400.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-5/LoMejorDelChavo_DVDR5.mp4",
+      },
+      {
+        name: "Volumen 6a",
+        duration: 106,
+        video: "https://ia801009.us.archive.org/8/items/lo-mejor-del-chavo-dvdr-6/LoMejorDelChavo_DVDR6.mp4",
+      },
+      {
+        name: "Volumen 6b",
+        duration: 8,
+        video: "https://ia601009.us.archive.org/8/items/lo-mejor-del-chavo-dvdr-6/LoMejorDelChavo_DVDR62.mp4",
+      },
+      {
+        name: "Volumen 7a",
+        duration: 104,
+        video: "https://dn720305.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-7/LoMejorDelChavo_DVDR7.mp4",
+      },
+      {
+        name: "Volumen 7b",
+        duration: 104,
+        video: "https://dn720305.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-7/LoMejorDelChavo_DVDR73.mp4",
+      },
+      {
+        name: "Volumen 8a",
+        duration: 92,
+        video: "https://dn720409.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-8/LoMejorDelChavo_DVDR8.mp4",
+      },
+      {
+        name: "Volumen 8b",
+        duration: 90,
+        video: "https://dn720409.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-8/LoMejorDelChavo_DVDR83.mp4",
+      },
+      {
+        name: "Volumen 8c",
+        duration: 22,
+        video: "https://dn720409.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-8/LoMejorDelChavo_DVDR84.mp4",
+      },
+      {
+        name: "Volumen 9a",
+        duration: 75,
+        video: "https://dn720401.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-9/LoMejorDelChavo_DVDR9.mp4",
+      },
+      {
+        name: "Volumen 9b",
+        duration: 73,
+        video: "https://dn720401.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-9/LoMejorDelChavo_DVDR93.mp4",
+      },
+      {
+        name: "Volumen 9c",
+        duration: 29,
+        video: "https://dn720401.ca.archive.org/0/items/lo-mejor-del-chavo-dvdr-9/LoMejorDelChavo_DVDR94.mp4",
+      },
+      {
+        name: "Volumen 10a",
+        duration: 107,
+        video: "https://ia801009.us.archive.org/0/items/lo-mejor-del-chavo-dvdr-10/LoMejorDelChavo_DVDR10.mp4",
+      },
+      {
+        name: "Volumen 10b",
+        duration: 105,
+        video: "https://ia601009.us.archive.org/0/items/lo-mejor-del-chavo-dvdr-10/LoMejorDelChavo_DVDR103.mp4",
+      },
+      {
+        name: "Volumen 10c",
+        duration: 5,
+        video: "https://ia801009.us.archive.org/0/items/lo-mejor-del-chavo-dvdr-10/LoMejorDelChavo_DVDR104.mp4",
+      },
+      {
+        name: "Volumen 11a",
+        duration: 81,
+        video: "https://ia801009.us.archive.org/34/items/lo-mejor-del-chavo-dvdr-11/LoMejorDelChavo_DVDR11.mp4",
+      },
+      {
+        name: "Volumen 11b",
+        duration: 79,
+        video: "https://ia801009.us.archive.org/34/items/lo-mejor-del-chavo-dvdr-11/LoMejorDelChavo_DVDR113.mp4",
+      },
+      {
+        name: "Volumen 11c",
+        duration: 21,
+        video: "https://ia801009.us.archive.org/34/items/lo-mejor-del-chavo-dvdr-11/LoMejorDelChavo_DVDR114.mp4",
+      },
+    ],
+    description: "Las desventuras del Chavo, un huerfanito de 8 años que vive solo en la vecindad.",
+    releaseYear: 1973,
+    poster: "https://image.tmdb.org/t/p/original/d2xJ6xmrchmnVL0S9gsbiGHskxp.jpg",
+  },
+  // Add more TV shows here...
+  
 ];
 
 // Export for use in GitHub Pages
