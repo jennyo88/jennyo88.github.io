@@ -2,12 +2,13 @@ const channels = [
   // ========================================
   // CHANNEL NUMBERING GUIDE
   // ========================================
-  //   0s - Movies                       (21)
+  //   0s - Movies                       (23)
   //        Action & Adventure     (1-5)  (5)
   //        Comedy & Family       (6-11)  (6)
   //        Drama & Romance      (12-13)  (2)
   //        Fantasy & Sci-Fi     (14-20)  (7)
   //        Horror & Thriller    (21-21)  (1)
+  //        Romance & Comedy     (22-23)  (2)
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
   // 200s - Cartoon Designated (201-203)  (3)
@@ -137,6 +138,28 @@ const channels = [
     duration: 96,
     releaseYear: 1993,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/21799/yaO08fRNFidoJtuUvO017nHaxTdlObbsA9dKtq0K.webp",
+  },
+  {
+    name: "My Girl Friday",
+    category: "Movies",
+    subcategory: "Romance & Comedy",
+    channelNumber: 22,
+    video: "https://archive.org/download/his_girl_friday/his_girl_friday.mp4",
+    description: "",
+    duration: 91,
+    releaseYear: 1940,
+    poster: "",
+  },
+  {
+    name: "Tammy And The Millionaire",
+    category: "Movies",
+    subcategory: "Romance & Comedy",
+    channelNumber: 23,
+    video: "https://archive.org/download/tammy-and-the-millionaire-1967-may-dramady-romance/Tammy%20and%20the%20Millionaire%20%281967%20May%2C%20Dramady%2C%20Romance%29.mp4",
+    description: "",
+    duration: 90,
+    releaseYear: 1967,
+    poster: "",
   },
   {
     name: "That Hamilton Woman",
