@@ -11,7 +11,10 @@ const channels = [
   //        Romance & Comedy     (22-23)  (2)
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
-  // 200s - Cartoon Designated (201-204)  (4)
+  // 200s - Cartoon Designated     (201)  (1)
+  // 210s - Anime              (211-213)  (3)
+  //        Anime Romance          (211)  (1)
+  //        Anime Acción       (212-213)  (2)
   // 300s - TV Show Designated (301-301)  (1)
   // ========================================
   //
@@ -440,7 +443,7 @@ const channels = [
     name: "Candy Candy",
     category: "Cartoons",
     subcategory: "Anime Romance",
-    channelNumber: 201,
+    channelNumber: 211,
     episodes: [
       {
         name: "Candy Candy 001",
@@ -526,7 +529,7 @@ const channels = [
     name: "Dragon Ball Z",
     category: "Cartoons",
     subcategory: "Anime Acción",
-    channelNumber: 202,
+    channelNumber: 212,
     episodes: [
       {
         name: "Dragon Ball Z 001",
@@ -797,7 +800,7 @@ const channels = [
     name: "The Tom and Jerry Show",
     category: "Cartoons",
     subcategory: "Tom & Jerry",
-    channelNumber: 203,
+    channelNumber: 201,
     episodes: [
       {
         name: "Volumen 1",
@@ -845,70 +848,575 @@ const channels = [
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
   },
   {
-    name: "Caballeros del Zodiaco",
+    name: "Los caballeros del zodíaco",
     category: "Cartoons",
     subcategory: "Anime Acción",
-    channelNumber: 204,
+    channelNumber: 213,
     episodes: [
       {
-        name: "Caballeros del Zodiaco 001",
+        name: "Caballeros del zodíaco 001",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20001%20-%20Las%20leyendas%20de%20una%20nueva%20era%20-%20Warner%20Channel%20-%2016-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 002",
+        name: "Caballeros del zodíaco 002",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20002%20-%20Cuando%20Seiya%20viste%20la%20armadura%20de%20Pegaso%20-%20Warner%20Channel%20-%2017-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 003",
+        name: "Caballeros del zodíaco 003",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20003%20-%20El%20Guerrero%20De%20Los%20Hielos%20-%20Warner%20Channel%20-%2018-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 004",
+        name: "Caballeros del zodíaco 004",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20004%20-%20El%20Caballero%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2019-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 005",
+        name: "Caballeros del zodíaco 005",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20005%20-%20La%20Resurrecci%C3%B3n%20Del%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2023-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 006",
+        name: "Caballeros del zodíaco 006",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20006%20-%20El%20Guerrero%20Que%20Viene%20Del%20Infierno%20-%20Warner%20Channel%20-%2024-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 007",
+        name: "Caballeros del zodíaco 007",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20007%20-%20La%20Venganza%20Del%20Caballero%20F%C3%A9nix%20-%20Warner%20Channel%20-%2025-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 008",
+        name: "Caballeros del zodíaco 008",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20008%20-%20En%20Busca%20De%20La%20Armadura%20De%20Oro%20-%20Warner%20Channel%20-%2026-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 009",
+        name: "Caballeros del zodíaco 009",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20009%20-%20Los%20Caballeros%20Del%20Apocalipsis%20-%20Warner%20Channel%20-%2030-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 010",
+        name: "Caballeros del zodíaco 010",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20010%20-%20La%20Tumba%20De%20La%20Armadura%20Sagrada%20-%20Warner%20Channel%20-%2031-10-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 011",
+        name: "Caballeros del zodíaco 011",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20011%20-%20Seiya%20Se%20Enfrenta%20Con%20Su%20Doble%20-%20Warner%20Channel%20-%2001-11-2023.mp4",
       },
       {
-        name: "Caballeros del Zodiaco 012",
+        name: "Caballeros del zodíaco 012",
         duration: 24,
         video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20012%20-%20Las%20Cadenas%20De%20La%20Amistad%20-%20Warner%20Channel%20-%2002-10-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 013",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-04/Caballeros%20Del%20Zodiaco%20Ep%20013%20-%20Haza%C3%B1as%20Explosivas%20-%20Warner%20Channel%20-%2006-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 014",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-04/Caballeros%20Del%20Zodiaco%20Ep%20014%20-%20La%20Derrota%20Del%20Fantasma%20Del%20Diablo%20-%20Warner%20Channel%20-%2007-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 015",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-04/Caballeros%20Del%20Zodiaco%20Ep%20015%20-%20El%20Secreto%20Del%20F%C3%A9nix%20-%20Warner%20Channel%20-%2008-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 016",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-04/Caballeros%20Del%20Zodiaco%20Ep%20016%20-%20El%20Ataque%20A%20La%20Fundaci%C3%B3n%20-%20Warner%20Channel%20-%2009-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 017",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-05/Caballeros%20Del%20Zodiaco%20Ep%20017%20-%20El%20Rescate%20De%20Saori%20-%20Warner%20Channel%20-%2013-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 018",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-05/Caballeros%20Del%20Zodiaco%20Ep%20018%20-%20Los%20Caballeros%20De%20Los%20Abismos%20-%20Warner%20Channel%20-%2014-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 019",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-05/Caballeros%20Del%20Zodiaco%20Ep%20019%20-%20La%20Isla%20Del%20Espectro%20-%20Warner%20Channel%20-%2015-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 020",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-05/Caballeros%20Del%20Zodiaco%20Ep%20020%20-%20La%20Traici%C3%B3n%20Del%20Se%C3%B1or%20De%20Los%20Hielos%20-%20Warner%20Channel%20-%2016-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 021",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-06/Caballeros%20Del%20Zodiaco%20Ep%20021%20-%20La%20Pir%C3%A1mide%20De%20Hielo%20-%20Warner%20Channel%20-%2020-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 022",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-06/Caballeros%20Del%20Zodiaco%20Ep%20022%20-%20El%20Caballero%20De%20La%20Llama%20-%20Warner%20Channel%20-%2021-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 023",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-06/Caballeros%20Del%20Zodiaco%20Ep%20023%20-%20El%20%C3%81ngel%20De%20La%20Muerte%20-%20Warner%20Channel%20-%2022-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 024",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-06/Caballeros%20Del%20Zodiaco%20Ep%20024%20-%20El%20Vuelo%20De%20Pegaso%20-%20Warner%20Channel%20-%2023-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 025",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-07/Caballeros%20Del%20Zodiaco%20Ep%20025%20-%20La%20Revelaci%C3%B3n%20-%20Warner%20Channel%20-%2027-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 026",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-07/Caballeros%20Del%20Zodiaco%20Ep%20026%20-%20Amigos%20O%20Enemigos%20-%20Warner%20Channel%20-%2028-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 027",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-07/Caballeros%20Del%20Zodiaco%20Ep%20027%20-%20Seiya%20Se%20Convierte%20En%20Piedra%20-%20Warner%20Channel%20-%2029-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 028",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-07/Caballeros%20Del%20Zodiaco%20Ep%20028%20-%20El%20Sacrificio%20Del%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2030-11-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 029",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-08/Caballeros%20Del%20Zodiaco%20Ep%20029%20-%20El%20Secuestro%20De%20Saori%20-%20Warner%20Channel%20-%2004-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 030",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-08/Caballeros%20Del%20Zodiaco%20Ep%20030%20-%20El%20Ardiente%20Cosmos%20Del%20Amor%20-%20Warner%20Channel%20-%2005-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 031",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-08/Caballeros%20Del%20Zodiaco%20Ep%20031%20-%20La%20L%C3%ADnea%20Entre%20La%20Vida%20Y%20La%20Muerte%20-%20Warner%20Channel%20-%2007-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 032",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-09/Caballeros%20Del%20Zodiaco%20Ep%20032%20-%20La%20Isla%20De%20La%20Reina%20Muerte%20-%20Warner%20Channel%20-%2011-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 033",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-09/Caballeros%20Del%20Zodiaco%20Ep%20033%20-%20El%20Llanto%20Del%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2012-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 034",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-09/Caballeros%20Del%20Zodiaco%20Ep%20034%20-%20Adi%C3%B3s%20Camarada%20-%20Warner%20Channel%20-%2014-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 035",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-10/Caballeros%20Del%20Zodiaco%20Ep%20035%20-%20La%20Esperanza%20De%20Seiya%20-%20Warner%20Channel%20-%2018-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 036",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-10/Caballeros%20Del%20Zodiaco%20Ep%20036%20-%20Doce%20Juegos%20De%20Ropa%20Dorada%20-%20Warner%20Channel%20-%2019-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 037",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-09/Caballeros%20Del%20Zodiaco%20Ep%20037%20-%20Ladecisi%C3%B3n%20Del%20Casco%20-%20Warner%20Channel%20-%2013-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 038",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-11/Caballeros%20Del%20Zodiaco%20Ep%20038%20-%20Ataquen%20Santos%20Dorados%20-%20Warner%20Channel%20-%2025-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 039",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-11/Caballeros%20Del%20Zodiaco%20Ep%20039%20-%20Shiryu%20Contra%20M%C3%A1scara%20Mortal%20-%20Warner%20Channel%20-%2026-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 040",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-11/Caballeros%20Del%20Zodiaco%20Ep%20040%20-%20La%20Partida%20-%20Warner%20Channel%20-%2028-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 041",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-12/Caballeros%20Del%20Zodiaco%20Ep%20041%20-%20La%20Crisis%20De%20Athena%20-%20Warner%20Channel%20-%2001-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 042",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-10/Caballeros%20Del%20Zodiaco%20Ep%20042%20-%20Cosmo%20Final%20-%20Warner%20Channel%20-%2020-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 043",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-12/Caballeros%20Del%20Zodiaco%20Ep%20043%20-%20Batalla%20En%20La%20Casa%20De%20Tauro%20-%20Warner%20Channel%20-%2003-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 044",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-12/Caballeros%20Del%20Zodiaco%20Ep%20044%20-%20G%C3%A9minis%2C%20El%20Laberinto%20De%20Luz%20Y%20Sombras%20-%20Warner%20Channel%20-%2004-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 045",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-13/Caballeros%20Del%20Zodiaco%20Ep%20045%20-%20Enviados%20A%20Otra%20Dimensi%C3%B3n%20-%20Warner%20Channel%20-%2008-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 046",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-11/Caballeros%20Del%20Zodiaco%20Ep%20046%20-%20La%20Cadena%20De%20La%20Nebulosa%20De%20Andr%C3%B3meda%20Ataca%20Esta%20Vez%20-%20Warner%20Channel%20-%2027-12-2023.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 047",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-13/Caballeros%20Del%20Zodiaco%20Ep%20047%20-%20El%20Valeroso%20Hyoga%20Ahora%20Dormir%C3%A1%20Apaciblemente%20-%20Warner%20Channel%20-%2010-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 048",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-13/Caballeros%20Del%20Zodiaco%20Ep%20048%20-%20Shiryu%20Vuelve%20Del%20Pa%C3%ADs%20De%20Los%20Muertos%20-%20Warner%20Channel%20-%2011-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 049",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-14/Caballeros%20Del%20Zodiaco%20Ep%20049%20-%20Shunrei%20Reza%20Por%20Shiryu%20-%20Warner%20Channel%20-%2015-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 050",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-14/Caballeros%20Del%20Zodiaco%20Ep%20050%20-%20Arriba%20Drag%C3%B3n%2C%20Tu%20Cosmos%20Puede%20Derrotar%20A%20Los%20Caballeros%20De%20Oro%20-%20Warner%20Channel%20-%2016-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 051",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-14/Caballeros%20Del%20Zodiaco%20Ep%20051%20-%20Por%20Qu%C3%A9%20El%20Le%C3%B3n%20Dorado%20Trata%20De%20Matar%20A%20Seiya%20-%20Warner%20Channel%20-%2017-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 052",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-14/Caballeros%20Del%20Zodiaco%20Ep%20052%20-%20El%20Legendario%20Golpe%20Sat%C3%A1nico%20De%20Arles%20-%20Warner%20Channel%20-%2018-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 053",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-15/Caballeros%20Del%20Zodiaco%20Ep%20053%20-%20Cassios%20Muere%20Por%20Amor%20-%20Warner%20Channel%20-%2022-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 054",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-15/Caballeros%20Del%20Zodiaco%20Ep%20054%20-%20Ikki%2C%20El%20Ave%20F%C3%A9nix%20Sin%20Alas%20-%20Warner%20Channel%20-%2023-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 055",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-15/Caballeros%20Del%20Zodiaco%20Ep%20055%20-%20El%20Grito%20De%20Athena%20-%20Warner%20Channel%20-%2024-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 056",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-15/Caballeros%20Del%20Zodiaco%20Ep%20056%20-%20Shaka%2C%20El%20Caballero%20M%C3%A1s%20Cercano%20Al%20Gran%20Maestro%20-%20Warner%20Channel%20-%2025-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 057",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-16/Caballeros%20Del%20Zodiaco%20Ep%20057%20-%20Shaka%20Abre%20Sus%20Ojos%20-%20Warner%20Channel%20-%2029-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 058",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-16/Caballeros%20Del%20Zodiaco%20Ep%20058%20-%20Ikki%20Muere%20Valientemente%20Por%20Amistad%20-%20Warner%20Channel%20-%2030-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 059",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-16/Caballeros%20Del%20Zodiaco%20Ep%20059%20-%20Hyoga%20Vuelve%20A%20La%20Vida%20-%20Warner%20Channel%20-%2031-01-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 060",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-16/Caballeros%20Del%20Zodiaco%20Ep%20060%20-%20El%20Renacimiento%20De%20Hyoga%20-%20Warner%20Channel%20-%2001-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 061",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-17/Caballeros%20Del%20Zodiaco%20Ep%20061%20-%20R%C3%ADndete%20O%20Morir%C3%A1s%20-%20Warner%20Channel%20-%2005-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 062",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-17/Caballeros%20Del%20Zodiaco%20Ep%20062%20-%20Hyoga%2C%20El%20Valiente%20Guerrero%20-%20Warner%20Channel%20-%2006-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 063",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-17/Caballeros%20Del%20Zodiaco%20Ep%20063%20-%20Todas%20Las%20Armaduras%20Doradas%20Se%20Reunieron%20En%20El%20Santuario%20-%20Warner%20Channel%20-%2007-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 064",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-17/Caballeros%20Del%20Zodiaco%20Ep%20064%20-%20Amigos%2C%20Encomendar%C3%A9%20Atenea%20A%20Ustedes%20-%20Warner%20Channel%20-%2008-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 065",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-18/Caballeros%20Del%20Zodiaco%20Ep%20065%20-%20Ruge%20La%20Espada%20Sagrada%20-%20Warner%20Channel%20-%2012-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 066",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-18/Caballeros%20Del%20Zodiaco%20Ep%20066%20-%20Shiryu%20Se%20Convierte%20En%20Una%20Estrella%20Fugaz%20-%20Warner%20Channel%20-%2013-02-2024%20-%20Emisi%C3%B3n%20Nocturna.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 067",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-18/Caballeros%20Del%20Zodiaco%20Ep%20067%20-%20Adi%C3%B3s%20Mi%20Maestro%20Y%20Mis%20Amigos%20-%20Warner%20Channel%20-%2013-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 068",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-18/Caballeros%20Del%20Zodiaco%20Ep%20068%20-%20Un%20Hermoso%20Guerrero%20Afrodita%20-%20Warner%20Channel%20-%2014-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 069",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-18/Caballeros%20Del%20Zodiaco%20Ep%20069%20-%20Dulce%20Aroma%20De%20Muerte%20-%20Warner%20Channel%20-%2015-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 070",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-19/Caballeros%20Del%20Zodiaco%20Ep%20070%20-%20Duerme%20En%20Paz%20Shun%20-%20Warner%20Channel%20-%2019-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 071",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-19/Caballeros%20Del%20Zodiaco%20Ep%20071%20-%20El%20Reloj%20De%20Fuego%20Se%20Extingue%20-%20Warner%20Channel%20-%2020-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 072",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-19/Caballeros%20Del%20Zodiaco%20Ep%20072%20-%20No%20Pierdas%20A%20Tus%20Amigos%20Seiya%20-%20Warner%20Channel%20-%2021-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 073",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-19/Caballeros%20Del%20Zodiaco%20Ep%20073%20-%20Amigos%2C%20Re%C3%BAnanse%20Con%20Athena%20-%20Warner%20Channel%20-%2022-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 074",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-20/Caballeros%20Del%20Zodiaco%20Ep%20074%20-%20Enemigos%20Del%20Polo%20Norte%20-%20Warner%20Channel%20-%2029-02-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 075",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-20/Caballeros%20Del%20Zodiaco%20Ep%20075%20-%20%C2%A1Hilda%21%20La%20Diosa%20Encantada%20Por%20El%20Diablo%20-%20Warner%20Channel%20-%2001-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 076",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-21/Caballeros%20Del%20Zodiaco%20Ep%20076%20-%20El%20Cosmos%20De%20Thor%20Est%C3%A1%20Lleno%20De%20Odio%20-%20Warner%20Channel%20-%2004-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 077",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-21/Caballeros%20Del%20Zodiaco%20Ep%20077%20-%20Thor%20Muere%20Por%20Hilda%20-%20Warner%20Channel%20-%2005-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 078",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-21/Caballeros%20Del%20Zodiaco%20Ep%20078%20-%20Phenril%2C%20El%20Lobo%20Del%20Norte%20Muestra%20Sus%20Colmillos%20-%20Warner%20Channel%20-%2006-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 079",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-21/Caballeros%20Del%20Zodiaco%20Ep%20079%20-%20Pobres%20Lobos%20Del%20Norte%20-%20Warner%20Channel%20-%2007-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 080",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-22/Caballeros%20Del%20Zodiaco%20Ep%20080%20-%20Lamentos%20En%20El%20Hielo%20-%20Warner%20Channel%20-%2011-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 081",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-22/Caballeros%20Del%20Zodiaco%20Ep%20081%20-%20La%20Batalla%20Mortal%20De%20Fler%20-%20Warner%20Channel%20-%2012-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 082",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-22/Caballeros%20Del%20Zodiaco%20Ep%20082%20-%20Cisne%2C%20El%C3%A9vate%20Del%20Infierno%20Hirviente%20-%20Warner%20Channel%20-%2013-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 083",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-22/Caballeros%20Del%20Zodiaco%20Ep%20083%20-%20%C2%A1Arpa%20Misteriosa%21%20Preludio%20Intenta%20Enviar%20A%20Shun%20A%20La%20Muerte%20-%20Warner%20Channel%20-%2014-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 084",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-23/Caballeros%20Del%20Zodiaco%20Ep%20084%20-%20%C2%A1Condenado%20A%20Muerte%21%20Requiem%20De%20Cuerdas%20-%20Warner%20Channel%20-%2018-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 085",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-23/Caballeros%20Del%20Zodiaco%20Ep%20085%20-%20Un%20Guerrero%20Triste%20Y%20Valeroso%20-%20Warner%20Channel%20-%2019-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 086",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-23/Caballeros%20Del%20Zodiaco%20Ep%20086%20-%20F%C3%A9nix%20Y%20Sus%20Alas%20Ardientes%20-%20Warner%20Channel%20-%2020-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 087",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-23/Caballeros%20Del%20Zodiaco%20Ep%20087%20-%20La%20Coraza%20Amatista%20-%20Warner%20Channel%20-%2021-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 088",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-24/Caballeros%20Del%20Zodiaco%20Ep%20088%20-%20%C2%A1La%20Espada%20De%20Fuego%21%20La%20Ambici%C3%B3n%20Maligna%20-%20Warner%20Channel%20-%2025-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 089",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-24/Caballeros%20Del%20Zodiaco%20Ep%20089%20-%20%C2%A1El%20Sacrificio%20Al%20Mal%21%20El%20Bosque%20De%20Los%20Esp%C3%ADritus%20-%20Warner%20Channel%20-%2026-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 090",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-24/Caballeros%20Del%20Zodiaco%20Ep%20090%20-%20%C2%A1No%20Veas%20Hacia%20Atr%C3%A1s%20Seiya%21%20La%20Cosmoenerg%C3%ADa%20Del%20Drag%C3%B3n%20Naciente%20-%20Warner%20Channel%20-%2027-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 091",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-24/Caballeros%20Del%20Zodiaco%20Ep%20091%20-%20%C2%A1Quema%20Tu%20Cosmoenerg%C3%ADa%20Shun%21%20Secreto%20Oculto%20Del%20Colmillo%20Negro%20-%20Warner%20Channel%20-%2028-03-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 092",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-25/Caballeros%20Del%20Zodiaco%20Ep%20092%20-%20Shun%2C%20Gira%20Tu%20%C3%9Altimo%20Vapor%20Nebuloso%20-%20Warner%20Channel%20-%2001-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 093",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-25/Caballeros%20Del%20Zodiaco%20Ep%20093%20-%20%C2%A1Bud%21%20Los%20Gemelos%20Del%20Destino%20-%20Warner%20Channel%20-%2002-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 094",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-25/Caballeros%20Del%20Zodiaco%20Ep%20094%20-%20Lazos%20Entre%20Hermanos%20-%20Warner%20Channel%20-%2003-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 095",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-25/Caballeros%20Del%20Zodiaco%20Ep%20095%20-%20El%20H%C3%A9roe%20De%20La%20Leyenda%20Ha%20Revivido%20-%20Warner%20Channel%20-%2004-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 096",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-26/Caballeros%20Del%20Zodiaco%20Ep%20096%20-%20Drag%C3%B3n%20Contra%20Drag%C3%B3n%2C%20Una%20Oportunidad%20En%20Cienmil%20-%20Warner%20Channel%20-%2008-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 097",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-26/Caballeros%20Del%20Zodiaco%20Ep%20097%20-%20Un%20Brujo%20Del%20Mal%2C%20La%20Canci%C3%B3n%20De%20La%20Muerte%20-%20Warner%20Channel%20-%2009-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 098",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-26/Caballeros%20Del%20Zodiaco%20Ep%20098%20-%20La%20Milagrosa%20Aparici%C3%B3n%20De%20La%20Armadura%20De%20Od%C3%ADn%20-%20Warner%20Channel%20-%2010-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 099",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-26/Caballeros%20Del%20Zodiaco%20Ep%20099%20-%20%C2%A1Athena%21%20Mi%20Oraci%C3%B3n%20Eterna%20Por%20Ti%20-%20Warner%20Channel%20-%2011-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 100",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-27/Caballeros%20Del%20Zodiaco%20Ep%20100%20-%20%C2%A1Poseid%C3%B3n%2C%20El%20Emperador%20Del%20Oc%C3%A9ano%21%20Una%20Nueva%20Guerra%20Santa%20-%20Warner%20Channel%20-%2015-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 101",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-27/Caballeros%20Del%20Zodiaco%20Ep%20101%20-%20Destruyan%20Todos%20Los%20Pilares%20De%20Los%20Siete%20Mares%20-%20Warner%20Channel%20-%2016-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 102",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-27/Caballeros%20Del%20Zodiaco%20Ep%20102%20-%20El%20Misterioso%20Brillo%20De%20La%20Armadura%20De%20Bronce%20-%20Warner%20Channel%20-%2017-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 103",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-27/Caballeros%20Del%20Zodiaco%20Ep%20103%20-%20Shun%20Es%20Atacado%20Por%20Las%20Seis%20Bestias%20De%20Escila%20-%20Warner%20Channel%20-%2018-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 104",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-28/Caballeros%20Del%20Zodiaco%20Ep%20104%20-%20Muerte%20De%20Las%20Seis%20Bestias%20Por%20La%20Poderosa%20Cadena%20Dorada%20-%20Warner%20Channel%20-%2022-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 105",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-28/Caballeros%20Del%20Zodiaco%20Ep%20105%20-%20Excalibur%20Habita%20En%20El%20Brazo%20De%20Shiryu%20-%20Warner%20Channel%20-%2023-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 106",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-28/Caballeros%20Del%20Zodiaco%20Ep%20106%20-%20Seiya%20Se%20Encuentra%20A%20Su%20Ser%20M%C3%A1s%20Querido%20-%20Warner%20Channel%20-%2024-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 107",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-28/Caballeros%20Del%20Zodiaco%20Ep%20107%20-%20Lymnades%20El%20Despiadado%20-%20Warner%20Channel%20-%2025-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 108",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-29/Caballeros%20Del%20Zodiaco%20Ep%20108%20-%20Isaac%2C%20El%20Hombre%20Que%20Olvid%C3%B3%20Los%20Sentimientos%20-%20Warner%20Channel%20-%2029-04-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 109",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-29/Caballeros%20Del%20Zodiaco%20Ep%20109%20-%20Cuidado%20Ikki%2C%20Otra%20Triste%20Batalla%20Mortal%20-%20Warner%20Channel%20-%2030-04-2024%20%28Incompleto%29.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 111",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-29/Caballeros%20Del%20Zodiaco%20Ep%20111%20-%20Amigos%2C%20Cuando%20Morimos%20Lo%20Hacemos%20Juntos%20-%20Warner%20Channel%20-%2002-05-2024%20%28Transmisi%C3%B3n%20Nocturna%29.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 112",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-30/Caballeros%20Del%20Zodiaco%20Ep%20112%20-%20El%20Misterio%20Del%20Renacimiento%20De%20Poseid%C3%B3n%20-%20Warner%20Channel%20-%2006-05-2024%20%28Emisi%C3%B3n%20Nocturna%29.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 113",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-29/Caballeros%20Del%20Zodiaco%20Ep%20113%20-%20%C2%A1Flecha%20Dorada%2C%20Ataca%20A%20Poseid%C3%B3n%21%20-%20Warner%20Channel%20-%2002-05-2024.mp4",
+      },
+      {
+        name: "Caballeros del zodíaco 114",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-30/Caballeros%20Del%20Zodiaco%20Ep%20114%20-%20Viva%20La%20Amistad%2C%20Larga%20Vida%2C%20Leyenda%20De%20Los%20Caballeros%20-%20Warner%20Channel%20-%2006-05-2024.mp4",
       },
       // Add more episodes here...
     ],
