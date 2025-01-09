@@ -12,10 +12,9 @@ const channels = [
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
   // 200s - Classic Cartoons       (201)  (1)
-  // 210s - Anime              (211-213)  (3)
-  //        Anime Romance          (211)  (1)
-  //        Anime Acción       (212-213)  (2)
-  // 300s - TV Show Designated (301-301)  (1)
+  // 300s - Anime Romance      (301-302)  (2)
+  // 310s - Anime Acción       (311-312)  (2)
+  // 400s - TV Show Designated (301-301)  (1)
   // ========================================
   //
   // ========================================
@@ -439,11 +438,64 @@ const channels = [
     releaseYear: 1993,
     poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
+  
+  {
+    name: "The Tom and Jerry Show",
+    category: "Cartoons",
+    subcategory: "Tom & Jerry",
+    channelNumber: 201,
+    episodes: [
+      {
+        name: "Volumen 1",
+        duration: 58,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%201.mp4",
+      },
+      {
+        name: "Volumen 2",
+        duration: 56,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%202.mp4",
+      },
+      {
+        name: "Volumen 3",
+        duration: 58,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%203.mp4",
+      },
+      {
+        name: "Volumen 4",
+        duration: 55,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%204.mp4",
+      },
+      {
+        name: "Volumen 5",
+        duration: 59,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%205.mp4",
+      },
+      {
+        name: "Volumen 7",
+        duration: 55,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%207.mp4",
+      },
+      {
+        name: "Volumen 8",
+        duration: 57,
+        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%208.mp4",
+      },
+      {
+        name: "Volumen Extra",
+        duration: 54,
+        video: "https://ia800504.us.archive.org/3/items/VHS-Tom-y-Jerry/Volumen%20Extra.mp4",
+      },
+      // Add more episodes here...
+    ],
+    releaseYear: 1975,
+    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
+  },
+  
   {
     name: "Candy Candy",
     category: "Cartoons",
     subcategory: "Anime Romance",
-    channelNumber: 211,
+    channelNumber: 301,
     episodes: [
       {
         name: "Candy Candy 001",
@@ -526,10 +578,186 @@ const channels = [
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
   },
   {
+    name: "Ranma ½",
+    category: "Cartoons",
+    subcategory: "Anime Romance",
+    channelNumber: 302,
+    episodes: [
+      {
+        name: "Ranma ½ 001",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20001%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 002",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20002%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 003",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20003%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 004",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20004%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 005",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20005%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 006",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20006%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 007",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20007%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 008",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20008%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 009",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20009%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 010",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20010%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 011",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20011%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 012",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20012%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 013",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20013%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 014",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20014%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 015",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20015%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 016",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20016%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 017",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20017%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 018",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20018%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 019",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20019%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 020",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20020%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 021",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20021%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 022",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20022%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 023",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20023%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 024",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20024%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 025",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20025%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 026",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20026%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 027",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20027%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 028",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20028-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 029",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20029%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 030",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20030%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 031",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20031%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      // Add more episodes here... 32 - 159
+      {
+        name: "Ranma ½ 160",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20160%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 161",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20161%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+    ],
+    releaseYear: 1989,
+    poster: "https://images.justwatch.com/poster/323469403/s718/ranma-1-2.jpg",
+  },
+  {
     name: "Dragon Ball Z",
     category: "Cartoons",
     subcategory: "Anime Acción",
-    channelNumber: 212,
+    channelNumber: 311,
     episodes: [
       {
         name: "Dragon Ball Z 001",
@@ -1598,61 +1826,10 @@ const channels = [
     poster: "https://m.media-amazon.com/images/S/pv-target-images/334f00b53cf3ef848ea7048b25711bc98e8236ce1685a096990c80d0965835ea.png",
   },
   {
-    name: "The Tom and Jerry Show",
-    category: "Cartoons",
-    subcategory: "Tom & Jerry",
-    channelNumber: 201,
-    episodes: [
-      {
-        name: "Volumen 1",
-        duration: 58,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%201.mp4",
-      },
-      {
-        name: "Volumen 2",
-        duration: 56,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%202.mp4",
-      },
-      {
-        name: "Volumen 3",
-        duration: 58,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%203.mp4",
-      },
-      {
-        name: "Volumen 4",
-        duration: 55,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%204.mp4",
-      },
-      {
-        name: "Volumen 5",
-        duration: 59,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%205.mp4",
-      },
-      {
-        name: "Volumen 7",
-        duration: 55,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%207.mp4",
-      },
-      {
-        name: "Volumen 8",
-        duration: 57,
-        video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%208.mp4",
-      },
-      {
-        name: "Volumen Extra",
-        duration: 54,
-        video: "https://ia800504.us.archive.org/3/items/VHS-Tom-y-Jerry/Volumen%20Extra.mp4",
-      },
-      // Add more episodes here...
-    ],
-    releaseYear: 1975,
-    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
-  },
-  {
     name: "Los caballeros del zodíaco",
     category: "Cartoons",
     subcategory: "Anime Acción",
-    channelNumber: 213,
+    channelNumber: 312,
     episodes: [
       {
         name: "Caballeros del zodíaco 001",
@@ -2224,7 +2401,6 @@ const channels = [
     releaseYear: 1986,
     poster: "https://images.justwatch.com/poster/305117882/s718/saint-seiya-knights-of-the-zodiac.jpg",
   },
-  
   // Add more cartoons here...
 
   // ========================================
