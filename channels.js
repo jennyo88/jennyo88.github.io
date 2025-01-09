@@ -439,7 +439,7 @@ const channels = [
   {
     name: "Candy Candy",
     category: "Cartoons",
-    subcategory: "Candy Candy",
+    subcategory: "Anime Romance",
     channelNumber: 201,
     episodes: [
       {
@@ -525,7 +525,7 @@ const channels = [
   {
     name: "Dragon Ball Z",
     category: "Cartoons",
-    subcategory: "Dragon Ball",
+    subcategory: "Anime Acción",
     channelNumber: 202,
     episodes: [
       {
@@ -837,7 +837,7 @@ const channels = [
   {
     name: "Caballeros del Zodiaco",
     category: "Cartoons",
-    subcategory: "Caballeros del Zodiaco",
+    subcategory: "Anime Acción",
     channelNumber: 204,
     episodes: [
       {
