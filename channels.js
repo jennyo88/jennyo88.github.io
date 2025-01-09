@@ -11,7 +11,7 @@ const channels = [
   //        Romance & Comedy     (22-23)  (2)
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
-  // 200s - Cartoon Designated     (201)  (1)
+  // 200s - Classic Cartoons       (201)  (1)
   // 210s - Anime              (211-213)  (3)
   //        Anime Romance          (211)  (1)
   //        Anime Acción       (212-213)  (2)
@@ -534,6 +534,7 @@ const channels = [
       {
         name: "Dragon Ball Z 001",
         duration: 24,
+        description: "Saga Saiyajin",
         video: "https://archive.org/download/episodio-1_202403/s%20%281%29.mp4",
       },
       {
@@ -709,6 +710,7 @@ const channels = [
       {
         name: "Dragon Ball Z 036",
         duration: 24,
+        description: "Saga Freezer",
         video: "https://archive.org/download/episodio-1_202403/s%20%2836%29.mp4",
       },
       {
@@ -790,6 +792,146 @@ const channels = [
         name: "Dragon Ball Z 052",
         duration: 24,
         video: "https://archive.org/download/episodio-1_202403/s%20%2852%29.mp4",
+      },
+      {
+        name: "Dragon Ball Z 053",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B053%5D%20La%20horrible%20transformaci%C3%B3n%20de%20Zaabon.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 054",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B054%5D%20Hay%20que%20proteger%20al%20planeta%20de%20la%20esperanza%21%20Krilin%20in.mp4",
+      },
+      {
+        name: "Dragon Ball Z 055",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B055%5D%20Vegeta%20revive%20milagrosamente.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 056",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B056%5D%20El%20complot%20de%20Freezer%20se%20ha%20desvanecido.%20-%20Dragon%20Ball.mp4",
+      },
+      {
+        name: "Dragon Ball Z 057",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B057%5D%20Goku%20entrena%20bajo%20la%20gravedad%20de%20cien.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 058",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B058%5D%20El%20grupo%20secreto%20de%20Freezer.%20Las%20terribles%20fuerzas%20esp.mp4",
+      },
+      {
+        name: "Dragon Ball Z 059",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B059%5D%20%C2%A1Ten%20cuidado%20Bulma%21%20La%20esfera%20de%204%20estrellas%20podr%C3%ADa%20ca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 060",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B060%5D%20La%20inquebrantable%20voluntad%20de%20Goku.%20-%20Dragon%20Ball%20Sull.mp4",
+      },
+      {
+        name: "Dragon Ball Z 061",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B061%5D%20La%20batalla%20se%20acerca%2C%20han%20llegado%20las%20fuerzas%20especial.mp4",
+      },
+      {
+        name: "Dragon Ball Z 062",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B062%5D%20%C2%A1Goku%20se%20acerca%21%20Los%20temibles%20hombres%20de%20Freezer.%20-%20Dr.mp4",
+      },
+      {
+        name: "Dragon Ball Z 063",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B063%5D%20El%20se%C3%B1or%20Gurdo%20se%20enfada%20y%20utiliza%20un%20truco%20de%20magia.%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 064",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B064%5D%20El%20terrible%20Rikum.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 065",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B065%5D%20%C2%A1No%20te%20mueras%20Gohan%21%20Goku%20finalmente%20llega%20al%20campo%20de.mp4",
+      },
+      {
+        name: "Dragon Ball Z 066",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B066%5D%20El%20legendario%20Super%20Saiyajin%20Goku.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 067",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B067%5D%20%C2%A1Yiz%20y%20Boter%20atacan%20a%20Goku%21%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 068",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B068%5D%20La%20aparici%C3%B3n%20del%20capit%C3%A1n%20Gi-nyu.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 069",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B069%5D%20%C2%A1Ya%20viste%20el%20verdadero%20poder%20de%20Goku%21%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 070",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B070%5D%20Freezer%20llega%20con%20el%20patriarca.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 071",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B071%5D%20%C2%BFGoku%20es%20Gin-yu%20y%20Gin-yu%20es%20Goku%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 072",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B072%5D%20%C2%A1Sal%20de%20ah%C3%AD%20Super%20Shen%20Long%2C%20y%20cumple%20mi%20deseo%21%20-%20Drag.mp4",
+      },
+      {
+        name: "Dragon Ball Z 073",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B073%5D%20%C2%A1Yo%20no%20soy%20%C3%A9l%21%20Gohan%2C%20ataca%20a%20tu%20padre%20sin%20temor.%20-%20Dr.mp4",
+      },
+      {
+        name: "Dragon Ball Z 074",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B074%5D%20Gi-nyu%20se%20convierte%20en%20rana.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 075",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B075%5D%20Di%20la%20clave%20secreta%20de%20las%20Esferas%20de%20Drag%C3%B3n.%20-%20Dragon.mp4",
+      },
+      {
+        name: "Dragon Ball Z 076",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B076%5D%20Pikoro%20y%20Kami-Sama%20reviven%20con%20la%20ayuda%20del%20Super%20Shen.mp4",
+      },
+      {
+        name: "Dragon Ball Z 077",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B077%5D%20%C2%BFLa%20aparici%C3%B3n%20de%20un%20nuevo%20guerrero%20Pikoro%20y%20Neil%20se%20fu.mp4",
+      },
+      {
+        name: "Dragon Ball Z 078",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B078%5D%20%C2%A1Una%20trasformaci%C3%B3n%20de%20pesadilla%21%20Freezer%20tiene%20un%20pode.mp4",
+      },
+      {
+        name: "Dragon Ball Z 079",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B079%5D%20Gohan%20es%20atacado%20por%20el%20malvado%20Freezer.%20-%20Dragon%20Ball.mp4",
+      },
+      {
+        name: "Dragon Ball Z 080",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B080%5D%20La%20llegada%20de%20Pikoro.%20-%20Dragon%20Ball%20Sullca.mp4",
       },
       // Add more episodes here...
     ],
