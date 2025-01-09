@@ -933,6 +933,665 @@ const channels = [
         duration: 24,
         video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B080%5D%20La%20llegada%20de%20Pikoro.%20-%20Dragon%20Ball%20Sullca.mp4",
       },
+      {
+        name: "Dragon Ball Z 081",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B081%5D%20Pikoro%20se%20encarga%20de%20derrotar%20a%20Freezer.%20-%20Dragon%20Ball.mp4",
+      },
+      {
+        name: "Dragon Ball Z 082",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B082%5D%20La%20segunda%20trasformaci%C3%B3n%20de%20Freezer.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 083",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B083%5D%20Freezer%20tiene%20ganada%20la%20batalla%20con%20su%20tercera%20trasfor.mp4",
+      },
+      {
+        name: "Dragon Ball Z 084",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B084%5D%20La%20muerte%20de%20Dende.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 085",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B085%5D%20Goku%20se%20recupera.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 086",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B086%5D%20Muere%20un%20orgulloso%20saiyajin.%20Vegeta.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 087",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B087%5D%20La%20batalla%20final%20comienza.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 088",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B088%5D%20Un%20combate%20de%20cuerpo%20a%20cuerpo.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 089",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B089%5D%20Freezer%20pelea%20sin%20usar%20las%20dos%20manos.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 090",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B090%5D%20Goku%20es%20un%20sujeto%20muy%20audaz.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 091",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B091%5D%20Goku%20hace%20el%20Kaio-ken%20aumentado%20a%20veinte%20veces.%20-%20Drag.mp4",
+      },
+      {
+        name: "Dragon Ball Z 092",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B092%5D%20La%20gigantesca%20Genki-dama%3B%20esta%20es%20la%20%C3%BAltima%20esperanza..mp4",
+      },
+      {
+        name: "Dragon Ball Z 093",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B093%5D%20%C2%A1No%20dejes%20ir%20esta%20oportunidad%21%20Pikoro%20ayuda%20a%20Goku.%20-%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 094",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B094%5D%20El%20poder%20destructivo%20de%20la%20Genki-dama.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 095",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B095%5D%20Finalmente%20Goku%20se%20convierte%20en%20el%20Legendario%20Super%20Sa.mp4",
+      },
+      {
+        name: "Dragon Ball Z 096",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B096%5D%20Goku%20vengar%C3%A1%20la%20muerte%20de%20todos.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 097",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B097%5D%20Un%20gran%20destello%20atraviesa%20Namekusei.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 098",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B098%5D%20Freezer%20utiliza%20su%20m%C3%A1ximo%20poder.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 099",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B099%5D%20Namekusei%20est%C3%A1%20a%20punto%20de%20estallar%3B%20Shen%20Long%2C%20cumple%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 100",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B100%5D%20Yo%20soy%20el%20hijo%20de%20Goku%3B%20Gohan%20vuelve%20a%20aparecer%20en%20el%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 101",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B101%5D%20El%20%C3%BAltimo%20deseo.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 102",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B102%5D%20La%20%C3%9Altima%20Esperanza.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 103",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B103%5D%20La%20desesperaci%C3%B3n%20de%20Freezer.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 104",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B104%5D%20La%20autodestrucci%C3%B3n%20de%20Freezer.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 105",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B105%5D%20Freezer%20pierde%20la%20pelea.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 106",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B106%5D%20Namekusei%20explota.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 107",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%2037-107/%5B107%5D%20Los%20Guerreros%20Z%20han%20revivido.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 108",
+        duration: 24,
+        description: "Saga Garlick Jr.",
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B108%5D%20El%20Templo%20Sagrado%20est%C3%A1%20en%20problemas.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 109",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B109%5D%20La%20neblina%20del%20mal.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 110",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B110%5D%20Pikoro%20forma%20parte%20de%20la%20familia%20del%20mal.%20-%20Dragon%20Bal.mp4",
+      },
+      {
+        name: "Dragon Ball Z 111",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B111%5D%20Pikoro%20enfrenta%20a%20Gohan.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 112",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B112%5D%20El%20plan%20de%20Pikoro.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 113",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B113%5D%20Kami%20sama%20y%20Mr.%20Popo%20van%20al%20lugar%20sagrado.%20-%20Dragon%20Ba.mp4",
+      },
+      {
+        name: "Dragon Ball Z 114",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B114%5D%20La%20vida%20de%20kami%20sama%20est%C3%A1%20en%20peligro.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 115",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B115%5D%20El%20agua%20ultra%20sagrada%20salva%20al%20mundo.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 116",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B116%5D%20Gohan%20destruye%20el%20planeta%20maligno.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 117",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20108-117/%5B117%5D%20Krilin%20le%20propone%20matrimonio%20a%20Maron.%20-%20Dragon%20Ball%20Su.mp4",
+      },
+      {
+        name: "Dragon Ball Z 118",
+        duration: 24,
+        description: "Saga Cell",
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B118%5D%20Ese%20es%20el%20planeta%20Tierra%20Pap%C3%A1.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 119",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B119%5D%20Yo%20me%20encargar%C3%A9%20de%20derrotar%20a%20Freezer.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 120",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B120%5D%20El%20Final%20de%20Freezer.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 121",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B121%5D%20Goku%20ha%20regresado.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 122",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B122%5D%20La%20identidad%20del%20joven%20misterioso.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 123",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B123%5D%20La%20t%C3%A9cnica%20especial%20de%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 124",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B124%5D%20Superar%C3%A9%20a%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 125",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B125%5D%20Una%20prueba%20muy%20dif%C3%ADcil%20para%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 126",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B126%5D%20%C2%BFQuienes%20son%20los%20androides%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 127",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B127%5D%20Los%20Terribles%20Androides%20N%C3%BAmero%2019%20y%2020.%20-%20Dragon%20Ball%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 128",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B128%5D%20Goku%20tiene%20dos%20Problemas.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 129",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B129%5D%20Vegeta%20se%20Convierte%20en%20Super%20Saiyajin.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 130",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B130%5D%20El%20secreto%20del%20doctor%20Maki.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 131",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B131%5D%20La%20realidad%20es%20acaso%20mucho%20peor%20que%20el%20futuro%20-%20Dragon.mp4",
+      },
+      {
+        name: "Dragon Ball Z 132",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B132%5D%20Hay%20que%20buscar%20el%20laboratorio%20del%20doctor%20Maki%20-%20Dragon.mp4",
+      },
+      {
+        name: "Dragon Ball Z 133",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B133%5D%20Los%20androides%2017%20y%2018%20despiertan.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 134",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B134%5D%20El%20ej%C3%A9rcito%20encargado%20de%20matar%20a%20Goku.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 135",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B135%5D%20Las%20Habilidades%20del%20Androide%20No.%2018.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 136",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B136%5D%20%C2%BFEste%20ser%C3%A1%20el%20fin%20de%20los%20Guerreros%20Z%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 137",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B137%5D%20La%20decisi%C3%B3n%20de%20Pikoro.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 138",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B138%5D%20Los%20androides%20destructores.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 139",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B139%5D%20Bulma%20se%20entera%20de%20un%20gran%20misterio.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 140",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20118-140/%5B140%5D%20Un%20misterioso%20huevo%20encontrado%20en%20la%20m%C3%A1quina%20del%20tiemp.mp4",
+      },
+      {
+        name: "Dragon Ball Z 141",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B141%5D%20El%20nacimiento%20de%20un%20nuevo%20guerrero.%20-%20Dragon%20Ball%20Sull.mp4",
+      },
+      {
+        name: "Dragon Ball Z 142",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B142%5D%20El%20monstruo%20que%20tiene%20el%20ki%20de%20Goku.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 143",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B143%5D%20El%20androide%20Cell.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 144",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B144%5D%20Cell%20se%20escapa%20de%20las%20manos%20de%20Pikoro.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 145",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B145%5D%20La%20habitaci%C3%B3n%20secreta%20del%20laboratorio%20del%20doctor%20Gero..mp4",
+      },
+      {
+        name: "Dragon Ball Z 146",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B146%5D%20Goku%20se%20recupera.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 147",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B147%5D%20%C2%A1Vamos%20a%20la%20Habitaci%C3%B3n%20del%20Tiempo%21%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 148",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B148%5D%20Pikoro%20VS%20El%20Androide%20No.%2017%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 149",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B149%5D%20Cell%20est%C3%A1%20a%20punto%20de%20perfeccionar%20su%20cuerpo.%20-%20Dragon%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 150",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B150%5D%20Pikoro%20pelea%20con%20todas%20sus%20fuerzas.%20-%20Dragon%20Ball%20Sull.mp4",
+      },
+      {
+        name: "Dragon Ball Z 151",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B151%5D%20La%20%C3%BAltima%20esperanza%2C%20el%20androide%20No.%2016%20-%20Dragon%20Ball%20.mp4",
+      },
+      {
+        name: "Dragon Ball Z 152",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B152%5D%20Cell%20absorbe%20a%20No.%2017.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 153",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B153%5D%20El%20nuevo%20desaf%C3%ADo%20de%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 154",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B154%5D%20Sal%20de%20ah%C3%AD%20No.%2018.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 155",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B155%5D%20El%20Super%20poder%20de%20Vegeta.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 156",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B156%5D%20Yo%20soy%20super%20Vegeta.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 157",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B157%5D%20Un%20guerrero%20orgulloso.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 158",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B158%5D%20La%20decisi%C3%B3n%20de%20Krilin.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 159",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B159%5D%20Cell%20busca%20perfeccionar%20su%20cuerpo.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 160",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B160%5D%20Cell%2C%20el%20dios%20de%20la%20destrucci%C3%B3n.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 161",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B161%5D%20Super%20Vegeta%20corre%20peligro.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 162",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B162%5D%20Trunks%20se%20pone%20furioso.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 163",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B163%5D%20Salva%20a%20pap%C3%A1.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 164",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B164%5D%20La%20desesperaci%C3%B3n%20de%20vivir%20en%20un%20futuro%20infernal.%20-%20Dra.mp4",
+      },
+      {
+        name: "Dragon Ball Z 165",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B165%5D%20El%20punto%20d%C3%A9bil%20de%20Super%20Trunks.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 166",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B166%5D%20El%20misterio%20del%20nuevo%20torneo%20de%20artes%20marciales.%20-%20Dra.mp4",
+      },
+      {
+        name: "Dragon Ball Z 167",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B167%5D%20El%20aviso%20del%20torneo%20de%20Cell.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 168",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B168%5D%20Los%20nuevos%20poderes%20de%20Goku%20y%20Gohan.%20-%20Dragon%20Ball%20Sull.mp4",
+      },
+      {
+        name: "Dragon Ball Z 169",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B169%5D%20La%20tranquilidad%20de%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 170",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B170%5D%20El%20descanso%20de%20los%20guerreros.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 171",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B171%5D%20Cuando%20Gohan%20era%20beb%C3%A9.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 172",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B172%5D%20Busquemos%20a%20un%20nuevo%20kami%20sama.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 173",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B173%5D%20Las%20esferas%20del%20drag%C3%B3n%20vuelven%20a%20existir.%20-%20Dragon%20Bal.mp4",
+      },
+      {
+        name: "Dragon Ball Z 174",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B174%5D%20El%20sufrimiento%20de%20Goku.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 175",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B175%5D%20El%20torneo%20de%20Cell%20comienza.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 176",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B176%5D%20El%20ej%C3%A9rcito%20de%20Mr.%20Sat%C3%A1n.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 177",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B177%5D%20Goku%20vs.%20Cell.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 178",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B178%5D%20El%20super%20kame-hame-ha%20de%20Cell.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 179",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B179%5D%20Cell%20cambia%20las%20reglas%20del%20torneo.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 180",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B180%5D%20%C2%BFGoku%20se%20rinde%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 181",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B181%5D%20Gohan%2C%20el%20joven%20m%C3%A1s%20fuerte.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 182",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B182%5D%20Gohan%2C%20%C2%A1Expulsa%20todo%20tu%20poder%21%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 183",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B183%5D%20El%20ataque%20de%20los%20Cell%20juniors.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 184",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B184%5D%20Gohan%20se%20enfada.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 185",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B185%5D%20Destrucci%C3%B3n%20de%20los%20Cell%20Juniors.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 186",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B186%5D%20Cell%20es%20golpeado.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 187",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B187%5D%20La%20transformaci%C3%B3n%20de%20Cell.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 188",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B188%5D%20Adi%C3%B3s%20a%20todos.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 189",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B189%5D%20Una%20terrible%20pesadilla%20en%20pleno%20d%C3%ADa.%20-%20Dragon%20Ball%20Sul.mp4",
+      },
+      {
+        name: "Dragon Ball Z 190",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B190%5D%20Un%20mensaje%20para%20Gohan.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 191",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B191%5D%20La%20pelea%20ha%20terminado...%20gracias%2C%20Goku%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 192",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B192%5D%20Goku%20se%20va%20a%20entrenar%20al%20m%C3%A1s%20all%C3%A1.%20-%20Dragon%20Ball%20Sullc.mp4",
+      },
+      {
+        name: "Dragon Ball Z 193",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B193%5D%20%C2%A1Pap%C3%A1%2C%20jam%C3%A1s%20me%20dar%C3%A9%20por%20vencido%21%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 194",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B194%5D%20Otro%20final%20feliz.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 195",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B195%5D%20El%20peleador%20m%C3%A1s%20fuerte%20del%20otro%20mundo.%20-%20Dragon%20Ball%20S.mp4",
+      },
+      {
+        name: "Dragon Ball Z 196",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B196%5D%20La%20reuni%C3%B3n%20de%20los%20peleadores%20mas%20valientes.%20-%20Dragon%20B.mp4",
+      },
+      {
+        name: "Dragon Ball Z 197",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B197%5D%20El%20torneo%20se%20pone%20emocionante.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 198",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B198%5D%20%C2%BFQui%C3%A9n%20ganar%C3%A1%20Goku%20o%20Paikuhan.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 199",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20141-199/%5B199%5D%20Goku%20hace%20un%20Kame-Hame-Ha%20a%20toda%20velocidad.%20-%20Dragon%20B.mp4",
+      },
+      {
+        name: "Dragon Ball Z 200",
+        duration: 24,
+        description: "Saga Majin Boo",
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B200%5D%20Gohan%20asiste%20a%20la%20preparatoria.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 201",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B201%5D%20El%20guerrero%20que%20lucha%20por%20la%20justicia%2C%20el%20Gran%20Saiyama.mp4",
+      },
+      {
+        name: "Dragon Ball Z 202",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B202%5D%20La%20primera%20cita%20de%20Gohan.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 203",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B203%5D%20Gohan%20salva%20a%20Videl.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 204",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B204%5D%20%C2%BFEl%20ladr%C3%B3n%20es%20el%20Gran%20Saiyaman%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 205",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B205%5D%20%C2%BFGok%C3%BA%20regresa%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 206",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B206%5D%20El%20sorprendente%20poder%20de%20Goten.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 207",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B207%5D%20El%20entrenamiento%20para%20volar.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 208",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B208%5D%20Los%20guerreros%20Z%20se%20re%C3%BAnen%20de%20nuevo.%20-%20Dragon%20Ball%20Sull.mp4",
+      },
+      {
+        name: "Dragon Ball Z 209",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B209%5D%20Ten%20cuidado%20gran%20Saiyaman.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      {
+        name: "Dragon Ball Z 210",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20200-250/%5B210%5D%20El%20peque%C3%B1o%20Trunks.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
+      // Add more episodes here... 211 - 290
+      {
+        name: "Dragon Ball Z 291",
+        duration: 24,
+        video: "https://archive.org/download/dragon-ball-zvideoplaytv/Dragon%20ball%20Z%20251-291/%5B291%5D%20El%20sue%C3%B1o%20de%20Gok%C3%BA.%20-%20Dragon%20Ball%20Sullca.mp4",
+      },
       // Add more episodes here...
     ],
     releaseYear: 1989,
