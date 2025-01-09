@@ -11,7 +11,7 @@ const channels = [
   //        Romance & Comedy     (22-23)  (2)
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
-  // 200s - Cartoon Designated (201-203)  (3)
+  // 200s - Cartoon Designated (201-204)  (4)
   // 300s - TV Show Designated (301-301)  (1)
   // ========================================
   //
@@ -834,6 +834,78 @@ const channels = [
     releaseYear: 1975,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
   },
+  {
+    name: "Caballeros del Zodiaco",
+    category: "Cartoons",
+    subcategory: "Caballeros del Zodiaco",
+    channelNumber: 204,
+    episodes: [
+      {
+        name: "Capítulo 001",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20001%20-%20Las%20leyendas%20de%20una%20nueva%20era%20-%20Warner%20Channel%20-%2016-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 002",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20002%20-%20Cuando%20Seiya%20viste%20la%20armadura%20de%20Pegaso%20-%20Warner%20Channel%20-%2017-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 003",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20003%20-%20El%20Guerrero%20De%20Los%20Hielos%20-%20Warner%20Channel%20-%2018-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 004",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-01/Caballeros%20Del%20Zodiaco%20Ep%20004%20-%20El%20Caballero%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2019-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 005",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20005%20-%20La%20Resurrecci%C3%B3n%20Del%20Drag%C3%B3n%20-%20Warner%20Channel%20-%2023-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 006",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20006%20-%20El%20Guerrero%20Que%20Viene%20Del%20Infierno%20-%20Warner%20Channel%20-%2024-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 007",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20007%20-%20La%20Venganza%20Del%20Caballero%20F%C3%A9nix%20-%20Warner%20Channel%20-%2025-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 008",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-02/Caballeros%20Del%20Zodiaco%20Ep%20008%20-%20En%20Busca%20De%20La%20Armadura%20De%20Oro%20-%20Warner%20Channel%20-%2026-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 009",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20009%20-%20Los%20Caballeros%20Del%20Apocalipsis%20-%20Warner%20Channel%20-%2030-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 010",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20010%20-%20La%20Tumba%20De%20La%20Armadura%20Sagrada%20-%20Warner%20Channel%20-%2031-10-2023.mp4",
+      },
+      {
+        name: "Capítulo 011",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20011%20-%20Seiya%20Se%20Enfrenta%20Con%20Su%20Doble%20-%20Warner%20Channel%20-%2001-11-2023.mp4",
+      },
+      {
+        name: "Capítulo 012",
+        duration: 24,
+        video: "https://archive.org/download/Caballeros-Del-Zodiaco-Warner-Channel-Parte-03/Caballeros%20Del%20Zodiaco%20Ep%20012%20-%20Las%20Cadenas%20De%20La%20Amistad%20-%20Warner%20Channel%20-%2002-10-2023.mp4",
+      },
+      // Add more episodes here...
+    ],
+    releaseYear: 1986,
+    poster: "https://images.justwatch.com/poster/305117882/s718/saint-seiya-knights-of-the-zodiac.jpg",
+  },
+  
   // Add more cartoons here...
 
   // ========================================
