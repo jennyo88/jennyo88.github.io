@@ -148,7 +148,7 @@ const channels = [
     description: "",
     duration: 91,
     releaseYear: 1940,
-    poster: "",
+    poster: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/His_Girl_Friday_%281940_poster%29_crop.jpg/1200px-His_Girl_Friday_%281940_poster%29_crop.jpg",
   },
   {
     name: "Tammy And The Millionaire",
@@ -159,7 +159,7 @@ const channels = [
     description: "",
     duration: 90,
     releaseYear: 1967,
-    poster: "",
+    poster: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSyU_xgZ_aWG4V5ONZPzDiKkz1oYOdo3vqvm1mOXBWmvtxHmV06l2WB0MO2O6y2QmBpP3d2",
   },
   {
     name: "That Hamilton Woman",
