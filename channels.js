@@ -531,7 +531,252 @@ const channels = [
       {
         name: "Capítulo 001",
         duration: 24,
-        video: "https://archive.org/download/dragon-ball-zvideoplaytv/%5B001%5D%20Aparece%20un%20mini%20Goku%2C%20su%20nombre%20es%20Gohan.mp4",
+        video: "https://archive.org/download/episodio-1_202403/s%20%281%29.mp4",
+      },
+      {
+        name: "Capítulo 002",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%282%29.mp4",
+      },
+      {
+        name: "Capítulo 003",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%283%29.mp4",
+      },
+      {
+        name: "Capítulo 004",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%284%29.mp4",
+      },
+      {
+        name: "Capítulo 005",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%285%29%20%281%29.mp4",
+      },
+      {
+        name: "Capítulo 006",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%286%29.mp4",
+      },
+      {
+        name: "Capítulo 007",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%287%29.mp4",
+      },
+      {
+        name: "Capítulo 008",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%288%29.mp4",
+      },
+      {
+        name: "Capítulo 009",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%289%29.mp4",
+      },
+      {
+        name: "Capítulo 010",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2810%29.mp4",
+      },
+      {
+        name: "Capítulo 011",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2811%29.mp4",
+      },
+      {
+        name: "Capítulo 012",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2812%29.mp4",
+      },
+      {
+        name: "Capítulo 013",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2813%29.mp4",
+      },
+      {
+        name: "Capítulo 014",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2814%29.mp4",
+      },
+      {
+        name: "Capítulo 015",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2815%29.mp4",
+      },
+      {
+        name: "Capítulo 016",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2816%29.mp4",
+      },
+      {
+        name: "Capítulo 017",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2817%29.mp4",
+      },
+      {
+        name: "Capítulo 018",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2818%29.mp4",
+      },
+      {
+        name: "Capítulo 019",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2819%29.mp4",
+      },
+      {
+        name: "Capítulo 020",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2820%29.mp4",
+      },
+      {
+        name: "Capítulo 021",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2821%29.mp4",
+      },
+      {
+        name: "Capítulo 022",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2822%29.mp4",
+      },
+      {
+        name: "Capítulo 023",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2823%29.mp4",
+      },
+      {
+        name: "Capítulo 024",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2824%29.mp4",
+      },
+      {
+        name: "Capítulo 025",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2825%29.mp4",
+      },
+      {
+        name: "Capítulo 026",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2826%29.mp4",
+      },
+      {
+        name: "Capítulo 027",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2827%29.mp4",
+      },
+      {
+        name: "Capítulo 028",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2828%29.mp4",
+      },
+      {
+        name: "Capítulo 029",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2829%29.mp4",
+      },
+      {
+        name: "Capítulo 030",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2830%29.mp4",
+      },
+      {
+        name: "Capítulo 031",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2831%29.mp4",
+      },
+      {
+        name: "Capítulo 032",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2832%29.mp4",
+      },
+      {
+        name: "Capítulo 033",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2833%29.mp4",
+      },
+      {
+        name: "Capítulo 034",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2834%29.mp4",
+      },
+      {
+        name: "Capítulo 035",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2835%29.mp4",
+      },
+      {
+        name: "Capítulo 036",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2836%29.mp4",
+      },
+      {
+        name: "Capítulo 037",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2837%29.mp4",
+      },
+      {
+        name: "Capítulo 038",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2838%29.mp4",
+      },
+      {
+        name: "Capítulo 039",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2839%29.mp4",
+      },
+      {
+        name: "Capítulo 040",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2840%29.mp4",
+      },
+      {
+        name: "Capítulo 041",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2841%29.mp4",
+      },
+      {
+        name: "Capítulo 042",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2842%29.mp4",
+      },
+      {
+        name: "Capítulo 043",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2843%29.mp4",
+      },
+      {
+        name: "Capítulo 044",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2844%29.mp4",
+      },
+      {
+        name: "Capítulo 045",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2845%29.mp4",
+      },
+      {
+        name: "Capítulo 046",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2846%29.mp4",
+      },
+      {
+        name: "Capítulo 047",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2847%29.mp4",
+      },
+      {
+        name: "Capítulo 048",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2848%29.mp4",
+      },
+      {
+        name: "Capítulo 049",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2849%29.mp4",
+      },
+      {
+        name: "Capítulo 050",
+        duration: 24,
+        video: "https://archive.org/download/episodio-1_202403/s%20%2850%29.mp4",
       },
       // Add more episodes here...
     ],
