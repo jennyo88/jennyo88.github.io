@@ -738,7 +738,646 @@ const channels = [
         duration: 23,
         video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20031%20-%20Espa%C3%B1ol%20Latino.mp4",
       },
-      // Add more episodes here... 32 - 159
+      {
+        name: "Ranma ½ 032",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20032%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 033",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20033%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 034",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20034%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 035",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20035%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 036",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20036%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 037",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20037%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 038",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20038%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 039",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20039%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 040",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20040%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 041",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20041%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 042",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20042%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 043",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20043%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 044",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20044%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 045",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20045%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 046",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20046%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 047",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20047%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 048",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20048%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 049",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20049%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 050",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20050%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 051",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20051%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 052",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20052%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 053",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20053%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 054",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20054%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 055",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20055%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 056",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20056%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 057",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20057%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 058",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20058%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 059",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20059%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 060",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20060%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 061",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20061%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 062",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20062%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 063",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20063%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 064",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20064%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 065",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20065%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 066",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20066%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 067",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20067%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 068",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20068%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 069",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20069%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 070",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20070%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 071",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20071%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 072",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20072%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 073",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20073%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 074",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20074%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 075",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20075%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 076",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20076%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 077",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20077%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 078",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20078%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 079",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20079%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 080",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20080%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 081",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20081%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 082",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20082%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 083",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20083%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 084",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20084%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 085",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20085%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 086",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20086%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 087",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20087%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 088",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20088%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 089",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20089%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 090",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20090%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 091",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20091%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 092",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20092%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 093",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20093%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 094",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20094%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 095",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20095%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 096",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20096%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 097",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20097%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 098",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20098%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 099",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20099%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 100",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20100%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 101",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20101%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 102",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20102%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 103",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20103%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 104",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20104%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 105",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20105%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 106",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20106%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 107",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20107%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 108",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20108%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 109",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20109%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 110",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20110%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 111",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20111%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 112",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20112%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 113",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20113%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 114",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20114%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 115",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20115%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 116",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20116%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 117",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20117%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 118",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20118%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 119",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20119%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 120",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20120%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 121",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20121%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 122",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20122%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 123",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20123%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 124",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20124%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 125",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20125%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 126",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20126%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 127",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20127%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 128",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20128%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 129",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20129%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 130",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20130%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 131",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20131%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 132",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20132%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 133",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20133%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 134",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20134%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 135",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20135%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 136",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20136%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 137",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20137%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 138",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20138%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 139",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20139%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 140",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20140%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 141",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20141%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 142",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20142%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 143",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20143%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 144",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20144%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 145",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20145%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 146",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20146%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 147",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20147%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 148",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20148%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 149",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20149%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 150",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20150%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 151",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20151%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 152",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20152%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 153",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20153%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 154",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20154%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 155",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20155%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 156",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20156%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 157",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20157%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 158",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20158%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
+      {
+        name: "Ranma ½ 159",
+        duration: 23,
+        video: "https://archive.org/download/ranma-nibunnoichi-espanol-latino-y-japones/Ranma%C2%BD%20%20-%20Episodio%20159%20-%20Espa%C3%B1ol%20Latino.mp4",
+      },
       {
         name: "Ranma ½ 160",
         duration: 23,
