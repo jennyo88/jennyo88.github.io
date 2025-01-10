@@ -17,7 +17,7 @@ const channels = [
   // ========================================
   // 100s - Kids Programming   (101-105)  (5)
   // 200s - Classic Cartoons   (201-202)  (2)
-  // 300s - Anime Romance      (301-302)  (2)
+  // 300s - Anime       (301-302)  (2)
   // 310s - Anime Acción       (311-312)  (2)
   // ========================================
   // ========================================
@@ -736,7 +736,187 @@ const channels = [
         duration: 23,
         video: "https://archive.org/download/candy.candy_202109/Capitulo%20015%20.%20La%20decisi%C3%B3n%20que%20arrebata%20la%20felicidad.mp4",
       },
-      // Add more episodes here...
+      {
+        name: "Candy Candy 016",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20016%20.%20Viaje%20a%20un%20pa%C3%ADs%20desconocido%20.mp4",
+      },
+      {
+        name: "Candy Candy 017",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20017%20.%20En%20un%20lejano%20y%20sediento%20desierto.mp4",
+      },
+      {
+        name: "Candy Candy 018",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20018%20.%20El%20crucifijo%20que%20conduce%20al%20destino.mp4",
+      },
+      {
+        name: "Candy Candy 019",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20019%20.%20El%20fin%20de%20un%20viaje%20de%20sufrimientos.mp4",
+      },
+      {
+        name: "Candy Candy 020",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20020%20.%20Soy%20tan%20feliz%20como%20en%20mis%20sue%C3%B1os.mp4",
+      },
+      {
+        name: "Candy Candy 021",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20021%20.%20La%20paloma%20que%20transporta%20la%20amistad.mp4",
+      },
+      {
+        name: "Candy Candy 022",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20022%20.%20%21No%20te%20rindas%20Anthony%21.mp4",
+      },
+      {
+        name: "Candy Candy 023",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20023%20.%20La%20primera%20cita.mp4",
+      },
+      {
+        name: "Candy Candy 024",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20024%20.%20Mi%20Anthony.mp4",
+      },
+      {
+        name: "Candy Candy 025",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20025%20.%20Avanzanda%20al%20ma%C3%B1ana%20y%20supera%20tu%20tristeza.mp4",
+      },
+      {
+        name: "Candy Candy 026",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20026%20.%20El%20padre%20%C3%A1rbol%20lo%20sabe%20todo.mp4",
+      },
+      {
+        name: "Candy Candy 027",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20027%20.%20El%20regalo%20de%20un%20%C3%A1ngel.mp4",
+      },
+      {
+        name: "Candy Candy 028",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20028%20.%20Cicatrices%20muy%20en%20el%20fondo%20de%20mi%20coraz%C3%B3n.mp4",
+      },
+      {
+        name: "Candy Candy 029",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20029%20.%20Partida%20hacia%20la%20esperanza.mp4",
+      },
+      {
+        name: "Candy Candy 030",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20030%20.%20El%20amor%20supera%20los%20torbellinos.mp4",
+      },
+      {
+        name: "Candy Candy 031",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20031%20.%20Un%20nuevo%20d%C3%ADa%20en%20una%20vieja%20ciudad.mp4",
+      },
+      {
+        name: "Candy Candy 032",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20032%20.%20La%20colina%20de%20Pony%20dentro%20de%20una%20prisi%C3%B3n.mp4",
+      },
+      {
+        name: "Candy Candy 033",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20033%20.%20La%20nueva%20estudiante%20tiene%20arrugas.mp4",
+      },
+      {
+        name: "Candy Candy 034",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20034%20.%20El%20reverso%20del%20sobre%20lacrado.mp4",
+      },
+      {
+        name: "Candy Candy 035",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20035%20.%20Un%20maravilloso%20domingo.mp4",
+      },
+      {
+        name: "Candy Candy 036",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20036%20.%20La%20sonrisa%20ha%20vuelto.mp4",
+      },
+      {
+        name: "Candy Candy 037",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20037%20.%20Un%20encuentro%20maravilloso.mp4",
+      },
+      {
+        name: "Candy Candy 038",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20038%20.%20El%20secreto%20de%20Terry.mp4",
+      },
+      {
+        name: "Candy Candy 039",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20039%20.%20El%20tesoro%20que%20desata%20la%20ira.mp4",
+      },
+      {
+        name: "Candy Candy 040",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20040%20.%20Reflexiones%20que%20entran%20y%20salen%20con%20libertad.mp4",
+      },
+      {
+        name: "Candy Candy 041",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20041%20.%20Un%20hada%20en%20el%20festival%20del%20colegio.mp4",
+      },
+      {
+        name: "Candy Candy 042",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20042%20.%20El%20p%C3%ADcnic%20de%20medianoche.mp4",
+      },
+      {
+        name: "Candy Candy 043",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20043%20.%20El%20colegio%20de%20Verano%20en%20el%20lago.mp4",
+      },
+      {
+        name: "Candy Candy 044",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20044%20.%20Lazos%20entre%20madre%20e%20hijo.mp4",
+      },
+      {
+        name: "Candy Candy 045",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20045%20.%20Fiesta%20blanca%20para%20dos.mp4",
+      },
+      {
+        name: "Candy Candy 046",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20046%20.%20Emoci%C3%B3n%20al%20final%20del%20verano.mp4",
+      },
+      {
+        name: "Candy Candy 047",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20047%20.%20La%20oscura%20trampa%20de%20Eliza.mp4",
+      },
+      {
+        name: "Candy Candy 048",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20048%20.%20Entre%20paredes%20fr%C3%ADas%20y%20gruesas.mp4",
+      },
+      {
+        name: "Candy Candy 049",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20049%20.%20La%20decisi%C3%B3n%20de%20Terry.mp4",
+      },
+      {
+        name: "Candy Candy 050",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20050%20.%20Viaje%20entre%20la%20niebla%20matutina.mp4",
+      },
+      // Add more episodes 51 - 114
+      {
+        name: "Candy Candy 115",
+        duration: 23,
+        video: "https://archive.org/download/candy.candy_202109/Capitulo%20115%20.%20Florecen%20las%20flores%20en%20la%20colina%20de%20Pony.mp4",
+      },
     ],
     releaseYear: 1981,
     poster: "https://m.media-amazon.com/images/I/81KaTQ8QyhL.jpg",
