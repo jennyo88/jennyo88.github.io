@@ -451,7 +451,7 @@ const channels = [
   {
     name: "The Tom and Jerry Show",
     category: "Cartoons",
-    subcategory: "Tom & Jerry",
+    subcategory: "Classic Cartoons",
     channelNumber: 201,
     episodes: [
       {
@@ -502,7 +502,7 @@ const channels = [
   {
     name: "The Flintstones",
     category: "Cartoons",
-    subcategory: "Los Picapiedra",
+    subcategory: "Classic Cartoons",
     channelNumber: 202,
     episodes: [
       {
