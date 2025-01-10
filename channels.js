@@ -2,7 +2,9 @@ const channels = [
   // ========================================
   // CHANNEL NUMBERING GUIDE
   // ========================================
-  //   0s - Movies                       (23)
+  // ========================================
+  //       0s - Movies                   (23)
+  // ========================================
   //        Action & Adventure     (1-5)  (5)
   //        Comedy & Family       (6-11)  (6)
   //        Drama & Romance      (12-13)  (2)
@@ -10,15 +12,21 @@ const channels = [
   //        Horror & Thriller    (21-21)  (1)
   //        Romance & Comedy     (22-23)  (2)
   // ========================================
+  // ========================================
+  // 100-300s - Cartoons                 (11)
+  // ========================================
   // 100s - Kids Programming   (101-105)  (5)
-  // 200s - Classic Cartoons       (201)  (1)
+  // 200s - Classic Cartoons   (201-202)  (2)
   // 300s - Anime Romance      (301-302)  (2)
   // 310s - Anime Acción       (311-312)  (2)
-  // 400s - TV Show Designated (301-301)  (1)
   // ========================================
-  //
   // ========================================
-  // Movies
+  // 400s - TV Shows           (401-401)  (1)
+  // ========================================
+  // ========================================
+  
+  // ========================================
+  // 0s - Movies
   // ========================================
   {
     name: "The Terminator",
@@ -274,9 +282,8 @@ const channels = [
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5519/lnMC0cOyI16BFfZVaIMFRtEx9Cb8eab4wMvqgYNW.webp",
   },
   // Add more movies here...
-
   // ========================================
-  // Cartoons
+  // 100s - Kids Programming
   // ========================================
   {
     name: "Kids WB Block",
@@ -438,7 +445,9 @@ const channels = [
     releaseYear: 1993,
     poster: "https://static.wikia.nocookie.net/parody/images/8/88/Playtimeland_Fun_DVD_Cover.png",
   },
-  
+  // ========================================
+  // 200s - Classic Cartoons
+  // ========================================
   {
     name: "The Tom and Jerry Show",
     category: "Cartoons",
@@ -446,42 +455,42 @@ const channels = [
     channelNumber: 201,
     episodes: [
       {
-        name: "Volumen 1",
+        name: "Tom & Jerry Volumen 1",
         duration: 58,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%201.mp4",
       },
       {
-        name: "Volumen 2",
+        name: "Tom & Jerry Volumen 2",
         duration: 56,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%202.mp4",
       },
       {
-        name: "Volumen 3",
+        name: "Tom & Jerry Volumen 3",
         duration: 58,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%203.mp4",
       },
       {
-        name: "Volumen 4",
+        name: "Tom & Jerry Volumen 4",
         duration: 55,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%204.mp4",
       },
       {
-        name: "Volumen 5",
+        name: "Tom & Jerry Volumen 5",
         duration: 59,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%205.mp4",
       },
       {
-        name: "Volumen 7",
+        name: "Tom & Jerry Volumen 7",
         duration: 55,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%207.mp4",
       },
       {
-        name: "Volumen 8",
+        name: "Tom & Jerry Volumen 8",
         duration: 57,
         video: "https://archive.org/download/VHS-Tom-y-Jerry/Volumen%208.mp4",
       },
       {
-        name: "Volumen Extra",
+        name: "Tom & Jerry Volumen Extra",
         duration: 54,
         video: "https://ia800504.us.archive.org/3/items/VHS-Tom-y-Jerry/Volumen%20Extra.mp4",
       },
@@ -490,7 +499,162 @@ const channels = [
     releaseYear: 1975,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/shows/7731/season_c/FMXnlcve9WZjpvy5VoVMSH1lkIOlUxFetqObh9qo.webp",
   },
+  {
+    name: "The Flintstones",
+    category: "Cartoons",
+    subcategory: "Los Picapiedra",
+    channelNumber: 202,
+    episodes: [
+      {
+        name: "Los Picapiedra 01x01",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x01-El%20Picavion.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x02",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x02-Noche%20de%20Parranda.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x03",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x03-La%20piscina.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x04",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x04-%20No%20se%20Busca%20Ayuda.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x05",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x05-La%20doble%20personalidad.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x06",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x06-El%20monstruo%20del%20lago%20de%20brea.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x07",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x07-Las%20ni%C3%B1eras.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x08",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x08-En%20Las%20Carreras.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x09",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x09-El%20anillo%20de%20compromiso.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x10",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x10-Hollyrock%2C%20alla%20vamos.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x11",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x11-El%20campe%C3%B3n%20de%20golf.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x12",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x12-El%20boleto%20de%20la%20loter%C3%ADa.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x13",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x13-El%20Restaurant.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x14",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x14-El%20intruso.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x15",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x15-La%20noche%20de%20las%20chicas.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x16",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x16-Clases%20de%20Danza%20con%20Arturo%20Murrieta.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x17",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x17-El%20gran%20robo%20al%20banco.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x18",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x18-Los%20cazadores.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x19",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x19-El%20piano%20ardiente.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x20",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x20-El%20hipnotizador.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x21",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x21-Cartas%20de%20amor%20sobre%20las%20rocas.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x22",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x22-El%20magnate.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x23",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x23-Los%20astrolocos.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x24",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x24-El%20largo%2C%20largo%20fin%20de%20semana.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x25",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x25-En%20la%20masa.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x26",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x26-El%20buen%20explorador.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x27",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x27-Cuartos%20en%20renta.mp4",
+      },
+      {
+        name: "Los Picapiedra 01x28",
+        duration: 25,
+        video: "https://archive.org/download/los-picapiedra-serie-completa-espanol-latino/Los%20picapiedra/Temporada%201/01x28-Pedro%20Picapiedra%2C%20Antes%20y%20Despu%C3%A9s.mp4",
+      },
+      // Add more episodes here...
+    ],
+    releaseYear: 1960,
+    poster: "https://images.justwatch.com/poster/76219363/s718/los-picapiedra.jpg",
+  },
+  // Add more shows...
   
+  // ========================================
+  // 300s - Anime Romance
+  // ========================================
   {
     name: "Candy Candy",
     category: "Cartoons",
@@ -1392,6 +1556,9 @@ const channels = [
     releaseYear: 1989,
     poster: "https://images.justwatch.com/poster/323469403/s718/ranma-1-2.jpg",
   },
+  // ========================================
+  // 310s - Anime Acción
+  // ========================================
   {
     name: "Dragon Ball Z",
     category: "Cartoons",
@@ -3043,13 +3210,13 @@ const channels = [
   // Add more cartoons here...
 
   // ========================================
-  // TV Shows
+  // 400s - TV Shows
   // ========================================
   {
     name: "El Chavo del 8",
     category: "Shows",
     subcategory: "El Chavo del 8",
-    channelNumber: 301,
+    channelNumber: 401,
     episodes: [
       {
         name: "Volumen 1",
