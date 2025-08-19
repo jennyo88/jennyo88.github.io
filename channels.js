@@ -3,7 +3,7 @@ const channels = [
   // CHANNEL NUMBERING GUIDE
   // ========================================
   // ========================================
-  //       0s - Movies                   (23)
+  //       0s - Movies                   (22)
   // ========================================
   //        Action & Adventure     (1-5)  (5)
   //        Comedy & Family       (6-11)  (6)
@@ -11,6 +11,7 @@ const channels = [
   //        Fantasy & Sci-Fi     (15-21)  (7)
   //        Horror & Thriller    (22-22)  (1)
   //        Romance & Comedy     (23-24)  (2)
+  //        Disney Classics      (25-35)  (10)
   // ========================================
   // ========================================
   // 100-300s - Cartoons                 (11)
@@ -293,6 +294,128 @@ const channels = [
     duration: 109,
     releaseYear: 1982,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/5519/lnMC0cOyI16BFfZVaIMFRtEx9Cb8eab4wMvqgYNW.webp",
+  },
+
+  {
+    name: "101 Dalmatians",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 25,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/101%20Dalmatians%201996%20UK%20VHS.mp4",
+    description: "",
+    duration: 103,
+    releaseYear: 1996,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/5/0/7/9/45079-101-dalmatians-0-1000-0-1500-crop.jpg?v=20c15a79c3",
+  },
+  {
+    name: "A Bug's Life",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 26,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/A%20Bug%27s%20Life%201999%20UK%20VHS.mp4",
+    description: "",
+    duration: 95,
+    releaseYear: 1999,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/7/1/1/1/47111-a-bug-s-life-0-1000-0-1500-crop.jpg?v=30ec62f056",
+  },
+  {
+    name: "Aladdin",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 27,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Aladdin%201994%20UK%20VHS.mp4",
+    description: "",
+    duration: 92,
+    releaseYear: 1994,
+    poster: "https://a.ltrbxd.com/resized/sm/upload/n3/26/lb/e2/trm94WPjW5ApKulhFvuRm5cT8KQ-0-1000-0-1500-crop.jpg?v=7aa7423779",
+  },
+  {
+    name: "Aladdin and the King of Thieves",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 28,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Aladdin%20and%20the%20King%20of%20Thieves%201997%20UK%20VHS.mp4",
+    description: "",
+    duration: 81,
+    releaseYear: 1997,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/5/4/7/1/45471-aladdin-and-the-king-of-thieves-0-1000-0-1500-crop.jpg?v=1d31844fca",
+  },
+  {
+    name: "Bambi",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 29,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Bambi%201994%20UK%20VHS.mp4",
+    description: "",
+    duration: 69,
+    releaseYear: 1942,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/9/8/1/6/49816-bambi-0-1000-0-1500-crop.jpg?v=3df9758764",
+  },
+  {
+    name: "Beauty and the Beast",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 30,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Beauty%20and%20the%20Beast%201993%20UK%20VHS.mp4",
+    description: "",
+    duration: 84,
+    releaseYear: 1991,
+    poster: "https://a.ltrbxd.com/resized/sm/upload/qw/zu/zk/ky/iLe8yMOF5we6lvYbKLHzho7ATQk-0-1000-0-1500-crop.jpg?v=c4c6ebbfa3",
+  },
+  {
+    name: "Beauty and the Beast The Enchanted Christmas",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 31,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Beauty%20and%20the%20Beast%20The%20Enchanted%20Christmas%201997%20UK%20VHS.mp4",
+    description: "",
+    duration: 72,
+    releaseYear: 1997,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/3/9/8/6/43986-beauty-and-the-beast-the-enchanted-christmas-0-1000-0-1500-crop.jpg?v=6c4c8a913d",
+  },
+  {
+    name: "Cinderella",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 32,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Cinderella%201992%20UK%20VHS.mp4",
+    description: "",
+    duration: 72,
+    releaseYear: 1950,
+    poster: "https://a.ltrbxd.com/resized/sm/upload/v2/rx/es/za/2wlK3RvdWK3zcyDYd5lUB5r4XMe-0-1000-0-1500-crop.jpg?v=5e0bf1e2f8",
+  },
+    {
+    name: "Dumbo",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 343
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Dumbo%201992%20UK%20VHS.mp4",
+    description: "",
+    duration: 64,
+    releaseYear: 1941,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/5/3/7/4/45374-dumbo-0-1000-0-1500-crop.jpg?v=b9339f84e9",
+  },
+  {
+    name: "Fantasia",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 34,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Fantasia%201991%20UK%20VHS.mp4",
+    description: "",
+    duration: 124,
+    releaseYear: 1940,
+    poster: "https://a.ltrbxd.com/resized/sm/upload/u3/vf/g6/w1/2jbLGpf4gRcoluzgMQMDjZaQ47l-0-1000-0-1500-crop.jpg?v=50e3632861",
+  },
+  {
+    name: "Hercules",
+    category: "Movies",
+    subcategory: "Disney Classics",
+    channelNumber: 35,
+    video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Hercules%201998%20UK%20VHS.mp4",
+    description: "",
+    duration: 93,
+    releaseYear: 1997,
+    poster: "https://a.ltrbxd.com/resized/film-poster/4/4/8/3/8/44838-hercules-0-1000-0-1500-crop.jpg?v=8a4f55aa27",
   },
   // Add more movies here...
   // ========================================
