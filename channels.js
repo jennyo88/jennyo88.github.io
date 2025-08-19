@@ -388,7 +388,7 @@ const channels = [
     name: "Dumbo",
     category: "Movies",
     subcategory: "Disney Classics",
-    channelNumber: 343
+    channelNumber: 33,
     video: "https://archive.org/download/101-dalmatians-1996-uk-vhs_202404/Dumbo%201992%20UK%20VHS.mp4",
     description: "",
     duration: 64,
