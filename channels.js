@@ -7,10 +7,10 @@ const channels = [
   // ========================================
   //        Action & Adventure     (1-5)  (5)
   //        Comedy & Family       (6-11)  (6)
-  //        Drama & Romance      (12-13)  (2)
-  //        Fantasy & Sci-Fi     (14-20)  (7)
-  //        Horror & Thriller    (21-21)  (1)
-  //        Romance & Comedy     (22-23)  (2)
+  //        Drama & Romance      (12-14)  (2)
+  //        Fantasy & Sci-Fi     (15-21)  (7)
+  //        Horror & Thriller    (22-22)  (1)
+  //        Romance & Comedy     (23-24)  (2)
   // ========================================
   // ========================================
   // 100-300s - Cartoons                 (11)
@@ -28,24 +28,7 @@ const channels = [
   // ========================================
   // 0s - Movies
   // ========================================
-  {
-    name: "Mystery Science Theater 3000",
-    category: "LIVE",
-    subcategory: "Live TV",
-    channelNumber: 501,
-    video: "https://shoutfact-mst3k-ts-zype-jgfey.amagi.tv/playlist/shoutfact-mst3k-ts-zype/cb573d19796c648f9cd43b67cef044829e7b3dcb0e6c886470af4a9765d96208d6e5af87b208b7634ce6419a34567d2c0c34db66bd6c69d7df7ac7503113106d8ae9f23b85cc755ce0a3566e35b679194ffd0805c85e2b46f4c556488934be7c4534ed0a65597bcd9e01ef290f909f0b887a378bb3dd7f396d390ec90c1fbcbf5ba0f8ff5e43ca78f3b81b489c7b41e49f40cddd19a681d50d9e5e8f7fa51280c0f2de8213d183c36baf04e006fd394805f101d20eab27d4efa92b54a97f21521b51a69087ff5a3995353b369ad1eacfa87b8eacf348af6f25af08d86e89359862a908dd9126584f13bd302814abca4f622ba1ecb2c88e5dea62c399d08bfe5206f3d515744ecf62ca2c2239da9aa171dd9242c0e571c9dc036c714dfc9bcbf493a396dd0d076ce5c6fa54d8fe240410250f834fab996c9405d26b97ef1d26594141bea084a5eccc733f78468a8c5f9b4655e99bc3aede0d32c4741449e03b99720b78c9382c51e42eb9b50f2cb1665bd50a6cae6762c902dda83cf9a2ece00410bcca8817ac38a1e65c92be29815911754ef3fe2554400c5ad5ed6d027939e04df6dcc7e4385853b9b99db0901d68470a16540d99eba825c8d98e7a4b64ae39424f47502fe4638739e0511c3f79b359b9ca2e7b8a012d2894c21e4d4a6093b2dca28fc4c549b03f9e8fd20a6f031b049936162d7adca6873ba96d531f9a3c30a5c4e3dbc501777fde2c4eb3995dcb34f111a6d1/45/848x480_1782040/index.m3u8",
-    releaseYear: 1988,
-    poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwf-KEihTAW8urP9briNBzvYu_emKouB6B7fD4kKmoahx_jGlC5wbSgKJaE-pBtH7AJc2U",
-  },  
-  {
-    name: "Shout! Movies",
-    category: "LIVE",
-    subcategory: "Live TV",
-    channelNumber: 502,
-    video: "https://amg00163-amg00163c15-zype-international-7166.playouts.now.amagi.tv/playlist/amg00163-shoutfactory1-shoutmovies-zypeinternational/cb573d19796c648f9cd43b67cef044829e7b3dcb0e6c886470af4a9765d96208d6e5af87b208b7634ce6419a34567d2c0c34db66bd6c69d7df7ac7503113106d8ae9f23b85cc755ce0a3566e35b679194ffd0805c85e2b46f4c556488934be7c4534ed0a65597bcd9e01ef290f909f0b887a378bb3dd7f396d390ec90c1fbcbf5ba0f8ff5e43ca78a9b21940c72811ee9f40cddd18a681d50d9e5ed474f9138097a1ded44684829931fd50e706fd394805f101d20eab27d4efa92b54a97f21521b51a69087ff5a3995353b369ad1eacfa87b8eacf348af6f25af08d86e89359862a908dd9126584f13bd302814abca4f622ba1ecb2c88e5dea62c399d08bfe5206f3d515744ecf62ca2c2239da9aa171dd9242c0e571c9dc036c714dfc9bcbf493a396dd0d076ce5c6fa54d8fe240410250f834fab996c9405d26b97ef1d26594141bea084a5eccc733f78468a8c5f9b4655e99bc3aede0d32c4741449e03b99720b78c9382c51e42eb9b50f2cb1665bd50a6cae6762c902dda83cf9a2ece00410bcca8817ac38a1e65c92be29815911754ef3fe2554400c5ad5ed6d027939e04df6dcc7e4385853b9b99db0901d68470a16540d99eba825c8d98e7a4b64ae39424f47502fe4638739e0511c3f79b359b9ca2e7b8a012d2894c21e4d4a6093b2dca28fc4c549b03f9e8fd20a6f031b049936162d7adca6873bab6fab1fd2fb20af02a70310c7c03a090acac64e9e092c0980/67/848x480_1782040/index.m3u8",
-    releaseYear: "",
-    poster: "",
-  },    
+  
   {
     name: "The Terminator",
     category: "Movies",
@@ -171,7 +154,7 @@ const channels = [
     name: "My Girl Friday",
     category: "Movies",
     subcategory: "Romance & Comedy",
-    channelNumber: 22,
+    channelNumber: 23,
     video: "https://archive.org/download/his_girl_friday/his_girl_friday.mp4",
     description: "",
     duration: 91,
@@ -182,7 +165,7 @@ const channels = [
     name: "Tammy And The Millionaire",
     category: "Movies",
     subcategory: "Romance & Comedy",
-    channelNumber: 23,
+    channelNumber: 24,
     video: "https://archive.org/download/tammy-and-the-millionaire-1967-may-dramady-romance/Tammy%20and%20the%20Millionaire%20%281967%20May%2C%20Dramady%2C%20Romance%29.mp4",
     description: "",
     duration: 90,
@@ -216,7 +199,7 @@ const channels = [
     name: "Good Will Hunting",
     category: "Movies",
     subcategory: "Drama & Romance",
-    channelNumber: 13,
+    channelNumber: 14,
     video: "https://archive.org/download/Good_Will_Hunting_ABC_WOC_2001-02-19/Good_Will_Hunting_ABC_WOC_2001-02-19.mp4",
     description: "",
     duration: 127,
@@ -227,7 +210,7 @@ const channels = [
     name: "Beneath the Planet of the Apes",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 14,
+    channelNumber: 15,
     video: "https://archive.org/download/beneath-the-planet-of-the-apes_202208/BeneathThePlanetOfTheApes.mp4",
     description: "A sci-fi sequel where astronauts discover the dark truth about Earth's future.",
     duration: 95,
@@ -238,7 +221,7 @@ const channels = [
     name: "Godzilla",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 15,
+    channelNumber: 16,
     video: "https://archive.org/download/godzilla_20230622/Godzilla.mp4",
     description: "A giant lizard attacks New York City, and a team tries to stop it.",
     duration: 139,
@@ -249,7 +232,7 @@ const channels = [
     name: "Starship Troopers",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 16,
+    channelNumber: 17,
     video: "https://archive.org/download/VHSPreservationProject/Starship%20Troopers%20%281997%29.mp4",
     description: "Humans battle alien Bugs in a dystopian, satirical sci-fi war.",
     duration: 129,
@@ -260,7 +243,7 @@ const channels = [
     name: "Star Wars",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 17,
+    channelNumber: 18,
     video: "https://archive.org/download/star-wars-1977_202301/Star%20Wars%20%281977%29.mp4",
     description: "The epic space opera that began a cultural phenomenon.",
     duration: 121,
@@ -271,7 +254,7 @@ const channels = [
     name: "The Lost World: Jurassic Park",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 18,
+    channelNumber: 19,
     video: "https://archive.org/download/jurassic-park-the-lost-world/Jurassic%20Park%20The%20Lost%20World.mp4",
     description: "A team faces danger on an island of wild dinosaurs.",
     duration: 129,
@@ -282,7 +265,7 @@ const channels = [
     name: "The Matrix",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 19,
+    channelNumber: 20,
     video: "https://archive.org/download/the-matrix-fullscreen/4.The%20Matrix%20FS%20%28VCD%29.mp4",
     description: "A hacker learns the truth about his simulated reality.",
     duration: 136,
@@ -293,7 +276,7 @@ const channels = [
     name: "The Time Machine",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 20,
+    channelNumber: 21,
     video: "https://archive.org/download/the-time-machine-1978-time-travel-sci-fi/The%20Time%20Machine%20%281978%20Time%20Travel%20SciFi%29.mp4",
     description: "A thrilling adaptation of H.G. Wells' classic time-travel adventure.",
     duration: 99,
@@ -304,7 +287,7 @@ const channels = [
     name: "The Thing",
     category: "Movies",
     subcategory: "Horror & Thriller",
-    channelNumber: 21,
+    channelNumber: 22,
     video: "https://archive.org/download/the-thing-1982-vhs/The%20Thing%201982%20VHS%20.mp4",
     description: "A tense sci-fi horror about an alien shape-shifter.",
     duration: 109,
