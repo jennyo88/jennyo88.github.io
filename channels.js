@@ -22,7 +22,7 @@ const channels = [
   // 310s - Anime Acción       (311-312)  (2)
   // ========================================
   // ========================================
-  // 400s - TV Shows           (401-401)  (1)
+  // 400s - TV Shows           (401-403)  (3)
   // ========================================
   // ========================================
   
@@ -3125,6 +3125,37 @@ const channels = [
     description: "",
     releaseYear: 1982,
     poster: "https://i.ebayimg.com/images/g/EVIAAOSwnpZh0EBv/s-l1200.jpg",
+  },
+  {
+    name: "Fawlty Towers",
+    category: "Shows",
+    subcategory: "Fawlty Towers",
+    channelNumber: 403,
+    episodes: [
+      {
+        name: "S02E01 | S02E05 | S02E06",
+        duration: 33,
+        video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/Basil%20The%20Rat.mp4",
+      },
+      {
+        name: "S01E01 | S01E04 | S01E06",
+        duration: 32,
+        video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Germans.mp4",
+      },
+      {
+        name: "S01E05 | S02E03 | S02E04",
+        duration: 35,
+        video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Kipper%20And%20The%20Corpse.mp4",
+      },
+      {
+        name: "S01E02 | S01E03 | S02E02",
+        duration: 35,
+        video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Psychiatrist.mp4",
+      },
+    ],
+    description: "",
+    releaseYear: 1986,
+    poster: "https://m.media-amazon.com/images/M/MV5BYWNlZGU4NWMtNjdmOS00MDBmLTkwMmYtY2M3ZTU0YzJiNDk1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
   },
   // Add more TV shows here...
   
