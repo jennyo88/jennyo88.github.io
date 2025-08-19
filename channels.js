@@ -3134,22 +3134,22 @@ const channels = [
     episodes: [
       {
         name: "S02E01 | S02E05 | S02E06",
-        duration: 33,
+        duration: 95,
         video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/Basil%20The%20Rat.mp4",
       },
       {
         name: "S01E01 | S01E04 | S01E06",
-        duration: 32,
+        duration: 92,
         video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Germans.mp4",
       },
       {
         name: "S01E05 | S02E03 | S02E04",
-        duration: 35,
+        duration: 93,
         video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Kipper%20And%20The%20Corpse.mp4",
       },
       {
         name: "S01E02 | S01E03 | S02E02",
-        duration: 35,
+        duration: 99,
         video: "https://archive.org/download/fawlty-towers-vhs-set-bbc-video-cbs-fox-1986/The%20Psychiatrist.mp4",
       },
     ],
