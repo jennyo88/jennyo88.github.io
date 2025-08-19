@@ -211,6 +211,18 @@ const channels = [
     releaseYear: 1946,
     poster: "https://image.tmdb.org/t/p/original/gd5EoAU4MM57sW3vlWxJ0NMM8cV.jpg",
   },
+
+  {
+    name: "Good Will Hunting",
+    category: "Movies",
+    subcategory: "Drama & Romance",
+    channelNumber: 13,
+    video: "https://archive.org/download/Good_Will_Hunting_ABC_WOC_2001-02-19/Good_Will_Hunting_ABC_WOC_2001-02-19.mp4",
+    description: "",
+    duration: 127,
+    releaseYear: 1997,
+    poster: "https://a.ltrbxd.com/resized/film-poster/5/1/6/2/1/51621-good-will-hunting-0-1000-0-1500-crop.jpg",
+  },
   { 
     name: "Beneath the Planet of the Apes",
     category: "Movies",
