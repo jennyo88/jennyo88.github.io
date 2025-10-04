@@ -3,15 +3,15 @@ const channels = [
   // CHANNEL NUMBERING GUIDE
   // ========================================
   // ========================================
-  //       0s - Movies                   (22)
+  //       0s - Movies                   (23)
   // ========================================
   //        Action & Adventure     (1-5)  (5)
   //        Comedy & Family        (6-9)  (4)
   //        Disney Classics      (10-22)  (12)
   //        Romance & Comedy     (23-24)  (2)
-  //        Drama & Romance      (25-27)  (3)
-  //        Fantasy & Sci-Fi     (28-34)  (7)
-  //        Horror & Thriller    (35-40)  (5)
+  //        Drama & Romance      (25-28)  (4)
+  //        Fantasy & Sci-Fi     (29-35)  (7)
+  //        Horror & Thriller    (36-41)  (5)
   // ========================================
   // ========================================
   // 100-300s - Cartoons                 (11)
@@ -394,15 +394,15 @@ const channels = [
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/8032/PzUycNmvjSLt8nojOEK3Yf9zw3YDVKv3F7Izh3aC.webp",
   },
   {
-    name: "Spawn",
+    name: "War of the Worlds",
     category: "Movies",
     subcategory: "Fantasy & Sci-Fi",
     channelNumber: 34,
-    video: "https://archive.org/download/spawn-vhs-rental-rip-mediahoarderz.com/Spawn%20%28VHS%20Rental%20Rip%29%20%5BMediaHoarderz.com%5D.mp4",
-    description: "",
-    duration: 96,
-    releaseYear: 1997,
-    poster: "https://a.ltrbxd.com/resized/film-poster/4/6/3/2/5/46325-spawn-0-1000-0-1500-crop.jpg?v=ecedc183a3",
+    video: "https://archive.org/download/war-of-the-worlds_202206/War%20of%20the%20Worlds.ia.mp4",
+    description: "Ray Ferrier, a dockworker, is ready to spend a weekend together with his children. However, an alien tripod descends on Earth threatening to wipe out humanity.",
+    duration: 123,
+    releaseYear: 2005,
+    poster: "https://image.tmdb.org/t/p/original/6Biy7R9LfumYshur3YKhpj56MpB.jpg",
   },
   {
     name: "The Time Machine",
