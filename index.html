@@ -390,6 +390,7 @@
     <div class="notification"></div>
 
     <!-- JavaScript for Interactivity -->
+    // JavaScript for Interactivity
     <script src="./channels.js"></script>
     <script>
         const videoPlayer = document.getElementById('video-player');
@@ -401,15 +402,20 @@
         const powerLight = document.getElementById('power-light');
         const powerOverlay = document.querySelector('.power-off');
         const poster = document.getElementById('poster');
+    
         let currentChannelIndex = 0;
         let currentStartTime = new Date();
         let lastShuffleIndex = -1;
+        const playbackTimes = {}; // store playback per subcategory
     
+        // build unique subcategories from channels.js
         const subcategories = (() => {
-            return Object.keys(channels.reduce((acc, channel) => {
-                acc[channel.subcategory] = true;
-                return acc;
-            }, {}));
+            return Object.keys(
+                channels.reduce((acc, channel) => {
+                    acc[channel.subcategory] = true;
+                    return acc;
+                }, {})
+            );
         })();
     
         const formatTime = (date) => {
@@ -424,55 +430,81 @@
             return array;
         };
     
-        // Pre-shuffle all videos once during initialization
+        // playback helpers
+        const updatePlaybackTime = (subcategory) => {
+            playbackTimes[subcategory] = videoPlayer.currentTime || 0;
+        };
+    
+        const restorePlaybackTime = (subcategory) => {
+            if (playbackTimes[subcategory] != null) {
+                videoPlayer.currentTime = playbackTimes[subcategory];
+            }
+        };
+    
+        // pre-shuffle episodes so the guide is consistent
         const preShuffledChannels = channels.map(channel => {
-            const shuffledEpisodes = channel.episodes && channel.episodes.length > 0
-                ? shuffleArray([...channel.episodes])
-                : null;
+            const shuffledEpisodes =
+                channel.episodes && channel.episodes.length > 0
+                    ? shuffleArray([...channel.episodes])
+                    : null;
             return {
                 ...channel,
                 episodes: shuffledEpisodes
             };
         });
-
+    
+        // cache per-subcategory shuffled "guide videos"
         let shuffledVideosCache = {};
-
+    
         const populateTVGuide = (subcategory) => {
             tvGuideList.innerHTML = '';
-            const channelsInSubcategory = preShuffledChannels.filter(channel => channel.subcategory === subcategory);
+    
+            const channelsInSubcategory = preShuffledChannels.filter(
+                channel => channel.subcategory === subcategory
+            );
+    
             if (channelsInSubcategory.length === 0) {
                 console.error(`Subcategory "${subcategory}" not found in channels.`);
-                subcategoryInfo.textContent = "Subcategory not found.";
+                subcategoryInfo.textContent = 'Subcategory not found.';
                 return;
             }
-        
+    
             categoryInfo.textContent = `Category: ${channelsInSubcategory[0].category}`;
             subcategoryInfo.textContent = `Playing: ${subcategory}`;
-        
+    
             let startTime = new Date(currentStartTime);
-        
-            // Use cached shuffle or shuffle only once per refresh
+    
+            // only build / shuffle once per subcategory
             if (!shuffledVideosCache[subcategory]) {
-                shuffledVideosCache[subcategory] = shuffleArray(channelsInSubcategory.flatMap(channel => {
-                    const channelVideos = channel.episodes && channel.episodes.length > 0
-                        ? channel.episodes.map(episode => ({
-                            name: episode.name || 'Unnamed Episode',
-                            duration: episode.duration || 30,
-                            video: episode.video || channel.video,
-                            poster: channel.poster || 'assets/images/default_poster.jpg'
-                        }))
-                        : [{
-                            name: channel.name || 'Untitled',
-                            duration: channel.duration || 30,
-                            video: channel.video,
-                            poster: channel.poster || 'assets/images/default_poster.jpg'
-                        }];
-                    return channelVideos;
-                }));
+                shuffledVideosCache[subcategory] = shuffleArray(
+                    channelsInSubcategory.flatMap(channel => {
+                        const channelVideos =
+                            channel.episodes && channel.episodes.length > 0
+                                ? channel.episodes.map(episode => ({
+                                      name: episode.name || 'Unnamed Episode',
+                                      duration: episode.duration || 30,
+                                      video: episode.video || channel.video,
+                                      poster:
+                                          channel.poster ||
+                                          'assets/images/default_poster.jpg'
+                                  }))
+                                : [
+                                      {
+                                          name: channel.name || 'Untitled',
+                                          duration: channel.duration || 30,
+                                          video: channel.video,
+                                          poster:
+                                              channel.poster ||
+                                              'assets/images/default_poster.jpg'
+                                      }
+                                  ];
+                        return channelVideos;
+                    })
+                );
             }
-        
+    
             const videos = shuffledVideosCache[subcategory];
-        
+    
             videos.forEach((video, index) => {
                 const listItem = document.createElement('li');
                 listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
@@ -480,141 +512,65 @@
                 listItem.setAttribute('data-video', video.video);
                 listItem.setAttribute('data-poster', video.poster);
                 listItem.setAttribute('data-start-time', startTime.getTime());
-        
+    
                 if (index === 0) {
                     listItem.classList.add('now-playing');
                 } else if (index === 1) {
                     listItem.classList.add('up-next');
                 }
-        
+    
                 tvGuideList.appendChild(listItem);
                 startTime.setMinutes(startTime.getMinutes() + video.duration);
             });
         };
-        
+    
         const synchronizePlayback = () => {
             const currentTime = new Date().getTime();
             const guideItems = document.querySelectorAll('.tv-guide li');
-        
+    
             for (let i = 0; i < guideItems.length; i++) {
                 const item = guideItems[i];
                 const startTime = parseInt(item.getAttribute('data-start-time'), 10);
-                const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000; // Convert to milliseconds
+                const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
                 const endTime = startTime + duration;
-        
+    
                 if (currentTime >= startTime && currentTime < endTime) {
                     const videoSrc = item.getAttribute('data-video');
                     const posterSrc = item.getAttribute('data-poster');
-        
-                    const elapsedTime = (currentTime - startTime) / 1000; // Elapsed time in seconds
-        
+    
+                    const elapsedTime = (currentTime - startTime) / 1000;
+    
                     if (videoPlayer.src !== videoSrc) {
                         videoPlayer.src = videoSrc;
                         videoPlayer.load();
                         videoPlayer.currentTime = elapsedTime;
-
+    
                         videoPlayer
                             .play()
                             .catch(err => {
-                                if (err.name !== "AbortError") {
-                                    console.error("Error starting video:", err);
+                                if (err.name !== 'AbortError') {
+                                    console.error('Error starting video:', err);
                                 }
                             });
                     }
-        
+    
                     if (poster.src !== posterSrc) {
-                        poster.src = posterSrc; // Update the poster dynamically
+                        poster.src = posterSrc;
                     }
-        
-                    guideItems.forEach(item => item.classList.remove('now-playing', 'up-next'));
+    
+                    guideItems.forEach(item =>
+                        item.classList.remove('now-playing', 'up-next')
+                    );
                     item.classList.add('now-playing');
-        
+    
                     if (guideItems[i + 1]) {
                         guideItems[i + 1].classList.add('up-next');
                     }
-        
+    
                     break;
                 }
             }
         };
-        
-        const setChannel = (index) => {
-            if (index < 0 || index >= subcategories.length) {
-                console.error('Index out of bounds for subcategories');
-                return;
-            }
-        
-            currentChannelIndex = (index + subcategories.length) % subcategories.length;
-            const subcategory = subcategories[currentChannelIndex];
-            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategory);
-        
-            if (!channel) {
-                console.error(`No channel found for subcategory: ${subcategory}`);
-                showNotification(`No videos available for subcategory: ${subcategory}`, 'red');
-                return;
-            }
-        
-            populateTVGuide(subcategory);
-            
-            // Ensure synchronizePlayback is called only after populating the guide
-            setTimeout(() => {
-                synchronizePlayback();
-            }, 0);
-        
-            // Set poster to the first video in the shuffled list
-            const firstVideo = shuffledVideosCache[subcategory]?.[0];
-            poster.src = firstVideo?.poster || channel.poster || 'assets/images/default_poster.jpg';
-        
-            showNotification(
-                `Switched to Channel: ${channel.subcategory}`,
-                'limegreen'
-            );
-        };
-        
-        const shuffleChannels = () => {
-            if (!subcategories || subcategories.length === 0) {
-                showNotification('Error: No subcategories available to shuffle.', 'red');
-                return;
-            }
-        
-            let randomIndex;
-            do {
-                randomIndex = Math.floor(Math.random() * subcategories.length);
-            } while (randomIndex === lastShuffleIndex && subcategories.length > 1);
-        
-            lastShuffleIndex = randomIndex;
-            setChannel(randomIndex);
-        
-            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[randomIndex]);
-            if (channel) {
-                showNotification(
-                    `Shuffled to Channel: ${channel.subcategory}`,
-                    'limegreen'
-                );
-            } else {
-                showNotification('Error: Could not find channel details.', 'red');
-            }
-        };
-        
-    
-        const showVolumeIndicator = (volume) => {
-            const notification = document.querySelector('.notification');
-            const volumePercent = Math.round(volume * 100);
-    
-            notification.textContent = `Volume: ${volumePercent}%`;
-            notification.style.color = volumePercent === 0 ? 'red' : volumePercent > 70 ? 'limegreen' : 'limegreen';
-            notification.style.display = 'block';
-    
-            setTimeout(() => {
-                notification.style.transition = 'opacity 0.5s ease';
-                notification.style.opacity = '0';
-                setTimeout(() => {
-                    notification.style.display = 'none';
-                    notification.style.opacity = '1';
-                }, 500);
-            }, 1000);
-        };
-
     
         const showNotification = (message, color = 'limegreen') => {
             const notification = document.querySelector('.notification');
@@ -632,12 +588,99 @@
                 }, 500);
             }, 3000);
         };
-
+    
+        const setChannel = (index) => {
+            if (index < 0 || index >= subcategories.length) {
+                console.error('Index out of bounds for subcategories');
+                return;
+            }
+    
+            currentChannelIndex = (index + subcategories.length) % subcategories.length;
+            const subcategory = subcategories[currentChannelIndex];
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategory
+            );
+    
+            if (!channel) {
+                console.error(`No channel found for subcategory: ${subcategory}`);
+                showNotification(
+                    `No videos available for subcategory: ${subcategory}`,
+                    'red'
+                );
+                return;
+            }
+    
+            populateTVGuide(subcategory);
+    
+            // make sure playback is aligned after the DOM updates
+            setTimeout(() => {
+                synchronizePlayback();
+            }, 0);
+    
+            // set poster to the first video in the shuffled list
+            const firstVideo = shuffledVideosCache[subcategory]?.[0];
+            poster.src =
+                firstVideo?.poster ||
+                channel.poster ||
+                'assets/images/default_poster.jpg';
+    
+            showNotification(`Switched to Channel: ${channel.subcategory}`, 'limegreen');
+        };
+    
+        const shuffleChannels = () => {
+            if (!subcategories || subcategories.length === 0) {
+                showNotification('Error: No subcategories available to shuffle.', 'red');
+                return;
+            }
+    
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * subcategories.length);
+            } while (randomIndex === lastShuffleIndex && subcategories.length > 1);
+    
+            lastShuffleIndex = randomIndex;
+            setChannel(randomIndex);
+    
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[randomIndex]
+            );
+            if (channel) {
+                showNotification(
+                    `Shuffled to Channel: ${channel.subcategory}`,
+                    'limegreen'
+                );
+            } else {
+                showNotification('Error: Could not find channel details.', 'red');
+            }
+        };
+    
+        const showVolumeIndicator = (volume) => {
+            const notification = document.querySelector('.notification');
+            const volumePercent = Math.round(volume * 100);
+    
+            notification.textContent = `Volume: ${volumePercent}%`;
+            notification.style.color =
+                volumePercent === 0 ? 'red' : 'limegreen';
+            notification.style.display = 'block';
+    
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1';
+                }, 500);
+            }, 1000);
+        };
+    
+        // button events
         shuffleButton.addEventListener('click', shuffleChannels);
     
         document.getElementById('channel-up').addEventListener('click', () => {
             setChannel(currentChannelIndex + 1);
-            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
             if (channel) {
                 showNotification(`Channel up: ${channel.subcategory}`, 'limegreen');
             } else {
@@ -647,33 +690,42 @@
     
         document.getElementById('channel-down').addEventListener('click', () => {
             setChannel(currentChannelIndex - 1);
-            const channel = preShuffledChannels.find(channel => channel.subcategory === subcategories[currentChannelIndex]);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
             if (channel) {
                 showNotification(`Channel down: ${channel.subcategory}`, 'limegreen');
             } else {
                 showNotification('Channel down: No channel found', 'red');
             }
         });
-        
-        // When the current video finishes, go to a random channel
+    
+        // auto-random when video ends
         videoPlayer.addEventListener('ended', () => {
-            // Save current channel playback time before leaving
-            updatePlaybackTime(subcategories[currentChannelIndex]);
-
-            // pick a random channel that's not the current one
+            const currentSubcat = subcategories[currentChannelIndex];
+    
+            // remember where we were on this channel
+            updatePlaybackTime(currentSubcat);
+    
+            // pick a random other channel
             let nextIndex = currentChannelIndex;
             if (subcategories.length > 1) {
                 while (nextIndex === currentChannelIndex) {
                     nextIndex = Math.floor(Math.random() * subcategories.length);
                 }
             }
-
+    
+            // reset schedule to "now" for the next channel
+            currentStartTime = new Date();
+    
             setChannel(nextIndex);
-
-            const channel = channels.find(ch => ch.subcategory === subcategories[nextIndex]);
+    
+            const channel = channels.find(
+                ch => ch.subcategory === subcategories[nextIndex]
+            );
             if (channel) {
                 showNotification(
-                    `Auto-switched to: ${channel.name} (Channel ${channel.channelNumber})`,
+                    `Auto-switched to: ${channel.subcategory || channel.name}`,
                     'limegreen'
                 );
             }
@@ -689,35 +741,34 @@
             showVolumeIndicator(videoPlayer.volume);
         });
     
-        // Toggle power functionality
+        // power toggle
         powerButton.addEventListener('click', () => {
             const isPoweredOn = powerOverlay.style.display === 'none';
-        
-            // Toggle the power overlay
+    
+            // toggle overlay
             powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
-        
-            // Toggle power light indicator
+    
             if (isPoweredOn) {
-                powerLight.style.background = 'red'; // Change to red overlay
+                // going OFF
+                powerLight.style.background = 'red';
                 powerLight.style.boxShadow = '0 0 15px red';
                 videoPlayer.pause();
             } else {
-                powerLight.style.background = 'green'; // Change to green overlay
+                // going ON
+                powerLight.style.background = 'green';
                 powerLight.style.boxShadow = '0 0 15px green';
-                videoPlayer.play();
+                videoPlayer.play().catch(() => {});
             }
         });
-
-        // Optionally, keep updating during playback
+    
+        // keep guide in sync while playing
         videoPlayer.addEventListener('timeupdate', synchronizePlayback);
-        
-        // Populate the TV guide and play the first video
+    
+        // initial load
         populateTVGuide(subcategories[0]);
-        
-        // Call this on page load to align playback and guide
         synchronizePlayback();
-
     </script>
+
 
 
 
