@@ -654,6 +654,30 @@
                 showNotification('Channel down: No channel found', 'red');
             }
         });
+        
+        // When the current video finishes, go to a random channel
+        videoPlayer.addEventListener('ended', () => {
+            // Save current channel playback time before leaving
+            updatePlaybackTime(subcategories[currentChannelIndex]);
+
+            // pick a random channel that's not the current one
+            let nextIndex = currentChannelIndex;
+            if (subcategories.length > 1) {
+                while (nextIndex === currentChannelIndex) {
+                    nextIndex = Math.floor(Math.random() * subcategories.length);
+                }
+            }
+
+            setChannel(nextIndex);
+
+            const channel = channels.find(ch => ch.subcategory === subcategories[nextIndex]);
+            if (channel) {
+                showNotification(
+                    `Auto-switched to: ${channel.name} (Channel ${channel.channelNumber})`,
+                    'limegreen'
+                );
+            }
+        });
     
         document.getElementById('volume-up').addEventListener('click', () => {
             videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
