@@ -356,17 +356,6 @@ const channels = [
     releaseYear: 1970,
     poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/1880/fLrzUkj1CTPrLgz57JjsTEXNvLktlLySJG609b8U.webp",
   },
-  { 
-    name: "Godzilla",
-    category: "Movies",
-    subcategory: "Fantasy & Sci-Fi",
-    channelNumber: 31,
-    video: "https://archive.org/download/godzilla_20230622/Godzilla.mp4",
-    description: "A giant lizard attacks New York City, and a team tries to stop it.",
-    duration: 139,
-    releaseYear: 1998,
-    poster: "https://images.theposterdb.com/prod/public/images/posters/optimized/movies/4147/UtNrbf3Mb1K43mMbTmwhMZ3OvVKXjWnAjnbHewyT.webp",
-  },
   {
     name: "Starship Troopers",
     category: "Movies",
