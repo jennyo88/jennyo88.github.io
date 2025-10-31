@@ -34,7 +34,7 @@ const channels = [
     category: "Movies",
     subcategory: "Intro",
     channelNumber: 1,
-    video: "https://archive.org/download/tcm-feature-presentation-intro/TCM%20-%20Feature%20Presentation%20intro.mp4",
+    video: "https://archive.org/download/tcm-feature-presentation-intro/TCM%20-%20Feature%20Presentation%20intro.ia.mp4",
     duration: 1, // In minutes
   },
   {
