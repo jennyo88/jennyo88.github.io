@@ -428,6 +428,29 @@
             }
             return array;
         };
+
+        // check media
+        const checkMediaURL = (url, type = 'video') => {
+            return new Promise((resolve) => {
+                if (!url) return resolve(false);
+
+                if (type === 'video') {
+                    const video = document.createElement('video');
+                    video.preload = 'metadata';
+        
+                    video.onloadedmetadata = () => resolve(true);
+                    video.onerror = () => resolve(false);
+        
+                    video.src = url;
+                } else {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                }
+            });
+        };
+
     
         // playback helpers
         const updatePlaybackTime = (subcategory) => {
@@ -455,7 +478,7 @@
         // cache per-subcategory shuffled "guide videos"
         let shuffledVideosCache = {};
     
-        const populateTVGuide = (subcategory) => {
+        const populateTVGuide = async (subcategory) => {
             tvGuideList.innerHTML = '';
     
             const channelsInSubcategory = preShuffledChannels.filter(
@@ -502,7 +525,30 @@
                 );
             }
     
-            const videos = shuffledVideosCache[subcategory];
+            const videos = [];
+
+            for (const video of shuffledVideosCache[subcategory]) {
+                const videoOK = await checkMediaURL(video.video, 'video');
+                const posterOK = await checkMediaURL(video.poster, 'image');
+            
+                if (!videoOK) {
+                    console.warn('❌ Broken video:', video.video);
+                    continue;
+                }
+            
+                if (!posterOK) {
+                    console.warn('⚠️ Broken poster, using fallback:', video.poster);
+                    video.poster = 'assets/images/default_poster.jpg';
+                }
+            
+                videos.push(video);
+            }
+            
+            if (videos.length === 0) {
+                showNotification(`No playable media in ${subcategory}`, 'red');
+                return;
+            }
+
     
             videos.forEach((video, index) => {
                 const listItem = document.createElement('li');
