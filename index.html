@@ -634,7 +634,7 @@
             }, 3000);
         };
     
-        const setChannel = async (index) => {
+        const setChannel = (index) => {
             if (index < 0 || index >= subcategories.length) {
                 console.error('Index out of bounds for subcategories');
                 return;
@@ -642,7 +642,6 @@
     
             currentChannelIndex = (index + subcategories.length) % subcategories.length;
             const subcategory = subcategories[currentChannelIndex];
-            
             const channel = preShuffledChannels.find(
                 channel => channel.subcategory === subcategory
             );
@@ -655,14 +654,15 @@
                 );
                 return;
             }
-
-            // IMPORTANT: wait for async media checks + DOM list creation
-            await populateTVGuide(subcategory);
-
-            // Now the DOM has the guide items; we can sync safely
-            synchronizePlayback();
     
-            // Poster (use first valid shuffled video if present)
+            populateTVGuide(subcategory);
+    
+            // make sure playback is aligned after the DOM updates
+            setTimeout(() => {
+                synchronizePlayback();
+            }, 0);
+    
+            // set poster to the first video in the shuffled list
             const firstVideo = shuffledVideosCache[subcategory]?.[0];
             poster.src =
                 firstVideo?.poster ||
@@ -810,9 +810,8 @@
         videoPlayer.addEventListener('timeupdate', synchronizePlayback);
     
         // initial load
-        window.addEventListener('load', async () => {
-            await setChannel(0);
-        });
+        populateTVGuide(subcategories[0]);
+        synchronizePlayback();
     </script>
 
 
