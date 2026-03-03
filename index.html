@@ -393,6 +393,7 @@
     <script src="./channels.js"></script>
     <script>
         const videoPlayer = document.getElementById('video-player');
+        const GUIDE_DEPTH = 10;  // how many items to show (now + up next)
         const tvGuideList = document.getElementById('tv-guide-list');
         const categoryInfo = document.getElementById('category-info');
         const subcategoryInfo = document.getElementById('subcategory-info');
@@ -405,6 +406,7 @@
         let currentChannelIndex = 0;
         let currentStartTime = new Date();
         let lastShuffleIndex = -1;
+        let tvQueue = [];  // [{key, name, duration, video, poster, category, subcategory}]
         const playbackTimes = {}; // store playback per subcategory
     
         // build unique subcategories from channels.js
@@ -449,6 +451,87 @@
                     img.src = url;
                 }
             });
+        };
+
+        const buildGuideTimes = (items, start = new Date()) => {
+          let t = new Date(start);
+          return items.map(item => {
+            const startTime = new Date(t);
+            t.setMinutes(t.getMinutes() + (item.duration || 30));
+            return { item, startTime };
+          });
+        };
+
+        const renderQueueTVGuide = () => {
+          tvGuideList.innerHTML = '';
+          if (!tvQueue.length) return;
+        
+          // show what we're playing (from the queue head)
+          const now = tvQueue[0];
+          categoryInfo.textContent = `Category: ${now.category}`;
+          subcategoryInfo.textContent = `Playing: ${now.subcategory}`;
+        
+          const scheduled = buildGuideTimes(tvQueue, new Date());
+        
+          scheduled.forEach(({ item, startTime }, idx) => {
+            const li = document.createElement('li');
+            li.textContent = `${formatTime(startTime)} - ${item.name}`;
+        
+            li.setAttribute('data-duration', item.duration || 30);
+            li.setAttribute('data-video', item.video);
+            li.setAttribute('data-poster', item.poster || 'assets/images/default_poster.jpg');
+            li.setAttribute('data-start-time', startTime.getTime());
+        
+            if (idx === 0) li.classList.add('now-playing');
+            else if (idx === 1) li.classList.add('up-next');
+        
+            tvGuideList.appendChild(li);
+          });
+        };
+        
+        const fillQueue = async (reset = false) => {
+          const playable = await getGlobalPlayable();
+          if (!playable.length) {
+            showNotification('No playable media found in library.', 'red');
+            return;
+          }
+        
+          if (reset) tvQueue = [];
+        
+          // Fill until GUIDE_DEPTH
+          while (tvQueue.length < GUIDE_DEPTH) {
+            const avoidKey = tvQueue.length ? tvQueue[tvQueue.length - 1].key : lastGlobalPickKey;
+            const pick = pickRandomFrom(playable, avoidKey);
+        
+            // prevent duplicates back-to-back
+            if (tvQueue.length && pick.key === tvQueue[tvQueue.length - 1].key) continue;
+        
+            tvQueue.push(pick);
+          }
+        
+          renderQueueTVGuide();
+        };
+        
+        const playNowFromQueue = async () => {
+          if (!tvQueue.length) return;
+          const now = tvQueue[0];
+        
+          poster.src = now.poster || 'assets/images/default_poster.jpg';
+        
+          if (videoPlayer.src !== now.video) {
+            videoPlayer.src = now.video;
+            videoPlayer.load();
+          }
+        
+          videoPlayer.currentTime = 0;
+        
+          try {
+            await videoPlayer.play();
+          } catch (e) {
+            // autoplay may be blocked; user can press play
+          }
+        
+          lastGlobalPickKey = now.key;
         };
 
     
@@ -584,20 +667,10 @@
           };
         
           const shuffleAll = async () => {
-            const playable = await getGlobalPlayable();
-            if (!playable.length) {
-              showNotification('No playable media found in library.', 'red');
-              return;
-            }
-    
-            const pick = pickRandomFrom(playable, lastGlobalPickKey);
-            lastGlobalPickKey = pick.key;
-        
-            renderGlobalGuide(pick, playable);
-            await playGlobalItem(pick);
-        
-            showNotification(`Shuffled (All): ${pick.subcategory}`, 'limegreen');
-          };
+              await fillQueue(true);     // rebuild brand-new random guide
+              await playNowFromQueue();  // play "Now Playing"
+              showNotification('Shuffled (All Categories)', 'limegreen');
+            };
 
         const updatePlaybackTime = (subcategory) => {
             playbackTimes[subcategory] = videoPlayer.currentTime || 0;
@@ -891,35 +964,15 @@
             }
         });
     
-        // auto-random when video ends
-        videoPlayer.addEventListener('ended', () => {
-            shuffleAll();
-    
-            // remember where we were on this channel
-            updatePlaybackTime(currentSubcat);
-    
-            // pick a random other channel
-            let nextIndex = currentChannelIndex;
-            if (subcategories.length > 1) {
-                while (nextIndex === currentChannelIndex) {
-                    nextIndex = Math.floor(Math.random() * subcategories.length);
-                }
-            }
-    
-            // reset schedule to "now" for the next channel
-            currentStartTime = new Date();
-    
-            setChannel(nextIndex);
-    
-            const channel = channels.find(
-                ch => ch.subcategory === subcategories[nextIndex]
-            );
-            if (channel) {
-                showNotification(
-                    `Auto-switched to: ${channel.subcategory || channel.name}`,
-                    'limegreen'
-                );
-            }
+        videoPlayer.addEventListener('ended', async () => {
+          // remove the thing we just finished
+          tvQueue.shift();
+        
+          // add one more random item to the end and re-render guide
+          await fillQueue(false);
+        
+          // play the new "now playing"
+          await playNowFromQueue();
         });
     
         document.getElementById('volume-up').addEventListener('click', () => {
