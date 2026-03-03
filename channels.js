@@ -93,6 +93,16 @@ const channels = [
     poster: "https://image.tmdb.org/t/p/original/3svvunKXkhRvEKByGDua1Qu0otq.jpg",
   },
   {
+    name: "Godzilla",
+    category: "Movies",
+    channelNumber: 6,
+    video: "https://archive.org/download/godzilla-1998-uk-vhs/Godzilla%20%281998%20UK%20VHS%29.mp4",
+    description: "",
+    duration: 147,
+    releaseYear: 1998,
+    poster: "https://image.tmdb.org/t/p/original/xJVl1I95StraYAwaNbBkVoWE2qA.jpg",
+  },
+  {
     name: "Ghostbusters",
     category: "Movies",
     subcategory: "Comedy & Family",
