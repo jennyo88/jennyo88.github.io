@@ -392,349 +392,571 @@
     <!-- JavaScript for Interactivity -->
     <script src="./channels.js"></script>
     <script>
-    /* ========= Retro TV - ALL-IN-ONE SCRIPT (randomize across ALL categories) =========
-       - Assumes `channels` exists (loaded before this script, e.g. channels.js)
-       - Your HTML already has:
-         #video-player, #tv-guide-list, #category-info, #subcategory-info, #shuffle, #power, #power-light, .power-off, #poster
-         #volume-up, #volume-down, #channel-up, #channel-down
-    ================================================================================== */
+        const videoPlayer = document.getElementById('video-player');
+        const tvGuideList = document.getElementById('tv-guide-list');
+        const categoryInfo = document.getElementById('category-info');
+        const subcategoryInfo = document.getElementById('subcategory-info');
+        const shuffleButton = document.getElementById('shuffle');
+        const powerButton = document.getElementById('power');
+        const powerLight = document.getElementById('power-light');
+        const powerOverlay = document.querySelector('.power-off');
+        const poster = document.getElementById('poster');
     
-    (() => {
-      // ---- DOM ----
-      const videoPlayer = document.getElementById('video-player');
-      const tvGuideList = document.getElementById('tv-guide-list');
-      const categoryInfo = document.getElementById('category-info');
-      const subcategoryInfo = document.getElementById('subcategory-info');
-      const shuffleButton = document.getElementById('shuffle');
-      const powerButton = document.getElementById('power');
-      const powerLight = document.getElementById('power-light');
-      const powerOverlay = document.querySelector('.power-off');
-      const poster = document.getElementById('poster');
+        let currentChannelIndex = 0;
+        let currentStartTime = new Date();
+        let lastShuffleIndex = -1;
+        const playbackTimes = {}; // store playback per subcategory
     
-      const btnVolUp = document.getElementById('volume-up');
-      const btnVolDown = document.getElementById('volume-down');
-      const btnChUp = document.getElementById('channel-up');
-      const btnChDown = document.getElementById('channel-down');
+        // build unique subcategories from channels.js
+        const subcategories = (() => {
+            return Object.keys(
+                channels.reduce((acc, channel) => {
+                    acc[channel.subcategory] = true;
+                    return acc;
+                }, {})
+            );
+        })();
     
-      // ---- GUARDS ----
-      if (!videoPlayer || !tvGuideList || !categoryInfo || !subcategoryInfo || !shuffleButton) {
-        console.error('Missing required DOM elements for Retro TV.');
-        return;
-      }
-      if (!Array.isArray(window.channels)) {
-        console.error('`channels` is not defined. Make sure channels.js is loaded BEFORE this script.');
-        return;
-      }
+        const formatTime = (date) => {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
     
-      // ---- STATE ----
-      const FALLBACK_POSTER = 'assets/images/default_poster.jpg';
-      let lastGlobalPickKey = null;
-    
-      // "Channel" buttons can optionally jump around a "station list"
-      let stationIndex = 0;
-      const stations = (() => {
-        const set = new Set();
-        for (const ch of channels) set.add(ch.subcategory || ch.name || 'Unknown');
-        return Array.from(set);
-      })();
-    
-      // Cache of validated playable items (global)
-      let globalPlayableCache = null;
-    
-      // ---- UTILS ----
-      const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-      const showNotification = (message, color = 'limegreen') => {
-        const notification = document.querySelector('.notification');
-        if (!notification) return;
-        notification.textContent = message;
-        notification.style.color = color;
-        notification.style.display = 'block';
-        notification.style.transition = 'opacity 0.5s ease';
-        notification.style.opacity = '1';
-    
-        setTimeout(() => {
-          notification.style.opacity = '0';
-          setTimeout(() => {
-            notification.style.display = 'none';
-            notification.style.opacity = '1';
-          }, 500);
-        }, 2000);
-      };
-    
-      const checkMediaURL = (url, type = 'video') => {
-        return new Promise((resolve) => {
-          if (!url) return resolve(false);
-    
-          if (type === 'video') {
-            const v = document.createElement('video');
-            v.preload = 'metadata';
-            v.onloadedmetadata = () => resolve(true);
-            v.onerror = () => resolve(false);
-            v.src = url;
-          } else {
-            const img = new Image();
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-            img.src = url;
-          }
-        });
-      };
-    
-      const pickRandomFrom = (arr, avoidKey = null) => {
-        if (!arr || arr.length === 0) return null;
-        if (arr.length === 1) return arr[0];
-    
-        let pick = null;
-        for (let tries = 0; tries < 12; tries++) {
-          const candidate = arr[Math.floor(Math.random() * arr.length)];
-          if (!avoidKey || candidate.key !== avoidKey) {
-            pick = candidate;
-            break;
-          }
-        }
-        return pick || arr[Math.floor(Math.random() * arr.length)];
-      };
-    
-      // ---- BUILD GLOBAL POOL (all categories/subcategories) ----
-      const buildGlobalPool = () => {
-        const pool = [];
-        for (const ch of channels) {
-          const category = ch.category || 'Uncategorized';
-          const subcategory = ch.subcategory || ch.name || 'Unknown';
-          const channelName = ch.name || subcategory || 'Untitled';
-          const posterSrc = ch.poster || FALLBACK_POSTER;
-    
-          if (Array.isArray(ch.episodes) && ch.episodes.length) {
-            for (const ep of ch.episodes) {
-              pool.push({
-                key: `${subcategory}::${ep.name || ep.video || ch.video || Math.random()}`,
-                category,
-                subcategory,
-                name: ep.name || channelName || 'Untitled',
-                duration: ep.duration || ch.duration || 30,
-                video: ep.video || ch.video,
-                poster: posterSrc
-              });
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
             }
-          } else {
-            pool.push({
-              key: `${subcategory}::${channelName || ch.video || Math.random()}`,
-              category,
-              subcategory,
-              name: channelName || 'Untitled',
-              duration: ch.duration || 30,
-              video: ch.video,
-              poster: posterSrc
+            return array;
+        };
+
+        // check media
+        const checkMediaURL = (url, type = 'video') => {
+            return new Promise((resolve) => {
+                if (!url) return resolve(false);
+
+                if (type === 'video') {
+                    const video = document.createElement('video');
+                    video.preload = 'metadata';
+        
+                    video.onloadedmetadata = () => resolve(true);
+                    video.onerror = () => resolve(false);
+        
+                    video.src = url;
+                } else {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                }
             });
-          }
-        }
-        return pool;
-      };
+        };
+
     
-      const getGlobalPlayable = async () => {
-        if (globalPlayableCache) return globalPlayableCache;
+        // playback helpers
+        // ---- GLOBAL RANDOM PLAYBACK (ALL CATEGORIES) ----
+
+        const FALLBACK_POSTER = 'assets/images/default_poster.jpg';
+        let globalPlayableCache = null; // validated playable items
+        let lastGlobalPickKey = null;
     
-        const pool = buildGlobalPool();
-        const playable = [];
+        const buildGlobalPool = () => {
+            // Flatten channels + episodes into one list
+            const pool = [];
+            for (const ch of preShuffledChannels) {
+              if (ch.episodes && ch.episodes.length) {
+                for (const ep of ch.episodes) {
+                  pool.push({
+                    key: `${ch.subcategory || ch.name}::${ep.name || ep.video || ch.video}`,
+                    category: ch.category || 'Uncategorized',
+                    subcategory: ch.subcategory || ch.name || 'Unknown',
+                    name: ep.name || ch.name || 'Untitled',
+                    duration: ep.duration || ch.duration || 30,
+                    video: ep.video || ch.video,
+                    poster: ch.poster || FALLBACK_POSTER
+                  });
+                }
+              } else {
+                pool.push({
+                  key: `${ch.subcategory || ch.name}::${ch.name || ch.video}`,
+                  category: ch.category || 'Uncategorized',
+                  subcategory: ch.subcategory || ch.name || 'Unknown',
+                  name: ch.name || 'Untitled',
+                  duration: ch.duration || 30,
+                  video: ch.video,
+                  poster: ch.poster || FALLBACK_POSTER
+                });
+              }
+            }
+            return pool;
+          };
     
-        for (const item of pool) {
-          const videoOK = await checkMediaURL(item.video, 'video');
-          if (!videoOK) continue;
+          const getGlobalPlayable = async () => {
+            if (globalPlayableCache) return globalPlayableCache;
+        
+            const pool = buildGlobalPool();
+            const playable = [];
+        
+            for (const item of pool) {
+              const videoOK = await checkMediaURL(item.video, 'video');
+              if (!videoOK) continue;
+        
+              const posterOK = await checkMediaURL(item.poster, 'image');
+              if (!posterOK) item.poster = FALLBACK_POSTER;
+        
+              playable.push(item);
+            }
     
-          const posterOK = await checkMediaURL(item.poster, 'image');
-          if (!posterOK) item.poster = FALLBACK_POSTER;
+            globalPlayableCache = playable;
+            return playable;
+          };
     
-          playable.push(item);
-        }
+          const pickRandomFrom = (arr, avoidKey = null) => {
+            if (!arr.length) return null;
+            if (arr.length === 1) return arr[0];
+        
+            let pick = null;
+            for (let tries = 0; tries < 10; tries++) {
+              const candidate = arr[Math.floor(Math.random() * arr.length)];
+              if (!avoidKey || candidate.key !== avoidKey) {
+                pick = candidate;
+                break;
+              }
+            }
+            return pick || arr[Math.floor(Math.random() * arr.length)];
+          };
     
-        globalPlayableCache = playable;
-        return playable;
-      };
+          const renderGlobalGuide = (nowItem, playable, upNextCount = 8) => {
+            tvGuideList.innerHTML = '';
+        
+            categoryInfo.textContent = `Category: ${nowItem.category}`;
+            subcategoryInfo.textContent = `Playing: ${nowItem.subcategory}`;
+        
+            let startTime = new Date(); // guide relative to "now"
+            const upNext = [];
+            let avoid = nowItem.key;
+        
+            for (let i = 0; i < upNextCount; i++) {
+              const next = pickRandomFrom(playable, avoid);
+              if (!next) break;
+              upNext.push(next);
+              avoid = next.key;
+            }
     
-      // ---- GUIDE UI (Now Playing + randomized Up Next) ----
-      const renderGlobalGuide = (nowItem, playable, upNextCount = 8) => {
-        tvGuideList.innerHTML = '';
+            const guideItems = [nowItem, ...upNext];
+            guideItems.forEach((v, idx) => {
+              const li = document.createElement('li');
+              li.textContent = `${formatTime(startTime)} - ${v.name}`;
+              li.setAttribute('data-duration', v.duration);
+              li.setAttribute('data-video', v.video);
+              li.setAttribute('data-poster', v.poster);
+              li.setAttribute('data-start-time', startTime.getTime());
+        
+              if (idx === 0) li.classList.add('now-playing');
+              else if (idx === 1) li.classList.add('up-next');
+        
+              tvGuideList.appendChild(li);
+              startTime.setMinutes(startTime.getMinutes() + (v.duration || 30));
+            });
+          };
     
-        categoryInfo.textContent = `Category: ${nowItem.category}`;
-        subcategoryInfo.textContent = `Playing: ${nowItem.subcategory}`;
+          const playGlobalItem = async (item) => {
+            if (!item) return;
+        
+            // update UI
+            poster.src = item.poster || FALLBACK_POSTER;
+            categoryInfo.textContent = `Category: ${item.category}`;
+            subcategoryInfo.textContent = `Playing: ${item.subcategory}`;
+        
+            // load & play
+            if (videoPlayer.src !== item.video) {
+              videoPlayer.src = item.video;
+              videoPlayer.load();
+            }
     
-        const guideItems = [nowItem];
-        let avoid = nowItem.key;
+            // reset to start (since we're doing "simply play random")
+            videoPlayer.currentTime = 0;
+        
+            try {
+              await videoPlayer.play();
+            } catch (e) {
+              // autoplay might be blocked; user can hit play
+            }
+          };
+        
+          const shuffleAll = async () => {
+            const playable = await getGlobalPlayable();
+            if (!playable.length) {
+              showNotification('No playable media found in library.', 'red');
+              return;
+            }
     
-        for (let i = 0; i < upNextCount; i++) {
-          const next = pickRandomFrom(playable, avoid);
-          if (!next) break;
-          guideItems.push(next);
-          avoid = next.key;
-        }
+            const pick = pickRandomFrom(playable, lastGlobalPickKey);
+            lastGlobalPickKey = pick.key;
+        
+            renderGlobalGuide(pick, playable);
+            await playGlobalItem(pick);
+        
+            showNotification(`Shuffled (All): ${pick.subcategory}`, 'limegreen');
+          };
+
+        const updatePlaybackTime = (subcategory) => {
+            playbackTimes[subcategory] = videoPlayer.currentTime || 0;
+        };
     
-        let startTime = new Date();
-        guideItems.forEach((v, idx) => {
-          const li = document.createElement('li');
-          li.textContent = `${formatTime(startTime)} - ${v.name}`;
-          li.setAttribute('data-duration', v.duration);
-          li.setAttribute('data-video', v.video);
-          li.setAttribute('data-poster', v.poster);
-          li.setAttribute('data-start-time', startTime.getTime());
+        const restorePlaybackTime = (subcategory) => {
+            if (playbackTimes[subcategory] != null) {
+                videoPlayer.currentTime = playbackTimes[subcategory];
+            }
+        };
     
-          if (idx === 0) li.classList.add('now-playing');
-          else if (idx === 1) li.classList.add('up-next');
-    
-          tvGuideList.appendChild(li);
-          startTime.setMinutes(startTime.getMinutes() + (v.duration || 30));
+        // pre-shuffle episodes so the guide is consistent
+        const preShuffledChannels = channels.map(channel => {
+            const shuffledEpisodes =
+                channel.episodes && channel.episodes.length > 0
+                    ? shuffleArray([...channel.episodes])
+                    : null;
+            return {
+                ...channel,
+                episodes: shuffledEpisodes
+            };
         });
-      };
     
-      // ---- PLAYBACK ----
-      const playGlobalItem = async (item) => {
-        if (!item) return;
+        // cache per-subcategory shuffled "guide videos"
+        let shuffledVideosCache = {};
     
-        // poster + labels
-        if (poster) poster.src = item.poster || FALLBACK_POSTER;
-        categoryInfo.textContent = `Category: ${item.category}`;
-        subcategoryInfo.textContent = `Playing: ${item.subcategory}`;
+        const populateTVGuide = async (subcategory) => {
+            tvGuideList.innerHTML = '';
     
-        // load + play from start
-        if (videoPlayer.src !== item.video) {
-          videoPlayer.src = item.video;
-          videoPlayer.load();
-        }
-        videoPlayer.currentTime = 0;
+            const channelsInSubcategory = preShuffledChannels.filter(
+                channel => channel.subcategory === subcategory
+            );
     
-        try {
-          await videoPlayer.play();
-        } catch (_) {
-          // Autoplay may be blocked; user interaction (shuffle/power/play) will allow.
-        }
-      };
+            if (channelsInSubcategory.length === 0) {
+                console.error(`Subcategory "${subcategory}" not found in channels.`);
+                subcategoryInfo.textContent = 'Subcategory not found.';
+                return;
+            }
     
-      const shuffleAll = async () => {
-        const playable = await getGlobalPlayable();
-        if (!playable.length) {
-          showNotification('No playable media found in library.', 'red');
-          return;
-        }
+            categoryInfo.textContent = `Category: ${channelsInSubcategory[0].category}`;
+            subcategoryInfo.textContent = `Playing: ${subcategory}`;
     
-        const pick = pickRandomFrom(playable, lastGlobalPickKey);
-        lastGlobalPickKey = pick.key;
+            let startTime = new Date(currentStartTime);
     
-        renderGlobalGuide(pick, playable);
-        await playGlobalItem(pick);
+            // only build / shuffle once per subcategory
+            if (!shuffledVideosCache[subcategory]) {
+                shuffledVideosCache[subcategory] = shuffleArray(
+                    channelsInSubcategory.flatMap(channel => {
+                        const channelVideos =
+                            channel.episodes && channel.episodes.length > 0
+                                ? channel.episodes.map(episode => ({
+                                      name: episode.name || 'Unnamed Episode',
+                                      duration: episode.duration || 30,
+                                      video: episode.video || channel.video,
+                                      poster:
+                                          channel.poster ||
+                                          'assets/images/default_poster.jpg'
+                                  }))
+                                : [
+                                      {
+                                          name: channel.name || 'Untitled',
+                                          duration: channel.duration || 30,
+                                          video: channel.video,
+                                          poster:
+                                              channel.poster ||
+                                              'assets/images/default_poster.jpg'
+                                      }
+                                  ];
+                        return channelVideos;
+                    })
+                );
+            }
     
-        showNotification(`Shuffled (All): ${pick.subcategory}`, 'limegreen');
-      };
+            const videos = [];
+
+            for (const video of shuffledVideosCache[subcategory]) {
+                const videoOK = await checkMediaURL(video.video, 'video');
+                const posterOK = await checkMediaURL(video.poster, 'image');
+            
+                if (!videoOK) {
+                    console.warn('❌ Broken video:', video.video);
+                    continue;
+                }
+            
+                if (!posterOK) {
+                    console.warn('⚠️ Broken poster, using fallback:', video.poster);
+                    video.poster = 'assets/images/default_poster.jpg';
+                }
+            
+                videos.push(video);
+            }
+            
+            if (videos.length === 0) {
+                showNotification(`No playable media in ${subcategory}`, 'red');
+                return;
+            }
+
     
-      // ---- OPTIONAL: "Channel" buttons jump between subcategories, but still randomize within that station ----
-      const getPlayableByStation = async (stationName) => {
-        const playable = await getGlobalPlayable();
-        return playable.filter((x) => x.subcategory === stationName);
-      };
+            videos.forEach((video, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
+                listItem.setAttribute('data-duration', video.duration);
+                listItem.setAttribute('data-video', video.video);
+                listItem.setAttribute('data-poster', video.poster);
+                listItem.setAttribute('data-start-time', startTime.getTime());
     
-      const tuneStation = async (idx) => {
-        if (!stations.length) return;
-        stationIndex = (idx + stations.length) % stations.length;
-        const station = stations[stationIndex];
+                if (index === 0) {
+                    listItem.classList.add('now-playing');
+                } else if (index === 1) {
+                    listItem.classList.add('up-next');
+                }
     
-        const stationPlayable = await getPlayableByStation(station);
-        if (!stationPlayable.length) {
-          showNotification(`No playable media in: ${station}`, 'red');
-          return;
-        }
+                tvGuideList.appendChild(listItem);
+                startTime.setMinutes(startTime.getMinutes() + video.duration);
+            });
+        };
     
-        const pick = pickRandomFrom(stationPlayable, lastGlobalPickKey);
-        lastGlobalPickKey = pick.key;
+        const synchronizePlayback = () => {
+            const currentTime = new Date().getTime();
+            const guideItems = document.querySelectorAll('.tv-guide li');
     
-        renderGlobalGuide(pick, stationPlayable);
-        await playGlobalItem(pick);
-        showNotification(`Channel: ${station}`, 'limegreen');
-      };
+            for (let i = 0; i < guideItems.length; i++) {
+                const item = guideItems[i];
+                const startTime = parseInt(item.getAttribute('data-start-time'), 10);
+                const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
+                const endTime = startTime + duration;
     
-      // ---- VOLUME ----
-      const showVolumeIndicator = (volume) => {
-        const notification = document.querySelector('.notification');
-        if (!notification) return;
+                if (currentTime >= startTime && currentTime < endTime) {
+                    const videoSrc = item.getAttribute('data-video');
+                    const posterSrc = item.getAttribute('data-poster');
     
-        const volumePercent = Math.round(volume * 100);
-        notification.textContent = `Volume: ${volumePercent}%`;
-        notification.style.color = volumePercent === 0 ? 'red' : 'limegreen';
-        notification.style.display = 'block';
+                    const elapsedTime = (currentTime - startTime) / 1000;
     
-        setTimeout(() => {
-          notification.style.transition = 'opacity 0.5s ease';
-          notification.style.opacity = '0';
-          setTimeout(() => {
-            notification.style.display = 'none';
+                    if (videoPlayer.src !== videoSrc) {
+                        videoPlayer.src = videoSrc;
+                        videoPlayer.load();
+                        videoPlayer.currentTime = elapsedTime;
+    
+                        videoPlayer
+                            .play()
+                            .catch(err => {
+                                if (err.name !== 'AbortError') {
+                                    console.error('Error starting video:', err);
+                                }
+                            });
+                    }
+    
+                    if (poster.src !== posterSrc) {
+                        poster.src = posterSrc;
+                    }
+    
+                    guideItems.forEach(item =>
+                        item.classList.remove('now-playing', 'up-next')
+                    );
+                    item.classList.add('now-playing');
+    
+                    if (guideItems[i + 1]) {
+                        guideItems[i + 1].classList.add('up-next');
+                    }
+    
+                    break;
+                }
+            }
+        };
+    
+        const showNotification = (message, color = 'limegreen') => {
+            const notification = document.querySelector('.notification');
+    
+            notification.textContent = message;
+            notification.style.color = color;
+            notification.style.display = 'block';
+            notification.style.transition = 'opacity 0.5s ease';
             notification.style.opacity = '1';
-          }, 500);
-        }, 900);
-      };
     
-      // ---- POWER ----
-      const isPoweredOn = () => powerOverlay && powerOverlay.style.display === 'none';
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 3000);
+        };
     
-      const setPower = (on) => {
-        if (!powerOverlay || !powerLight) return;
+        const setChannel = (index) => {
+            if (index < 0 || index >= subcategories.length) {
+                console.error('Index out of bounds for subcategories');
+                return;
+            }
     
-        powerOverlay.style.display = on ? 'none' : 'block';
+            currentChannelIndex = (index + subcategories.length) % subcategories.length;
+            const subcategory = subcategories[currentChannelIndex];
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategory
+            );
     
-        if (on) {
-          powerLight.style.background = 'green';
-          powerLight.style.boxShadow = '0 0 15px green';
-          videoPlayer.play().catch(() => {});
-        } else {
-          powerLight.style.background = 'red';
-          powerLight.style.boxShadow = '0 0 15px red';
-          videoPlayer.pause();
-        }
-      };
+            if (!channel) {
+                console.error(`No channel found for subcategory: ${subcategory}`);
+                showNotification(
+                    `No videos available for subcategory: ${subcategory}`,
+                    'red'
+                );
+                return;
+            }
     
-      // ---- EVENTS ----
-      shuffleButton.addEventListener('click', shuffleAll);
+            populateTVGuide(subcategory);
     
-      if (btnVolUp) {
-        btnVolUp.addEventListener('click', () => {
-          videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-          showVolumeIndicator(videoPlayer.volume);
+            // make sure playback is aligned after the DOM updates
+            setTimeout(() => {
+                synchronizePlayback();
+            }, 0);
+    
+            // set poster to the first video in the shuffled list
+            const firstVideo = shuffledVideosCache[subcategory]?.[0];
+            poster.src =
+                firstVideo?.poster ||
+                channel.poster ||
+                'assets/images/default_poster.jpg';
+    
+            showNotification(`Switched to Channel: ${channel.subcategory}`, 'limegreen');
+        };
+    
+        const shuffleChannels = () => {
+            if (!subcategories || subcategories.length === 0) {
+                showNotification('Error: No subcategories available to shuffle.', 'red');
+                return;
+            }
+    
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * subcategories.length);
+            } while (randomIndex === lastShuffleIndex && subcategories.length > 1);
+    
+            lastShuffleIndex = randomIndex;
+            setChannel(randomIndex);
+    
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[randomIndex]
+            );
+            if (channel) {
+                showNotification(
+                    `Shuffled to Channel: ${channel.subcategory}`,
+                    'limegreen'
+                );
+            } else {
+                showNotification('Error: Could not find channel details.', 'red');
+            }
+        };
+    
+        const showVolumeIndicator = (volume) => {
+            const notification = document.querySelector('.notification');
+            const volumePercent = Math.round(volume * 100);
+    
+            notification.textContent = `Volume: ${volumePercent}%`;
+            notification.style.color =
+                volumePercent === 0 ? 'red' : 'limegreen';
+            notification.style.display = 'block';
+    
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1';
+                }, 500);
+            }, 1000);
+        };
+    
+        // button events
+        shuffleButton.addEventListener('click', shuffleAll);
+    
+        document.getElementById('channel-up').addEventListener('click', () => {
+            setChannel(currentChannelIndex + 1);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
+            if (channel) {
+                showNotification(`Channel up: ${channel.subcategory}`, 'limegreen');
+            } else {
+                showNotification('Channel up: No channel found', 'red');
+            }
         });
-      }
     
-      if (btnVolDown) {
-        btnVolDown.addEventListener('click', () => {
-          videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-          showVolumeIndicator(videoPlayer.volume);
+        document.getElementById('channel-down').addEventListener('click', () => {
+            setChannel(currentChannelIndex - 1);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
+            if (channel) {
+                showNotification(`Channel down: ${channel.subcategory}`, 'limegreen');
+            } else {
+                showNotification('Channel down: No channel found', 'red');
+            }
         });
-      }
     
-      // Channel buttons: move station, randomize within that station
-      if (btnChUp) btnChUp.addEventListener('click', () => tuneStation(stationIndex + 1));
-      if (btnChDown) btnChDown.addEventListener('click', () => tuneStation(stationIndex - 1));
+        // auto-random when video ends
+        videoPlayer.addEventListener('ended', () => {
+            shuffleAll();
     
-      // Auto-random (ALL categories) when current video ends
-      videoPlayer.addEventListener('ended', () => {
-        shuffleAll();
-      });
+            // remember where we were on this channel
+            updatePlaybackTime(currentSubcat);
     
-      // Power toggle
-      if (powerButton) {
+            // pick a random other channel
+            let nextIndex = currentChannelIndex;
+            if (subcategories.length > 1) {
+                while (nextIndex === currentChannelIndex) {
+                    nextIndex = Math.floor(Math.random() * subcategories.length);
+                }
+            }
+    
+            // reset schedule to "now" for the next channel
+            currentStartTime = new Date();
+    
+            setChannel(nextIndex);
+    
+            const channel = channels.find(
+                ch => ch.subcategory === subcategories[nextIndex]
+            );
+            if (channel) {
+                showNotification(
+                    `Auto-switched to: ${channel.subcategory || channel.name}`,
+                    'limegreen'
+                );
+            }
+        });
+    
+        document.getElementById('volume-up').addEventListener('click', () => {
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+            showVolumeIndicator(videoPlayer.volume);
+        });
+    
+        document.getElementById('volume-down').addEventListener('click', () => {
+            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+            showVolumeIndicator(videoPlayer.volume);
+        });
+    
+        // power toggle
         powerButton.addEventListener('click', () => {
-          setPower(!isPoweredOn());
+            const isPoweredOn = powerOverlay.style.display === 'none';
+    
+            // toggle overlay
+            powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
+    
+            if (isPoweredOn) {
+                // going OFF
+                powerLight.style.background = 'red';
+                powerLight.style.boxShadow = '0 0 15px red';
+                videoPlayer.pause();
+            } else {
+                // going ON
+                powerLight.style.background = 'green';
+                powerLight.style.boxShadow = '0 0 15px green';
+                videoPlayer.play().catch(() => {});
+            }
         });
-      }
     
-      // ---- INIT ----
-      // Ensure overlay default: ON (if your CSS starts it hidden, we keep it)
-      if (powerOverlay && powerOverlay.style.display === '') {
-        powerOverlay.style.display = 'none';
-      }
-      if (powerLight && (!powerLight.style.background || powerLight.style.background === '')) {
-        powerLight.style.background = 'green';
-        powerLight.style.boxShadow = '0 0 15px green';
-      }
+        // keep guide in sync while playing
+        videoPlayer.addEventListener('timeupdate', synchronizePlayback);
     
-      // Start with a global random pick
-      shuffleAll();
-    })();
+        // initial load
+        shuffleAll();
     </script>
 
 
