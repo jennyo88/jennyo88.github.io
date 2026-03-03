@@ -1,690 +1,938 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Retro TV</title>
-  <style>
-    :root {
-      --bg: #333;
-      --bg2: #222;
-      --panel: #444;
-      --panel2: #555;
-      --text: #fff;
-      --accent: #ffcc00;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro TV</title>
+    <style>
+      :root{
+        --bg:#0b0f17;
+        --panel:#121827;
+        --panel2:#0f1523;
+        --text:#e8eefc;
+        --muted:#a9b4cf;
+        --accent:#ffcc00;
+        --accent2:#7cf7d4;
+        --danger:#ff4d4d;
+        --ok:#34d399;
+    
+        --radius:14px;
+        --radius-sm:10px;
+    
+        --shadow-lg: 0 18px 50px rgba(0,0,0,.55);
+        --shadow-md: 0 10px 24px rgba(0,0,0,.45);
+        --shadow-in: inset 0 0 0 1px rgba(255,255,255,.06);
+        --ring: 0 0 0 3px rgba(255,204,0,.25);
+    
+        --grid-gap: 18px;
+      }
+      *{ box-sizing:border-box; }
+      html,body{ height:100%; }
+      body{
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        margin:0;
+        background:
+          radial-gradient(1100px 700px at 20% 20%, rgba(124,247,212,.14), transparent 55%),
+          radial-gradient(900px 600px at 85% 30%, rgba(255,204,0,.12), transparent 55%),
+          linear-gradient(180deg, #070a10 0%, #0b0f17 60%, #070a10 100%);
+        color:var(--text);
+        overflow:hidden;
+      }
 
-    * { box-sizing: border-box; }
+      /* Layout */
+      .container{
+        display:flex;
+        height:100vh;
+        width:100vw;
+      }
 
-    body {
-      font-family: Helvetica, sans-serif;
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      height: 100vh;
-      overflow: hidden;
-    }
+      /* Video area */
+      .video-section{
+        position:relative;
+        width:70%;
+        height:100%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:24px;
+      }
+    
+      .tv-container{
+        width:min(760px, 92%);
+        aspect-ratio: 700 / 550;
+        position:relative;
+        filter: drop-shadow(var(--shadow-lg));
+      }
 
-    .container {
-      display: flex;
-      height: 100vh;
-      width: 100vw;
-    }
+      /* CRT screen surface */
+      .tv-screen{
+        position:absolute;
+        top:9%;
+        left:7%;
+        width:86%;
+        height:72%;
+        overflow:hidden;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 50% 35%, rgba(255,255,255,.18), rgba(0,0,0,.75) 65%, rgba(0,0,0,.95) 100%);
+        box-shadow:
+          inset 0 0 0 1px rgba(255,255,255,.08),
+          inset 0 -20px 60px rgba(0,0,0,.55),
+          0 10px 25px rgba(0,0,0,.55);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        transition: background .35s ease, box-shadow .35s ease, transform .35s ease;
+      }
+    
+      .tv-screen.on{
+        background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), rgba(0,0,0,.25) 60%, rgba(0,0,0,.4) 100%);
+      }
 
-    /* VIDEO AREA */
-    .video-section {
-      position: relative;
-      width: 70%;
-      height: 100%;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+      /* CRT overlays (scanlines + vignette + slight glass sheen) */
+      .tv-screen::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,.03) 0px,
+            rgba(255,255,255,.03) 1px,
+            rgba(0,0,0,0) 3px,
+            rgba(0,0,0,0) 6px
+          );
+        opacity:.25;
+        pointer-events:none;
+        mix-blend-mode: overlay;
+      }
+    
+      .tv-screen::after{
+        content:"";
+        position:absolute;
+        inset:-2px;
+        background:
+          radial-gradient(120% 100% at 50% 20%, rgba(255,255,255,.18), transparent 40%),
+          radial-gradient(120% 140% at 50% 60%, transparent 55%, rgba(0,0,0,.55) 100%);
+        opacity:.55;
+        pointer-events:none;
+      }
+    
+      video{
+        width:78%;
+        height:78%;
+        object-fit:contain;
+        position:absolute;
+        top:45%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        z-index:1;
+        border-radius: 10px;
+        filter: contrast(1.05) saturate(1.05);
+      }
 
-    #video-player {
-      width: 78%;
-      height: 78%;
-      object-fit: contain;
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-    }
+      .power-off{
+        background:
+          radial-gradient(circle at 50% 40%, rgba(255,255,255,.05), rgba(0,0,0,.9) 55%, rgba(0,0,0,1) 100%);
+        width:85%;
+        height:85%;
+        position:absolute;
+        top:10%;
+        left:14%;
+        z-index:2;
+        display:none;
+        justify-content:center;
+        align-items:center;
+        color:rgba(232,238,252,.9);
+        font-size:1.1em;
+        letter-spacing:.06em;
+        text-transform:uppercase;
+        pointer-events:none;
+        border-radius: 14px;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+      }
+    
+      .tv-overlay{
+        position:absolute;
+        width:100%;
+        height:100%;
+        background:url('./assets/images/tvbackclean.webp') no-repeat center center;
+        background-size:contain;
+        z-index:3;
+      }
 
-    /* "TV off" overlay */
-    .screen-off {
-      position: absolute;
-      width: 85%;
-      height: 85%;
-      top: 10%;
-      left: 14%;
-      z-index: 2;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #000, #111 60%, #222 80%, #000 100%);
-      color: #fff;
-      font-size: 1.1rem;
-      pointer-events: none;
-    }
+      /* Sidebar */
+      .sidebar{
+        width:30%;
+        height:100%;
+        padding:22px;
+        overflow-y:auto;
+        background:
+          linear-gradient(180deg, rgba(18,24,39,.92), rgba(12,16,28,.92));
+        border-left: 1px solid rgba(255,255,255,.06);
+        box-shadow: -20px 0 50px rgba(0,0,0,.35);
+        position:relative;
+        display:flex;
+        flex-direction:column;
+        gap: var(--grid-gap);
+      }
 
-    /* Static overlay as a real video layer */
-    #static-overlay {
-      display: none;
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      object-fit: cover;
-      pointer-events: none;
-      opacity: 0.55;
-      mix-blend-mode: screen;
-    }
+      /* Subtle grain + scanlines */
+      .sidebar::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          repeating-linear-gradient(
+            transparent,
+            transparent 3px,
+            rgba(0,0,0,.12) 4px
+          );
+        opacity:.18;
+        pointer-events:none;
+      }
+    
+      .sidebar::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:
+          radial-gradient(900px 500px at 30% 20%, rgba(124,247,212,.10), transparent 60%),
+          radial-gradient(800px 500px at 80% 30%, rgba(255,204,0,.08), transparent 60%);
+        opacity:.7;
+        pointer-events:none;
+        mix-blend-mode: screen;
+      }
 
-    .tv-overlay {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('./assets/images/tvbackclean.webp') no-repeat center center;
-      background-size: contain;
-      z-index: 3;
-      pointer-events: none;
-    }
+      /* Panels */
+      .tv-guide,
+      .poster-container{
+        position:relative;
+        border-radius: var(--radius);
+        background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+        box-shadow: var(--shadow-md), var(--shadow-in);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding:16px;
+      }
+    
+      .tv-guide h2{
+        margin:0 0 12px 0;
+        font-size:1.05rem;
+        letter-spacing:.14em;
+        text-transform:uppercase;
+        color: var(--accent);
+        text-shadow: 0 8px 20px rgba(0,0,0,.55);
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+      }
+    
+      .tv-guide h2::after{
+        content:"";
+        height:1px;
+        flex:1;
+        margin-left:12px;
+        background: linear-gradient(90deg, rgba(255,204,0,.6), transparent);
+      }
+    
+      .tv-guide ul{
+        list-style:none;
+        padding:0;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+      }
+      
+      .tv-guide li{
+        padding:10px 12px;
+        border-radius: var(--radius-sm);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+        font-size:.9rem;
+        color: var(--text);
+        transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      }
+    
+      .tv-guide li:hover{
+        transform: translateY(-1px);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,.10), 0 10px 24px rgba(0,0,0,.35);
+        background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      }
+    
+      .tv-guide li.now-playing{
+        background:
+          linear-gradient(180deg, rgba(255,204,0,.22), rgba(255,204,0,.10));
+        color: var(--text);
+        box-shadow: var(--ring), inset 0 0 0 1px rgba(255,204,0,.35);
+        font-weight:700;
+      }
 
-    /* SIDEBAR */
-    .sidebar {
-      width: 30%;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      padding: 15px;
-      overflow-y: auto;
-      border-right: 3px solid var(--bg2);
-      position: relative;
-    }
+      /* Optional: make time muted if you wrap it in a span.time */
+      .tv-guide li .time{
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        letter-spacing:.02em;
+      }
 
-    .sidebar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.1) 4px
-      );
-      pointer-events: none;
-    }
+      /* Posters */
+      .poster-container{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:16px;
+      }
+    
+      .poster-container img{
+        width: 168px;
+        height: 236px;
+        border-radius: 14px;
+        object-fit: cover;
+        box-shadow: 0 18px 40px rgba(0,0,0,.55);
+        transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+        will-change: transform;
+      }
+    
+      .poster-container img:hover{
+        transform: translateY(-3px) scale(1.03);
+        filter: saturate(1.1) contrast(1.05);
+        box-shadow: 0 26px 55px rgba(0,0,0,.65);
+      }
 
-    .tv-guide {
-      margin-bottom: 15px;
-      background: linear-gradient(to bottom, var(--panel2), var(--panel));
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.6);
-      color: #eee;
-      font-family: Verdana, sans-serif;
-      position: relative;
-      z-index: 1;
-    }
+      /* Button panel */
+      .button-panel{
+        position:absolute;
+        bottom: 13%;
+        left: 35%;
+        transform: translateX(-50%);
+        display:flex;
+        gap:14px;
+        z-index:6;
+      }
+    
+      .button-panel button{
+        width:12px;
+        height:12px;
+        border:none;
+        border-radius:999px;
+        cursor:pointer;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,.40), rgba(255,255,255,.08) 35%, rgba(0,0,0,0) 70%);
+        box-shadow:
+          inset 0 1px 2px rgba(255,255,255,.35),
+          inset 0 -2px 4px rgba(0,0,0,.55),
+          0 0 0 1px rgba(255,255,255,.10),
+          0 10px 20px rgba(0,0,0,.45);
+        transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
+      }
+    
+      .button-panel button:hover{
+        transform: translateY(-1px);
+        box-shadow:
+          inset 0 1px 2px rgba(255,255,255,.4),
+          inset 0 -2px 4px rgba(0,0,0,.55),
+          0 0 0 1px rgba(255,255,255,.16),
+          0 16px 30px rgba(0,0,0,.55);
+      }
+    
+      .button-panel button:active{
+        transform: translateY(0px) scale(.98);
+        filter: brightness(1.05);
+      }
 
-    .tv-guide h2 {
-      margin: 0 0 10px 0;
-      font-size: 1.5rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-      color: var(--accent);
-      text-transform: uppercase;
-    }
+      /* Power button */
+      #power{
+        width:26px;
+        height:26px;
+        border:none;
+        border-radius:999px;
+        cursor:pointer;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,.10) 35%, rgba(0,0,0,0) 70%);
+        box-shadow:
+          inset 0 1px 2px rgba(255,255,255,.35),
+          inset 0 -2px 4px rgba(0,0,0,.6),
+          0 0 0 1px rgba(255,255,255,.12),
+          0 18px 30px rgba(0,0,0,.55);
+        transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
+      }
+    
+      #power:hover{ transform: translateY(-1px); }
+      #power:active{ transform: translateY(0px) scale(.98); }
+    
+      #power-light{
+        width:26px;
+        height:26px;
+        border-radius:999px;
+        background: var(--ok);
+        box-shadow: 0 0 16px rgba(52,211,153,.7);
+        transition: box-shadow .25s ease, background-color .25s ease, filter .25s ease;
+      }
+    
+      .power-off #power-light{
+        background: var(--danger);
+        box-shadow: 0 0 16px rgba(255,77,77,.65);
+      }
+    
+      .spacer{
+        width:41px;
+        height:10px;
+      }
 
-    .tv-guide ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      /* Notification */
+      .notification{
+        position:fixed;
+        top:70%;
+        left:35%;
+        transform:translate(-50%,-50%);
+        font-size:14px;
+        color: var(--accent2);
+        background: rgba(10,14,24,.82);
+        border: 1px solid rgba(255,255,255,.08);
+        padding:10px 14px;
+        border-radius: 12px;
+        display:none;
+        z-index:15;
+        text-align:center;
+        box-shadow: var(--shadow-md);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        animation: fadeInOut 3s ease;
+      }
+    
+      @keyframes fadeInOut{
+        0%, 90%{ opacity:1; }
+        100%{ opacity:0; }
+      }
 
-    .tv-guide li {
-      margin-bottom: 10px;
-      padding: 10px;
-      background: linear-gradient(to right, #666, #444);
-      border-radius: 5px;
-      font-size: 0.8rem;
-      color: #fff;
-      font-family: "Courier New", monospace;
-      display: flex;
-      justify-content: space-between;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .tv-guide li:hover {
-      background: #777;
-      transform: scale(1.05);
-    }
-
-    .tv-guide li.now-playing {
-      background: var(--accent);
-      color: #000;
-      font-weight: bold;
-      animation: glow 1s infinite alternate;
-    }
-
-    @keyframes glow {
-      0% { box-shadow: 0 0 5px var(--accent); }
-      100% { box-shadow: 0 0 15px var(--accent); }
-    }
-
-    .poster-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      background: linear-gradient(to top, #444, #222);
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.7);
-      position: relative;
-      z-index: 1;
-    }
-
-    .poster-container img {
-      width: 180px;
-      height: 240px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.8);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .poster-container img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px rgba(255,255,255,0.8);
-    }
-
-    /* BUTTON PANEL */
-    .button-panel {
-      position: absolute;
-      bottom: 13%;
-      left: 35%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 15px;
-      z-index: 6;
-    }
-
-    .button-panel button {
-      width: 12px;
-      height: 12px;
-      background: radial-gradient(circle, rgba(192,192,192,0.5), rgba(0,0,0,0) 70%);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: box-shadow 0.2s ease, background-color 0.2s ease;
-      box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.6),
-        inset 0 -1px 2px rgba(0,0,0,0.4),
-        0 0 10px rgba(192,192,192,0.6);
-    }
-
-    .button-panel button:hover {
-      box-shadow:
-        0 0 15px rgba(255,255,255,0.8),
-        0 0 30px rgba(192,192,192,0.6);
-    }
-
-    .button-panel button:active {
-      background: linear-gradient(145deg, #e0e0e0, #b0b0b0);
-      box-shadow:
-        inset 0 2px 5px rgba(0,0,0,0.4),
-        0 0 5px rgba(255,255,255,0.5);
-    }
-
-    #power {
-      width: 25px;
-      height: 25px;
-      box-shadow:
-        inset 0 1px 2px rgba(255,255,255,0.6),
-        inset 0 -1px 2px rgba(0,0,0,0.4),
-        0 0 15px rgba(192,192,192,0.8);
-    }
-
-    #power-light {
-      width: 25px;
-      height: 25px;
-      background: green;
-      border-radius: 50%;
-      box-shadow: 0 0 15px green;
-      transition: box-shadow 0.3s ease, background-color 0.3s ease;
-    }
-
-    .spacer { width: 41px; height: 10px; }
-
-    .notification {
-      position: fixed;
-      top: 70%;
-      left: 35%;
-      transform: translate(-50%, -50%);
-      font-size: 14px;
-      color: limegreen;
-      background: rgba(0,0,0,0.8);
-      padding: 10px 20px;
-      border-radius: 5px;
-      display: none;
-      z-index: 15;
-      text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .container { flex-direction: column; }
-      .video-section { width: 100%; height: 60%; }
-      .sidebar { width: 100%; height: 40%; flex-direction: row; padding: 10px; }
-      .poster-container img { width: 150px; height: 200px; }
-      .tv-guide ul { font-size: 0.8rem; }
-      .button-panel { left: 50%; }
-      .notification { left: 50%; }
-    }
-  </style>
+      /* Better scrolling */
+      .sidebar{
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255,255,255,.18) transparent;
+      }
+      .sidebar::-webkit-scrollbar{ width:10px; }
+      .sidebar::-webkit-scrollbar-thumb{
+        background: rgba(255,255,255,.14);
+        border-radius: 999px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+      .sidebar::-webkit-scrollbar-thumb:hover{
+        background: rgba(255,255,255,.22);
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+    
+      /* Responsive */
+      @media (max-width: 768px){
+        body{ overflow:auto; }
+        .container{ flex-direction:column; height:auto; min-height:100vh; }
+        .video-section{ width:100%; height:58vh; padding:16px; }
+        .sidebar{ width:100%; height:auto; min-height:42vh; }
+        .poster-container img{ width: 150px; height: 210px; }
+      }
+    
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce){
+        *{ transition:none !important; animation:none !important; }
+      }
+    </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="video-section">
-      <video id="video-player" controls></video>
+    <!-- Main Interface -->
+    <div class="container">
+        <!-- Video Section -->
+        <div class="video-section">
+            <video id="video-player" controls></video>
+            <div class="power-off"></div>
+            <div class="tv-overlay"></div>
+        </div>
 
-      <!-- Static overlay (real video, not CSS background) -->
-      <video id="static-overlay" muted loop playsinline>
-        <source src="./assets/videos/tv-static.mp4" type="video/mp4" />
-      </video>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- TV Guide -->
+            <div class="tv-guide" style="overflow-y: auto;">
+                <h2>TV Guide</h2>
+                <p id="category-info"></p>
+                <p id="subcategory-info"></p>
+                <ul id="tv-guide-list"></ul>
+            </div>
 
-      <!-- Power off overlay -->
-      <div class="screen-off">POWER OFF</div>
-
-      <div class="tv-overlay"></div>
+            <!-- Poster Container -->
+            <div class="poster-container" id="poster-container">
+                <img id="poster" src="./assets/images/default_poster.jpg" alt="Channel Poster" >
+            </div>
+        </div>
     </div>
 
-    <div class="sidebar">
-      <div class="tv-guide" style="overflow-y:auto;">
-        <h2>TV Guide</h2>
-        <p id="category-info"></p>
-        <p id="subcategory-info"></p>
-        <ul id="tv-guide-list"></ul>
-      </div>
+    <div id="static-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('./assets/videos/tv-static.mp4') center/cover; z-index: 1000;"></div>
 
-      <div class="poster-container" id="poster-container">
-        <img id="poster" src="./assets/images/default_poster.jpg" alt="Channel Poster" />
-      </div>
-    </div>
-  </div>
-
-  <div class="button-panel">
-    <div class="button-container"><button id="shuffle"></button></div>
-
-    <div class="button-container">
-      <button id="volume-down"></button>
-      <div class="button-label">Vol -</div>
-    </div>
-
-    <div class="button-container">
-      <button id="volume-up"></button>
-      <div class="button-label">Vol +</div>
-    </div>
-
-    <div class="button-container">
-      <button id="channel-down"></button>
-      <div class="button-label">Ch -</div>
-    </div>
-
-    <div class="button-container">
-      <button id="channel-up"></button>
-      <div class="button-label">Ch +</div>
+    <!-- Button Panel -->
+    <div class="button-panel">
+        <div class="button-container">
+            <button id="shuffle"></button>
+        </div>
+        <div class="button-container">
+            <button id="volume-down"></button>
+            <div class="button-label">Vol -</div>
+        </div>
+        <div class="button-container">
+            <button id="volume-up"></button>
+            <div class="button-label">Vol +</div>
+        </div>
+        <div class="button-container">
+            <button id="channel-down"></button>
+            <div class="button-label">Ch -</div>
+        </div>
+        <div class="button-container">
+            <button id="channel-up"></button>
+            <div class="button-label">Ch +</div>
+        </div>
+        <div class="button-container-large">
+            <div id="power-light"></div>
+        </div>
+        <div class="spacer"></div>
+        <div class="button-container-large">
+            <button id="power"></button>
+        </div>
     </div>
 
-    <div class="button-container-large">
-      <div id="power-light"></div>
-    </div>
+    <!-- Notification Area -->
+    <div class="notification"></div>
 
-    <div class="spacer"></div>
+    <!-- JavaScript for Interactivity -->
+    <script src="./channels.js"></script>
+    <script>
+        const videoPlayer = document.getElementById('video-player');
+        const tvGuideList = document.getElementById('tv-guide-list');
+        const categoryInfo = document.getElementById('category-info');
+        const subcategoryInfo = document.getElementById('subcategory-info');
+        const shuffleButton = document.getElementById('shuffle');
+        const powerButton = document.getElementById('power');
+        const powerLight = document.getElementById('power-light');
+        const powerOverlay = document.querySelector('.power-off');
+        const poster = document.getElementById('poster');
+    
+        let currentChannelIndex = 0;
+        let currentStartTime = new Date();
+        let lastShuffleIndex = -1;
+        const playbackTimes = {}; // store playback per subcategory
+    
+        // build unique subcategories from channels.js
+        const subcategories = (() => {
+            return Object.keys(
+                channels.reduce((acc, channel) => {
+                    acc[channel.subcategory] = true;
+                    return acc;
+                }, {})
+            );
+        })();
+    
+        const formatTime = (date) => {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        };
+    
+        const shuffleArray = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
 
-    <div class="button-container-large">
-      <button id="power"></button>
-    </div>
-  </div>
+        // check media
+        const checkMediaURL = (url, type = 'video') => {
+            return new Promise((resolve) => {
+                if (!url) return resolve(false);
 
-  <div class="notification"></div>
-
-  <script src="./channels.js"></script>
-  <script>
-    const videoPlayer = document.getElementById('video-player');
-    const staticOverlay = document.getElementById('static-overlay');
-    const GUIDE_DEPTH = 10;
-
-    const tvGuideList = document.getElementById('tv-guide-list');
-    const categoryInfo = document.getElementById('category-info');
-    const subcategoryInfo = document.getElementById('subcategory-info');
-
-    const shuffleButton = document.getElementById('shuffle');
-    const powerButton = document.getElementById('power');
-    const powerLight = document.getElementById('power-light');
-    const screenOffOverlay = document.querySelector('.screen-off');
-    const poster = document.getElementById('poster');
-
-    let currentChannelIndex = 0;
-    let currentStartTime = new Date();
-    let lastShuffleIndex = -1;
-
-    let tvQueue = [];  // [{key, name, duration, video, poster, category, subcategory}]
-    const playbackTimes = {};
-
-    const subcategories = (() => {
-      return Object.keys(
-        channels.reduce((acc, channel) => {
-          acc[channel.subcategory] = true;
-          return acc;
-        }, {})
-      );
-    })();
-
-    const formatTime = (date) => date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    const shuffleArray = (array) => {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    };
-
-    const checkMediaURL = (url, type = 'video') => {
-      return new Promise((resolve) => {
-        if (!url) return resolve(false);
-
-        if (type === 'video') {
-          const v = document.createElement('video');
-          v.preload = 'metadata';
-          v.onloadedmetadata = () => resolve(true);
-          v.onerror = () => resolve(false);
-          v.src = url;
-        } else {
-          const img = new Image();
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(false);
-          img.src = url;
-        }
-      });
-    };
-
-    const buildGuideTimes = (items, start = new Date()) => {
-      let t = new Date(start);
-      return items.map(item => {
-        const startTime = new Date(t);
-        t.setMinutes(t.getMinutes() + (item.duration || 30));
-        return { item, startTime };
-      });
-    };
-
-    const renderQueueTVGuide = () => {
-      tvGuideList.innerHTML = '';
-      if (!tvQueue.length) return;
-
-      const now = tvQueue[0];
-      categoryInfo.textContent = `Category: ${now.category}`;
-      subcategoryInfo.textContent = `Playing: ${now.subcategory}`;
-
-      const scheduled = buildGuideTimes(tvQueue, new Date());
-      scheduled.forEach(({ item, startTime }, idx) => {
-        const li = document.createElement('li');
-        li.textContent = `${formatTime(startTime)} - ${item.name}`;
-
-        li.setAttribute('data-duration', item.duration || 30);
-        li.setAttribute('data-video', item.video);
-        li.setAttribute('data-poster', item.poster || 'assets/images/default_poster.jpg');
-        li.setAttribute('data-start-time', startTime.getTime());
-
-        if (idx === 0) li.classList.add('now-playing');
-        else if (idx === 1) li.classList.add('up-next');
-
-        tvGuideList.appendChild(li);
-      });
-    };
-
-    const FALLBACK_POSTER = 'assets/images/default_poster.jpg';
-    let globalPlayableCache = null;
-    let lastGlobalPickKey = null;
-
-    const preShuffledChannels = channels.map(channel => {
-      const shuffledEpisodes =
-        channel.episodes && channel.episodes.length > 0
-          ? shuffleArray([...channel.episodes])
-          : null;
-      return { ...channel, episodes: shuffledEpisodes };
-    });
-
-    const buildGlobalPool = () => {
-      const pool = [];
-      for (const ch of preShuffledChannels) {
-        if (ch.episodes && ch.episodes.length) {
-          for (const ep of ch.episodes) {
-            pool.push({
-              key: `${ch.subcategory || ch.name}::${ep.name || ep.video || ch.video}`,
-              category: ch.category || 'Uncategorized',
-              subcategory: ch.subcategory || ch.name || 'Unknown',
-              name: ep.name || ch.name || 'Untitled',
-              duration: ep.duration || ch.duration || 30,
-              video: ep.video || ch.video,
-              poster: ch.poster || FALLBACK_POSTER
+                if (type === 'video') {
+                    const video = document.createElement('video');
+                    video.preload = 'metadata';
+        
+                    video.onloadedmetadata = () => resolve(true);
+                    video.onerror = () => resolve(false);
+        
+                    video.src = url;
+                } else {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = url;
+                }
             });
-          }
-        } else {
-          pool.push({
-            key: `${ch.subcategory || ch.name}::${ch.name || ch.video}`,
-            category: ch.category || 'Uncategorized',
-            subcategory: ch.subcategory || ch.name || 'Unknown',
-            name: ch.name || 'Untitled',
-            duration: ch.duration || 30,
-            video: ch.video,
-            poster: ch.poster || FALLBACK_POSTER
-          });
-        }
-      }
-      return pool;
-    };
+        };
 
-    const getGlobalPlayable = async () => {
-      if (globalPlayableCache) return globalPlayableCache;
+    
+        // playback helpers
+        const updatePlaybackTime = (subcategory) => {
+            playbackTimes[subcategory] = videoPlayer.currentTime || 0;
+        };
+    
+        const restorePlaybackTime = (subcategory) => {
+            if (playbackTimes[subcategory] != null) {
+                videoPlayer.currentTime = playbackTimes[subcategory];
+            }
+        };
+    
+        // pre-shuffle episodes so the guide is consistent
+        const preShuffledChannels = channels.map(channel => {
+            const shuffledEpisodes =
+                channel.episodes && channel.episodes.length > 0
+                    ? shuffleArray([...channel.episodes])
+                    : null;
+            return {
+                ...channel,
+                episodes: shuffledEpisodes
+            };
+        });
+    
+        // cache per-subcategory shuffled "guide videos"
+        let shuffledVideosCache = {};
+    
+        const populateTVGuide = async (subcategory) => {
+            tvGuideList.innerHTML = '';
+    
+            const channelsInSubcategory = preShuffledChannels.filter(
+                channel => channel.subcategory === subcategory
+            );
+    
+            if (channelsInSubcategory.length === 0) {
+                console.error(`Subcategory "${subcategory}" not found in channels.`);
+                subcategoryInfo.textContent = 'Subcategory not found.';
+                return;
+            }
+    
+            categoryInfo.textContent = `Category: ${channelsInSubcategory[0].category}`;
+            subcategoryInfo.textContent = `Playing: ${subcategory}`;
+    
+            let startTime = new Date(currentStartTime);
+    
+            // only build / shuffle once per subcategory
+            if (!shuffledVideosCache[subcategory]) {
+                shuffledVideosCache[subcategory] = shuffleArray(
+                    channelsInSubcategory.flatMap(channel => {
+                        const channelVideos =
+                            channel.episodes && channel.episodes.length > 0
+                                ? channel.episodes.map(episode => ({
+                                      name: episode.name || 'Unnamed Episode',
+                                      duration: episode.duration || 30,
+                                      video: episode.video || channel.video,
+                                      poster:
+                                          channel.poster ||
+                                          'assets/images/default_poster.jpg'
+                                  }))
+                                : [
+                                      {
+                                          name: channel.name || 'Untitled',
+                                          duration: channel.duration || 30,
+                                          video: channel.video,
+                                          poster:
+                                              channel.poster ||
+                                              'assets/images/default_poster.jpg'
+                                      }
+                                  ];
+                        return channelVideos;
+                    })
+                );
+            }
+    
+            const videos = [];
 
-      const pool = buildGlobalPool();
-      const playable = [];
+            for (const video of shuffledVideosCache[subcategory]) {
+                const videoOK = await checkMediaURL(video.video, 'video');
+                const posterOK = await checkMediaURL(video.poster, 'image');
+            
+                if (!videoOK) {
+                    console.warn('❌ Broken video:', video.video);
+                    continue;
+                }
+            
+                if (!posterOK) {
+                    console.warn('⚠️ Broken poster, using fallback:', video.poster);
+                    video.poster = 'assets/images/default_poster.jpg';
+                }
+            
+                videos.push(video);
+            }
+            
+            if (videos.length === 0) {
+                showNotification(`No playable media in ${subcategory}`, 'red');
+                return;
+            }
 
-      for (const item of pool) {
-        const videoOK = await checkMediaURL(item.video, 'video');
-        if (!videoOK) continue;
+    
+            videos.forEach((video, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${formatTime(startTime)} - ${video.name}`;
+                listItem.setAttribute('data-duration', video.duration);
+                listItem.setAttribute('data-video', video.video);
+                listItem.setAttribute('data-poster', video.poster);
+                listItem.setAttribute('data-start-time', startTime.getTime());
+    
+                if (index === 0) {
+                    listItem.classList.add('now-playing');
+                } else if (index === 1) {
+                    listItem.classList.add('up-next');
+                }
+    
+                tvGuideList.appendChild(listItem);
+                startTime.setMinutes(startTime.getMinutes() + video.duration);
+            });
+        };
+    
+        const synchronizePlayback = () => {
+            const currentTime = new Date().getTime();
+            const guideItems = document.querySelectorAll('.tv-guide li');
+    
+            for (let i = 0; i < guideItems.length; i++) {
+                const item = guideItems[i];
+                const startTime = parseInt(item.getAttribute('data-start-time'), 10);
+                const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
+                const endTime = startTime + duration;
+    
+                if (currentTime >= startTime && currentTime < endTime) {
+                    const videoSrc = item.getAttribute('data-video');
+                    const posterSrc = item.getAttribute('data-poster');
+    
+                    const elapsedTime = (currentTime - startTime) / 1000;
+    
+                    if (videoPlayer.src !== videoSrc) {
+                        videoPlayer.src = videoSrc;
+                        videoPlayer.load();
+                        videoPlayer.currentTime = elapsedTime;
+    
+                        videoPlayer
+                            .play()
+                            .catch(err => {
+                                if (err.name !== 'AbortError') {
+                                    console.error('Error starting video:', err);
+                                }
+                            });
+                    }
+    
+                    if (poster.src !== posterSrc) {
+                        poster.src = posterSrc;
+                    }
+    
+                    guideItems.forEach(item =>
+                        item.classList.remove('now-playing', 'up-next')
+                    );
+                    item.classList.add('now-playing');
+    
+                    if (guideItems[i + 1]) {
+                        guideItems[i + 1].classList.add('up-next');
+                    }
+    
+                    break;
+                }
+            }
+        };
+    
+        const showNotification = (message, color = 'limegreen') => {
+            const notification = document.querySelector('.notification');
+    
+            notification.textContent = message;
+            notification.style.color = color;
+            notification.style.display = 'block';
+            notification.style.transition = 'opacity 0.5s ease';
+            notification.style.opacity = '1';
+    
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 500);
+            }, 3000);
+        };
+    
+        const setChannel = (index) => {
+            if (index < 0 || index >= subcategories.length) {
+                console.error('Index out of bounds for subcategories');
+                return;
+            }
+    
+            currentChannelIndex = (index + subcategories.length) % subcategories.length;
+            const subcategory = subcategories[currentChannelIndex];
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategory
+            );
+    
+            if (!channel) {
+                console.error(`No channel found for subcategory: ${subcategory}`);
+                showNotification(
+                    `No videos available for subcategory: ${subcategory}`,
+                    'red'
+                );
+                return;
+            }
+    
+            populateTVGuide(subcategory);
+    
+            // make sure playback is aligned after the DOM updates
+            setTimeout(() => {
+                synchronizePlayback();
+            }, 0);
+    
+            // set poster to the first video in the shuffled list
+            const firstVideo = shuffledVideosCache[subcategory]?.[0];
+            poster.src =
+                firstVideo?.poster ||
+                channel.poster ||
+                'assets/images/default_poster.jpg';
+    
+            showNotification(`Switched to Channel: ${channel.subcategory}`, 'limegreen');
+        };
+    
+        const shuffleChannels = () => {
+            if (!subcategories || subcategories.length === 0) {
+                showNotification('Error: No subcategories available to shuffle.', 'red');
+                return;
+            }
+    
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * subcategories.length);
+            } while (randomIndex === lastShuffleIndex && subcategories.length > 1);
+    
+            lastShuffleIndex = randomIndex;
+            setChannel(randomIndex);
+    
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[randomIndex]
+            );
+            if (channel) {
+                showNotification(
+                    `Shuffled to Channel: ${channel.subcategory}`,
+                    'limegreen'
+                );
+            } else {
+                showNotification('Error: Could not find channel details.', 'red');
+            }
+        };
+    
+        const showVolumeIndicator = (volume) => {
+            const notification = document.querySelector('.notification');
+            const volumePercent = Math.round(volume * 100);
+    
+            notification.textContent = `Volume: ${volumePercent}%`;
+            notification.style.color =
+                volumePercent === 0 ? 'red' : 'limegreen';
+            notification.style.display = 'block';
+    
+            setTimeout(() => {
+                notification.style.transition = 'opacity 0.5s ease';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    notification.style.opacity = '1';
+                }, 500);
+            }, 1000);
+        };
+    
+        // button events
+        shuffleButton.addEventListener('click', shuffleChannels);
+    
+        document.getElementById('channel-up').addEventListener('click', () => {
+            setChannel(currentChannelIndex + 1);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
+            if (channel) {
+                showNotification(`Channel up: ${channel.subcategory}`, 'limegreen');
+            } else {
+                showNotification('Channel up: No channel found', 'red');
+            }
+        });
+    
+        document.getElementById('channel-down').addEventListener('click', () => {
+            setChannel(currentChannelIndex - 1);
+            const channel = preShuffledChannels.find(
+                channel => channel.subcategory === subcategories[currentChannelIndex]
+            );
+            if (channel) {
+                showNotification(`Channel down: ${channel.subcategory}`, 'limegreen');
+            } else {
+                showNotification('Channel down: No channel found', 'red');
+            }
+        });
+    
+        // auto-random when video ends
+        videoPlayer.addEventListener('ended', () => {
+            const currentSubcat = subcategories[currentChannelIndex];
+    
+            // remember where we were on this channel
+            updatePlaybackTime(currentSubcat);
+    
+            // pick a random other channel
+            let nextIndex = currentChannelIndex;
+            if (subcategories.length > 1) {
+                while (nextIndex === currentChannelIndex) {
+                    nextIndex = Math.floor(Math.random() * subcategories.length);
+                }
+            }
+    
+            // reset schedule to "now" for the next channel
+            currentStartTime = new Date();
+    
+            setChannel(nextIndex);
+    
+            const channel = channels.find(
+                ch => ch.subcategory === subcategories[nextIndex]
+            );
+            if (channel) {
+                showNotification(
+                    `Auto-switched to: ${channel.subcategory || channel.name}`,
+                    'limegreen'
+                );
+            }
+        });
+    
+        document.getElementById('volume-up').addEventListener('click', () => {
+            videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+            showVolumeIndicator(videoPlayer.volume);
+        });
+    
+        document.getElementById('volume-down').addEventListener('click', () => {
+            videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+            showVolumeIndicator(videoPlayer.volume);
+        });
+    
+        // power toggle
+        powerButton.addEventListener('click', () => {
+            const isPoweredOn = powerOverlay.style.display === 'none';
+    
+            // toggle overlay
+            powerOverlay.style.display = isPoweredOn ? 'block' : 'none';
+    
+            if (isPoweredOn) {
+                // going OFF
+                powerLight.style.background = 'red';
+                powerLight.style.boxShadow = '0 0 15px red';
+                videoPlayer.pause();
+            } else {
+                // going ON
+                powerLight.style.background = 'green';
+                powerLight.style.boxShadow = '0 0 15px green';
+                videoPlayer.play().catch(() => {});
+            }
+        });
+    
+        // keep guide in sync while playing
+        videoPlayer.addEventListener('timeupdate', synchronizePlayback);
+    
+        // initial load
+        populateTVGuide(subcategories[0]);
+        synchronizePlayback();
+    </script>
 
-        const posterOK = await checkMediaURL(item.poster, 'image');
-        if (!posterOK) item.poster = FALLBACK_POSTER;
 
-        playable.push(item);
-      }
 
-      globalPlayableCache = playable;
-      return playable;
-    };
 
-    const pickRandomFrom = (arr, avoidKey = null) => {
-      if (!arr.length) return null;
-      if (arr.length === 1) return arr[0];
-
-      let pick = null;
-      for (let tries = 0; tries < 10; tries++) {
-        const candidate = arr[Math.floor(Math.random() * arr.length)];
-        if (!avoidKey || candidate.key !== avoidKey) {
-          pick = candidate;
-          break;
-        }
-      }
-      return pick || arr[Math.floor(Math.random() * arr.length)];
-    };
-
-    const fillQueue = async (reset = false) => {
-      const playable = await getGlobalPlayable();
-      if (!playable.length) {
-        showNotification('No playable media found in library.', 'red');
-        return;
-      }
-
-      if (reset) tvQueue = [];
-
-      while (tvQueue.length < GUIDE_DEPTH) {
-        const avoidKey = tvQueue.length ? tvQueue[tvQueue.length - 1].key : lastGlobalPickKey;
-        const pick = pickRandomFrom(playable, avoidKey);
-        if (!pick) break;
-        if (tvQueue.length && pick.key === tvQueue[tvQueue.length - 1].key) continue;
-        tvQueue.push(pick);
-      }
-
-      renderQueueTVGuide();
-    };
-
-    const playNowFromQueue = async () => {
-      if (!tvQueue.length) return;
-      const now = tvQueue[0];
-
-      poster.src = now.poster || FALLBACK_POSTER;
-
-      if (videoPlayer.src !== now.video) {
-        videoPlayer.src = now.video;
-        videoPlayer.load();
-      }
-
-      videoPlayer.currentTime = 0;
-
-      try { await videoPlayer.play(); } catch (e) {}
-      lastGlobalPickKey = now.key;
-    };
-
-    const shuffleAll = async () => {
-      await fillQueue(true);
-      await playNowFromQueue();
-      showNotification('Shuffled (All Categories)', 'limegreen');
-    };
-
-    const synchronizePlayback = () => {
-      const currentTime = new Date().getTime();
-      const guideItems = document.querySelectorAll('.tv-guide li');
-
-      for (let i = 0; i < guideItems.length; i++) {
-        const item = guideItems[i];
-        const startTime = parseInt(item.getAttribute('data-start-time'), 10);
-        const duration = parseInt(item.getAttribute('data-duration'), 10) * 60000;
-        const endTime = startTime + duration;
-
-        if (currentTime >= startTime && currentTime < endTime) {
-          const videoSrc = item.getAttribute('data-video');
-          const posterSrc = item.getAttribute('data-poster');
-          const elapsedTime = (currentTime - startTime) / 1000;
-
-          if (videoPlayer.src !== videoSrc) {
-            videoPlayer.src = videoSrc;
-            videoPlayer.load();
-            videoPlayer.currentTime = elapsedTime;
-            videoPlayer.play().catch(() => {});
-          }
-
-          if (poster.src !== posterSrc) poster.src = posterSrc;
-
-          guideItems.forEach(x => x.classList.remove('now-playing', 'up-next'));
-          item.classList.add('now-playing');
-          if (guideItems[i + 1]) guideItems[i + 1].classList.add('up-next');
-          break;
-        }
-      }
-    };
-
-    const showNotification = (message, color = 'limegreen') => {
-      const notification = document.querySelector('.notification');
-
-      notification.textContent = message;
-      notification.style.color = color;
-      notification.style.display = 'block';
-      notification.style.opacity = '1';
-
-      setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-          notification.style.display = 'none';
-          notification.style.opacity = '1';
-        }, 500);
-      }, 3000);
-    };
-
-    const showVolumeIndicator = (volume) => {
-      const notification = document.querySelector('.notification');
-      const volumePercent = Math.round(volume * 100);
-
-      notification.textContent = `Volume: ${volumePercent}%`;
-      notification.style.color = volumePercent === 0 ? 'red' : 'limegreen';
-      notification.style.display = 'block';
-
-      setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-          notification.style.display = 'none';
-          notification.style.opacity = '1';
-        }, 500);
-      }, 1000);
-    };
-
-    // EVENTS
-    shuffleButton.addEventListener('click', shuffleAll);
-
-    document.getElementById('volume-up').addEventListener('click', () => {
-      videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-      showVolumeIndicator(videoPlayer.volume);
-    });
-
-    document.getElementById('volume-down').addEventListener('click', () => {
-      videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-      showVolumeIndicator(videoPlayer.volume);
-    });
-
-    // When a video ends: pop queue head, refill to depth, play next
-    videoPlayer.addEventListener('ended', async () => {
-      tvQueue.shift();
-      await fillQueue(false);
-      await playNowFromQueue();
-    });
-
-    // Keep guide "now playing" in sync
-    videoPlayer.addEventListener('timeupdate', synchronizePlayback);
-
-    // POWER TOGGLE
-    let isPoweredOn = true;
-
-    powerButton.addEventListener('click', () => {
-      isPoweredOn = !isPoweredOn;
-
-      if (!isPoweredOn) {
-        powerLight.style.background = 'red';
-        powerLight.style.boxShadow = '0 0 15px red';
-
-        screenOffOverlay.style.display = 'flex';
-        staticOverlay.style.display = 'block';
-        staticOverlay.play().catch(() => {});
-
-        videoPlayer.pause();
-      } else {
-        powerLight.style.background = 'green';
-        powerLight.style.boxShadow = '0 0 15px green';
-
-        screenOffOverlay.style.display = 'none';
-        staticOverlay.pause();
-        staticOverlay.style.display = 'none';
-
-        videoPlayer.play().catch(() => {});
-      }
-    });
-
-    // Initial load
-    shuffleAll();
-  </script>
 </body>
 </html>
